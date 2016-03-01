@@ -1,0 +1,125 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5CE006A6-667A-D7DA-2705-A6E86E04DC72" name="USER">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:21:13 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="F882EDA1-4E66-AE84-986B-86FD4F5295CD">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:22:13 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USERNAME" id="2C3E37D2-633E-E4A9-7F1B-919230F785BE">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-03-01 17:20:49 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PASSWORD" id="B52CA183-1005-9D8D-AB69-4A8157DBD87C">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-03-01 17:21:06 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAME" id="FEBE2FE5-8062-B7AE-7D9B-126FA175B63B">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:22:31 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REC_DATE" id="003C30A8-9F42-99DE-D5F4-F122DF32405E">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:23:22 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SHIPPING_ADDRESS_ID" id="F2BE9523-5281-5E04-27DC-0793F54FE10D">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:24:42 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F769B264-1340-5A5C-672F-82A409E9CA30" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</associations>
+</Column>
+<Column name="BILLING_ADDRESS_ID" id="D578A2FE-1F18-F29C-1B6F-9263629BFF45">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:25:10 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="488FAC19-4384-C83A-4A26-36A045ACBFBD" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="6777E154-670F-7FCF-D1D7-44DAE3063407" name="USER_PK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:22:13 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="337210EC-0099-613F-9EC9-CC1F0E7CD217" name="SHIPPING_ADDRESS_FK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 13:14:15 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F2BE9523-5281-5E04-27DC-0793F54FE10D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EB165E96-5263-9FED-092F-C76C7D9BAAD0" name="BILLING_ADDRESS_FK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 13:14:51 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D578A2FE-1F18-F29C-1B6F-9263629BFF45"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

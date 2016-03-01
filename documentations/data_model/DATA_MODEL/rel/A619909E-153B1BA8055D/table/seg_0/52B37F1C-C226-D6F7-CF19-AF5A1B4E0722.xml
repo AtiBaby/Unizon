@@ -1,0 +1,112 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="52B37F1C-C226-D6F7-CF19-AF5A1B4E0722" name="ADDRESS">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 11:25:22 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_2</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="EA25A69C-35AB-1042-5246-02C395B9A2B1">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:35:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ZIP" id="223ED0DA-ED24-4A49-EDE4-D988FCAD1A3A">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:35:26 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="COUNTRY" id="461CCB29-9710-26CF-E0EC-2ED523A91AC1">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:36:04 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CITY" id="2EE38FFB-5E70-EFE4-1281-B113FA97EAA6">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:36:04 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STREET" id="5ED90D13-2FEA-520B-B4E9-A2A3BEF962B5">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:36:04 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STR_NUMBER" id="6AD486AE-594F-0832-F7CD-12DA19D5AAE1">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:37:20 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FLOOR" id="60EC9E30-8845-5490-539A-B5450F871AD3">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-03-01 17:21:42 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DOOR" id="D98A5666-D6AF-52AA-6540-DD626285CED1">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-03-01 17:21:52 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="171DC7A0-FD79-6FEF-0F21-7578DB4B4AC3" name="ADDRESS_PK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:35:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
