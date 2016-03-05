@@ -1,0 +1,46 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CD7ECFBD-3493-EB18-9E66-506A8AB2C135" name="CATEGORY">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:52:18 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<ordsAlias>table_4</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="ACA4092D-08D1-C41F-B57A-C092BF5747DC">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:53:26 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CATEGORY" id="1CD3F8B7-683C-DDA5-5CF4-38A420CC70CC">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:53:26 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="303FA4FA-5FDE-59FC-0B8A-08257DFF07B1" name="CATEGORY_PK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:53:26 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="ACA4092D-08D1-C41F-B57A-C092BF5747DC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

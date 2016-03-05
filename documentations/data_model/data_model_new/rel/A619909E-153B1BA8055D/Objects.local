@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="Table" objectID="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" name="ORDER" seqName="seg_0"/>
+   <object objectType="Table" objectID="52B37F1C-C226-D6F7-CF19-AF5A1B4E0722" name="ADDRESS" seqName="seg_0"/>
+   <object objectType="Table" objectID="5CE006A6-667A-D7DA-2705-A6E86E04DC72" name="USER" seqName="seg_0"/>
+   <object objectType="Table" objectID="B303DEB0-A146-92F6-49CD-80460D0FB9B3" name="PRODUCT" seqName="seg_0"/>
+   <object objectType="Table" objectID="BB6CFAE9-0BBB-DE8E-5D88-7CC505476F8F" name="CAT_TO_PROD" seqName="seg_0"/>
+   <object objectType="Table" objectID="CD7ECFBD-3493-EB18-9E66-506A8AB2C135" name="CATEGORY" seqName="seg_0"/>
+   <object objectType="Table" objectID="E9768233-78C9-AE1D-B025-59E64142F83A" name="PROD_TO_ORDER" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="322BBE23-0D3A-AD0E-C9BB-539FB2FC914A" name="ORDER_ADDRESS_FK" containerID="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" refContainerID="52B37F1C-C226-D6F7-CF19-AF5A1B4E0722" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="4DC5AC8D-E129-9200-6DBF-F84C22F99BAB" name="ORDER_ADDRESS_FKv1" containerID="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" refContainerID="52B37F1C-C226-D6F7-CF19-AF5A1B4E0722" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="7321ABD1-3040-8DEB-18C9-BFEE2A61FE68" name="ORDER_USER_FK" containerID="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" refContainerID="5CE006A6-667A-D7DA-2705-A6E86E04DC72" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="87F4DE69-DE7E-F72C-8A12-7C05510E8C93" name="PROD_TO_ORDER_PRODUCT_FK" containerID="E9768233-78C9-AE1D-B025-59E64142F83A" refContainerID="B303DEB0-A146-92F6-49CD-80460D0FB9B3" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="BFE78DD9-9BD6-5708-18FA-75696539AE0E" name="CAT_TO_PROD_CATEGORY_FK" containerID="BB6CFAE9-0BBB-DE8E-5D88-7CC505476F8F" refContainerID="CD7ECFBD-3493-EB18-9E66-506A8AB2C135" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="C7DF0FE4-DA0D-31D6-B652-E11071B03372" name="CAT_TO_PROD_PRODUCT_FK" containerID="BB6CFAE9-0BBB-DE8E-5D88-7CC505476F8F" refContainerID="B303DEB0-A146-92F6-49CD-80460D0FB9B3" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="E398F3D0-96F1-087C-641D-C430A12A4F33" name="PROD_TO_ORDER_ORDER_FK" containerID="E9768233-78C9-AE1D-B025-59E64142F83A" refContainerID="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" seqName="seg_0"/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>

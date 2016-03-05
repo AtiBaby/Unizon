@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E9768233-78C9-AE1D-B025-59E64142F83A" name="PROD_TO_ORDER">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:55:30 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<ordsAlias>table_7</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ORDER_ID" id="3D994B0C-3980-7671-9347-76502624C538">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:56:14 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E398F3D0-96F1-087C-641D-C430A12A4F33" referredColumn="FB8C440D-B239-7B92-62B7-4003DC78B41A"/>
+</associations>
+</Column>
+<Column name="PROD_ID" id="153D8ACF-F989-353D-6629-4093881C46F3">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:56:31 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="87F4DE69-DE7E-F72C-8A12-7C05510E8C93" referredColumn="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
+</associations>
+</Column>
+<Column name="AMOUNT" id="F84546C0-A227-5F16-9BEB-84670B63182D">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:56:31 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="39FF3E35-3037-34DA-ADAC-6B8B5778086E" name="PROD_TO_ORDER_PK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 12:56:14 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3D994B0C-3980-7671-9347-76502624C538"/>
+<colUsage columnID="153D8ACF-F989-353D-6629-4093881C46F3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D5BBF679-1060-7806-AF1E-8B5434D65458" name="PROD_TO_ORDER_ORDER_FK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 13:21:54 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3D994B0C-3980-7671-9347-76502624C538"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3B1DA190-CCA7-53D1-BAA2-50110CD51C4E" name="PROD_TO_ORDER_PRODUCT_FK">
+<createdBy>Jácint</createdBy>
+<createdTime>2016-02-28 13:22:11 UTC</createdTime>
+<ownerDesignName>data_model_new</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="153D8ACF-F989-353D-6629-4093881C46F3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
