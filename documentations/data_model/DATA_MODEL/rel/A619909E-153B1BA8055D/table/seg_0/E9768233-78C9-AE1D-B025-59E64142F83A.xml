@@ -56,6 +56,7 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="3D994B0C-3980-7671-9347-76502624C538"/>
+<colUsage columnID="153D8ACF-F989-353D-6629-4093881C46F3"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="D5BBF679-1060-7806-AF1E-8B5434D65458" name="PROD_TO_ORDER_ORDER_FK">

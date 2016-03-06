@@ -42,6 +42,32 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="SHIPPING_ADDRESS_ID" id="5BB5BFCA-C0DB-44CE-3511-F010314F4537">
+<createdBy>Gigi</createdBy>
+<createdTime>2016-03-05 19:26:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="322BBE23-0D3A-AD0E-C9BB-539FB2FC914A" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</associations>
+</Column>
+<Column name="BILLING_ADDRESS_ID" id="B23B927E-5D3E-BCE2-53AE-5D57DD06029F">
+<createdBy>Gigi</createdBy>
+<createdTime>2016-03-05 19:26:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4DC5AC8D-E129-9200-6DBF-F84C22F99BAB" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="CDD958F7-DFD0-4A41-76B8-2CB79DBA370D" name="ORDER_PK">
@@ -63,6 +89,26 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="6F8EE850-85DA-76C0-5E80-E78D9F299C90"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FEC9A031-4CE7-2E09-6107-3F3BEC5E4736" name="ORDER_ADDRESS_FK">
+<createdBy>Gigi</createdBy>
+<createdTime>2016-03-05 19:26:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5BB5BFCA-C0DB-44CE-3511-F010314F4537"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D686C705-6B47-C744-3150-6D847C62959F" name="ORDER_ADDRESS_FKv1">
+<createdBy>Gigi</createdBy>
+<createdTime>2016-03-05 19:26:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B23B927E-5D3E-BCE2-53AE-5D57DD06029F"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
