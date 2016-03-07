@@ -1,14 +1,12 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <Diagram class="oracle.dbtools.crest.swingui.datatypes.DPVDataTypes" id="DB1AFFEB-4FF3-D82B-1EFF-7855A69C6BBC">
 <createdBy>Jácint</createdBy>
-<modifiedBy>Jácint</modifiedBy>
 <createdTime>2016-02-28 11:10:16 UTC</createdTime>
 <autoRoute>false</autoRoute>
 <boxInbox>true</boxInbox>
 <showLegend>false</showLegend>
 <showLabels>true</showLabels>
 <showRelAttributes>false</showRelAttributes>
-<gridEnabled>false</gridEnabled>
 <showGrid>false</showGrid>
 <diagramColor>-1</diagramColor>
 <display>false</display>

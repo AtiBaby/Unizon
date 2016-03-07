@@ -3,10 +3,8 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 11:21:13 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<ordsAlias>table_1</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
-<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="USER_ID" id="F882EDA1-4E66-AE84-986B-86FD4F5295CD">
 <createdBy>Jácint</createdBy>
@@ -15,7 +13,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="USERNAME" id="2C3E37D2-633E-E4A9-7F1B-919230F785BE">
@@ -26,7 +23,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="E-MAIL" id="D2D46163-32BE-04C6-3554-420D2DB6E520">
@@ -37,7 +33,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="PHONE_NUMBER_ID" id="3D42EC3E-63FC-A85A-2B8D-BD87DDCFF406">
@@ -47,7 +42,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<delegate>1BE47EB5-536E-0077-F7C0-83769B7AA4DA</delegate>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="591F5804-675C-BA39-07F3-F28EF62A6994" referredColumn="1BE47EB5-536E-0077-F7C0-83769B7AA4DA"/>
@@ -61,7 +56,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="NAME" id="FEBE2FE5-8062-B7AE-7D9B-126FA175B63B">
@@ -72,7 +66,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="REGISTRATION_DATE" id="003C30A8-9F42-99DE-D5F4-F122DF32405E">
@@ -83,21 +76,16 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="HOME_ADDRESS_ID" id="98B72D74-FECA-FB52-E144-0DD664740E01">
+<Column name="DEFAULT_ADDRESS_ID" id="98B72D74-FECA-FB52-E144-0DD664740E01">
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 18:53:24 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="0C9A0058-BF0E-F48F-6D41-1DEF7A365A34" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
-</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -130,16 +118,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="D2D46163-32BE-04C6-3554-420D2DB6E520"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="66456CF1-CABD-967A-4149-8F55F5A5CE54" name="USER_ADDRESS_FK">
-<createdBy>adam</createdBy>
-<createdTime>2016-03-07 18:53:41 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="98B72D74-FECA-FB52-E144-0DD664740E01"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="4B68039C-0036-B748-46A7-A40DD911FFDF" name="USER_PHONE_NUMBER_FK">

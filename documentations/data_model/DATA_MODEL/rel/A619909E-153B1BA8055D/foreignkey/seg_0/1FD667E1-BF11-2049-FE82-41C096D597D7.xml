@@ -1,14 +1,13 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="1FD667E1-BF11-2049-FE82-41C096D597D7" containerWithKeyObject="C967BC59-1AEF-E70D-9589-979D61F46048" localFKIndex="B061520F-FA87-2044-FBF2-29BF4D461AD6" name="CAT_TO_TAG_TAG_FK">
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="1FD667E1-BF11-2049-FE82-41C096D597D7" name="CAT_TO_TAG_TAG_FK">
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:22:15 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<containerWithKeyObject>C967BC59-1AEF-E70D-9589-979D61F46048</containerWithKeyObject>
 <deleteRule>NO ACTION</deleteRule>
-<referredTableID>007AA3BC-87F4-4604-1270-7869BABD9D3D</referredTableID>
+<localFKIndex>B061520F-FA87-2044-FBF2-29BF4D461AD6</localFKIndex>
 <keyObject>7C9C6BA2-5AA1-3D39-327B-369AD0CF78AF</keyObject>
-<referredKeyID>7C9C6BA2-5AA1-3D39-327B-369AD0CF78AF</referredKeyID>
 <mandatory>true</mandatory>
 <transferable>true</transferable>
-<rely>false</rely>
 <columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
 </FKIndexAssociation>

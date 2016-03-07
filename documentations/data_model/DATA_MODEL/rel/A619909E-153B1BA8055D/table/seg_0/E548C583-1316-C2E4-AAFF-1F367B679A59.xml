@@ -1,0 +1,80 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E548C583-1316-C2E4-AAFF-1F367B679A59" name="ADDRESSES_OF_USER">
+<createdBy>Heather</createdBy>
+<createdTime>2016-03-07 21:05:17 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="DESCRIPTION" id="DF5941C5-8D78-6EDC-A6C0-4CBEBE594142">
+<createdBy>Heather</createdBy>
+<createdTime>2016-03-07 21:21:32 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_ID" id="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4">
+<createdBy>Heather</createdBy>
+<createdTime>2016-03-07 21:06:11 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<delegate>F882EDA1-4E66-AE84-986B-86FD4F5295CD</delegate>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0C3E2AD9-1D1F-0024-970D-0042ADD1012E" referredColumn="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
+</associations>
+</Column>
+<Column name="ADDRESS_ID" id="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C">
+<createdBy>Heather</createdBy>
+<createdTime>2016-03-07 21:06:55 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<delegate>EA25A69C-35AB-1042-5246-02C395B9A2B1</delegate>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9DD542E4-B5B2-2CC1-FB7C-E90149D2145A" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E8CDDEC7-9834-EA8C-0AC8-5F43E99B6EF3" name="ADDRESSES_OF_USER_PK">
+<createdBy>Heather</createdBy>
+<createdTime>2016-03-07 21:07:10 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4"/>
+<colUsage columnID="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AAD476A1-8C9C-C21B-5BB4-D95F1A51F7AE" name="ADDRESSES_OF_USER_USER_FK">
+<createdBy>Heather</createdBy>
+<createdTime>2016-03-07 21:07:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EEEAA8F8-F26C-7EC8-611E-7A480D398385" name="ADDRESSES_OF_USER_ADDRESS_FK">
+<createdBy>Heather</createdBy>
+<createdTime>2016-03-07 21:07:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

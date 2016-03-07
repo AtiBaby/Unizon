@@ -1,14 +1,13 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="322BBE23-0D3A-AD0E-C9BB-539FB2FC914A" containerWithKeyObject="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" localFKIndex="FEC9A031-4CE7-2E09-6107-3F3BEC5E4736" name="ORDER_ADDRESS_FK">
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="322BBE23-0D3A-AD0E-C9BB-539FB2FC914A" name="ORDER_ADDRESS_FK">
 <createdBy>Gigi</createdBy>
 <createdTime>2016-03-05 19:26:45 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<containerWithKeyObject>2DB10596-5986-AE09-2B88-65E0FDFAC6AC</containerWithKeyObject>
 <deleteRule>NO ACTION</deleteRule>
-<referredTableID>52B37F1C-C226-D6F7-CF19-AF5A1B4E0722</referredTableID>
+<localFKIndex>FEC9A031-4CE7-2E09-6107-3F3BEC5E4736</localFKIndex>
 <keyObject>171DC7A0-FD79-6FEF-0F21-7578DB4B4AC3</keyObject>
-<referredKeyID>171DC7A0-FD79-6FEF-0F21-7578DB4B4AC3</referredKeyID>
 <mandatory>true</mandatory>
 <transferable>true</transferable>
-<rely>false</rely>
 <columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
 </FKIndexAssociation>

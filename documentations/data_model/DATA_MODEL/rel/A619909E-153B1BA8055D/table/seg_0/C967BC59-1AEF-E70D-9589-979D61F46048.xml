@@ -3,10 +3,8 @@
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:21:20 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<ordsAlias>table_11</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
-<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="CATEGORY_ID" id="B8487888-18D4-5727-691F-85BDE9DA5AA3">
 <createdBy>adam</createdBy>
@@ -15,7 +13,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<delegate>ACA4092D-08D1-C41F-B57A-C092BF5747DC</delegate>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="62418B42-8B83-35A8-EF38-D9BD20700704" referredColumn="ACA4092D-08D1-C41F-B57A-C092BF5747DC"/>
@@ -28,7 +26,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<delegate>D22B8C42-E765-BDFF-7FC7-54CB5852A0C7</delegate>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="1FD667E1-BF11-2049-FE82-41C096D597D7" referredColumn="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7"/>

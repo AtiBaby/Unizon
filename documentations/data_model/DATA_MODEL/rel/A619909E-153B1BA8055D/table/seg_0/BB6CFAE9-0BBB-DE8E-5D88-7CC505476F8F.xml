@@ -3,10 +3,8 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:53:43 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<ordsAlias>table_5</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
-<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="PROD_ID" id="9887EA32-462B-88A8-4FA2-B34CCD3284A0">
 <createdBy>Jácint</createdBy>
@@ -15,7 +13,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<delegate>FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C</delegate>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="C7DF0FE4-DA0D-31D6-B652-E11071B03372" referredColumn="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
@@ -28,7 +26,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<delegate>ACA4092D-08D1-C41F-B57A-C092BF5747DC</delegate>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="BFE78DD9-9BD6-5708-18FA-75696539AE0E" referredColumn="ACA4092D-08D1-C41F-B57A-C092BF5747DC"/>

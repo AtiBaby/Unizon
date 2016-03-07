@@ -3,10 +3,8 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:52:18 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<ordsAlias>table_4</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
-<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="CATEGORY_ID" id="ACA4092D-08D1-C41F-B57A-C092BF5747DC">
 <createdBy>Jácint</createdBy>
@@ -15,7 +13,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="NAME" id="1CD3F8B7-683C-DDA5-5CF4-38A420CC70CC">
@@ -26,7 +23,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>

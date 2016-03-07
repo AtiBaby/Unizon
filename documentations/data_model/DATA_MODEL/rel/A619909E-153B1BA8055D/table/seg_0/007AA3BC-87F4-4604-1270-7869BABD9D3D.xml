@@ -3,10 +3,8 @@
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:01:26 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<ordsAlias>table_8</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
-<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="TAG_ID" id="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7">
 <createdBy>adam</createdBy>
@@ -15,7 +13,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="NAME" id="16AD123D-C167-BC26-4F62-B17AFDC90099">
@@ -26,7 +23,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
