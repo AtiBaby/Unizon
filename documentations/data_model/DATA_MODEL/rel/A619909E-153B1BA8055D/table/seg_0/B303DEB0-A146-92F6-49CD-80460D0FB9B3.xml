@@ -8,7 +8,7 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="ID" id="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C">
+<Column name="PROD_ID" id="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C">
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:38:37 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
@@ -22,20 +22,10 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:38:54 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="TYPE" id="B623477E-52D2-3659-61E6-65CEABB120A7">
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 12:39:46 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
@@ -61,12 +51,14 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="ADATOK/LEÍRÁS..STB" id="1340CC85-629D-14B1-1A0B-CE58A1DD5465">
+<Column name="DESCRIPTION" id="1340CC85-629D-14B1-1A0B-CE58A1DD5465">
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:41:06 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>

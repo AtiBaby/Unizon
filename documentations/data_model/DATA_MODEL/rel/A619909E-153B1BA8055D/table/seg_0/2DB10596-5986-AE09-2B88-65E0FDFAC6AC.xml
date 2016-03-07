@@ -8,7 +8,7 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="ID" id="FB8C440D-B239-7B92-62B7-4003DC78B41A">
+<Column name="ORDER_ID" id="FB8C440D-B239-7B92-62B7-4003DC78B41A">
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:55:09 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
@@ -31,7 +31,20 @@
 <colAssociation fkAssociation="7321ABD1-3040-8DEB-18C9-BFEE2A61FE68" referredColumn="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
 </associations>
 </Column>
-<Column name="REC_DATE" id="2D4F5BDA-FD51-3E14-FBE0-6FC34E38E8A2">
+<Column name="PHONE_NUMBER_ID" id="385FDF83-66FF-CC45-EB78-1FC4F0F642D7">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 18:50:19 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F85B6AB9-8411-F34F-0D5D-385C863EA3B1" referredColumn="1BE47EB5-536E-0077-F7C0-83769B7AA4DA"/>
+</associations>
+</Column>
+<Column name="ORDER_DATE" id="2D4F5BDA-FD51-3E14-FBE0-6FC34E38E8A2">
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:55:26 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
@@ -109,6 +122,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="B23B927E-5D3E-BCE2-53AE-5D57DD06029F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A4C70F22-BDF7-9752-151B-2A0525ECBADA" name="ORDER_PHONE_NUMBER_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:18:03 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="385FDF83-66FF-CC45-EB78-1FC4F0F642D7"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
