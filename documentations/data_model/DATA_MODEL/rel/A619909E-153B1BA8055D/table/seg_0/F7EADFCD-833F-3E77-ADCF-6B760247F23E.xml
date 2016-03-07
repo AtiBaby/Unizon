@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F7EADFCD-833F-3E77-ADCF-6B760247F23E" name="PROD_TO_TAG">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:01:57 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_9</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PROD_ID" id="798C5FF0-3169-CF7A-C02B-2C93379A5E94">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:02:19 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6D05352A-A62D-DBB0-03BE-B9D0ABED73D0" referredColumn="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
+</associations>
+</Column>
+<Column name="TAG_ID" id="799A693F-0425-B5D8-0EF9-BBCF99690293">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:02:27 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E2E3A58E-E27B-2DC7-E001-708645204B17" referredColumn="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D2351166-154F-3EA2-5A6E-F5CE4D75A136" name="PROD_TO_TAG_PK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:03:20 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="798C5FF0-3169-CF7A-C02B-2C93379A5E94"/>
+<colUsage columnID="799A693F-0425-B5D8-0EF9-BBCF99690293"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="62C58D73-6B7B-4E5E-A472-B6232FDEF6FC" name="PROD_TO_TAG_PRODUCT_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:03:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="798C5FF0-3169-CF7A-C02B-2C93379A5E94"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6BB77B28-9FF5-7F46-5303-0A09E075E836" name="PROD_TO_TAG_TAG_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:04:11 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="799A693F-0425-B5D8-0EF9-BBCF99690293"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
