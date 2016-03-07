@@ -42,5 +42,15 @@
 <colUsage columnID="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7"/>
 </indexColumnUsage>
 </ind_PK_UK>
+<ind_PK_UK id="E026724A-8A0F-09DC-AE87-7FB4259395C7" name="TAG_UNIQUE">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-07 19:59:09 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="16AD123D-C167-BC26-4F62-B17AFDC90099"/>
+</indexColumnUsage>
+</ind_PK_UK>
 </indexes>
 </Table>
