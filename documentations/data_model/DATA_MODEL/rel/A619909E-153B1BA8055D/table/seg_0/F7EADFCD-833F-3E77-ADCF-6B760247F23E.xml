@@ -5,15 +5,16 @@
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="PROD_ID" id="798C5FF0-3169-CF7A-C02B-2C93379A5E94">
+<Column name="PRODUCT_ID" id="798C5FF0-3169-CF7A-C02B-2C93379A5E94">
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:02:19 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="6D05352A-A62D-DBB0-03BE-B9D0ABED73D0" referredColumn="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
@@ -26,7 +27,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>D22B8C42-E765-BDFF-7FC7-54CB5852A0C7</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="E2E3A58E-E27B-2DC7-E001-708645204B17" referredColumn="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7"/>

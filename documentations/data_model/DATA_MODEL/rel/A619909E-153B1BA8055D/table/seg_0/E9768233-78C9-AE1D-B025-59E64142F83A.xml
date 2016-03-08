@@ -5,6 +5,7 @@
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="ORDER_ID" id="3D994B0C-3980-7671-9347-76502624C538">
 <createdBy>Jácint</createdBy>
@@ -13,20 +14,20 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>FB8C440D-B239-7B92-62B7-4003DC78B41A</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="E398F3D0-96F1-087C-641D-C430A12A4F33" referredColumn="FB8C440D-B239-7B92-62B7-4003DC78B41A"/>
 </associations>
 </Column>
-<Column name="PROD_ID" id="153D8ACF-F989-353D-6629-4093881C46F3">
+<Column name="PRODUCT_ID" id="153D8ACF-F989-353D-6629-4093881C46F3">
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:56:31 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="87F4DE69-DE7E-F72C-8A12-7C05510E8C93" referredColumn="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
@@ -40,6 +41,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>

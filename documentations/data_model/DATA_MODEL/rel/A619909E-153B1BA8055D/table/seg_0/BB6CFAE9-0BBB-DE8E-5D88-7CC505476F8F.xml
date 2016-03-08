@@ -5,28 +5,29 @@
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="PROD_ID" id="9887EA32-462B-88A8-4FA2-B34CCD3284A0">
+<Column name="PRODUCT_ID" id="9887EA32-462B-88A8-4FA2-B34CCD3284A0">
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:54:28 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="C7DF0FE4-DA0D-31D6-B652-E11071B03372" referredColumn="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
 </associations>
 </Column>
-<Column name="CAT_ID" id="0F1250C0-DFDF-9215-7EC1-CD6A1D6DA496">
+<Column name="CATEGORY_ID" id="0F1250C0-DFDF-9215-7EC1-CD6A1D6DA496">
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:54:28 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>ACA4092D-08D1-C41F-B57A-C092BF5747DC</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="BFE78DD9-9BD6-5708-18FA-75696539AE0E" referredColumn="ACA4092D-08D1-C41F-B57A-C092BF5747DC"/>
