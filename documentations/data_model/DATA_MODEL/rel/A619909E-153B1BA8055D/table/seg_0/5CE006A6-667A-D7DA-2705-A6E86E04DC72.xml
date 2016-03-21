@@ -1,9 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5CE006A6-667A-D7DA-2705-A6E86E04DC72" name="USER">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5CE006A6-667A-D7DA-2705-A6E86E04DC72" name="UNI_USER">
 <sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 11:21:13 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>user</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
@@ -31,7 +32,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="E-MAIL" id="D2D46163-32BE-04C6-3554-420D2DB6E520">
+<Column name="E_MAIL" id="D2D46163-32BE-04C6-3554-420D2DB6E520">
 <sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:10:17 UTC</createdTime>
@@ -103,6 +104,9 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0C9A0058-BF0E-F48F-6D41-1DEF7A365A34" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -153,6 +157,9 @@
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="98B72D74-FECA-FB52-E144-0DD664740E01"/>
+</indexColumnUsage>
 </ind_PK_UK>
 </indexes>
 </Table>

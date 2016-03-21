@@ -1,10 +1,13 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" name="ORDER">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2DB10596-5986-AE09-2B88-65E0FDFAC6AC" name="UNI_ORDER">
+<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:54:43 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>order</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="ORDER_ID" id="FB8C440D-B239-7B92-62B7-4003DC78B41A">
 <createdBy>Jácint</createdBy>
@@ -13,6 +16,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="USER_ID" id="6F8EE850-85DA-76C0-5E80-E78D9F299C90">
@@ -22,7 +26,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>F882EDA1-4E66-AE84-986B-86FD4F5295CD</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="7321ABD1-3040-8DEB-18C9-BFEE2A61FE68" referredColumn="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
@@ -35,7 +39,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>1BE47EB5-536E-0077-F7C0-83769B7AA4DA</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="F85B6AB9-8411-F34F-0D5D-385C863EA3B1" referredColumn="1BE47EB5-536E-0077-F7C0-83769B7AA4DA"/>
@@ -49,6 +53,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="SHIPPING_ADDRESS_ID" id="5BB5BFCA-C0DB-44CE-3511-F010314F4537">
@@ -58,7 +63,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>EA25A69C-35AB-1042-5246-02C395B9A2B1</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="322BBE23-0D3A-AD0E-C9BB-539FB2FC914A" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
@@ -71,7 +76,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>EA25A69C-35AB-1042-5246-02C395B9A2B1</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="4DC5AC8D-E129-9200-6DBF-F84C22F99BAB" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
