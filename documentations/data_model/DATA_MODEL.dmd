@@ -5,4 +5,9 @@
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <capitalNames>false</capitalNames>
 <designId>568AAD09-2D26-1FD7-37F7-622E3B24C30D</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="AE562BB4-2581-EFC6-D800-EFC23A28BB62">
+<designStoragePath>/unizon-sql</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
 </OSDM_Design>

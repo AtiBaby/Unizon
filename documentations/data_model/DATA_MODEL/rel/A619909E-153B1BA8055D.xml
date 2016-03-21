@@ -4,5 +4,12 @@
 <createdTime>2016-02-28 11:21:02 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <shouldBeOpen>true</shouldBeOpen>
-<selectedRDBMSSite>32076570-2523-435C-2E92-BF29817DFF70</selectedRDBMSSite>
+<selectedRDBMSSite>3FD120B5-9F4E-6278-D5E2-746D192C8319</selectedRDBMSSite>
+<importDDLFileStamps>
+<importDDLFileStamp class="oracle.dbtools.crest.imports.DDLFileStamp">
+<fileName>unizon-sql.ddl</fileName>
+<pathName>/home/adam</pathName>
+<dbType>11</dbType>
+</importDDLFileStamp>
+</importDDLFileStamps>
 </relationalModel>

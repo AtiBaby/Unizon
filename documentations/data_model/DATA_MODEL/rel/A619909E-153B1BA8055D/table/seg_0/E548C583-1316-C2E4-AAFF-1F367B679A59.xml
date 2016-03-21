@@ -1,19 +1,24 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E548C583-1316-C2E4-AAFF-1F367B679A59" name="ADDRESSES_OF_USER">
+<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>Heather</createdBy>
 <createdTime>2016-03-07 21:05:17 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="DESCRIPTION" id="DF5941C5-8D78-6EDC-A6C0-4CBEBE594142">
+<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>Heather</createdBy>
 <createdTime>2016-03-07 21:21:32 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
+<use>0</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
+<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="USER_ID" id="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4">
@@ -23,7 +28,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>F882EDA1-4E66-AE84-986B-86FD4F5295CD</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="0C3E2AD9-1D1F-0024-970D-0042ADD1012E" referredColumn="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
@@ -36,7 +41,7 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>EA25A69C-35AB-1042-5246-02C395B9A2B1</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="9DD542E4-B5B2-2CC1-FB7C-E90149D2145A" referredColumn="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>

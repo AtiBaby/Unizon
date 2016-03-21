@@ -1,10 +1,12 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="007AA3BC-87F4-4604-1270-7869BABD9D3D" name="TAG">
+<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:01:26 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
 <Column name="TAG_ID" id="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7">
 <createdBy>adam</createdBy>
@@ -13,16 +15,20 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="NAME" id="16AD123D-C167-BC26-4F62-B17AFDC90099">
+<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:01:55 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
+<use>0</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
+<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
