@@ -1,0 +1,153 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 12, 2016, 11:32:35 PM
+    Author     : Laci
+*/
+*, *:after, *:before {
+    padding: 0;
+    margin: 0;
+}
+html, body {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    background-color: #eae7e5;
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    color:white;
+    font-size: 16px;
+    height: 50px;
+    //position: relative;
+    background-color: #222;
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 5px solid #a8aca9;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+header a {
+    color: white;
+}
+
+header a:active,
+header a:visited {
+    color: white;
+}
+
+header a:hover {
+    text-decoration: underline;
+    //color: gray;
+}
+
+.reg {
+    position: absolute;
+    right: 0;
+    top: 15px;
+}
+
+.reg a {
+    padding: 0 5px;
+}
+
+
+.container {
+    margin:0 auto;
+    max-width: 1000px;
+    min-width: 320px;
+    width: 100%;
+    position: relative;
+}
+
+.logo img {
+    width: 150px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+section {
+    position: relative;
+    top: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    border: 1px black solid;
+    border-radius: 2px;
+    
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+li a:hover {
+    background-color: #111;
+    cursor: pointer;
+}
+
+.img-slider {
+    position: relative;
+    top: 10px;
+    height: 300px;
+    border: solid 2px black;
+    border-radius: 2px;
+}
+
+.products {
+    position: relative;
+    top: 20px;
+    height: 800px;
+    border: solid 2px black;
+    border-radius: 2px;
+}
+
+footer {
+    position: relative;
+    top: 40px;
+    height: 60px;
+    border: solid 2px black;
+    border-radius: 2px;
+}
+
+footer p {
+    text-align: center;
+    margin-top: 23px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 250px;
+}
+
+.footer-logo {
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+
+}
