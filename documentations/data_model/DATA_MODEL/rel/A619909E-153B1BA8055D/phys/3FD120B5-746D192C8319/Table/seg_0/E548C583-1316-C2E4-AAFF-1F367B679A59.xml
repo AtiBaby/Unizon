@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="ADDRESSES_OF_USER" directorySegmentName="seg_0" id="E548C583-1316-C2E4-AAFF-1F367B679A59">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="USER_ID" id="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ADDRESS_ID" id="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DESCRIPTION" id="DF5941C5-8D78-6EDC-A6C0-4CBEBE594142">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="ADDRESSES_OF_USER_USER_FK" id="AAD476A1-8C9C-C21B-5BB4-D95F1A51F7AE">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="ADDRESSES_OF_USER_ADDRESS_FK" id="EEEAA8F8-F26C-7EC8-611E-7A480D398385">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="ADDRESSES_OF_USER_PK" id="E8CDDEC7-9834-EA8C-0AC8-5F43E99B6EF3">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

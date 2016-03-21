@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="PROD_TO_ORDER" directorySegmentName="seg_0" id="E9768233-78C9-AE1D-B025-59E64142F83A">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PRODUCT_ID" id="153D8ACF-F989-353D-6629-4093881C46F3">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ORDER_ID" id="3D994B0C-3980-7671-9347-76502624C538">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AMOUNT" id="F84546C0-A227-5F16-9BEB-84670B63182D">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="PROD_TO_ORDER_PRODUCT_FK" id="3B1DA190-CCA7-53D1-BAA2-50110CD51C4E">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="PROD_TO_ORDER_ORDER_FK" id="D5BBF679-1060-7806-AF1E-8B5434D65458">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PROD_TO_ORDER_PK" id="39FF3E35-3037-34DA-ADAC-6B8B5778086E">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

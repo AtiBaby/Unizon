@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="TAG" directorySegmentName="seg_0" id="007AA3BC-87F4-4604-1270-7869BABD9D3D">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="NAME" id="16AD123D-C167-BC26-4F62-B17AFDC90099">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TAG_ID" id="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="TAG_PK" id="7C9C6BA2-5AA1-3D39-327B-369AD0CF78AF">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+<uniqueKeys>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="TAG_UNIQUE" id="E026724A-8A0F-09DC-AE87-7FB4259395C7">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-21 19:02:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</UniqueKey>
+</uniqueKeys>
+</TableProxyOraclev12c>
