@@ -32,26 +32,36 @@
 3. Standalone.xml átírása:
 3. 1. Nyissuk meg (Ne Microsoft Word-ben!): WILDFLY_HOME/standalone/configuration/standalone.xml
 3. 2. Keressük ki a <datasources> elemet.
-3. 3. Tegyük be ezt ide, értelem szerűen a user-name és password elemek értékeit írjuk át:
-<datasource jta="true" jndi-name="java:/MySqlDS" pool-name="MySqlDS" enabled="true" use-ccm="true">
-    <connection-url>jdbc:mysql://localhost:3306/unizon</connection-url>
-    <driver-class>com.mysql.jdbc.Driver</driver-class>
-    <driver>mysql-connector-java-5.1.38-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
-    <pool>
-        <min-pool-size>8</min-pool-size>
-        <initial-pool-size>8</initial-pool-size>
-        <max-pool-size>32</max-pool-size>
-    </pool>
-    <security>
-        <user-name>root</user-name>
-        <password>passWORD1234...</password>
-    </security>
-    <validation>
-        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
-        <background-validation>true</background-validation>
-        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
-    </validation>
-</datasource>
+3. 3. Cseréljük le erre, értelem szerűen a user-name és password elemek értékeit írjuk át:
+<datasources>
+    <datasource jta="true" jndi-name="java:/MySqlDS" pool-name="MySqlDS" enabled="true" use-ccm="true">
+        <connection-url>jdbc:mysql://localhost:3306/unizon</connection-url>
+        <driver-class>com.mysql.jdbc.Driver</driver-class>
+        <driver>mysql-connector-java-5.1.38-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
+        <pool>
+            <min-pool-size>8</min-pool-size>
+            <initial-pool-size>8</initial-pool-size>
+            <max-pool-size>32</max-pool-size>
+        </pool>
+        <security>
+            <user-name>root</user-name>
+            <password>passWORD1234...</password>
+        </security>
+        <validation>
+            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
+            <background-validation>true</background-validation>
+            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
+        </validation>
+    </datasource>
+    <drivers>
+        <driver name="h2" module="com.h2database.h2">
+            <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+        </driver>
+        <driver name="mysql" module="com.mysql.driver">
+            <driver-class>com.mysql.jdbc.Driver</driver-class>
+        </driver>
+    </drivers>
+</datasources>
 3. 4. A standalone.xml-en belül keressük meg ezt:
 
 <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
