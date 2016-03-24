@@ -1,0 +1,63 @@
+1. mysql jdbc driver deploy a web interface-en keresztul. (jar allomanyt kell deployolni)
+1. 1. localhost:8080
+1. 2. Administration Console
+1. 3. Deployments tab kiválasztása
+1. 4. Add gomb megnyomása
+1. 5. Upload a new deployment radio gomb kiválasztása
+1. 6. Next
+1. 7. Choose File -> mysql-connector-java-5.1.38-bin.jar
+1. 8. Next
+1. 9. Finish
+
+
+2. Configure Datasources:
+2. 1. Configuration Tab
+2. 2. Subsystems
+2. 3. Datasources
+2. 4. Non-XA
+2. 5. Add gomb
+2. 6. Choose Datasource-nál MySQL Datasource
+2. 7. Attribútumok: Name: MySqlDS
+                    JNDI Name: java:/MySqlDS
+2. 8. Next
+2. 9. JDBC Driver oldalon -> Detected Driver tab-on belül ezt kell kiválasztani: mysql-connector-java-5.1.38-bin.jar_com.mysql.jdbc.Driver_5_1
+2. 10. Next
+2. 11. Connection Settings-nél:
+        Connection URL: jdbc:mysql://localhost:3306/unizon
+        Username és password mysql-nek megfelelően beállítása.
+2. 12. Test Connection (ha sikeres, akkor Finish)
+2. 13. Finish
+2. 14. Újra kell indítani a szervert.
+
+3. Standalone.xml átírása:
+3. 1. Nyissuk meg (Ne Microsoft Word-ben!): WILDFLY_HOME/standalone/configuration/standalone.xml
+3. 2. Keressük ki a <datasources> elemet.
+3. 3. Tegyük be ezt ide, értelem szerűen a user-name és password elemek értékeit írjuk át:
+<datasource jta="true" jndi-name="java:/MySqlDS" pool-name="MySqlDS" enabled="true" use-ccm="true">
+    <connection-url>jdbc:mysql://localhost:3306/unizon</connection-url>
+    <driver-class>com.mysql.jdbc.Driver</driver-class>
+    <driver>mysql-connector-java-5.1.38-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
+    <pool>
+        <min-pool-size>8</min-pool-size>
+        <initial-pool-size>8</initial-pool-size>
+        <max-pool-size>32</max-pool-size>
+    </pool>
+    <security>
+        <user-name>root</user-name>
+        <password>passWORD1234...</password>
+    </security>
+    <validation>
+        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
+        <background-validation>true</background-validation>
+        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
+    </validation>
+</datasource>
+3. 4. A standalone.xml-en belül keressük meg ezt:
+
+<default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
+
+Cseréljük ki erre:
+
+<default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:/MySqlDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
+
+
