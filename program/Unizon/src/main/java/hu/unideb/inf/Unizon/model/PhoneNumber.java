@@ -23,13 +23,13 @@ public class PhoneNumber implements Serializable {
 	@Column(name="PHONE_NUMBER", length=100)
 	private String phoneNumber;
 
-	//bi-directional many-to-one association to UniOrder
+	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="phoneNumber", fetch=FetchType.EAGER)
-	private List<UniOrder> uniOrders;
+	private List<Order> orders;
 
-	//bi-directional many-to-one association to UniUser
+	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="phoneNumber", fetch=FetchType.EAGER)
-	private List<UniUser> uniUsers;
+	private List<User> users;
 
 	public PhoneNumber() {
 	}
@@ -50,48 +50,48 @@ public class PhoneNumber implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<UniOrder> getUniOrders() {
-		return this.uniOrders;
+	public List<Order> getOrders() {
+		return this.orders;
 	}
 
-	public void setUniOrders(List<UniOrder> uniOrders) {
-		this.uniOrders = uniOrders;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
-	public UniOrder addUniOrder(UniOrder uniOrder) {
-		getUniOrders().add(uniOrder);
-		uniOrder.setPhoneNumber(this);
+	public Order addOrder(Order order) {
+		getOrders().add(order);
+		order.setPhoneNumber(this);
 
-		return uniOrder;
+		return order;
 	}
 
-	public UniOrder removeUniOrder(UniOrder uniOrder) {
-		getUniOrders().remove(uniOrder);
-		uniOrder.setPhoneNumber(null);
+	public Order removeOrder(Order order) {
+		getOrders().remove(order);
+		order.setPhoneNumber(null);
 
-		return uniOrder;
+		return order;
 	}
 
-	public List<UniUser> getUniUsers() {
-		return this.uniUsers;
+	public List<User> getUsers() {
+		return this.users;
 	}
 
-	public void setUniUsers(List<UniUser> uniUsers) {
-		this.uniUsers = uniUsers;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
-	public UniUser addUniUser(UniUser uniUser) {
-		getUniUsers().add(uniUser);
-		uniUser.setPhoneNumber(this);
+	public User addUser(User user) {
+		getUsers().add(user);
+		user.setPhoneNumber(this);
 
-		return uniUser;
+		return user;
 	}
 
-	public UniUser removeUniUser(UniUser uniUser) {
-		getUniUsers().remove(uniUser);
-		uniUser.setPhoneNumber(null);
+	public User removeUser(User user) {
+		getUsers().remove(user);
+		user.setPhoneNumber(null);
 
-		return uniUser;
+		return user;
 	}
 
 }

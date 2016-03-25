@@ -12,8 +12,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="UNI_ORDER")
-@NamedQuery(name="UniOrder.findAll", query="SELECT u FROM UniOrder u")
-public class UniOrder implements Serializable {
+@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
+public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,7 +26,7 @@ public class UniOrder implements Serializable {
 	private Date orderDate;
 
 	//bi-directional many-to-one association to ProdToOrder
-	@OneToMany(mappedBy="uniOrder", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="order", fetch=FetchType.EAGER)
 	private List<ProdToOrder> prodToOrders;
 
 	//bi-directional many-to-one association to Address
@@ -44,12 +44,12 @@ public class UniOrder implements Serializable {
 	@JoinColumn(name="PHONE_NUMBER_ID", nullable=false)
 	private PhoneNumber phoneNumber;
 
-	//bi-directional many-to-one association to UniUser
+	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false)
-	private UniUser uniUser;
+	private User user;
 
-	public UniOrder() {
+	public Order() {
 	}
 
 	public int getOrderId() {
@@ -78,14 +78,14 @@ public class UniOrder implements Serializable {
 
 	public ProdToOrder addProdToOrder(ProdToOrder prodToOrder) {
 		getProdToOrders().add(prodToOrder);
-		prodToOrder.setUniOrder(this);
+		prodToOrder.setOrder(this);
 
 		return prodToOrder;
 	}
 
 	public ProdToOrder removeProdToOrder(ProdToOrder prodToOrder) {
 		getProdToOrders().remove(prodToOrder);
-		prodToOrder.setUniOrder(null);
+		prodToOrder.setOrder(null);
 
 		return prodToOrder;
 	}
@@ -114,12 +114,12 @@ public class UniOrder implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public UniUser getUniUser() {
-		return this.uniUser;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUniUser(UniUser uniUser) {
-		this.uniUser = uniUser;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

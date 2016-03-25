@@ -45,17 +45,17 @@ public class Address implements Serializable {
 	@OneToMany(mappedBy="address", fetch=FetchType.EAGER)
 	private List<AddressesOfUser> addressesOfUsers;
 
-	//bi-directional many-to-one association to UniOrder
+	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="address1", fetch=FetchType.EAGER)
-	private List<UniOrder> uniOrders1;
+	private List<Order> orders1;
 
-	//bi-directional many-to-one association to UniOrder
+	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="address2", fetch=FetchType.EAGER)
-	private List<UniOrder> uniOrders2;
+	private List<Order> orders2;
 
-	//bi-directional many-to-one association to UniUser
+	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="address", fetch=FetchType.EAGER)
-	private List<UniUser> uniUsers;
+	private List<User> users;
 
 	public Address() {
 	}
@@ -146,70 +146,70 @@ public class Address implements Serializable {
 		return addressesOfUser;
 	}
 
-	public List<UniOrder> getUniOrders1() {
-		return this.uniOrders1;
+	public List<Order> getOrders1() {
+		return this.orders1;
 	}
 
-	public void setUniOrders1(List<UniOrder> uniOrders1) {
-		this.uniOrders1 = uniOrders1;
+	public void setOrders1(List<Order> orders1) {
+		this.orders1 = orders1;
 	}
 
-	public UniOrder addUniOrders1(UniOrder uniOrders1) {
-		getUniOrders1().add(uniOrders1);
-		uniOrders1.setAddress1(this);
+	public Order addOrders1(Order orders1) {
+		getOrders1().add(orders1);
+		orders1.setAddress1(this);
 
-		return uniOrders1;
+		return orders1;
 	}
 
-	public UniOrder removeUniOrders1(UniOrder uniOrders1) {
-		getUniOrders1().remove(uniOrders1);
-		uniOrders1.setAddress1(null);
+	public Order removeOrders1(Order orders1) {
+		getOrders1().remove(orders1);
+		orders1.setAddress1(null);
 
-		return uniOrders1;
+		return orders1;
 	}
 
-	public List<UniOrder> getUniOrders2() {
-		return this.uniOrders2;
+	public List<Order> getOrders2() {
+		return this.orders2;
 	}
 
-	public void setUniOrders2(List<UniOrder> uniOrders2) {
-		this.uniOrders2 = uniOrders2;
+	public void setOrders2(List<Order> orders2) {
+		this.orders2 = orders2;
 	}
 
-	public UniOrder addUniOrders2(UniOrder uniOrders2) {
-		getUniOrders2().add(uniOrders2);
-		uniOrders2.setAddress2(this);
+	public Order addOrders2(Order orders2) {
+		getOrders2().add(orders2);
+		orders2.setAddress2(this);
 
-		return uniOrders2;
+		return orders2;
 	}
 
-	public UniOrder removeUniOrders2(UniOrder uniOrders2) {
-		getUniOrders2().remove(uniOrders2);
-		uniOrders2.setAddress2(null);
+	public Order removeOrders2(Order orders2) {
+		getOrders2().remove(orders2);
+		orders2.setAddress2(null);
 
-		return uniOrders2;
+		return orders2;
 	}
 
-	public List<UniUser> getUniUsers() {
-		return this.uniUsers;
+	public List<User> getUsers() {
+		return this.users;
 	}
 
-	public void setUniUsers(List<UniUser> uniUsers) {
-		this.uniUsers = uniUsers;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
-	public UniUser addUniUser(UniUser uniUser) {
-		getUniUsers().add(uniUser);
-		uniUser.setAddress(this);
+	public User addUser(User user) {
+		getUsers().add(user);
+		user.setAddress(this);
 
-		return uniUser;
+		return user;
 	}
 
-	public UniUser removeUniUser(UniUser uniUser) {
-		getUniUsers().remove(uniUser);
-		uniUser.setAddress(null);
+	public User removeUser(User user) {
+		getUsers().remove(user);
+		user.setAddress(null);
 
-		return uniUser;
+		return user;
 	}
 
 }

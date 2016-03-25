@@ -1,9 +1,22 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -12,8 +25,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="UNI_USER")
-@NamedQuery(name="UniUser.findAll", query="SELECT u FROM UniUser u")
-public class UniUser implements Serializable {
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,12 +51,12 @@ public class UniUser implements Serializable {
 	private String username;
 
 	//bi-directional many-to-one association to AddressesOfUser
-	@OneToMany(mappedBy="uniUser", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private List<AddressesOfUser> addressesOfUsers;
 
-	//bi-directional many-to-one association to UniOrder
-	@OneToMany(mappedBy="uniUser", fetch=FetchType.EAGER)
-	private List<UniOrder> uniOrders;
+	//bi-directional many-to-one association to Order
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	private List<Order> orders;
 
 	//bi-directional many-to-one association to Address
 	@ManyToOne
@@ -55,7 +68,7 @@ public class UniUser implements Serializable {
 	@JoinColumn(name="PHONE_NUMBER_ID", nullable=false)
 	private PhoneNumber phoneNumber;
 
-	public UniUser() {
+	public User() {
 	}
 
 	public int getUserId() {
@@ -116,38 +129,38 @@ public class UniUser implements Serializable {
 
 	public AddressesOfUser addAddressesOfUser(AddressesOfUser addressesOfUser) {
 		getAddressesOfUsers().add(addressesOfUser);
-		addressesOfUser.setUniUser(this);
+		addressesOfUser.setUser(this);
 
 		return addressesOfUser;
 	}
 
 	public AddressesOfUser removeAddressesOfUser(AddressesOfUser addressesOfUser) {
 		getAddressesOfUsers().remove(addressesOfUser);
-		addressesOfUser.setUniUser(null);
+		addressesOfUser.setUser(null);
 
 		return addressesOfUser;
 	}
 
-	public List<UniOrder> getUniOrders() {
-		return this.uniOrders;
+	public List<Order> getOrders() {
+		return this.orders;
 	}
 
-	public void setUniOrders(List<UniOrder> uniOrders) {
-		this.uniOrders = uniOrders;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
-	public UniOrder addUniOrder(UniOrder uniOrder) {
-		getUniOrders().add(uniOrder);
-		uniOrder.setUniUser(this);
+	public Order addOrder(Order order) {
+		getOrders().add(order);
+		order.setUser(this);
 
-		return uniOrder;
+		return order;
 	}
 
-	public UniOrder removeUniOrder(UniOrder uniOrder) {
-		getUniOrders().remove(uniOrder);
-		uniOrder.setUniUser(null);
+	public Order removeOrder(Order order) {
+		getOrders().remove(order);
+		order.setUser(null);
 
-		return uniOrder;
+		return order;
 	}
 
 	public Address getAddress() {

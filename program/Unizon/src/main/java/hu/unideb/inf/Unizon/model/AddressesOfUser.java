@@ -25,10 +25,10 @@ public class AddressesOfUser implements Serializable {
 	@JoinColumn(name="ADDRESS_ID", nullable=false, insertable=false, updatable=false)
 	private Address address;
 
-	//bi-directional many-to-one association to UniUser
+	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false, insertable=false, updatable=false)
-	private UniUser uniUser;
+	private User user;
 
 	public AddressesOfUser() {
 	}
@@ -57,12 +57,12 @@ public class AddressesOfUser implements Serializable {
 		this.address = address;
 	}
 
-	public UniUser getUniUser() {
-		return this.uniUser;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUniUser(UniUser uniUser) {
-		this.uniUser = uniUser;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

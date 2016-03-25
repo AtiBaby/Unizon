@@ -20,15 +20,15 @@ public class ProdToOrder implements Serializable {
 	@Column(name="AMOUNT")
 	private int amount;
 
-	//bi-directional many-to-one association to UniOrder
-	@ManyToOne
-	@JoinColumn(name="ORDER_ID", nullable=false, insertable=false, updatable=false)
-	private UniOrder uniOrder;
-
 	//bi-directional many-to-one association to Product
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_ID", nullable=false, insertable=false, updatable=false)
 	private Product product;
+
+	//bi-directional many-to-one association to Order
+	@ManyToOne
+	@JoinColumn(name="ORDER_ID", nullable=false, insertable=false, updatable=false)
+	private Order order;
 
 	public ProdToOrder() {
 	}
@@ -49,20 +49,20 @@ public class ProdToOrder implements Serializable {
 		this.amount = amount;
 	}
 
-	public UniOrder getUniOrder() {
-		return this.uniOrder;
-	}
-
-	public void setUniOrder(UniOrder uniOrder) {
-		this.uniOrder = uniOrder;
-	}
-
 	public Product getProduct() {
 		return this.product;
 	}
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public Order getOrder() {
+		return this.order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }

@@ -24,13 +24,19 @@
 		<class>hu.unideb.inf.Unizon.model.AddressesOfUser</class>
 		<class>hu.unideb.inf.Unizon.model.AddressesOfUserPK</class>
 		<class>hu.unideb.inf.Unizon.model.Category</class>
+		<class>hu.unideb.inf.Unizon.model.CatToProd</class>
+		<class>hu.unideb.inf.Unizon.model.CatToProdPK</class>
+		<class>hu.unideb.inf.Unizon.model.CatToTag</class>
+		<class>hu.unideb.inf.Unizon.model.CatToTagPK</class>
 		<class>hu.unideb.inf.Unizon.model.PhoneNumber</class>
 		<class>hu.unideb.inf.Unizon.model.Product</class>
 		<class>hu.unideb.inf.Unizon.model.ProdToOrder</class>
 		<class>hu.unideb.inf.Unizon.model.ProdToOrderPK</class>
+		<class>hu.unideb.inf.Unizon.model.ProdToTag</class>
+		<class>hu.unideb.inf.Unizon.model.ProdToTagPK</class>
 		<class>hu.unideb.inf.Unizon.model.Tag</class>
-		<class>hu.unideb.inf.Unizon.model.UniOrder</class>
-		<class>hu.unideb.inf.Unizon.model.UniUser</class>
+		<class>hu.unideb.inf.Unizon.model.Order</class>
+		<class>hu.unideb.inf.Unizon.model.User</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<!-- Properties for Hibernate -->
