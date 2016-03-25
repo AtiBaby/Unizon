@@ -15,8 +15,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<b>It works!</b>
-<!-- <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<!-- <b>It works!</b> -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
@@ -32,28 +32,28 @@
         </div>
 
         <h:form id="reg">
-            <h2>Member Registration</h2>
+            <h2>User Registration</h2>
             <p>Enforces annotation-based constraints defined on the
                 model class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newMember.name}" />
+                <h:inputText id="name" value="#{newUser.name}" />
                 <h:message for="name" errorClass="invalid" />
 
                 <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{newMember.email}" />
+                <h:inputText id="email" value="#{newUser.EMail}" />
                 <h:message for="email" errorClass="invalid" />
 
-                <h:outputLabel for="phoneNumber" value="Phone #:" />
+                <!-- <h:outputLabel for="phoneNumber" value="Phone #:" />
                 <h:inputText id="phoneNumber"
-                    value="#{newMember.phoneNumber}" />
-                <h:message for="phoneNumber" errorClass="invalid" />
+                    value="#{newUser.phoneNumber}" />
+                <h:message for="phoneNumber" errorClass="invalid" /> -->
             </h:panelGrid>
 
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{memberController.register}"
+                        action="#{userController.register}"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
@@ -61,39 +61,38 @@
                 </h:panelGrid>
             </p>
         </h:form>
-        <h2>Members</h2>
-        <h:panelGroup rendered="#{empty members}">
-            <em>No registered members.</em>
+        <h2>users</h2>
+        <h:panelGroup rendered="#{empty users}">
+            <em>No registered users.</em>
         </h:panelGroup>
-        <h:dataTable var="_member" value="#{members}"
-            rendered="#{not empty members}"
+        <h:dataTable var="_user" value="#{users}"
+            rendered="#{not empty users}"
             styleClass="simpletablestyle">
             <h:column>
                 <f:facet name="header">Id</f:facet>
-                #{_member.id}
+                #{_user.id}
             </h:column>
             <h:column>
                 <f:facet name="header">Name</f:facet>
-                #{_member.name}
+                #{_user.name}
             </h:column>
             <h:column>
                 <f:facet name="header">Email</f:facet>
-                #{_member.email}
+                #{_user.EMail}
             </h:column>
-            <h:column>
+            <!-- <h:column>
                 <f:facet name="header">Phone #</f:facet>
-                #{_member.phoneNumber}
-            </h:column>
+                #{_user.phoneNumber}
+            </h:column> -->
             <h:column>
                 <f:facet name="header">REST URL</f:facet>
                 <a
-                    href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
+                    href="#{request.contextPath}/rest/users/#{_user.id}">/rest/users/#{_user.id}</a>
             </h:column>
             <f:facet name="footer">
-            REST URL for all members: <a
-                    href="#{request.contextPath}/rest/members">/rest/members</a>
+            REST URL for all users: <a
+                    href="#{request.contextPath}/rest/users">/rest/users</a>
             </f:facet>
         </h:dataTable>
     </ui:define>
 </ui:composition>
- -->
