@@ -1,65 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui" 
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-        <title>Registration</title>
-    </h:head>
-    <h:body>
-        <p:growl id="messages" life="4000" showDetail="true" />
-        <h:form id="registrationForm">
-            <center>
-                <p:panel>
-                    <p:panelGrid columns="2" style="font-size: 0.8em;">
-                        <p:outputLabel value="Username:"/>
-                        <p:inputText value="#{registrationController.userName}" required="true" requiredMessage="Username is required!"/>
-                        <p:outputLabel value="Password:"/>
-                        <p:password value="#{registrationController.password}" required="true" requiredMessage="Password is required!"
-                                    match="passwordAgain" validatorMessage="The passwords did not match!"/>
-                        <p:outputLabel value="Confirm password:"/>
-                        <p:password id="passwordAgain"/>
-                        <p:outputLabel value="Name:"/>
-                        <p:inputText value="#{registrationController.name}" required="true" requiredMessage="Name is required!"/>
-                        <p:outputLabel value="E-mail address:"/>
-                        <p:inputText value="#{registrationController.email}" required="true" requiredMessage="E-mail address is required!"
-                                     validatorMessage="Please add a valid e-mail address!">
-                            <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[ A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$"/>
-                        </p:inputText>
-                        <p:outputLabel value="Phone number:"/>
-                        <p:inputText value="#{registrationController.phoneNumber}" required="true" requiredMessage="Phone number is required!"
-                                     validatorMessage="Phone number must contain only numbers!">
-                            <f:validateRegex pattern="^[0-9]*$"/>
-                        </p:inputText>
-                        <p:outputLabel value="Billing/Invoicing address:"/>
-                        <p:outputLabel/>
-                        <p:outputLabel value="ZIP code:"/>
-                        <p:inputText value="#{registrationController.zip}" required="true" requiredMessage="ZIP code is required!"/>
-                        <p:outputLabel value="Country:"/>
-                        <p:inputText value="#{registrationController.country}" required="true" requiredMessage="Country is required!"/>
-                        <p:outputLabel value="City:"/>
-                        <p:inputText value="#{registrationController.city}" required="true" requiredMessage="City is required!"/>
-                        <p:outputLabel value="Street:"/>
-                        <p:inputText value="#{registrationController.street}" required="true" requiredMessage="Street is required!"/>
-                        <p:outputLabel value="Street number:"/>
-                        <p:inputText value="#{registrationController.streetNumber}" required="true" requiredMessage="Street number is required!"/>
-                        <p:outputLabel value="Floor:"/>
-                        <p:inputText value="#{registrationController.floor}"/>
-                        <p:outputLabel value="Door:"/>
-                        <p:inputText value="#{registrationController.door}"/>
-                    </p:panelGrid>
-                    <br/>
-                    <p:commandButton value="Register" actionListener="#{registrationController.register()}" ajax="true" update=":messages, :registrationForm" />
-                </p:panel>
-            </center>
-        </h:form>
-    </h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	
+	<ui:define name="fullBody">
+		<p:growl id="messages" life="4000" showDetail="true" />
+		<h:form id="registrationForm">
+			<center>
+				<p:panel>
+					<p:panelGrid columns="2" style="font-size: 0.8em;">
+						<p:outputLabel value="Username:" />
+						<p:inputText value="#{registrationController.userName}"
+							required="true" requiredMessage="Username is required!" />
+						<p:outputLabel value="Password:" />
+						<p:password value="#{registrationController.password}"
+							required="true" requiredMessage="Password is required!"
+							match="passwordAgain"
+							validatorMessage="The passwords did not match!" />
+						<p:outputLabel value="Confirm password:" />
+						<p:password id="passwordAgain" />
+						<p:outputLabel value="Name:" />
+						<p:inputText value="#{registrationController.name}"
+							required="true" requiredMessage="Name is required!" />
+						<p:outputLabel value="E-mail address:" />
+						<p:inputText value="#{registrationController.email}"
+							required="true" requiredMessage="E-mail address is required!"
+							validatorMessage="Please add a valid e-mail address!">
+							<f:validateRegex
+								pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[ A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:outputLabel value="Phone number:" />
+						<p:inputText value="#{registrationController.phoneNumber}"
+							required="true" requiredMessage="Phone number is required!"
+							validatorMessage="Phone number must contain only numbers!">
+							<f:validateRegex pattern="^[0-9]*$" />
+						</p:inputText>
+						<p:outputLabel value="Billing/Invoicing address:" />
+						<p:outputLabel />
+						<p:outputLabel value="ZIP code:" />
+						<p:inputText value="#{registrationController.zip}" required="true"
+							requiredMessage="ZIP code is required!" />
+						<p:outputLabel value="Country:" />
+						<p:inputText value="#{registrationController.country}"
+							required="true" requiredMessage="Country is required!" />
+						<p:outputLabel value="City:" />
+						<p:inputText value="#{registrationController.city}"
+							required="true" requiredMessage="City is required!" />
+						<p:outputLabel value="Street:" />
+						<p:inputText value="#{registrationController.street}"
+							required="true" requiredMessage="Street is required!" />
+						<p:outputLabel value="Street number:" />
+						<p:inputText value="#{registrationController.streetNumber}"
+							required="true" requiredMessage="Street number is required!" />
+						<p:outputLabel value="Floor:" />
+						<p:inputText value="#{registrationController.floor}" />
+						<p:outputLabel value="Door:" />
+						<p:inputText value="#{registrationController.door}" />
+					</p:panelGrid>
+					<br />
+					<p:commandButton value="Register"
+						actionListener="#{registrationController.register()}" ajax="true"
+						update=":messages, :registrationForm" />
+				</p:panel>
+			</center>
+		</h:form>
+	</ui:define>
+</ui:composition>
