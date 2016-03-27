@@ -8,6 +8,7 @@ package hu.unideb.inf.Unizon.facade;
 import hu.unideb.inf.Unizon.model.PhoneNumber;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -29,4 +30,11 @@ public class PhoneNumberFacade extends AbstractFacade<PhoneNumber> {
         super(PhoneNumber.class);
     }
     
+    public PhoneNumber findByPhoneNumber(String phoneNumber) {
+        try {
+            return (PhoneNumber) em.createNamedQuery("PhoneNumber.findByPhoneNumber").setParameter("phoneNumber", phoneNumber).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
 }

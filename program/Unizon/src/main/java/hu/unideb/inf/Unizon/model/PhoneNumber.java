@@ -4,94 +4,97 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the PHONE_NUMBER database table.
- * 
+ *
  */
 @Entity
-@Table(name="PHONE_NUMBER")
-@NamedQuery(name="PhoneNumber.findAll", query="SELECT p FROM PhoneNumber p")
+@Table(name = "PHONE_NUMBER")
+@NamedQueries({
+    @NamedQuery(name = "PhoneNumber.findAll", query = "SELECT p FROM PhoneNumber p"),
+    @NamedQuery(name = "PhoneNumber.findByPhoneNumber", query = "SELECT p FROM PhoneNumber p WHERE p.phoneNumber = :phoneNumber")
+})
 public class PhoneNumber implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="PHONE_NUMBER_ID", unique=true, nullable=false)
-	private int phoneNumberId;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name="PHONE_NUMBER", length=100)
-	private String phoneNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PHONE_NUMBER_ID", unique = true, nullable = false)
+    private int phoneNumberId;
 
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="phoneNumber", fetch=FetchType.EAGER)
-	private List<Order> orders;
+    @Column(name = "PHONE_NUMBER", length = 100)
+    private String phoneNumber;
 
-	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="phoneNumber", fetch=FetchType.EAGER)
-	private List<User> users;
+    //bi-directional many-to-one association to Order
+    @OneToMany(mappedBy = "phoneNumber", fetch = FetchType.EAGER)
+    private List<Order> orders;
 
-	public PhoneNumber() {
-	}
+    //bi-directional many-to-one association to User
+    @OneToMany(mappedBy = "phoneNumber", fetch = FetchType.EAGER)
+    private List<User> users;
 
-	public int getPhoneNumberId() {
-		return this.phoneNumberId;
-	}
+    public PhoneNumber() {
+    }
 
-	public void setPhoneNumberId(int phoneNumberId) {
-		this.phoneNumberId = phoneNumberId;
-	}
+    public int getPhoneNumberId() {
+        return this.phoneNumberId;
+    }
 
-	public String getPhoneNumber() {
-		return this.phoneNumber;
-	}
+    public void setPhoneNumberId(int phoneNumberId) {
+        this.phoneNumberId = phoneNumberId;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
 
-	public List<Order> getOrders() {
-		return this.orders;
-	}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
+    public List<Order> getOrders() {
+        return this.orders;
+    }
 
-	public Order addOrder(Order order) {
-		getOrders().add(order);
-		order.setPhoneNumber(this);
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
-		return order;
-	}
+    public Order addOrder(Order order) {
+        getOrders().add(order);
+        order.setPhoneNumber(this);
 
-	public Order removeOrder(Order order) {
-		getOrders().remove(order);
-		order.setPhoneNumber(null);
+        return order;
+    }
 
-		return order;
-	}
+    public Order removeOrder(Order order) {
+        getOrders().remove(order);
+        order.setPhoneNumber(null);
 
-	public List<User> getUsers() {
-		return this.users;
-	}
+        return order;
+    }
 
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
+    public List<User> getUsers() {
+        return this.users;
+    }
 
-	public User addUser(User user) {
-		getUsers().add(user);
-		user.setPhoneNumber(this);
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
-		return user;
-	}
+    public User addUser(User user) {
+        getUsers().add(user);
+        user.setPhoneNumber(this);
 
-	public User removeUser(User user) {
-		getUsers().remove(user);
-		user.setPhoneNumber(null);
+        return user;
+    }
 
-		return user;
-	}
+    public User removeUser(User user) {
+        getUsers().remove(user);
+        user.setPhoneNumber(null);
+
+        return user;
+    }
 
 }
