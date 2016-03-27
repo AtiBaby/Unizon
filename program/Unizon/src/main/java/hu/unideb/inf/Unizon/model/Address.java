@@ -38,8 +38,8 @@ public class Address implements Serializable {
 	@Column(name="STREET", length=100)
 	private String street;
 
-	@Column(name="ZIP")
-	private int zip;
+	@Column(name="ZIP", length=20)
+	private String zip;
 
 	//bi-directional many-to-one association to AddressesOfUser
 	@OneToMany(mappedBy="address", fetch=FetchType.EAGER)
@@ -116,13 +116,13 @@ public class Address implements Serializable {
 		this.street = street;
 	}
 
-	public int getZip() {
-		return this.zip;
-	}
+    public String getZip() {
+        return zip;
+    }
 
-	public void setZip(int zip) {
-		this.zip = zip;
-	}
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
 
 	public List<AddressesOfUser> getAddressesOfUsers() {
 		return this.addressesOfUsers;

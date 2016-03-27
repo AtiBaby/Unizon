@@ -33,7 +33,7 @@ use unizon;
 CREATE TABLE ADDRESS
   (
     ADDRESS_ID INT NOT NULL ,
-    ZIP        INT ,
+    ZIP        VARCHAR(20) ,
     COUNTRY    VARCHAR(100) ,
     CITY       VARCHAR(100) ,
     STREET     VARCHAR(100) ,
