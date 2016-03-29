@@ -1,0 +1,112 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7DB5D523-4924-45F7-BECE-EB6B4A2DF85F" name="UNI_USER">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:15:27 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_14</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USER_ID" id="CB2B820A-6667-4446-336D-17385CB07591">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:20:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USERNAME" id="42F9FFE0-09B4-83AC-7A22-D06F9909B02D">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:20:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PASSWORD" id="61EA60B0-5EBD-B3D7-006D-4F64A9CAEC5B">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:20:28 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="E_MAIL" id="52B683F0-C339-570E-7F1D-ABF99C37BF3A">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:33:45 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAME" id="505E5B9F-F03C-9733-410B-5F0A4B432192">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:35:41 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REGISTRATION_DATE" id="D9AD079B-DD6B-7678-0DBC-64572BF68703">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:35:59 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1FF1AA6D-1BFB-E8FB-262A-7782B06A4F53" name="UNI_USER_PK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:20:07 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CB2B820A-6667-4446-336D-17385CB07591"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C0669F81-9E9D-7AE0-F594-675583520838" name="UNI_USER_USERNAME">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:21:00 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="42F9FFE0-09B4-83AC-7A22-D06F9909B02D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DD3942FB-279C-F36D-6E2C-6BD0D8A22E13" name="UNI_USER_EMAIL">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:33:58 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="52B683F0-C339-570E-7F1D-ABF99C37BF3A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

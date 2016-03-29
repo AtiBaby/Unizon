@@ -1,0 +1,48 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C52E70DB-87F5-5F4B-BA37-B4838BB6D559" name="ADMINISTRATOR">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:36:46 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_15</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USER_ID" id="C43808ED-E68F-EC32-018F-0118DE66FB04">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:37:18 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C4AEBF61-814C-B73F-24A7-27E0D6C96338" referredColumn="CB2B820A-6667-4446-336D-17385CB07591"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D71109D3-B186-0653-26C1-447FEB0833EA" name="ADMINISTRATOR_PK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:37:24 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C43808ED-E68F-EC32-018F-0118DE66FB04"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="904C41FC-592C-8A38-9F33-57FE2F658ECF" name="ADMINISTRATOR_UNI_USER_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:39:33 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C43808ED-E68F-EC32-018F-0118DE66FB04"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

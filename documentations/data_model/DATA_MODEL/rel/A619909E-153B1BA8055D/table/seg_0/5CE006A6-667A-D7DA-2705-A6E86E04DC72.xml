@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5CE006A6-667A-D7DA-2705-A6E86E04DC72" name="UNI_USER">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5CE006A6-667A-D7DA-2705-A6E86E04DC72" name="UNI_USER_DATA">
 <sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 11:21:13 UTC</createdTime>
@@ -18,32 +18,9 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="USERNAME" id="2C3E37D2-633E-E4A9-7F1B-919230F785BE">
-<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
-<createdBy>Jácint</createdBy>
-<createdTime>2016-03-01 17:20:49 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>0</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="E_MAIL" id="D2D46163-32BE-04C6-3554-420D2DB6E520">
-<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
-<createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:10:17 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>0</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F0946994-7CFB-ECF2-0781-A13DA6458670" referredColumn="CB2B820A-6667-4446-336D-17385CB07591"/>
+</associations>
 </Column>
 <Column name="PHONE_NUMBER_ID" id="3D42EC3E-63FC-A85A-2B8D-BD87DDCFF406">
 <createdBy>adam</createdBy>
@@ -57,43 +34,6 @@
 <associations>
 <colAssociation fkAssociation="591F5804-675C-BA39-07F3-F28EF62A6994" referredColumn="1BE47EB5-536E-0077-F7C0-83769B7AA4DA"/>
 </associations>
-</Column>
-<Column name="ENCRYPTED_PASSWORD" id="B52CA183-1005-9D8D-AB69-4A8157DBD87C">
-<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
-<createdBy>Jácint</createdBy>
-<createdTime>2016-03-01 17:21:06 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>0</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="NAME" id="FEBE2FE5-8062-B7AE-7D9B-126FA175B63B">
-<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 11:22:31 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>0</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="REGISTRATION_DATE" id="003C30A8-9F42-99DE-D5F4-F122DF32405E">
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 11:23:22 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT007</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="DEFAULT_ADDRESS_ID" id="98B72D74-FECA-FB52-E144-0DD664740E01">
 <createdBy>adam</createdBy>
@@ -121,24 +61,14 @@
 <colUsage columnID="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="CF07CC19-3BCA-16C9-E065-2E7DDF0D9C1C" name="USER_USERNAME_UNIQUE">
+<ind_PK_UK id="C0463977-D89C-500D-DA0D-C78D3BB06C2B" name="USER_ADDRESS_FK">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:25:16 UTC</createdTime>
+<createdTime>2016-03-21 19:00:20 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<indexState>Unique Constraint</indexState>
+<indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="2C3E37D2-633E-E4A9-7F1B-919230F785BE"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="B169AA07-005B-52DE-342D-217FDBFD3F2B" name="USER__EMAIL_UNIQUE">
-<createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:26:08 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<indexState>Unique Constraint</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="D2D46163-32BE-04C6-3554-420D2DB6E520"/>
+<colUsage columnID="98B72D74-FECA-FB52-E144-0DD664740E01"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="4B68039C-0036-B748-46A7-A40DD911FFDF" name="USER_PHONE_NUMBER_FK">
@@ -151,14 +81,24 @@
 <colUsage columnID="3D42EC3E-63FC-A85A-2B8D-BD87DDCFF406"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="C0463977-D89C-500D-DA0D-C78D3BB06C2B" name="USER_ADDRESS_FK">
+<ind_PK_UK id="7856F853-4DA2-C0EE-25BE-C683DF7609F0" name="USER_ADDRESS_FK">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-21 19:00:20 UTC</createdTime>
+<createdTime>2016-03-29 17:04:02 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="98B72D74-FECA-FB52-E144-0DD664740E01"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4F99735C-1125-4E55-BEC1-7E7363084FE2" name="UNI_USER_DATA_UNI_USER_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 17:33:11 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
