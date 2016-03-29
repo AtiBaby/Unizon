@@ -1,76 +1,59 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 
 /**
  * The persistent class for the UNI_USER database table.
  * 
  */
 @Entity
-@Table(name="UNI_USER")
+@Table(name = "UNI_USER")
 @NamedQueries({
-    @NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
+    @NamedQuery(name="User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.username = :userName")
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="USER_ID", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "USER_ID", unique = true, nullable = false)
 	private int userId;
 
-	@Column(name="E_MAIL", length=100)
+	@Column(name = "E_MAIL", length = 100)
 	private String eMail;
 
-	@Column(name="ENCRYPTED_PASSWORD", length=100)
-	private String encryptedPassword;
-
-	@Column(name="NAME", length=100)
+	@Column(name = "NAME", length = 100)
 	private String name;
 
+	@Column(name = "PASSWORD", nullable = false, length = 100)
+	private String password;
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="REGISTRATION_DATE")
+	@Column(name = "REGISTRATION_DATE")
 	private Date registrationDate;
 
-	@Column(name="USERNAME", length=100)
+	@Column(name = "USERNAME", nullable = false, length = 100)
 	private String username;
 
-	//bi-directional many-to-one association to AddressesOfUser
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to AddressesOfUser
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<AddressesOfUser> addressesOfUsers;
 
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	// bi-directional one-to-one association to Administrator
+	@OneToOne(mappedBy = "user")
+	private Administrator administrator;
+
+	// bi-directional many-to-one association to Order
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Order> orders;
 
-	//bi-directional many-to-one association to Address
-	@ManyToOne
-	@JoinColumn(name="DEFAULT_ADDRESS_ID", nullable=false)
-	private Address address;
-
-	//bi-directional many-to-one association to PhoneNumber
-	@ManyToOne
-	@JoinColumn(name="PHONE_NUMBER_ID", nullable=false)
-	private PhoneNumber phoneNumber;
+	// bi-directional one-to-one association to UserData
+	@OneToOne(mappedBy = "user")
+	private UserData userData;
 
 	public User() {
 	}
@@ -91,20 +74,20 @@ public class User implements Serializable {
 		this.eMail = eMail;
 	}
 
-	public String getEncryptedPassword() {
-		return this.encryptedPassword;
-	}
-
-	public void setEncryptedPassword(String encryptedPassword) {
-		this.encryptedPassword = encryptedPassword;
-	}
-
 	public String getName() {
 		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Date getRegistrationDate() {
@@ -145,6 +128,14 @@ public class User implements Serializable {
 		return addressesOfUser;
 	}
 
+	public Administrator getAdministrator() {
+		return this.administrator;
+	}
+
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
+	}
+
 	public List<Order> getOrders() {
 		return this.orders;
 	}
@@ -167,20 +158,12 @@ public class User implements Serializable {
 		return order;
 	}
 
-	public Address getAddress() {
-		return this.address;
+	public UserData getUserData() {
+		return this.userData;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public PhoneNumber getPhoneNumber() {
-		return this.phoneNumber;
-	}
-
-	public void setPhoneNumber(PhoneNumber phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setUserData(UserData userData) {
+		this.userData = userData;
 	}
 
 }

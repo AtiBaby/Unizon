@@ -20,12 +20,14 @@ import javax.inject.Named;
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.AddressesOfUserFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
+import hu.unideb.inf.Unizon.facade.UserDataFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.Address;
 import hu.unideb.inf.Unizon.model.AddressesOfUser;
 import hu.unideb.inf.Unizon.model.AddressesOfUserPK;
 import hu.unideb.inf.Unizon.model.PhoneNumber;
 import hu.unideb.inf.Unizon.model.User;
+import hu.unideb.inf.Unizon.model.UserData;
 import password.Password;
 
 /**
@@ -36,12 +38,20 @@ import password.Password;
 @ViewScoped
 public class RegistrationController implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	private UserFacade userFacade;
+
+	@EJB
+	private UserDataFacade userDataFacade;
+
 	@EJB
 	private AddressFacade addressFacade;
+
 	@EJB
 	private AddressesOfUserFacade addressesOfUserFacade;
+
 	@EJB
 	private PhoneNumberFacade phoneNumberFacade;
 
@@ -118,18 +128,23 @@ public class RegistrationController implements Serializable {
 		}
 
 		User user = new User();
-		user.setAddress(address);
 		user.setEMail(email);
 		try {
-			user.setEncryptedPassword(Password.getSaltedHash(password));
+			user.setPassword(Password.getSaltedHash(password));
 		} catch (Exception ex) {
 			Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		user.setName(name);
-		user.setPhoneNumber(pn);
 		user.setRegistrationDate(new Date());
 		user.setUsername(userName);
 		userFacade.create(user);
+
+		UserData userData = new UserData();
+		userData.setDefaultAddress(address);
+		userData.setPhoneNumber(pn);
+		userData.setUser(user);
+		userData.setUserId(user.getUserId());
+		userDataFacade.create(userData);
 
 		AddressesOfUser addressesOfUser = new AddressesOfUser();
 		addressesOfUser.setDescription(addressDescription);
