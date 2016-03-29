@@ -94,6 +94,13 @@ public class RegistrationController implements Serializable {
 			return;
 		}
 
+		if (userFacade.findByEmail(email) != null) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
+					"E-mail address already exists!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return;
+		}
+
 		if (phoneNumberFacade.findByPhoneNumber(phoneNumber) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Phone number already exists!");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
