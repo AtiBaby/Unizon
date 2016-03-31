@@ -4,47 +4,47 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the CATEGORY database table.
  * 
  */
 @Entity
-@Table(name="CATEGORY")
-@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+@Table(name = "CATEGORY")
+@NamedQueries({ @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
+		@NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :catName") })
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="CATEGORY_ID", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "CATEGORY_ID", unique = true, nullable = false)
 	private int categoryId;
 
-	@Column(name="NAME", length=100)
+	@Column(name = "NAME", length = 100)
 	private String name;
 
-	//bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy="category1", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to CatToProd
+	@OneToMany(mappedBy = "category1", fetch = FetchType.EAGER)
 	private List<CatToProd> catToProds1;
 
-	//bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy="category2", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to CatToProd
+	@OneToMany(mappedBy = "category2", fetch = FetchType.EAGER)
 	private List<CatToProd> catToProds2;
 
-	//bi-directional many-to-one association to CatToTag
-	@OneToMany(mappedBy="category1", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to CatToTag
+	@OneToMany(mappedBy = "category1", fetch = FetchType.EAGER)
 	private List<CatToTag> catToTags1;
 
-	//bi-directional many-to-one association to CatToTag
-	@OneToMany(mappedBy="category2", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to CatToTag
+	@OneToMany(mappedBy = "category2", fetch = FetchType.EAGER)
 	private List<CatToTag> catToTags2;
 
-	//bi-directional many-to-many association to Product
-	@ManyToMany(mappedBy="categories", fetch=FetchType.EAGER)
+	// bi-directional many-to-many association to Product
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private List<Product> products;
 
-	//bi-directional many-to-many association to Tag
-	@ManyToMany(mappedBy="categories", fetch=FetchType.EAGER)
+	// bi-directional many-to-many association to Tag
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private List<Tag> tags;
 
 	public Category() {

@@ -5,10 +5,12 @@
  */
 package hu.unideb.inf.Unizon.facade;
 
-import hu.unideb.inf.Unizon.model.Category;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
+import hu.unideb.inf.Unizon.model.Category;
 
 /**
  *
@@ -17,16 +19,25 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CategoryFacade extends AbstractFacade<Category> {
 
-    @PersistenceContext(unitName = "primary")
-    private EntityManager em;
+	@PersistenceContext(unitName = "primary")
+	private EntityManager em;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
-    public CategoryFacade() {
-        super(Category.class);
-    }
-    
+	public CategoryFacade() {
+		super(Category.class);
+	}
+
+	public Category findByName(String name) {
+		try {
+			return (Category) em.createNamedQuery("Category.findByName").setParameter("catName", name)
+					.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
 }
