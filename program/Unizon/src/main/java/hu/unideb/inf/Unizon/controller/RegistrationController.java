@@ -54,7 +54,7 @@ public class RegistrationController implements Serializable {
 	@EJB
 	private PhoneNumberFacade phoneNumberFacade;
 
-	private String userName;
+	private String username;
 	private String password;
 	private String email;
 	private String name;
@@ -70,7 +70,7 @@ public class RegistrationController implements Serializable {
 	private Integer door;
 
 	private void nullProps() {
-		userName = null;
+		username = null;
 		password = null;
 		email = null;
 		name = null;
@@ -87,7 +87,7 @@ public class RegistrationController implements Serializable {
 	}
 
 	public void register() {
-		if (userFacade.findByUserName(userName) != null) {
+		if (userFacade.findByUsername(username) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Username already exists!");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return;
@@ -142,7 +142,7 @@ public class RegistrationController implements Serializable {
 		}
 		user.setName(name);
 		user.setRegistrationDate(new Date());
-		user.setUsername(userName);
+		user.setUsername(username);
 		userFacade.create(user);
 
 		UserData userData = new UserData();
@@ -172,12 +172,12 @@ public class RegistrationController implements Serializable {
 	public RegistrationController() {
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

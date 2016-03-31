@@ -38,7 +38,7 @@ public class LoginController implements Serializable {
 	public String login() {
 		logger.info("Authenticating user: {}.", username);
 
-		User user = userFacade.findByUserName(username);
+		User user = userFacade.findByUsername(username);
 		if (user != null) {
 			try {
 				if (Password.check(password, user.getPassword())) {
