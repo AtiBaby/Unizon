@@ -18,31 +18,32 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UserFacade extends AbstractFacade<User> {
 
-    @PersistenceContext(unitName = "primary")
-    private EntityManager em;
+	@PersistenceContext(unitName = "primary")
+	private EntityManager em;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
-    public UserFacade() {
-        super(User.class);
-    }
+	public UserFacade() {
+		super(User.class);
+	}
 
-    public User findByUserName(String userName) {
-        try {
-            return (User) em.createNamedQuery("User.findByUserName").setParameter("userName", userName).getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
-    
-    public User findByEmail(String eMail) {
-    	try {
-    		return (User) em.createNamedQuery("User.findByEmail").setParameter("eMail", eMail).getSingleResult();
-    	} catch (NoResultException nre) {
-    		return null;
-    	}
-    }
+	public User findByUserName(String userName) {
+		try {
+			return (User) em.createNamedQuery("User.findByUserName").setParameter("userName", userName)
+					.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
+	public User findByEmail(String eMail) {
+		try {
+			return (User) em.createNamedQuery("User.findByEmail").setParameter("eMail", eMail).getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
 }

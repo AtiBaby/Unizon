@@ -8,14 +8,15 @@ package hu.unideb.inf.Unizon.controller;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.AddressesOfUserFacade;
@@ -30,15 +31,13 @@ import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.model.UserData;
 import password.Password;
 
-/**
- *
- * @author Czuczi
- */
 @Named(value = "registrationController")
 @ViewScoped
 public class RegistrationController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
 	@EJB
 	private UserFacade userFacade;
@@ -139,7 +138,7 @@ public class RegistrationController implements Serializable {
 		try {
 			user.setPassword(Password.getSaltedHash(password));
 		} catch (Exception ex) {
-			Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+			logger.error(ex.getMessage());
 		}
 		user.setName(name);
 		user.setRegistrationDate(new Date());
