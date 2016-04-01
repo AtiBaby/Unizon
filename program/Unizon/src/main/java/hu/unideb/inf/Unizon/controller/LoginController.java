@@ -2,11 +2,11 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import hu.unideb.inf.Unizon.model.User;
 import password.Password;
 
 @Stateless
-@ManagedBean(name = "LoginController")
+@ManagedBean
 @SessionScoped
 public class LoginController implements Serializable {
 
@@ -32,8 +32,18 @@ public class LoginController implements Serializable {
 	@EJB
 	private AdministratorFacade administratorFacade;
 
+	private User user;
+	private boolean isAdministrator;
 	private String username;
-	private String password;	// TODO password nem lehet String, helyette: char[] password kell!
+	private String password; // TODO password nem lehet String, helyette: char[] password kell!
+
+	@PostConstruct
+	public void nullProps() {
+		this.user = null;
+		this.isAdministrator = false;
+		this.username = null;
+		this.password = null;
+	}
 
 	public String login() {
 		logger.info("Authenticating user: {}.", username);
@@ -42,36 +52,46 @@ public class LoginController implements Serializable {
 		if (user != null) {
 			try {
 				if (Password.check(password, user.getPassword())) {
+					this.user = user;
 					logger.info("User {} successfully authenticated.", username);
 
-					boolean isAdministrator = administratorFacade.isAdministrator(user.getUserId());
+					this.isAdministrator = administratorFacade.isAdministrator(user.getUserId());
 					logger.info("Is user {} administrator: {}", username, isAdministrator);
 
-					// TODO valaki tud jobbat?
-					ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-					externalContext.getSessionMap().put("user", user);
-					externalContext.getSessionMap().put("isAdministrator", isAdministrator);
-
 					return "/index.jsf?faces-redirect=true";
-				} else {
-					logger.info("User {} failed to authenticate.", username);
-					username = password = null;
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
-				username = password = null;
+				logger.error(e.getMessage());
 			}
 		}
+
+		logger.info("User {} failed to authenticate.", username);
+		nullProps();
 
 		return "/user/userlogin?faces-redirect=true";
 	}
 
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-
 		logger.info("User {} logged out.", username);
-
+		nullProps();
 		return "/index.jsf?faces-redirect=true";
+	}
+
+	public boolean isLoggedIn() {
+		return this.user != null;
+	}
+
+	public boolean isAdministrator() {
+		return isAdministrator;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getUsername() {

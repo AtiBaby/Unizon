@@ -17,15 +17,15 @@
 					<img src="#{request.contextPath}/resources/images/logo.png" />
 				</a>
 				<div class="reg">
-					<h:panelGroup rendered="#{not empty user}">
+					<h:panelGroup rendered="#{loginController.loggedIn}">
 						    <h:form>
 						    	<b>
-						    		<h:outputLabel>#{user.name}</h:outputLabel>
+						    		<h:outputLabel value="#{loginController.user.name}" />
 						    	</b>
-							    <h:commandLink action="#{LoginController.logout}">Log Out</h:commandLink>
+							    <h:commandLink action="#{loginController.logout}">Log Out</h:commandLink>
 						    </h:form>
 					</h:panelGroup>
-					<h:panelGroup rendered="${empty user}">
+					<h:panelGroup rendered="#{!loginController.loggedIn}">
 							<a href="#{request.contextPath}/registration/registration.jsf">Sign up</a>
 							<a href="#{request.contextPath}/user/userlogin.jsf">Login</a>
 					</h:panelGroup>

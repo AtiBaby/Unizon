@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="title">
 		Login
@@ -8,18 +12,25 @@
 
 	<ui:define name="fullBody">
 		<p:growl id="messages" life="4000" showDetail="true" />
-
 		<h:form id="loginform">
 			<center>
 				<p:panelGrid columns="2" style="text-align: center">
 					<p:outputLabel value="Username:" />
-					<p:inputText id="userName" value="#{LoginController.username}" />
-		
+					<p:inputText
+						id="username"
+						required="true"
+						requiredMessage="Please type in your username!"
+						value="#{loginController.username}" />
+					
 					<p:outputLabel value="Password:" />
-					<p:password value="#{LoginController.password}" />
+					<p:password
+						id="password"
+						required="true"
+						requiredMessage="Please type in your password!"
+						value="#{loginController.password}" />
 				</p:panelGrid>
 				<br />
-				<p:commandButton value="Login" action="#{LoginController.login}" />
+				<p:commandButton value="Login" action="#{loginController.login}" ajax="false" />
 			</center>
 		</h:form>
 	</ui:define>
