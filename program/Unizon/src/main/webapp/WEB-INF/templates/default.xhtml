@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
         <h:outputStylesheet name="css/screen.css" />
+        <h:outputStylesheet name="css/address-table.css" />
     </h:head>
     <h:body>
         <div id="header">
@@ -20,8 +21,8 @@
                         <h:panelGroup rendered="#{loginController.loggedIn}">
                             <h:form>
                                 <b>
-                                    <h:outputLabel value="#{loginController.user.name}" />
-                                </b>
+						    		<h:outputLink value="#{request.contextPath}/user/user.jsf">#{loginController.user.name}</h:outputLink>
+						    	</b>
                                 <h:commandLink action="#{loginController.logout}">Log Out</h:commandLink>
                             </h:form>
                         </h:panelGroup>
