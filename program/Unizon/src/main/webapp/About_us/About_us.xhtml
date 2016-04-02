@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="title">
+		Registration
+	</ui:define>
+	<ui:define name="fullBody">
+		<p:growl id="messages" life="4000" showDetail="true" />
+		<h:form id="registrationForm">
+			<center><h1>Rólunk</h1></center>
+				<p:panel>
+					<h2 align="center">Mi az Unison?</h2>
+					<p style="margin-top:50;margin-bottom:50">
+					Az Unison 2013-ban, a Debreceni Egyetem Informatika Karának hallgatói által alapított Webáruház. 
+					Kezdetben azzal a céllal jött létre, hogy a tanulás miatt leterhelt egyetemi diákok könnyebben 
+					intézhessék el a vásárlásaikat. Az első évben főleg az olyan tanulókra gondoltunk, aki kollégiumba 
+					költöztek be és nem ismerték a várost annyira, hogy tudják, mit hol lehet beszerezni. A kezdeti 
+					sikerek után mára nem csak nekik, hanem más embereknek is próbáltuk kényelmesebbé tenni az életüket. 
+					Mára már Magyarország egyik meghatározó webáruházává nőttük ki magunkat. Jelenleg mintegy 5 000 
+					terméket lehet a neten rendelni, de ez a választék folyamatosan bővül. Ez a bolt elnyerte a IV. 
+					helyet az Ország Boltja 2015 díjáért induló versenyen.</p>
+
+					<h2 align="center">Milyen termékekek árulunk?</h2>
+					<p style="margin-top:50;margin-bottom:50">
+					Nemcsak különböző tanulást segítő eszközöket, mint például könyveket, e-könyveket, laptopokat, tableteket 
+					kínálunk nekik eladásra, hanem olyan dolgokat is, amelyek kikapcsolódási lehetőséget nyújt a hallgatóknak. 
+					Ám mivel nem csak ők szeretnek pihenni, hanem sok más ember is, így ezzel szélesebbé vált a vásárlóink köre. 
+					Egyre több informatikával kapcsolatos termékekkel bővül kínálatunk. 
+					</p>
+					<center><p><img src="#{request.contextPath}/resources/images/About_us.jpg" /></p></center>
+
+					<h2 align="center">Várható tervek?</h2>
+					<p style="margin-top:50;margin-bottom:50">A kezdeti sikereknek köszönhetően egyre több lehetősége nyílik és egyre több partner támogatását nyeri 
+					el, aminek köszönhetően további növekedés várható. Cégünk székhelye az Debreceni Egyetem Informatika 
+					Karáról átkerült a Egyetemi főépületbe. A jövőben szeretnénk további vásárlókat is kiszolgálni. Elsődleges 
+					célpont a külföldi diákok, aminek előfeltétele a honlap angol nyelvű megléte és elérhetősége. Valamint 
+					tervezzük az egyetemi hálózatból való kiválást és saját szerverek létesítését.</p>
+					
+				</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
