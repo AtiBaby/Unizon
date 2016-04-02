@@ -29,7 +29,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="7321ABD1-3040-8DEB-18C9-BFEE2A61FE68" referredColumn="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
+<colAssociation fkAssociation="3EC2E6CC-F912-62E5-2273-9D7B9E7DFD1C" referredColumn="CB2B820A-6667-4446-336D-17385CB07591"/>
 </associations>
 </Column>
 <Column name="PHONE_NUMBER_ID" id="385FDF83-66FF-CC45-EB78-1FC4F0F642D7">
@@ -95,16 +95,6 @@
 <colUsage columnID="FB8C440D-B239-7B92-62B7-4003DC78B41A"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="8BDFC9BD-D74E-5DCF-39EC-3EA9C181D7E1" name="ORDER_USER_FK">
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 13:21:06 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="6F8EE850-85DA-76C0-5E80-E78D9F299C90"/>
-</indexColumnUsage>
-</ind_PK_UK>
 <ind_PK_UK id="FEC9A031-4CE7-2E09-6107-3F3BEC5E4736" name="ORDER_ADDRESS_FK">
 <createdBy>Gigi</createdBy>
 <createdTime>2016-03-05 19:26:45 UTC</createdTime>
@@ -133,6 +123,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="385FDF83-66FF-CC45-EB78-1FC4F0F642D7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="080CE759-634C-EEC0-F200-1B6DC87FBEA4" name="UNI_ORDER_UNI_USER_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 18:06:27 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6F8EE850-85DA-76C0-5E80-E78D9F299C90"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

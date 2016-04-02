@@ -1,10 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title><ui:insert name="title">Unison</ui:insert></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,21 +10,47 @@
 	<h:outputStylesheet name="css/screen.css" />
 </h:head>
 <h:body>
-
 	<div id="header">
 		<div class="container">
 			<ui:insert name="header">
-				<!-- Default Header -->
-				<a class="logo" href="#{request.contextPath}/index.jsf"><img
-					src="#{request.contextPath}/resources/images/logo.png" /></a>
+				<a class="logo" href="#{request.contextPath}/index.jsf">
+					<img src="#{request.contextPath}/resources/images/logo.png" />
+				</a>
 				<div class="reg">
-					<a href="#{request.contextPath}/registration/registration.jsf">Sign
-						up</a> <a href="#">Log in</a>
+					<h:panelGroup rendered="#{loginController.loggedIn}">
+						    <h:form>
+						    	<b>
+						    		<h:outputLabel value="#{loginController.user.name}" />
+						    	</b>
+							    <h:commandLink action="#{loginController.logout}">Log Out</h:commandLink>
+						    </h:form>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{!loginController.loggedIn}">
+							<a href="#{request.contextPath}/registration/registration.jsf">Sign up</a>
+							<a href="#{request.contextPath}/user/userlogin.jsf">Login</a>
+					</h:panelGroup>
 				</div>
-				<!-- END default header -->
 			</ui:insert>
 		</div>
 	</div>
+	
+	<ui:insert name="menubar">
+		<br />
+		<div class="container">
+			<div id="nav">
+				<ui:insert name="menu">
+					<ul>
+						<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+						<li><a href="#">Categories</a></li>
+						<li><a href="#{request.contextPath}/contact/contact.jsf">Contact</a></li>
+						<li><a href="#">About us</a></li>
+					</ul>
+				</ui:insert>
+			</div>
+		</div>
+		<br />
+	</ui:insert>
+	
 	<ui:insert name="fullBody">
 		<div id="section">
 			<div class="container">
@@ -58,15 +81,17 @@
 				</div>
 			</div>
 		</div>
+	</ui:insert>
+	
+	<ui:insert name="footer">
 		<div id="footer" class="container">
 			<ui:insert name="footer">
 				<!-- Default Footer -->
 				<p>Made in Debrecen &copy; 2016 UNISON</p>
 				<div class="footer-logo">
-					Science Icons,Dollar graphics by <a href="http://www.freepik.com/">Freepik</a>
-					from <a href="http://www.flaticon.com/">Flaticon</a> are licensed
-					under <a href="http://creativecommons.org/licenses/by/3.0/"
-						title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a
+					Science Icons,Dollar graphics by <a href="http://www.freepik.com/">Freepik</a> from <a
+						href="http://www.flaticon.com/">Flaticon</a> are licensed under <a
+						href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a
 						href="http://logomakr.com" title="Logo Maker">Logo Maker</a>
 				</div>
 				<!-- END default footer -->

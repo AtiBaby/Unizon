@@ -23,6 +23,7 @@
 		<class>hu.unideb.inf.Unizon.model.Address</class>
 		<class>hu.unideb.inf.Unizon.model.AddressesOfUser</class>
 		<class>hu.unideb.inf.Unizon.model.AddressesOfUserPK</class>
+		<class>hu.unideb.inf.Unizon.model.Administrator</class>
 		<class>hu.unideb.inf.Unizon.model.Category</class>
 		<class>hu.unideb.inf.Unizon.model.CatToProd</class>
 		<class>hu.unideb.inf.Unizon.model.CatToProdPK</class>
@@ -37,6 +38,7 @@
 		<class>hu.unideb.inf.Unizon.model.Tag</class>
 		<class>hu.unideb.inf.Unizon.model.Order</class>
 		<class>hu.unideb.inf.Unizon.model.User</class>
+		<class>hu.unideb.inf.Unizon.model.UserData</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<!-- Properties for Hibernate -->

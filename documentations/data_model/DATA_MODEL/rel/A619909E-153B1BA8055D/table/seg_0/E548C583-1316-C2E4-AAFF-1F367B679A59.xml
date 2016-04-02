@@ -31,7 +31,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="0C3E2AD9-1D1F-0024-970D-0042ADD1012E" referredColumn="F882EDA1-4E66-AE84-986B-86FD4F5295CD"/>
+<colAssociation fkAssociation="51F101BD-63BE-A15A-20DE-099C2DB143D2" referredColumn="CB2B820A-6667-4446-336D-17385CB07591"/>
 </associations>
 </Column>
 <Column name="ADDRESS_ID" id="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C">
@@ -61,16 +61,6 @@
 <colUsage columnID="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="AAD476A1-8C9C-C21B-5BB4-D95F1A51F7AE" name="ADDRESSES_OF_USER_USER_FK">
-<createdBy>Heather</createdBy>
-<createdTime>2016-03-07 21:07:45 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4"/>
-</indexColumnUsage>
-</ind_PK_UK>
 <ind_PK_UK id="EEEAA8F8-F26C-7EC8-611E-7A480D398385" name="ADDRESSES_OF_USER_ADDRESS_FK">
 <createdBy>Heather</createdBy>
 <createdTime>2016-03-07 21:07:45 UTC</createdTime>
@@ -79,6 +69,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4F6E4ABC-6B7D-331C-77BF-972B178424DD" name="ADDRESSES_OF_USER_UNI_USER_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-03-29 18:05:35 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

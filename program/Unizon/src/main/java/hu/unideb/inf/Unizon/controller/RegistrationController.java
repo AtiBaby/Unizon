@@ -8,8 +8,6 @@ package hu.unideb.inf.Unizon.controller;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -17,35 +15,46 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.AddressesOfUserFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
+import hu.unideb.inf.Unizon.facade.UserDataFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.Address;
 import hu.unideb.inf.Unizon.model.AddressesOfUser;
 import hu.unideb.inf.Unizon.model.AddressesOfUserPK;
 import hu.unideb.inf.Unizon.model.PhoneNumber;
 import hu.unideb.inf.Unizon.model.User;
+import hu.unideb.inf.Unizon.model.UserData;
 import password.Password;
 
-/**
- *
- * @author Czuczi
- */
 @Named(value = "registrationController")
 @ViewScoped
 public class RegistrationController implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
+
 	@EJB
 	private UserFacade userFacade;
+
+	@EJB
+	private UserDataFacade userDataFacade;
+
 	@EJB
 	private AddressFacade addressFacade;
+
 	@EJB
 	private AddressesOfUserFacade addressesOfUserFacade;
+
 	@EJB
 	private PhoneNumberFacade phoneNumberFacade;
 
-	private String userName;
+	private String username;
 	private String password;
 	private String email;
 	private String name;
@@ -61,7 +70,7 @@ public class RegistrationController implements Serializable {
 	private Integer door;
 
 	private void nullProps() {
-		userName = null;
+		username = null;
 		password = null;
 		email = null;
 		name = null;
@@ -78,8 +87,15 @@ public class RegistrationController implements Serializable {
 	}
 
 	public void register() {
-		if (userFacade.findByUserName(userName) != null) {
+		if (userFacade.findByUsername(username) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Username already exists!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return;
+		}
+
+		if (userFacade.findByEmail(email) != null) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
+					"E-mail address already exists!");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return;
 		}
@@ -118,18 +134,23 @@ public class RegistrationController implements Serializable {
 		}
 
 		User user = new User();
-		user.setAddress(address);
 		user.setEMail(email);
 		try {
-			user.setEncryptedPassword(Password.getSaltedHash(password));
+			user.setPassword(Password.getSaltedHash(password));
 		} catch (Exception ex) {
-			Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+			logger.error(ex.getMessage());
 		}
 		user.setName(name);
-		user.setPhoneNumber(pn);
 		user.setRegistrationDate(new Date());
-		user.setUsername(userName);
+		user.setUsername(username);
 		userFacade.create(user);
+
+		UserData userData = new UserData();
+		userData.setDefaultAddress(address);
+		userData.setPhoneNumber(pn);
+		userData.setUser(user);
+		userData.setUserId(user.getUserId());
+		userDataFacade.create(userData);
 
 		AddressesOfUser addressesOfUser = new AddressesOfUser();
 		addressesOfUser.setDescription(addressDescription);
@@ -151,12 +172,12 @@ public class RegistrationController implements Serializable {
 	public RegistrationController() {
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

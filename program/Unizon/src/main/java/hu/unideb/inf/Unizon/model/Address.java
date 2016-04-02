@@ -3,7 +3,6 @@ package hu.unideb.inf.Unizon.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The persistent class for the ADDRESS database table.
@@ -34,30 +33,29 @@ public class Address implements Serializable {
     private Integer floor;
 
     @Column(name = "STR_NUMBER")
-    private Integer strNumber;
+    private int strNumber;
 
     @Column(name = "STREET", length = 100)
     private String street;
 
-    @Column(name = "ZIP", length = 20)
+    @Column(name = "ZIP")
     private String zip;
 
-    //bi-directional many-to-one association to AddressesOfUser
+    // bi-directional many-to-one association to AddressesOfUser
     @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
     private List<AddressesOfUser> addressesOfUsers;
 
-    //bi-directional many-to-one association to Order
+    // bi-directional many-to-one association to Order
     @OneToMany(mappedBy = "address1", fetch = FetchType.EAGER)
     private List<Order> orders1;
 
-    //bi-directional many-to-one association to Order
+    // bi-directional many-to-one association to Order
     @OneToMany(mappedBy = "address2", fetch = FetchType.EAGER)
     private List<Order> orders2;
 
-    //bi-directional many-to-one association to User
-    @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
-    private List<User> users;
-
+    // //bi-directional many-to-one association to UserData
+    // @OneToMany(mappedBy="address", fetch=FetchType.EAGER)
+    // private List<UserData> userData;
     public Address() {
     }
 
@@ -101,11 +99,11 @@ public class Address implements Serializable {
         this.floor = floor;
     }
 
-    public Integer getStrNumber() {
-        return strNumber;
+    public int getStrNumber() {
+        return this.strNumber;
     }
 
-    public void setStrNumber(Integer strNumber) {
+    public void setStrNumber(int strNumber) {
         this.strNumber = strNumber;
     }
 
@@ -118,7 +116,7 @@ public class Address implements Serializable {
     }
 
     public String getZip() {
-        return zip;
+        return this.zip;
     }
 
     public void setZip(String zip) {
@@ -191,75 +189,23 @@ public class Address implements Serializable {
         return orders2;
     }
 
-    public List<User> getUsers() {
-        return this.users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public User addUser(User user) {
-        getUsers().add(user);
-        user.setAddress(this);
-
-        return user;
-    }
-
-    public User removeUser(User user) {
-        getUsers().remove(user);
-        user.setAddress(null);
-
-        return user;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.city);
-        hash = 37 * hash + Objects.hashCode(this.country);
-        hash = 37 * hash + this.door;
-        hash = 37 * hash + this.floor;
-        hash = 37 * hash + this.strNumber;
-        hash = 37 * hash + Objects.hashCode(this.street);
-        hash = 37 * hash + Objects.hashCode(this.zip);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Address other = (Address) obj;
-        if (this.door != other.door) {
-            return false;
-        }
-        if (this.floor != other.floor) {
-            return false;
-        }
-        if (this.strNumber != other.strNumber) {
-            return false;
-        }
-        if (!Objects.equals(this.city, other.city)) {
-            return false;
-        }
-        if (!Objects.equals(this.country, other.country)) {
-            return false;
-        }
-        if (!Objects.equals(this.street, other.street)) {
-            return false;
-        }
-        if (!Objects.equals(this.zip, other.zip)) {
-            return false;
-        }
-        return true;
-    }
-
+    // public List<UserData> getUserData() {
+    // return this.userData;
+    // }
+    //
+    // public void setUserData(List<UserData> userData) {
+    // this.userData = userData;
+    // }
+    // public UserData addUserData(UserData userData) {
+    // getUserData().add(userData);
+    // userData.setAddress(this);
+    //
+    // return userData;
+    // }
+    // public UserData removeUserData(UserData userData) {
+    // getUserData().remove(userData);
+    // userData.setAddress(null);
+    //
+    // return userData;
+    // }
 }
