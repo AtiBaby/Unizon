@@ -6,13 +6,23 @@
 		Contact
 	</ui:define>
 	<ui:define name="fullBody">
-            <h:outputText value="Telefonos ügyfélszolgálatunk 8-18 óra között rendelkezésére áll."/><br/>
-            <h:outputText title="telephone" value="Telefonszám: +36 20 123 1234"/><br />
-            <h:outputText value="Levelére három munkanapon belül garantáltan válaszolunk."/><br/>
-            <h:outputText title="mail" value="e-mail: contact@unizon.com"/><br/>
-            <h:outputText value="Tulajdonos: "/>
-            <a href="http://unideb.hu/portal/">Debreceni Egyetem</a><br/>
-            <h:outputText value="Címe: 4032 Debrecen, Egyetem tér 1."/><br/>
-            <center><img src="map.jpg"/></center>
+            <p:panel>
+                <center>
+                    <p style="margin-top:12pt;margin-bottom:12pt">
+                    <h:outputText value="Telefonos ügyfélszolgálatunk 8-18 óra között rendelkezésére áll."/><br/>
+                    <h:outputText title="telephone" value="Telefonszám: +36 20 123 1234"/><br />
+                    </p>
+                    <p style="margin-top:12pt;margin-bottom:12pt">
+                    <h:outputText value="Levelére három munkanapon belül garantáltan válaszolunk."/><br/>
+                    <h:outputText title="mail" value="e-mail: contact@unison.com"/><br/>
+                    </p>
+                    <p style="margin-top:12pt;margin-bottom:12pt">
+                    <h:outputText value="Tulajdonos: "/>
+                    <a href="http://unideb.hu/portal/">Debreceni Egyetem</a><br/>
+                    <h:outputText value="Címe: 4032 Debrecen, Egyetem tér 1."/><br/>
+                    </p>
+                    <img src="map.jpg"/>
+                </center>
+            </p:panel>
 	</ui:define>
 </ui:composition>
