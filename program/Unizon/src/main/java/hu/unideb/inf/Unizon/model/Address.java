@@ -1,8 +1,18 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the ADDRESS database table.
@@ -10,7 +20,19 @@ import java.util.List;
  */
 @Entity
 @Table(name = "ADDRESS")
-@NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
+@NamedQueries({
+	@NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
+	@NamedQuery(
+		name = "Address.findByAllAttributes",
+		query = "SELECT a FROM Address a WHERE"
+				+ " a.zip = :zip AND"
+				+ " a.country = :country AND"
+				+ " a.city = :city AND"
+				+ " a.street = :street AND"
+				+ " a.strNumber = :strNumber AND"
+				+ " a.floor = :floor AND"
+				+ " a.door = :door")
+})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,7 +55,7 @@ public class Address implements Serializable {
     private Integer floor;
 
     @Column(name = "STR_NUMBER")
-    private int strNumber;
+    private Integer strNumber;
 
     @Column(name = "STREET", length = 100)
     private String street;
@@ -99,11 +121,11 @@ public class Address implements Serializable {
         this.floor = floor;
     }
 
-    public int getStrNumber() {
+    public Integer getStrNumber() {
         return this.strNumber;
     }
 
-    public void setStrNumber(int strNumber) {
+    public void setStrNumber(Integer strNumber) {
         this.strNumber = strNumber;
     }
 

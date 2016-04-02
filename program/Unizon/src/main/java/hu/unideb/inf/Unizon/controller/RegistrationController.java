@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.inf.Unizon.controller;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -55,162 +50,100 @@ public class RegistrationController implements Serializable {
 	@EJB
 	private PhoneNumberFacade phoneNumberFacade;
 
-	private String username;
-	private String password;
-	private String email;
-	private String name;
-	private String phoneNumber;
-
+	private User newUser;
+	private PhoneNumber newPhoneNumber;
+	private Address newAddress;
 	private String addressDescription;
-	private String zip;
-	private String country;
-	private String city;
-	private String street;
-	private Integer streetNumber;
-	private Integer floor;
-	private Integer door;
 
-	private void nullProps() {
-		username = null;
-		password = null;
-		email = null;
-		name = null;
-		phoneNumber = null;
-
-		addressDescription = null;
-		zip = null;
-		country = null;
-		city = null;
-		street = null;
-		streetNumber = null;
-		floor = null;
-		door = null;
+	@PostConstruct
+	public void init() {
+		this.newUser = new User();
+		this.newPhoneNumber = new PhoneNumber();
+		this.newAddress = new Address();
+		this.addressDescription = null;
 	}
 
 	public void register() {
-		if (userFacade.findByUsername(username) != null) {
+		if (userFacade.findByUsername(newUser.getUsername()) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Username already exists!");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return;
 		}
 
-		if (userFacade.findByEmail(email) != null) {
+		if (userFacade.findByEmail(newUser.getEMail()) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
 					"E-mail address already exists!");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return;
 		}
 
-		if (phoneNumberFacade.findByPhoneNumber(phoneNumber) != null) {
+		if (phoneNumberFacade.findByPhoneNumber(newPhoneNumber.getPhoneNumber()) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Phone number already exists!");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return;
 		}
 
-		PhoneNumber pn = new PhoneNumber();
-		pn.setPhoneNumber(phoneNumber);
+		phoneNumberFacade.create(newPhoneNumber);
 
-		phoneNumberFacade.create(pn);
-
-		List<Address> addresses = addressFacade.findAll();
-		Address address = new Address();
-		address.setCity(city);
-		address.setZip(zip);
-		address.setCountry(country);
-		address.setStreet(street);
-		address.setStrNumber(streetNumber);
-		address.setFloor(floor);
-		address.setDoor(door);
-
-		boolean existingAddress = false;
-		for (Address a : addresses) {
-			if (a.equals(address)) {
-				address = a;
-				existingAddress = true;
-				break;
-			}
-		}
-		if (!existingAddress) {
-			addressFacade.create(address);
+		Address existingAddress = addressFacade.findByAllAttributes(newAddress);
+		if (existingAddress == null) {
+			addressFacade.create(newAddress);
+		} else {
+			newAddress = existingAddress;
 		}
 
-		User user = new User();
-		user.setEMail(email);
 		try {
-			user.setPassword(Password.getSaltedHash(password));
+			newUser.setPassword(Password.getSaltedHash(newUser.getPassword()));
 		} catch (Exception ex) {
 			log.error(ex.getMessage());
 		}
-		user.setName(name);
-		user.setRegistrationDate(new Date());
-		user.setUsername(username);
-		userFacade.create(user);
+		newUser.setRegistrationDate(new Date());
+		userFacade.create(newUser);
 
 		UserData userData = new UserData();
-		userData.setDefaultAddress(address);
-		userData.setPhoneNumber(pn);
-		userData.setUser(user);
-		userData.setUserId(user.getUserId());
+		userData.setDefaultAddress(newAddress);
+		userData.setPhoneNumber(newPhoneNumber);
+		userData.setUser(newUser);
+		userData.setUserId(newUser.getUserId());
 		userDataFacade.create(userData);
 
 		AddressesOfUser addressesOfUser = new AddressesOfUser();
 		addressesOfUser.setDescription(addressDescription);
-		addressesOfUser.setAddress(address);
-		addressesOfUser.setUser(user);
+		addressesOfUser.setAddress(newAddress);
+		addressesOfUser.setUser(newUser);
 
 		AddressesOfUserPK addressesOfUserPK = new AddressesOfUserPK();
-		addressesOfUserPK.setAddressId(address.getAddressId());
-		addressesOfUserPK.setUserId(user.getUserId());
-
+		addressesOfUserPK.setAddressId(newAddress.getAddressId());
+		addressesOfUserPK.setUserId(newUser.getUserId());
 		addressesOfUser.setId(addressesOfUserPK);
+
 		addressesOfUserFacade.create(addressesOfUser);
-		nullProps();
+
+		init();
 	}
 
-	/**
-	 * Creates a new instance of RegistrationController
-	 */
-	public RegistrationController() {
+	public User getNewUser() {
+		return newUser;
 	}
 
-	public String getUsername() {
-		return username;
+	public void setNewUser(User newUser) {
+		this.newUser = newUser;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public PhoneNumber getNewPhoneNumber() {
+		return newPhoneNumber;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setNewPhoneNumber(PhoneNumber newPhoneNumber) {
+		this.newPhoneNumber = newPhoneNumber;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public Address getNewAddress() {
+		return newAddress;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setNewAddress(Address newAddress) {
+		this.newAddress = newAddress;
 	}
 
 	public String getAddressDescription() {
@@ -219,62 +152,6 @@ public class RegistrationController implements Serializable {
 
 	public void setAddressDescription(String addressDescription) {
 		this.addressDescription = addressDescription;
-	}
-
-	public String getZip() {
-		return zip;
-	}
-
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public Integer getStreetNumber() {
-		return streetNumber;
-	}
-
-	public void setStreetNumber(Integer streetNumber) {
-		this.streetNumber = streetNumber;
-	}
-
-	public Integer getFloor() {
-		return floor;
-	}
-
-	public void setFloor(Integer floor) {
-		this.floor = floor;
-	}
-
-	public Integer getDoor() {
-		return door;
-	}
-
-	public void setDoor(Integer door) {
-		this.door = door;
 	}
 
 }

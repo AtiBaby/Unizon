@@ -152,3 +152,8 @@ li a:hover {
 @media screen and (max-width: 1000px) {
 
 }
+
+.required:before {
+	content: "* ";
+	color: red;
+}
