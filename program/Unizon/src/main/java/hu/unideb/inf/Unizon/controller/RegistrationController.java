@@ -13,7 +13,6 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +28,10 @@ import hu.unideb.inf.Unizon.model.AddressesOfUserPK;
 import hu.unideb.inf.Unizon.model.PhoneNumber;
 import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.model.UserData;
+import javax.faces.bean.ManagedBean;
 import password.Password;
 
-@Named(value = "registrationController")
+@ManagedBean
 @ViewScoped
 public class RegistrationController implements Serializable {
 
