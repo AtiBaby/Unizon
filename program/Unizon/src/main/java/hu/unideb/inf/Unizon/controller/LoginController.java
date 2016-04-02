@@ -7,9 +7,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import hu.unideb.inf.Unizon.facade.AdministratorFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
@@ -22,7 +22,8 @@ public class LoginController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	@Inject
+	private Logger log;
 
 	@EJB
 	private UserFacade userFacade;
@@ -44,26 +45,26 @@ public class LoginController implements Serializable {
 	}
 
 	public String login() {
-		logger.info("Authenticating user: {}.", username);
+		log.info("Authenticating user: {}.", username);
 
 		User user = userFacade.findByUsername(username);
 		if (user != null) {
 			try {
 				if (Password.check(password, user.getPassword())) {
 					this.user = user;
-					logger.info("User {} successfully authenticated.", username);
+					log.info("User {} successfully authenticated.", username);
 
 					this.isAdministrator = administratorFacade.isAdministrator(user.getUserId());
-					logger.info("Is user {} administrator: {}", username, isAdministrator);
+					log.info("Is user {} administrator: {}", username, isAdministrator);
 
 					return "/index.jsf?faces-redirect=true";
 				}
 			} catch (Exception e) {
-				logger.error(e.getMessage());
+				log.error(e.getMessage());
 			}
 		}
 
-		logger.info("User {} failed to authenticate.", username);
+		log.info("User {} failed to authenticate.", username);
 		nullProps();
 
 		return "/user/userlogin?faces-redirect=true";
@@ -71,7 +72,7 @@ public class LoginController implements Serializable {
 
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		logger.info("User {} logged out.", username);
+		log.info("User {} logged out.", username);
 		nullProps();
 		return "/index.jsf?faces-redirect=true";
 	}

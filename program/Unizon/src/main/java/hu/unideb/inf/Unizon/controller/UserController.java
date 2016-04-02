@@ -6,9 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import hu.unideb.inf.Unizon.model.User;
 
@@ -17,8 +17,9 @@ import hu.unideb.inf.Unizon.model.User;
 public class UserController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+	@Inject
+	private Logger log;
 
 	@ManagedProperty("#{loginController}")
 	private LoginController loginController;
