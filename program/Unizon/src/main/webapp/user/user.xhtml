@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="title">#{loginController.user.name}</ui:define>
+
+	<ui:define name="fullBody">
+		<p:growl id="messages" life="4000" showDetail="true" />
+		<center>
+			<h:form id="userform" rendered="#{loginController.loggedIn}">
+				<p:tabView>
+			        <p:tab title="User information">
+			            <p:panelGrid columns="2" style="text-align: center">
+							<p:outputLabel value="Name:" />
+							<p:outputLabel value="#{loginController.user.name}" />
+							
+							<p:outputLabel value="Username:" />
+							<p:outputLabel value="#{loginController.user.username}" />
+							
+							<p:outputLabel value="E-Mail:" />
+							<p:outputLabel value="#{loginController.user.EMail}" />
+							
+							<p:outputLabel value="Registration date:" />
+							<p:outputLabel value="#{loginController.user.registrationDate}">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:outputLabel>
+							
+							<p:outputLabel value="Has admin rights:" />
+							<p:outputLabel value="#{loginController.administrator}" />
+							
+							<p:outputLabel value="Phone Number:" />
+							<p:outputLabel value="#{loginController.user.userData.phoneNumber.phoneNumber}" />
+							
+							<p:outputLabel value="Addresses:" />
+							<p:panelGrid>
+								<h:dataTable
+									value="#{loginController.user.addressesOfUsers}"
+									var="addressesOfUser"
+									styleClass="address-table"
+					    			headerClass="address-table-header"
+					    			rowClasses="address-table-odd-row,order-table-even-row">
+									<h:column>
+										<f:facet name="header">Description</f:facet>
+										<p:outputLabel value="#{addressesOfUser.description}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Country</f:facet>
+										<p:outputLabel value="#{addressesOfUser.address.country}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Zip</f:facet>
+										<p:outputLabel value="#{addressesOfUser.address.zip}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">City</f:facet>
+										<p:outputLabel value="#{addressesOfUser.address.city}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Street</f:facet>
+										<p:outputLabel value="#{addressesOfUser.address.street}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Street Number</f:facet>
+										<p:outputLabel value="#{addressesOfUser.address.strNumber}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Floor</f:facet>
+										<p:outputLabel value="#{addressesOfUser.address.floor}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Door</f:facet>
+										<p:outputLabel value="#{addressesOfUser.address.door}" />
+									</h:column>
+								</h:dataTable>
+							</p:panelGrid>
+						</p:panelGrid>
+			        </p:tab>
+			        <p:tab title="Previous orders">
+		                <h:outputText value="Previous orders will be visible here!" />
+			        </p:tab>
+			    </p:tabView>
+				<br />
+			</h:form>
+		</center>
+	</ui:define>
+</ui:composition>
