@@ -70,11 +70,20 @@ public class SearchController implements Serializable {
 	}
 
 	public void search() {
-		if (category == null || category.equals("all")) {
-			setProducts(productFacade.findByNameContaining(productName));
+		if (productName != null && !productName.isEmpty()) {
+			if (category == null || category.equals("all")) {
+				setProducts(productFacade.findByNameContaining(productName));
+			} else {
+				Category cat = categoryFacade.findByName(category);
+				setProducts(productFacade.findByNameContaining(productName, cat));
+			}
 		} else {
-			Category cat = categoryFacade.findByName(category);
-			setProducts(productFacade.findByNameContaining(productName, cat));
+			if (category == null || category.equals("all")) {
+				setProducts(productFacade.findAll());
+			} else {
+				Category cat = categoryFacade.findByName(category);
+				setProducts(productFacade.findAll(cat));
+			}
 		}
 	}
 

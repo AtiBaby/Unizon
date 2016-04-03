@@ -58,4 +58,9 @@ public class ProductFacade extends AbstractFacade<Product> {
 				.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Product> findAll(Category cat) {
+		return em.createNamedQuery("Product.findAllByCat").setParameter("catId", cat.getCategoryId()).getResultList();
+	}
+
 }
