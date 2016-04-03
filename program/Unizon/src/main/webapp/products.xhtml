@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="title">
+		Products
+	</ui:define>
+	<ui:define name="products">
+		<f:facet name="last">
+			<h:outputStylesheet library="default" name="css/datalist.css" />
+		</f:facet>
+		<p:growl id="messages" life="4000" showDetail="true" />
+		<p:dataList value="#{SearchController.products}" var="product"
+			type="unordered" itemType="none" paginator="true" rows="5"
+			styleClass="paginated">
+			<h:outputLink value="#">
+				<p:graphicImage name="todo.gif" />
+				<h2>
+					<h:outputText value="#{product.productId}">
+					</h:outputText>
+				</h2>
+				<p>
+					<h:outputText value="#{product.title}">
+					</h:outputText>
+				</p>
+				<p>
+					<h:outputText value="#{product.price}">
+						<f:convertNumber currencyCode="HUF" type="currency" />
+					</h:outputText>
+				</p>
+			</h:outputLink>
+		</p:dataList>
+
+
+	</ui:define>
+</ui:composition>

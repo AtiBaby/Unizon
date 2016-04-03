@@ -34,15 +34,28 @@ public class ProductFacade extends AbstractFacade<Product> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Product> findByNameStartingWith(String term) {
-		return em.createNamedQuery("Product.findAllStartWith").setParameter("term", term + "%").getResultList();
+	public List<Product> findByNameStartingWith(String term, Integer num) {
+		return em.createNamedQuery("Product.findAllContain").setParameter("term", term + "%").setMaxResults(num)
+				.getResultList();
 
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Product> findByNameStartingWith(String term, Category cat) {
-		return em.createNamedQuery("Product.findAllByCatIdStartWith").setParameter("term", term + "%")
+	public List<Product> findByNameStartingWith(String term, Category cat, Integer num) {
+		return em.createNamedQuery("Product.findAllByCatIdContain").setParameter("term", term + "%")
+				.setParameter("catId", cat.getCategoryId()).setMaxResults(num).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Product> findByNameContaining(String productName, Category cat) {
+		return em.createNamedQuery("Product.findAllByCatIdContain").setParameter("term", "%" + productName + "%")
 				.setParameter("catId", cat.getCategoryId()).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Product> findByNameContaining(String productName) {
+		return em.createNamedQuery("Product.findAllContain").setParameter("term", "%" + productName + "%")
+				.getResultList();
 	}
 
 }

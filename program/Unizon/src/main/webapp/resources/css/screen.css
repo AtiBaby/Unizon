@@ -63,13 +63,13 @@ a {
     padding: 0 5px;
 }
 
-
 .container {
     margin:0 auto;
     max-width: 1000px;
     min-width: 320px;
     width: 100%;
     position: relative;
+ 
 }
 
 .logo img {
@@ -156,4 +156,14 @@ li a:hover {
 .required:before {
 	content: "* ";
 	color: red;
+}
+
+.search {
+    float:left;
+    
+}
+
+.logo{
+	   float:left;
+	   margin-right:50px;
 }

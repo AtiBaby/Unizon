@@ -38,26 +38,26 @@ public class SearchController implements Serializable {
 	private List<String> categoryNames;
 	private String productName;
 
+	private List<Product> products;
+
 	@PostConstruct
 	public void init() {
-		logger.info("Init starting...");
 		categoryNames = new ArrayList<>();
 		List<Category> categories = categoryFacade.findAll();
 		for (Category category : categories) {
 			categoryNames.add(category.getName());
 		}
-		logger.info("Init finished.");
 	}
 
 	public List<String> autoCompleteProductName(String term) {
-		logger.info(category);
+		logger.debug("Search category and term: " + category + " - " + term);
 		List<String> productNames = new ArrayList<>();
 		List<Product> products = new ArrayList<>();
 		if (category == null || category.equals("all")) {
-			products = productFacade.findByNameStartingWith(term);
+			products = productFacade.findByNameStartingWith(term, 10);
 		} else {
 			Category cat = categoryFacade.findByName(category);
-			products = productFacade.findByNameStartingWith(term, cat);
+			products = productFacade.findByNameStartingWith(term, cat, 10);
 		}
 		for (Product prod : products) {
 			productNames.add(prod.getTitle());
@@ -70,6 +70,12 @@ public class SearchController implements Serializable {
 	}
 
 	public void search() {
+		if (category == null || category.equals("all")) {
+			setProducts(productFacade.findByNameContaining(productName));
+		} else {
+			Category cat = categoryFacade.findByName(category);
+			setProducts(productFacade.findByNameContaining(productName, cat));
+		}
 	}
 
 	public String getCategory() {
@@ -94,6 +100,14 @@ public class SearchController implements Serializable {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 }
