@@ -1,5 +1,6 @@
 package hu.unideb.inf.Unizon.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -35,6 +37,9 @@ public class RegistrationController implements Serializable {
 	@Inject
 	private Logger log;
 
+	@Inject
+	private FacesContext facesContext;
+	
 	@EJB
 	private UserFacade userFacade;
 
@@ -66,20 +71,20 @@ public class RegistrationController implements Serializable {
 	public void register() {
 		if (userFacade.findByUsername(newUser.getUsername()) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Username already exists!");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			facesContext.addMessage(null, msg);
 			return;
 		}
 
 		if (userFacade.findByEmail(newUser.getEMail()) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
 					"E-mail address already exists!");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			facesContext.addMessage(null, msg);
 			return;
 		}
 
 		if (phoneNumberFacade.findByPhoneNumber(newPhoneNumber.getPhoneNumber()) != null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Phone number already exists!");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			facesContext.addMessage(null, msg);
 			return;
 		}
 
@@ -120,6 +125,13 @@ public class RegistrationController implements Serializable {
 		addressesOfUserFacade.create(addressesOfUser);
 
 		init();
+
+		try {
+			ExternalContext ec = facesContext.getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + "/user/userlogin.jsf?faces-redirect=true");
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	public User getNewUser() {

@@ -25,6 +25,9 @@ public class LoginController implements Serializable {
 	@Inject
 	private Logger log;
 
+	@Inject
+	private FacesContext facesContext;
+
 	@EJB
 	private UserFacade userFacade;
 
@@ -71,7 +74,7 @@ public class LoginController implements Serializable {
 	}
 
 	public String logout() {
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		facesContext.getExternalContext().invalidateSession();
 		log.info("User {} logged out.", username);
 		nullProps();
 		return "/index.jsf?faces-redirect=true";
