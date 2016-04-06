@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * The persistent class for the UNI_USER database table.
@@ -42,6 +44,7 @@ public class User implements Serializable {
 
 	// bi-directional many-to-one association to AddressesOfUser
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+        @Fetch(FetchMode.SUBSELECT)
 	private List<AddressesOfUser> addressesOfUsers;
 
 	// bi-directional one-to-one association to Administrator

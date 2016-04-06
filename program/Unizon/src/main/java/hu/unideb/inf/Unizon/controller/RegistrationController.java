@@ -26,6 +26,7 @@ import hu.unideb.inf.Unizon.model.AddressesOfUserPK;
 import hu.unideb.inf.Unizon.model.PhoneNumber;
 import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.model.UserData;
+import org.primefaces.context.RequestContext;
 import password.Password;
 
 @ManagedBean
@@ -128,7 +129,11 @@ public class RegistrationController implements Serializable {
 
 		try {
 			ExternalContext ec = facesContext.getExternalContext();
-			ec.redirect(ec.getRequestContextPath() + "/user/userlogin.jsf?faces-redirect=true");
+                        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Registration is successful, now you can login!");
+			facesContext.addMessage(null, msg);
+                        ec.getFlash().setKeepMessages(true);
+                        ec.redirect(ec.getRequestContextPath() + "/user/userlogin.jsf?faces-redirect=true");
+                        RequestContext.getCurrentInstance().update("messages");
 		} catch (IOException e) {
 			log.error(e.getMessage());
 		}
