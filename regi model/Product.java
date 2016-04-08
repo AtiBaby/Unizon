@@ -4,93 +4,66 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the PRODUCT database table.
  * 
  */
 @Entity
-@Table(name="PRODUCT")
-@NamedQueries({
-	@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-	@NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId"),
-	@NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.title LIKE :term"),
-	@NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId AND p.title LIKE :term")
-})
+@Table(name = "PRODUCT")
+@NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+		@NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId"),
+		@NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.title LIKE :term"),
+		@NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId AND p.title LIKE :term") })
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="PRODUCT_ID", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "PRODUCT_ID", unique = true, nullable = false)
 	private int productId;
 
-	@Column(name="AMOUNT")
+	@Column(name = "AMOUNT")
 	private int amount;
 
-	@Column(name="DESCRIPTION", length=1000)
+	@Column(name = "DESCRIPTION", length = 100)
 	private String description;
 
-	@Column(name="PRICE")
+	@Column(name = "PRICE")
 	private int price;
 
-	@Column(name="TITLE", nullable=false, length=100)
+	@Column(name = "TITLE", length = 100)
 	private String title;
 
-	//bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy="product1", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to CatToProd
+	@OneToMany(mappedBy = "product1", fetch = FetchType.EAGER)
 	private List<CatToProd> catToProds1;
 
-	//bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy="product2", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to CatToProd
+	@OneToMany(mappedBy = "product2", fetch = FetchType.EAGER)
 	private List<CatToProd> catToProds2;
 
-	//bi-directional many-to-many association to Category
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="CAT_TO_PROD"
-		, joinColumns={
-			@JoinColumn(name="PRODUCT_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="CATEGORY_ID", nullable=false)
-			}
-		)
+	// bi-directional many-to-many association to Category
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "CAT_TO_PROD", joinColumns = {
+			@JoinColumn(name = "PRODUCT_ID", nullable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "CATEGORY_ID", nullable = false) })
 	private List<Category> categories;
 
-	//bi-directional many-to-one association to ProdToOrder
-	@OneToMany(mappedBy="product", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to ProdToOrder
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	private List<ProdToOrder> prodToOrders;
 
-	//bi-directional many-to-one association to ProdToTag
-	@OneToMany(mappedBy="product1", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to ProdToTag
+	@OneToMany(mappedBy = "product1", fetch = FetchType.EAGER)
 	private List<ProdToTag> prodToTags1;
 
-	//bi-directional many-to-one association to ProdToTag
-	@OneToMany(mappedBy="product2", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to ProdToTag
+	@OneToMany(mappedBy = "product2", fetch = FetchType.EAGER)
 	private List<ProdToTag> prodToTags2;
 
-	//bi-directional many-to-many association to Tag
-	@ManyToMany(mappedBy="products", fetch=FetchType.EAGER)
+	// bi-directional many-to-many association to Tag
+	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
 	private List<Tag> tags;
-
-	//bi-directional many-to-one association to Image
-	@ManyToOne
-	@JoinColumn(name="DEFAULT_IMAGE_ID", nullable=false)
-	private Image image;
-
-	//bi-directional many-to-many association to Image
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="PRODUCT_TO_IMAGE"
-		, joinColumns={
-			@JoinColumn(name="PRODUCT_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="IMAGE_ID", nullable=false)
-			}
-		)
-	private List<Image> images;
 
 	public Product() {
 	}
@@ -259,22 +232,6 @@ public class Product implements Serializable {
 
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
-	}
-
-	public Image getImage() {
-		return this.image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	public List<Image> getImages() {
-		return this.images;
-	}
-
-	public void setImages(List<Image> images) {
-		this.images = images;
 	}
 
 }

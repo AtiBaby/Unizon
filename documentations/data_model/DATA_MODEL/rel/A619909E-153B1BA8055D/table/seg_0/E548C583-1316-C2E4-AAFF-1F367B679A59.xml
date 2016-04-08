@@ -1,26 +1,14 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E548C583-1316-C2E4-AAFF-1F367B679A59" name="ADDRESSES_OF_USER">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E548C583-1316-C2E4-AAFF-1F367B679A59" name="ADDRESS_TO_USER">
 <sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
 <createdBy>Heather</createdBy>
 <createdTime>2016-03-07 21:05:17 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>addresses_of_user</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="DESCRIPTION" id="DF5941C5-8D78-6EDC-A6C0-4CBEBE594142">
-<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
-<createdBy>Heather</createdBy>
-<createdTime>2016-03-07 21:21:32 UTC</createdTime>
-<ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>0</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="USER_ID" id="40E5B19F-64AD-EBFF-EEA5-B241B9F6AED4">
 <createdBy>Heather</createdBy>
 <createdTime>2016-03-07 21:06:11 UTC</createdTime>
@@ -61,7 +49,7 @@
 <colUsage columnID="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="EEEAA8F8-F26C-7EC8-611E-7A480D398385" name="ADDRESSES_OF_USER_ADDRESS_FK">
+<ind_PK_UK id="EEEAA8F8-F26C-7EC8-611E-7A480D398385" name="ADDRESS_TO_USER_ADDRESS_FK">
 <createdBy>Heather</createdBy>
 <createdTime>2016-03-07 21:07:45 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
@@ -71,7 +59,7 @@
 <colUsage columnID="CDFB220B-7034-C9EE-FF4B-BD6C6A36252C"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="4F6E4ABC-6B7D-331C-77BF-972B178424DD" name="ADDRESSES_OF_USER_UNI_USER_FK">
+<ind_PK_UK id="4F6E4ABC-6B7D-331C-77BF-972B178424DD" name="ADDRESS_TO_USER_UNI_USER_FK">
 <createdBy>adam</createdBy>
 <createdTime>2016-03-29 18:05:35 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>

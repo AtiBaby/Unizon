@@ -34,12 +34,6 @@
 						</p:inputText>
 						<p:outputLabel value="Billing/Invoicing address:" />
 						<p:outputLabel />
-						<p:outputLabel value="Address Description:" styleClass="required" />
-						<p:panelGrid>
-							<p:inputText id="addressDescription" value="#{registrationController.addressDescription}" required="true"
-								requiredMessage="Please enter a name for the address!" />
-							<p:watermark for="addressDescription" value="Home" styleClass="required" />
-						</p:panelGrid>
 						<p:outputLabel value="ZIP code:" styleClass="required" />
 						<p:inputText value="#{registrationController.newAddress.zip}" required="true" requiredMessage="ZIP code is required!" />
 						<p:outputLabel value="Country:" styleClass="required" />

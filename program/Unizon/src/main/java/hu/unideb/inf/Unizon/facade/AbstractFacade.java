@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.inf.Unizon.facade;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author Czuczi
- */
 public abstract class AbstractFacade<T> {
 
 	private Class<T> entityClass;
@@ -24,20 +16,20 @@ public abstract class AbstractFacade<T> {
 
 	public void create(T entity) {
 		getEntityManager().persist(entity);
-		// getEntityManager().flush();
-		// getEntityManager().getEntityManagerFactory().getCache().evictAll();
+		getEntityManager().flush();
+		getEntityManager().getEntityManagerFactory().getCache().evictAll();
 	}
 
 	public void edit(T entity) {
 		getEntityManager().merge(entity);
-		// getEntityManager().flush();
-		// getEntityManager().getEntityManagerFactory().getCache().evictAll();
+		getEntityManager().flush();
+		getEntityManager().getEntityManagerFactory().getCache().evictAll();
 	}
 
 	public void remove(T entity) {
 		getEntityManager().remove(getEntityManager().merge(entity));
-		// getEntityManager().flush();
-		// getEntityManager().getEntityManagerFactory().getCache().evictAll();
+		getEntityManager().flush();
+		getEntityManager().getEntityManagerFactory().getCache().evictAll();
 	}
 
 	public T find(Object id) {

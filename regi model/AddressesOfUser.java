@@ -10,7 +10,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="ADDRESSES_OF_USER")
-@NamedQuery(name="AddressesOfUser.findAll", query="SELECT a FROM AddressesOfUser a")
+@NamedQueries({
+	@NamedQuery(name="AddressesOfUser.findAll", query="SELECT a FROM AddressesOfUser a"),
+	@NamedQuery(name="AddressesOfUser.countUsersOfAddress",
+		query="SELECT count(distinct a.user) FROM AddressesOfUser a WHERE a.address.addressId = :addressId")
+})
 public class AddressesOfUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -63,6 +67,44 @@ public class AddressesOfUser implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof AddressesOfUser)) {
+			return false;
+		}
+		AddressesOfUser other = (AddressesOfUser) obj;
+		if (address == null) {
+			if (other.address != null) {
+				return false;
+			}
+		} else if (!address.equals(other.address)) {
+			return false;
+		}
+		if (user == null) {
+			if (other.user != null) {
+				return false;
+			}
+		} else if (!user.equals(other.user)) {
+			return false;
+		}
+		return true;
 	}
 
 }

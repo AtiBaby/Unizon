@@ -1,69 +1,71 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C967BC59-1AEF-E70D-9589-979D61F46048" name="CAT_TO_TAG">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6D761E27-0049-FE0B-686C-2766FF4DAE39" name="PRODUCT_TO_IMAGE">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:21:20 UTC</createdTime>
+<createdTime>2016-04-07 13:09:10 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_18</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="CATEGORY_ID" id="B8487888-18D4-5727-691F-85BDE9DA5AA3">
+<Column name="PRODUCT_ID" id="F586BDC4-5ECC-8E64-E962-6EA08B6F77AD">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:21:39 UTC</createdTime>
+<createdTime>2016-04-07 13:09:25 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>ACA4092D-08D1-C41F-B57A-C092BF5747DC</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="62418B42-8B83-35A8-EF38-D9BD20700704" referredColumn="ACA4092D-08D1-C41F-B57A-C092BF5747DC"/>
+<colAssociation fkAssociation="6035CA9D-3978-06C6-4EC1-4A76A4F0BF59" referredColumn="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
 </associations>
 </Column>
-<Column name="TAG_ID" id="55A5A503-7AB8-8866-E117-3BE7DB39DE17">
+<Column name="IMAGE_ID" id="F9D68A58-A5A1-5882-DE5F-F267F8445339">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:21:46 UTC</createdTime>
+<createdTime>2016-04-07 13:09:37 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<delegate>D22B8C42-E765-BDFF-7FC7-54CB5852A0C7</delegate>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="1FD667E1-BF11-2049-FE82-41C096D597D7" referredColumn="D22B8C42-E765-BDFF-7FC7-54CB5852A0C7"/>
+<colAssociation fkAssociation="AA196635-019D-390D-0523-7826BD1DC8D4" referredColumn="8F5417DF-AA61-D092-EA39-EB1DFD0C0A5D"/>
 </associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="11CC4B3E-92A4-F3B5-7B22-C22F2B1C0902" name="CAT_TO_TAG_PK">
+<ind_PK_UK id="71E8387E-B18C-110D-8DAA-D3DC6C37879D" name="PRODUCT_TO_IMAGE_PK">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:21:57 UTC</createdTime>
+<createdTime>2016-04-07 13:09:45 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="B8487888-18D4-5727-691F-85BDE9DA5AA3"/>
-<colUsage columnID="55A5A503-7AB8-8866-E117-3BE7DB39DE17"/>
+<colUsage columnID="F586BDC4-5ECC-8E64-E962-6EA08B6F77AD"/>
+<colUsage columnID="F9D68A58-A5A1-5882-DE5F-F267F8445339"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="1CCAEB20-8387-20B7-12CA-7E08784F6AA7" name="CAT_TO_TAG_CATEGORY_FK">
+<ind_PK_UK id="ACC4A01E-164C-3C3D-EC4D-577042D37BF2" name="PRODUCT_TO_IMAGE_PRODUCT_FK">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:22:09 UTC</createdTime>
+<createdTime>2016-04-07 13:09:54 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="B8487888-18D4-5727-691F-85BDE9DA5AA3"/>
+<colUsage columnID="F586BDC4-5ECC-8E64-E962-6EA08B6F77AD"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="B061520F-FA87-2044-FBF2-29BF4D461AD6" name="CAT_TO_TAG_TAG_FK">
+<ind_PK_UK id="369F6AD9-7DF6-EDDF-7148-53196FCE24A0" name="PRODUCT_TO_IMAGE_IMAGE_FK">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:22:15 UTC</createdTime>
+<createdTime>2016-04-07 13:10:01 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="55A5A503-7AB8-8866-E117-3BE7DB39DE17"/>
+<colUsage columnID="F9D68A58-A5A1-5882-DE5F-F267F8445339"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

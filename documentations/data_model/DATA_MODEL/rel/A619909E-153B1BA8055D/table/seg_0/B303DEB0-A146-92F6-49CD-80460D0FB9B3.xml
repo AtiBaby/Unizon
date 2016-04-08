@@ -23,7 +23,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:38:54 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>0</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -60,11 +59,24 @@
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
-<use>0</use>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DEFAULT_IMAGE_ID" id="4B09CC36-40CB-4F45-69A0-5591B727DEFF">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 13:12:25 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="92A3804A-C85D-6C23-76FA-52F16BFEC0A3" referredColumn="8F5417DF-AA61-D092-EA39-EB1DFD0C0A5D"/>
+</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -77,6 +89,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="FBC10FCB-AA15-AE20-AD9C-3CA31F404A5C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4AB1FA7B-97E5-692E-4B23-B34029742716" name="PRODUCT_IMAGE_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 13:12:40 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4B09CC36-40CB-4F45-69A0-5591B727DEFF"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

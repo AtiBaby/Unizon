@@ -22,7 +22,7 @@ public class Order implements Serializable {
 	private int orderId;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="ORDER_DATE", nullable=false)
+	@Column(name="ORDER_DATE")
 	private Date orderDate;
 
 	//bi-directional many-to-one association to ProdToOrder

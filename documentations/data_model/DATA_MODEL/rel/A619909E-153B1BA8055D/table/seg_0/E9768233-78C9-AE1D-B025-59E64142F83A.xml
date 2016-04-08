@@ -37,7 +37,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:56:31 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>

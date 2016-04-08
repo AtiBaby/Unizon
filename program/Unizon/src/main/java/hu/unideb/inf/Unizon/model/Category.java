@@ -4,48 +4,39 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
+
 /**
  * The persistent class for the CATEGORY database table.
  * 
  */
 @Entity
-@Table(name = "CATEGORY")
-@NamedQueries({ @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
-		@NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :catName") })
+@Table(name="CATEGORY")
+@NamedQueries({
+	@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
+	@NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :catName")
+})
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "CATEGORY_ID", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="CATEGORY_ID", unique=true, nullable=false)
 	private int categoryId;
 
-	@Column(name = "NAME", length = 100)
+	@Column(name="NAME", nullable=false, length=100)
 	private String name;
 
-	// bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy = "category1", fetch = FetchType.EAGER)
+	//bi-directional many-to-one association to CatToProd
+	@OneToMany(mappedBy="category1", fetch=FetchType.EAGER)
 	private List<CatToProd> catToProds1;
 
-	// bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy = "category2", fetch = FetchType.EAGER)
+	//bi-directional many-to-one association to CatToProd
+	@OneToMany(mappedBy="category2", fetch=FetchType.EAGER)
 	private List<CatToProd> catToProds2;
 
-	// bi-directional many-to-one association to CatToTag
-	@OneToMany(mappedBy = "category1", fetch = FetchType.EAGER)
-	private List<CatToTag> catToTags1;
-
-	// bi-directional many-to-one association to CatToTag
-	@OneToMany(mappedBy = "category2", fetch = FetchType.EAGER)
-	private List<CatToTag> catToTags2;
-
-	// bi-directional many-to-many association to Product
-	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+	//bi-directional many-to-many association to Product
+	@ManyToMany(mappedBy="categories", fetch=FetchType.EAGER)
 	private List<Product> products;
-
-	// bi-directional many-to-many association to Tag
-	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-	private List<Tag> tags;
 
 	public Category() {
 	}
@@ -110,64 +101,12 @@ public class Category implements Serializable {
 		return catToProds2;
 	}
 
-	public List<CatToTag> getCatToTags1() {
-		return this.catToTags1;
-	}
-
-	public void setCatToTags1(List<CatToTag> catToTags1) {
-		this.catToTags1 = catToTags1;
-	}
-
-	public CatToTag addCatToTags1(CatToTag catToTags1) {
-		getCatToTags1().add(catToTags1);
-		catToTags1.setCategory1(this);
-
-		return catToTags1;
-	}
-
-	public CatToTag removeCatToTags1(CatToTag catToTags1) {
-		getCatToTags1().remove(catToTags1);
-		catToTags1.setCategory1(null);
-
-		return catToTags1;
-	}
-
-	public List<CatToTag> getCatToTags2() {
-		return this.catToTags2;
-	}
-
-	public void setCatToTags2(List<CatToTag> catToTags2) {
-		this.catToTags2 = catToTags2;
-	}
-
-	public CatToTag addCatToTags2(CatToTag catToTags2) {
-		getCatToTags2().add(catToTags2);
-		catToTags2.setCategory2(this);
-
-		return catToTags2;
-	}
-
-	public CatToTag removeCatToTags2(CatToTag catToTags2) {
-		getCatToTags2().remove(catToTags2);
-		catToTags2.setCategory2(null);
-
-		return catToTags2;
-	}
-
 	public List<Product> getProducts() {
 		return this.products;
 	}
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
-
-	public List<Tag> getTags() {
-		return this.tags;
-	}
-
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
 	}
 
 }

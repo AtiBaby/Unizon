@@ -49,7 +49,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:55:26 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
@@ -95,7 +94,7 @@
 <colUsage columnID="FB8C440D-B239-7B92-62B7-4003DC78B41A"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="FEC9A031-4CE7-2E09-6107-3F3BEC5E4736" name="ORDER_ADDRESS_FK">
+<ind_PK_UK id="FEC9A031-4CE7-2E09-6107-3F3BEC5E4736" name="ORDER_SH_ADDRESS_FK">
 <createdBy>Gigi</createdBy>
 <createdTime>2016-03-05 19:26:45 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
@@ -105,7 +104,7 @@
 <colUsage columnID="5BB5BFCA-C0DB-44CE-3511-F010314F4537"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="D686C705-6B47-C744-3150-6D847C62959F" name="ORDER_ADDRESS_FKv1">
+<ind_PK_UK id="D686C705-6B47-C744-3150-6D847C62959F" name="ORDER_BI_ADDRESS_FK">
 <createdBy>Gigi</createdBy>
 <createdTime>2016-03-05 19:26:45 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>

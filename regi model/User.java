@@ -1,34 +1,20 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * The persistent class for the UNI_USER database table.
  * 
  */
 @Entity
-@Table(name="UNI_USER")
+@Table(name = "UNI_USER")
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name="User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.eMail = :eMail")
 })
@@ -36,59 +22,42 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="USER_ID", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "USER_ID", unique = true, nullable = false)
 	private int userId;
 
-	@Column(name="E_MAIL", nullable=false, length=100)
+	@Column(name = "E_MAIL", length = 100)
 	private String eMail;
 
-	@Column(name="NAME", nullable=false, length=100)
+	@Column(name = "NAME", length = 100)
 	private String name;
 
-	@Column(name="PASSWORD", nullable=false, length=100)
+	@Column(name = "PASSWORD", nullable = false, length = 100)
 	private String password;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="REGISTRATION_DATE", nullable=false)
+	@Column(name = "REGISTRATION_DATE")
 	private Date registrationDate;
 
-	@Column(name="USERNAME", nullable=false, length=100)
+	@Column(name = "USERNAME", nullable = false, length = 100)
 	private String username;
 
-	//bi-directional one-to-one association to Administrator
-	@OneToOne(mappedBy="user")
+	// bi-directional many-to-one association to AddressesOfUser
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+        @Fetch(FetchMode.SUBSELECT)
+	private List<AddressesOfUser> addressesOfUsers;
+
+	// bi-directional one-to-one association to Administrator
+	@OneToOne(mappedBy = "user")
 	private Administrator administrator;
 
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to Order
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Order> orders;
 
-	//bi-directional many-to-many association to Address
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="ADDRESS_TO_USER"
-		, joinColumns={
-			@JoinColumn(name="USER_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="ADDRESS_ID", nullable=false)
-			}
-		)
-	private List<Address> addresses;
-
-	//bi-directional many-to-many association to PhoneNumber
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="USER_TO_PHONE_NUMBER"
-		, joinColumns={
-			@JoinColumn(name="USER_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="PHONE_NUMBER_ID", nullable=false)
-			}
-		)
-	private List<PhoneNumber> phoneNumbers;
+	// bi-directional one-to-one association to UserData
+	@OneToOne(mappedBy = "user")
+	private UserData userData;
 
 	public User() {
 	}
@@ -141,6 +110,28 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
+	public List<AddressesOfUser> getAddressesOfUsers() {
+		return this.addressesOfUsers;
+	}
+
+	public void setAddressesOfUsers(List<AddressesOfUser> addressesOfUsers) {
+		this.addressesOfUsers = addressesOfUsers;
+	}
+
+	public AddressesOfUser addAddressesOfUser(AddressesOfUser addressesOfUser) {
+		getAddressesOfUsers().add(addressesOfUser);
+		addressesOfUser.setUser(this);
+
+		return addressesOfUser;
+	}
+
+	public AddressesOfUser removeAddressesOfUser(AddressesOfUser addressesOfUser) {
+		getAddressesOfUsers().remove(addressesOfUser);
+		addressesOfUser.setUser(null);
+
+		return addressesOfUser;
+	}
+
 	public Administrator getAdministrator() {
 		return this.administrator;
 	}
@@ -171,20 +162,12 @@ public class User implements Serializable {
 		return order;
 	}
 
-	public List<Address> getAddresses() {
-		return this.addresses;
+	public UserData getUserData() {
+		return this.userData;
 	}
 
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
-	public List<PhoneNumber> getPhoneNumbers() {
-		return this.phoneNumbers;
-	}
-
-	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
+	public void setUserData(UserData userData) {
+		this.userData = userData;
 	}
 
 	@Override

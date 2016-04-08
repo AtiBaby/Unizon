@@ -22,7 +22,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:35:26 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -35,7 +34,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:36:04 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>0</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -48,7 +46,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:36:04 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>0</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -61,7 +58,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:36:04 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>0</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -73,7 +69,6 @@
 <createdBy>Jácint</createdBy>
 <createdTime>2016-02-28 12:37:20 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -113,6 +108,22 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="EA25A69C-35AB-1042-5246-02C395B9A2B1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="81032FF6-0D3C-9F5F-BF2D-B4B9E994377C" name="ADDRESS__UN">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 12:31:35 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="223ED0DA-ED24-4A49-EDE4-D988FCAD1A3A"/>
+<colUsage columnID="461CCB29-9710-26CF-E0EC-2ED523A91AC1"/>
+<colUsage columnID="2EE38FFB-5E70-EFE4-1281-B113FA97EAA6"/>
+<colUsage columnID="5ED90D13-2FEA-520B-B4E9-A2A3BEF962B5"/>
+<colUsage columnID="6AD486AE-594F-0832-F7CD-12DA19D5AAE1"/>
+<colUsage columnID="60EC9E30-8845-5490-539A-B5450F871AD3"/>
+<colUsage columnID="D98A5666-D6AF-52AA-6540-DD626285CED1"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

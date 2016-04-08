@@ -23,7 +23,6 @@
 <createdBy>adam</createdBy>
 <createdTime>2016-03-07 19:15:23 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>0</use>
 <logicalDatatype>LOGDT024</logicalDatatype>

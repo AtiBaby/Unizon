@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BD0D7FFF-BE09-CC55-9D47-676D65ACC1C1" name="USER_TO_PHONE_NUMBER">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 12:39:18 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_16</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USER_ID" id="10CAA5C7-C3A5-F0F4-8077-3EF65903D0F3">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 12:39:40 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="74D2D687-75BC-D983-20A1-4DBB07FE341C" referredColumn="CB2B820A-6667-4446-336D-17385CB07591"/>
+</associations>
+</Column>
+<Column name="PHONE_NUMBER_ID" id="91E4B7E1-AB3F-DF7A-7752-7707965063D4">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 12:39:51 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A0316F54-62D3-BA96-6329-7D9F9F2DDBD8" referredColumn="1BE47EB5-536E-0077-F7C0-83769B7AA4DA"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="51DA4880-8073-B521-DF6D-7275C66F2ECA" name="USER_TO_PHONE_NUMBER_PK">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 12:40:12 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="10CAA5C7-C3A5-F0F4-8077-3EF65903D0F3"/>
+<colUsage columnID="91E4B7E1-AB3F-DF7A-7752-7707965063D4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D4CF24F9-8C85-A9ED-CED2-859D921FABB0" name="USER_TO_PHONE_NUMBER_FK2">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 12:40:20 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="10CAA5C7-C3A5-F0F4-8077-3EF65903D0F3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A595DFD0-A294-1692-D51B-41F14CFD1E2D" name="USER_TO_PHONE_NUMBER_FK1">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 12:40:31 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="91E4B7E1-AB3F-DF7A-7752-7707965063D4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

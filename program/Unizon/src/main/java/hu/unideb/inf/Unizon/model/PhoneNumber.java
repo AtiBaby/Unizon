@@ -1,15 +1,26 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the PHONE_NUMBER database table.
  * 
  */
 @Entity
-@Table(name = "PHONE_NUMBER")
+@Table(name="PHONE_NUMBER")
 @NamedQueries({
     @NamedQuery(name = "PhoneNumber.findAll", query = "SELECT p FROM PhoneNumber p"),
     @NamedQuery(name = "PhoneNumber.findByPhoneNumber", query = "SELECT p FROM PhoneNumber p WHERE p.phoneNumber = :phoneNumber")
@@ -18,20 +29,20 @@ public class PhoneNumber implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "PHONE_NUMBER_ID", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="PHONE_NUMBER_ID", unique=true, nullable=false)
 	private int phoneNumberId;
 
-	@Column(name = "PHONE_NUMBER", length = 100)
+	@Column(name="PHONE_NUMBER", nullable=false, length=100)
 	private String phoneNumber;
 
-	// bi-directional many-to-one association to Order
-	@OneToMany(mappedBy = "phoneNumber", fetch = FetchType.EAGER)
+	//bi-directional many-to-one association to Order
+	@OneToMany(mappedBy="phoneNumber", fetch=FetchType.EAGER)
 	private List<Order> orders;
 
-	// bi-directional many-to-one association to UserData
-	@OneToMany(mappedBy = "phoneNumber", fetch = FetchType.EAGER)
-	private List<UserData> userData;
+	//bi-directional many-to-many association to User
+	@ManyToMany(mappedBy="phoneNumbers", fetch=FetchType.EAGER)
+	private List<User> users;
 
 	public PhoneNumber() {
 	}
@@ -74,26 +85,42 @@ public class PhoneNumber implements Serializable {
 		return order;
 	}
 
-	public List<UserData> getUserData() {
-		return this.userData;
+	public List<User> getUsers() {
+		return this.users;
 	}
 
-	public void setUserData(List<UserData> userData) {
-		this.userData = userData;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
-	public UserData addUserData(UserData userData) {
-		getUserData().add(userData);
-		userData.setPhoneNumber(this);
-
-		return userData;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		return result;
 	}
 
-	public UserData removeUserData(UserData userData) {
-		getUserData().remove(userData);
-		userData.setPhoneNumber(null);
-
-		return userData;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof PhoneNumber)) {
+			return false;
+		}
+		PhoneNumber other = (PhoneNumber) obj;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null) {
+				return false;
+			}
+		} else if (!phoneNumber.equals(other.phoneNumber)) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -14,6 +14,14 @@
 			<h:form id="userform" rendered="#{loginController.loggedIn}">
 				<p:tabView>
 			        <p:tab title="User information">
+			        	<p:panelGrid>
+			        		<p:commandButton action="/user/edit_phone_number.jsf" value="Add new phone number">
+								<f:param name="phoneNumberId" value="0" />
+			        		</p:commandButton>
+			        		<p:commandButton action="/user/edit_address.jsf" value="Add new Address">
+			        			<f:param name="addressId" value="0" />
+			        		</p:commandButton>
+			        	</p:panelGrid>
 			            <p:panelGrid columns="2" style="text-align: center">
 							<p:outputLabel value="Name:" />
 							<p:outputLabel value="#{loginController.user.name}" />
@@ -32,51 +40,83 @@
 							<p:outputLabel value="Has admin rights:" />
 							<p:outputLabel value="#{loginController.administrator}" />
 							
-							<p:outputLabel value="Phone Number:" />
-							<p:outputLabel value="#{loginController.user.userData.phoneNumber.phoneNumber}" />
-							
-							<p:outputLabel value="Addresses:" />
-							<p:panelGrid>
+							<p:outputLabel value="Phone Numbers:" />
+							<p:panel>
 								<h:dataTable
-									value="#{loginController.user.addressesOfUsers}"
-									var="addressesOfUser"
+									value="#{loginController.user.phoneNumbers}"
+									var="phoneNumber"
 									styleClass="address-table"
 					    			headerClass="address-table-header"
 					    			rowClasses="address-table-odd-row,order-table-even-row">
 									<h:column>
-										<f:facet name="header">Description</f:facet>
-										<p:outputLabel value="#{addressesOfUser.description}" />
+										<f:facet name="header">Phone Number</f:facet>
+										<p:outputLabel value="#{phoneNumber.phoneNumber}" />
 									</h:column>
 									<h:column>
+										<f:facet name="header">Edit</f:facet>
+										<h:commandLink action="/user/edit_phone_number.jsf" value="Edit">
+											<f:param name="phoneNumberId" value="#{phoneNumber.phoneNumberId}" />
+										</h:commandLink>
+									</h:column>
+									<h:column>
+										<f:facet name="header">Delete</f:facet>
+										<h:commandLink action="#{phoneNumberController.removePhoneNumberFromUser()}" value="Remove">
+											<f:param name="phoneNumberId" value="#{phoneNumber.phoneNumberId}" />
+										</h:commandLink>
+									</h:column>
+								</h:dataTable>
+							</p:panel>
+							
+							<p:outputLabel value="Addresses:" />
+							<p:panel>
+								<h:dataTable
+									value="#{loginController.user.addresses}"
+									var="address"
+									styleClass="address-table"
+					    			headerClass="address-table-header"
+					    			rowClasses="address-table-odd-row,order-table-even-row">
+									<h:column>
 										<f:facet name="header">Country</f:facet>
-										<p:outputLabel value="#{addressesOfUser.address.country}" />
+										<p:outputLabel value="#{address.country}" />
 									</h:column>
 									<h:column>
 										<f:facet name="header">Zip</f:facet>
-										<p:outputLabel value="#{addressesOfUser.address.zip}" />
+										<p:outputLabel value="#{address.zip}" />
 									</h:column>
 									<h:column>
 										<f:facet name="header">City</f:facet>
-										<p:outputLabel value="#{addressesOfUser.address.city}" />
+										<p:outputLabel value="#{address.city}" />
 									</h:column>
 									<h:column>
 										<f:facet name="header">Street</f:facet>
-										<p:outputLabel value="#{addressesOfUser.address.street}" />
+										<p:outputLabel value="#{address.street}" />
 									</h:column>
 									<h:column>
 										<f:facet name="header">Street Number</f:facet>
-										<p:outputLabel value="#{addressesOfUser.address.strNumber}" />
+										<p:outputLabel value="#{address.strNumber}" />
 									</h:column>
 									<h:column>
 										<f:facet name="header">Floor</f:facet>
-										<p:outputLabel value="#{addressesOfUser.address.floor}" />
+										<p:outputLabel value="#{address.floor}" />
 									</h:column>
 									<h:column>
 										<f:facet name="header">Door</f:facet>
-										<p:outputLabel value="#{addressesOfUser.address.door}" />
+										<p:outputLabel value="#{address.door}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Edit</f:facet>
+										<h:commandLink action="/user/edit_address.jsf" value="Edit">
+											<f:param name="addressId" value="#{address.addressId}" />
+										</h:commandLink>
+									</h:column>
+									<h:column>
+										<f:facet name="header">Delete</f:facet>
+										<h:commandLink action="#{addressController.removeAddress()}" value="Remove">
+											<f:param name="addressId" value="#{address.addressId}" />
+										</h:commandLink>
 									</h:column>
 								</h:dataTable>
-							</p:panelGrid>
+							</p:panel>
 						</p:panelGrid>
 			        </p:tab>
 			        <p:tab title="Previous orders">

@@ -17,7 +17,7 @@ public class ProdToOrder implements Serializable {
 	@EmbeddedId
 	private ProdToOrderPK id;
 
-	@Column(name="AMOUNT", nullable=false)
+	@Column(name="AMOUNT")
 	private int amount;
 
 	//bi-directional many-to-one association to Product

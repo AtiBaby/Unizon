@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CD7ECFBD-3493-EB18-9E66-506A8AB2C135" name="CATEGORY">
-<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 12:52:18 UTC</createdTime>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="EED13061-6615-5CCB-C67A-F5A94EA7A3CE" name="IMAGE">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 13:07:09 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_17</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="CATEGORY_ID" id="ACA4092D-08D1-C41F-B57A-C092BF5747DC">
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 12:53:26 UTC</createdTime>
+<Column name="IMAGE_ID" id="8F5417DF-AA61-D092-EA39-EB1DFD0C0A5D">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 13:07:27 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -18,39 +18,39 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="NAME" id="1CD3F8B7-683C-DDA5-5CF4-38A420CC70CC">
-<sourceDDLFile>unizon-sql.ddl</sourceDDLFile>
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 12:53:26 UTC</createdTime>
+<Column name="IMAGE_URL" id="8BC92951-D966-A6B8-CCD9-29A23CFC5926">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 13:07:45 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
-<use>0</use>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>E5566D59-D3A3-F957-28AE-ADC4311E6D3C</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="303FA4FA-5FDE-59FC-0B8A-08257DFF07B1" name="CATEGORY_PK">
-<createdBy>Jácint</createdBy>
-<createdTime>2016-02-28 12:53:26 UTC</createdTime>
+<ind_PK_UK id="38D21B4D-8D86-1269-1710-3F62D76B2DD9" name="IMAGE_PK">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-07 13:07:27 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="ACA4092D-08D1-C41F-B57A-C092BF5747DC"/>
+<colUsage columnID="8F5417DF-AA61-D092-EA39-EB1DFD0C0A5D"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="3DC22099-D5B7-4B7F-1343-DE234FD22C54" name="CATEGORY_UNIQUE">
+<ind_PK_UK id="FA8E0261-CD8F-9795-D888-303948014660" name="IMAGE__UN">
 <createdBy>adam</createdBy>
-<createdTime>2016-03-07 19:58:48 UTC</createdTime>
+<createdTime>2016-04-07 13:07:53 UTC</createdTime>
 <ownerDesignName>DATA_MODEL</ownerDesignName>
 <indexState>Unique Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="1CD3F8B7-683C-DDA5-5CF4-38A420CC70CC"/>
+<colUsage columnID="8BC92951-D966-A6B8-CCD9-29A23CFC5926"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
