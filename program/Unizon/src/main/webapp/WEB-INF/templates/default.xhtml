@@ -43,15 +43,14 @@
 				<div class="reg">
 					<h:panelGroup rendered="#{loginController.loggedIn}">
 						<h:form>
-							<b> <h:outputLink
-									value="#{request.contextPath}/user/user.jsf">#{loginController.user.name}</h:outputLink>
+							<b>
+								<h:outputLink value="#{request.contextPath}/user/user.jsf">#{loginController.user.name}</h:outputLink>
 							</b>
-							<h:commandLink action="#{loginController.logout}">Log Out</h:commandLink>
+							<h:commandLink actionListener="#{loginController.logout()}">Log Out</h:commandLink>
 						</h:form>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{!loginController.loggedIn}">
-						<a href="#{request.contextPath}/registration/registration.jsf">Sign
-							up</a>
+						<a href="#{request.contextPath}/registration/registration.jsf">Sign up</a>
 						<a href="#{request.contextPath}/user/userlogin.jsf">Login</a>
 					</h:panelGroup>
 				</div>

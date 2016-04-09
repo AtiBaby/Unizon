@@ -1,11 +1,15 @@
 package hu.unideb.inf.Unizon.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -37,17 +41,17 @@ public class LoginController implements Serializable {
 	private User user;
 	private boolean isAdministrator;
 	private String username;
-	private String password; // TODO password nem lehet String, helyette: char[] password kell!
+	private String password;
 
 	@PostConstruct
-	public void nullProps() {
+	public void init() {
 		this.user = null;
 		this.isAdministrator = false;
 		this.username = null;
 		this.password = null;
 	}
 
-	public String login() {
+	public void login() {
 		log.info("Authenticating user: {}.", username);
 
 		User user = userFacade.findByUsername(username);
@@ -60,24 +64,44 @@ public class LoginController implements Serializable {
 					this.isAdministrator = administratorFacade.isAdministrator(user.getUserId());
 					log.info("Is {} administrator: {}", user, isAdministrator);
 
-					return "/index.jsf?faces-redirect=true";
+					redirect("/index.jsf?faces-redirect=true");
+					return;
 				}
 			} catch (Exception e) {
 				log.error(e.getMessage());
+				addErrorMessage("Unknown error happened!");
 			}
 		}
 
 		log.info("{} failed to authenticate.", user);
-		nullProps();
-
-		return "/user/userlogin?faces-redirect=true";
+		addErrorMessage("Wrong username or password!");
+		init();
 	}
 
-	public String logout() {
+	public void logout() {
 		facesContext.getExternalContext().invalidateSession();
 		log.info("{} logged out.", user);
-		nullProps();
-		return "/index.jsf?faces-redirect=true";
+		redirect("/index.jsf?faces-redirect=true");
+		init();
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
+	}
+
+	private void redirect(String url) {
+		log.info("Redirecting {} to {}.", user, url);
+		try {
+			ExternalContext ec = facesContext.getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + url);
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	public boolean isLoggedIn() {
