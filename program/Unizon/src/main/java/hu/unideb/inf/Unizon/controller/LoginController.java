@@ -55,10 +55,10 @@ public class LoginController implements Serializable {
 			try {
 				if (Password.check(password, user.getPassword())) {
 					this.user = user;
-					log.info("User {} successfully authenticated.", username);
+					log.info("{} successfully authenticated.", user);
 
 					this.isAdministrator = administratorFacade.isAdministrator(user.getUserId());
-					log.info("Is user {} administrator: {}", username, isAdministrator);
+					log.info("Is {} administrator: {}", user, isAdministrator);
 
 					return "/index.jsf?faces-redirect=true";
 				}
@@ -67,7 +67,7 @@ public class LoginController implements Serializable {
 			}
 		}
 
-		log.info("User {} failed to authenticate.", username);
+		log.info("{} failed to authenticate.", user);
 		nullProps();
 
 		return "/user/userlogin?faces-redirect=true";
@@ -75,7 +75,7 @@ public class LoginController implements Serializable {
 
 	public String logout() {
 		facesContext.getExternalContext().invalidateSession();
-		log.info("User {} logged out.", username);
+		log.info("{} logged out.", user);
 		nullProps();
 		return "/index.jsf?faces-redirect=true";
 	}

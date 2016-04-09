@@ -51,15 +51,15 @@ public class UserController implements Serializable {
 	}
 
 	public void changePassword() {
-		log.info("User: {} tries to change password.", user.getUsername());
+		log.info("{} tries to change password.", user);
 		try {
 			if (Password.check(currentPassword, user.getPassword())) {
-				log.info("User: {} matched the current password.", user.getUsername());
+				log.info("{} matched the current password.", user);
 
 				user.setPassword(Password.getSaltedHash(newPassword));
 				userFacade.edit(user);
 
-				log.info("User: {} successfully changed password.", user.getUsername());
+				log.info("{} successfully changed password.", user);
 				addInfoMessage("Password successfully updated.");
 
 				facesContext.getExternalContext().getFlash().setKeepMessages(true);
@@ -67,7 +67,7 @@ public class UserController implements Serializable {
 
 				redirect("/user/user.jsf?faces-redirect=true");
 			} else {
-				log.info("User: {} failed to match current password.", user.getUsername());
+				log.info("{} failed to match current password.", user);
 				addErrorMessage("Current password did not match!");
 				return;
 			}
@@ -92,7 +92,7 @@ public class UserController implements Serializable {
 	}
 
 	private void redirect(String url) {
-		log.info("Redirecting user: {} to {}.", user.getUsername(), url);
+		log.info("Redirecting {} to {}.", user, url);
 		try {
 			ExternalContext ec = facesContext.getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + url);

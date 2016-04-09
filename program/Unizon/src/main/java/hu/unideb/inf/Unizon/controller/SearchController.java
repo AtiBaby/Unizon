@@ -10,9 +10,9 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import hu.unideb.inf.Unizon.facade.CategoryFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
@@ -26,7 +26,8 @@ public class SearchController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
+	@Inject
+	private Logger log;
 
 	@EJB
 	private CategoryFacade categoryFacade;
@@ -50,7 +51,7 @@ public class SearchController implements Serializable {
 	}
 
 	public List<String> autoCompleteProductName(String term) {
-		logger.debug("Search category and term: " + category + " - " + term);
+		log.debug("Search category and term: " + category + " - " + term);
 		List<String> productNames = new ArrayList<>();
 		List<Product> products = new ArrayList<>();
 		if (category == null || category.equals("all")) {

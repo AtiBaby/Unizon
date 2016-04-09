@@ -272,4 +272,10 @@ public class Address implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Address [id=%s, %s, %s, %s, %s %s. door=%s, floor=%s]",
+				addressId, zip, country, city, street, strNumber, door, floor);
+	}
+
 }
