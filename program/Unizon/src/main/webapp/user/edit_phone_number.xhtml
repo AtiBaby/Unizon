@@ -28,7 +28,7 @@
 					
 					<p:commandButton value="Cancel" actionListener="#{loginController.showUserProfile()}" ajax="true" immediate="true" tabindex="2" />
 					<p:commandButton value="Update" actionListener="#{phoneNumberController.editPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{not empty phoneNumberController.newPhoneNumber}" tabindex="3" />
-					<p:commandButton value="Add" actionListener="#{phoneNumberController.addPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{empty phoneNumberController.newPhoneNumber}" tabindex="4" />
+					<p:commandButton value="Add" actionListener="#{phoneNumberController.addPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{empty phoneNumberController.newPhoneNumber}" tabindex="3" />
 			</h:form>
 		</center>
 	</ui:define>
