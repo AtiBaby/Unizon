@@ -39,16 +39,18 @@ public class LoginController implements Serializable {
 	private AdministratorFacade administratorFacade;
 
 	private User user;
-	private boolean isAdministrator;
 	private String username;
 	private String password;
 
 	@PostConstruct
 	public void init() {
 		this.user = null;
-		this.isAdministrator = false;
 		this.username = null;
 		this.password = null;
+	}
+
+	public void showUserProfile() {
+		redirect(isLoggedIn() ? "/user/user.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
 	}
 
 	public void login() {
@@ -60,9 +62,6 @@ public class LoginController implements Serializable {
 				if (Password.check(password, user.getPassword())) {
 					this.user = user;
 					log.info("{} successfully authenticated.", user);
-
-					this.isAdministrator = administratorFacade.isAdministrator(user.getUserId());
-					log.info("Is {} administrator: {}", user, isAdministrator);
 
 					redirect("/index.jsf?faces-redirect=true");
 					return;
@@ -109,6 +108,8 @@ public class LoginController implements Serializable {
 	}
 
 	public boolean isAdministrator() {
+		boolean isAdministrator = administratorFacade.isAdministrator(user.getUserId());
+		log.trace("Checking whether {} is administrator: {}", user, isAdministrator);
 		return isAdministrator;
 	}
 
