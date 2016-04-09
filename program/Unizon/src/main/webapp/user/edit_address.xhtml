@@ -40,6 +40,7 @@
 					
 					<br />
 					
+					<p:commandButton value="Cancel" actionListener="#{loginController.showUserProfile()}" ajax="true" immediate="true"/>
 					<p:commandButton value="Update" actionListener="#{addressController.editAddress()}" ajax="true" update=":messages, :addressForm" rendered="#{not empty addressController.newAddress.zip}" />
 					<p:commandButton value="Add" actionListener="#{addressController.addAddress()}" ajax="true" update=":messages, :addressForm" rendered="#{empty addressController.newAddress.zip}" />
 			</h:form>

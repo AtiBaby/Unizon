@@ -25,6 +25,7 @@
 					
 					<br />
 					
+					<p:commandButton value="Cancel" actionListener="#{loginController.showUserProfile()}" ajax="true" immediate="true"/>
 					<p:commandButton value="Update" actionListener="#{phoneNumberController.editPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{not empty phoneNumberController.newPhoneNumber}" />
 					<p:commandButton value="Add" actionListener="#{phoneNumberController.addPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{empty phoneNumberController.newPhoneNumber}" />
 			</h:form>
