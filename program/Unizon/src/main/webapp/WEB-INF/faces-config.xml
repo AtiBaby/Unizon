@@ -25,7 +25,7 @@
     
     <validator>
         <validator-id>requiredCheckboxValidator</validator-id>
-        <validator-class>check.RequiredCheckboxValidator</validator-class>
+        <validator-class>hu.unideb.inf.Unizon.validator.RequiredCheckboxValidator</validator-class>
     </validator>
 
 </faces-config>

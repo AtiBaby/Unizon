@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package check;
+package hu.unideb.inf.Unizon.validator;
 
 import java.text.MessageFormat;
 
@@ -16,6 +16,18 @@ import javax.faces.validator.ValidatorException;
 
 public class RequiredCheckboxValidator implements Validator {
 
+    private boolean isAgree;
+
+    public void setIsAgree(boolean isAgree) {
+        this.isAgree = isAgree;
+    }
+
+    public boolean getIsAgree() {
+        return this.isAgree;
+    }
+    
+    
+    
     public void validate(FacesContext context, UIComponent component, Object value)
         throws ValidatorException
     {
@@ -37,5 +49,7 @@ public class RequiredCheckboxValidator implements Validator {
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, requiredMessage, requiredMessage));
         }
     }
+    
+    
 
 }
