@@ -22,10 +22,4 @@
     xsi:schemaLocation="
         http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-    
-    <validator>
-        <validator-id>requiredCheckboxValidator</validator-id>
-        <validator-class>hu.unideb.inf.Unizon.validator.RequiredCheckboxValidator</validator-class>
-    </validator>
-
 </faces-config>
