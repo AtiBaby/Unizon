@@ -16,18 +16,6 @@ import javax.faces.validator.ValidatorException;
 
 public class RequiredCheckboxValidator implements Validator {
 
-    private boolean isAgree;
-
-    public void setIsAgree(boolean isAgree) {
-        this.isAgree = isAgree;
-    }
-
-    public boolean getIsAgree() {
-        return this.isAgree;
-    }
-    
-    
-    
     public void validate(FacesContext context, UIComponent component, Object value)
         throws ValidatorException
     {
