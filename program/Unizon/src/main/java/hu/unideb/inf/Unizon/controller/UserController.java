@@ -62,19 +62,21 @@ public class UserController implements Serializable {
 				log.info("{} successfully changed password.", user);
 				addInfoMessage("Password successfully updated.");
 
-				facesContext.getExternalContext().getFlash().setKeepMessages(true);
+//				facesContext.getExternalContext().getFlash().setKeepMessages(true);
 				RequestContext.getCurrentInstance().update("messages");
 
 				redirect("/user/user.jsf?faces-redirect=true");
 			} else {
 				log.info("{} failed to match current password.", user);
 				addErrorMessage("Current password did not match!");
+				RequestContext.getCurrentInstance().update("messages");
 				return;
 			}
 			init();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			addErrorMessage("Unkown error happened!");
+			RequestContext.getCurrentInstance().update("messages");
 		}
 	}
 
