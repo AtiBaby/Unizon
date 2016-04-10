@@ -12,25 +12,30 @@
 
 	<ui:define name="fullBody">
 		<p:growl id="messages" life="4000" showDetail="true" />
-		<h:form id="loginform">
+		<h:form id="loginForm">
 			<center>
-				<p:panelGrid columns="2" style="text-align: center">
-					<p:outputLabel value="Username:" />
-					<p:inputText
-						id="username"
-						required="true"
-						requiredMessage="Please type in your username!"
-						value="#{loginController.username}" />
+				<p:panel id="loginPanel">
+					<p:focus context="loginPanel"/>
+					<p:panelGrid columns="2" style="text-align: center">
+						<p:outputLabel value="Username:" styleClass="required" />
+						<p:inputText
+							id="username"
+							required="true"
+							requiredMessage="Please type in your username!"
+							value="#{loginController.username}" />
+						
+						<p:outputLabel value="Password:" styleClass="required" />
+						<p:password
+							id="password"
+							required="true"
+							requiredMessage="Please type in your password!"
+							value="#{loginController.password}" />
+					</p:panelGrid>
 					
-					<p:outputLabel value="Password:" />
-					<p:password
-						id="password"
-						required="true"
-						requiredMessage="Please type in your password!"
-						value="#{loginController.password}" />
-				</p:panelGrid>
-				<br />
-                                <p:commandButton value="Login" type="submit" action="#{loginController.login}" ajax="false" />
+					<br />
+	                
+	                <p:commandButton value="Login" type="submit" actionListener="#{loginController.login()}" ajax="true" update=":messages, :loginForm" />
+				</p:panel>
 			</center>
 		</h:form>
 	</ui:define>
