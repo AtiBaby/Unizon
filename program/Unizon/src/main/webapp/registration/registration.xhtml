@@ -50,9 +50,25 @@
 						<p:outputLabel value="Door:" />
 						<p:inputText value="#{registrationController.newAddress.door}" />
 					</p:panelGrid>
+                                        
+                                    <h:outputText styleClass="required" value="The fields with asterix are required!"/>
 					<br />
-					<p:commandButton value="Register" actionListener="#{registrationController.register()}" ajax="true"
-						update=":messages, :registrationForm" />
+                                        
+                                        <a href="#{request.contextPath}/registration/terms.xhtml">Terms and Conditions</a><br/>
+                                        <a href="#{request.contextPath}/registration/policy.xhtml">Privacy Policy</a><br/>
+					
+                                        <p:selectBooleanCheckbox id="check"
+                                                                
+                                                                itemLabel="I have read and agree to the Terms and Conditions and Privacy Policy"
+                                        />
+                                        <br/>
+                                        
+                                        
+                                        <p:commandButton id="register"
+                                                        value="Register" actionListener="#{registrationController.register()}"
+                                                        ajax="true"
+                                                        update=":messages, :registrationForm"
+                                        /><br/>
 				</p:panel>
 			</center>
 		</h:form>
