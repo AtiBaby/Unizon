@@ -144,7 +144,7 @@ public class RegistrationController implements Serializable {
                 this.isAgree = isAgree;
         }
 
-        public boolean isAgree() {
+        public boolean getIsAgree() {
             return this.isAgree;
         }
 
