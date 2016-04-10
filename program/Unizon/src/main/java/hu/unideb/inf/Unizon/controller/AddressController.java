@@ -100,12 +100,13 @@ public class AddressController implements Serializable {
 	}
 
 	private void removeAddressFromUser(Address address) {
-		log.info("Removing address: {} from user: {}.", address, user.getUsername());
+		log.info("Removing {} from {}.", address, user);
 
 		user.getAddresses().remove(address);
-		userFacade.edit(user);
+		user = userFacade.edit(user);
+		loginController.setUser(user);
 
-		log.info("Address: {} has been removed from user: {}.", address, user.getUsername());
+		log.info("{} has been removed from {}.", address, user);
 	}
 
 	private Address createOrFindAddress(Address address) {
@@ -113,11 +114,11 @@ public class AddressController implements Serializable {
 
 		Address existingAddress = addressFacade.findByAllAttributes(address);
 		if (existingAddress == null) {
-			log.info("Address {} does NOT exist in the database.", address);
+			log.info("{} does NOT exist in the database.", address);
 			result = createAddress(address);
 			result = address;
 		} else {
-			log.info("Address: {} exists in the database.", address);
+			log.info("{} exists in the database.", address);
 			result = existingAddress;
 		}
 
@@ -128,41 +129,42 @@ public class AddressController implements Serializable {
 		user.getAddresses().add(address);
 		user.setAddresses(new ArrayList<>(new HashSet<>(user.getAddresses())));
 
-		userFacade.edit(user);
+		user = userFacade.edit(user);
+		loginController.setUser(user);
 
-		log.info("Address: {} has been added to user: {}.", address, user.getUsername());
+		log.info("{} has been added to {}.", address, user);
 	}
 
 	private Address createAddress(Address address) {
-		log.info("Creating address: {}.", address);
+		log.info("Creating {}.", address);
 
 		addressFacade.create(address);
 
-		log.info("Address: {} has been successfully created.", address);
+		log.info("{} has been successfully created.", address);
 
 		return address;
 	}
 
 	private void deleteFromDatabaseIfRequired(Address addressToDelete) {
-		log.info("Trying to delete address: {} from the database.", addressToDelete);
+		log.info("Trying to delete {} from the database.", addressToDelete);
 
 		Address address = addressFacade.findByAllAttributes(addressToDelete);
 		if (address == null) {
-			log.info("Address: {} has already been deleted from the database.", addressToDelete);
+			log.info("{} has already been deleted from the database.", addressToDelete);
 		} else {
-			log.info("Address {} has {} number of users, {} number of orders1 and {} number of orders2.", address,
-					address.getUsers().size(), address.getOrders1().size(), address.getOrders2());
+			log.info("{} has {} number of users, {} number of orders1 and {} number of orders2.", address,
+					address.getUsers().size(), address.getOrders1().size(), address.getOrders2().size());
 
 			if (address.getUsers().isEmpty() && address.getOrders1().isEmpty() && address.getOrders2().isEmpty()) {
-				log.info("Deleting address: {} from the database.", address);
+				log.info("Deleting {} from the database.", address);
 				addressFacade.remove(address);
-				log.info("Address: {} has been deleted from the database.", address);
+				log.info("{} has been deleted from the database.", address);
 			}
 		}
 	}
 
 	private void redirect(String url) {
-		log.info("Redirecting user: {} to {}.", user.getUsername(), url);
+		log.info("Redirecting {} to {}.", user, url);
 		try {
 			ExternalContext ec = facesContext.getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + url);

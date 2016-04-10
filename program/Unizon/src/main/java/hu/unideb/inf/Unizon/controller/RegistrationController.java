@@ -49,7 +49,9 @@ public class RegistrationController implements Serializable {
 	private User newUser;
 	private PhoneNumber newPhoneNumber;
 	private Address newAddress;
+        private boolean isAgree;
 
+        
 	@PostConstruct
 	public void init() {
 		this.newUser = new User();
@@ -137,5 +139,13 @@ public class RegistrationController implements Serializable {
 	public void setNewAddress(Address newAddress) {
 		this.newAddress = newAddress;
 	}
+        
+        public void setIsAgree(boolean isAgree) {
+                this.isAgree = isAgree;
+        }
+
+        public boolean getIsAgree() {
+            return this.isAgree;
+        }
 
 }

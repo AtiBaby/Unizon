@@ -123,4 +123,9 @@ public class PhoneNumber implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("PhoneNumber [id=%s, %s]", phoneNumberId, phoneNumber);
+	}
+
 }

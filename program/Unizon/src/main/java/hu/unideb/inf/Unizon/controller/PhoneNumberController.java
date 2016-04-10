@@ -90,12 +90,13 @@ public class PhoneNumberController implements Serializable {
 	}
 
 	private void removePhoneNumberFromUser(PhoneNumber phoneNumber) {
-		log.info("Removing phone number: {} from user: {}.", phoneNumber.getPhoneNumber(), user.getUsername());
+		log.info("Removing {} from {}.", phoneNumber, user);
 
 		user.getPhoneNumbers().remove(originalPhoneNumber);
-		userFacade.edit(user);
+		user = userFacade.edit(user);
+		loginController.setUser(user);
 
-		log.info("Phone number: {} has been removed from user: {}.", phoneNumber.getPhoneNumber(), user.getUsername());
+		log.info("{} has been removed from {}.", phoneNumber, user);
 	}
 
 	private PhoneNumber createOrFindPhoneNumber(String phoneNumber) {
@@ -106,7 +107,7 @@ public class PhoneNumberController implements Serializable {
 			log.info("Phone number {} does NOT exist in the database.", phoneNumber);
 			result = createPhoneNumber(phoneNumber);
 		} else {
-			log.info("Phone number: {} exists in the database.", phoneNumber);
+			log.info("Phone number {} exists in the database.", phoneNumber);
 			result = existingPhoneNumber;
 		}
 
@@ -117,43 +118,44 @@ public class PhoneNumberController implements Serializable {
 		user.getPhoneNumbers().add(phoneNumber);
 		user.setPhoneNumbers(new ArrayList<>(new HashSet<>(user.getPhoneNumbers())));
 
-		userFacade.edit(user);
+		user = userFacade.edit(user);
+		loginController.setUser(user);
 
-		log.info("Phone number: {} has been added to user: {}.", phoneNumber.getPhoneNumber(), user.getUsername());
+		log.info("{} has been added to {}.", phoneNumber, user);
 	}
 
 	private PhoneNumber createPhoneNumber(String newPhoneNumber) {
-		log.info("Creating new phone number: {}.", newPhoneNumber);
+		log.info("Creating new phone number {}.", newPhoneNumber);
 
 		PhoneNumber phoneNumber = new PhoneNumber();
 		phoneNumber.setPhoneNumber(newPhoneNumber);
 		phoneNumberFacade.create(phoneNumber);
 
-		log.info("New phone number: {} has been successfully created.", phoneNumber.getPhoneNumber());
+		log.info("New phone number {} has been successfully created.", phoneNumber);
 
 		return phoneNumber;
 	}
 
 	private void deleteFromDatabaseIfRequired(String phoneNumberToDelete) {
-		log.info("Trying to delete phone number: {} from the database.", phoneNumberToDelete);
+		log.info("Trying to delete phone number {} from the database.", phoneNumberToDelete);
 
 		PhoneNumber phoneNumber = phoneNumberFacade.findByPhoneNumber(phoneNumberToDelete);
 		if (phoneNumber == null) {
-			log.info("Phone number: {} has already been deleted from the database.", phoneNumberToDelete);
+			log.info("Phone number {} has already been deleted from the database.", phoneNumberToDelete);
 		} else {
-			log.info("Phone number {} has {} number of users and {} number of orders.", phoneNumber.getPhoneNumber(),
-					phoneNumber.getUsers().size(), phoneNumber.getOrders().size());
+			log.info("{} has {} number of users and {} number of orders.", phoneNumber, phoneNumber.getUsers().size(),
+					phoneNumber.getOrders().size());
 
 			if (phoneNumber.getUsers().isEmpty() && phoneNumber.getOrders().isEmpty()) {
-				log.info("Deleting phone number: {} from the database.", phoneNumber.getPhoneNumber());
+				log.info("Deleting {} from the database.", phoneNumber);
 				phoneNumberFacade.remove(phoneNumber);
-				log.info("Phone number: {} has been deleted from the database.", phoneNumber.getPhoneNumber());
+				log.info("{} has been deleted from the database.", phoneNumber);
 			}
 		}
 	}
 
 	private void redirect(String url) {
-		log.info("Redirecting user: {} to {}.", user.getUsername(), url);
+		log.info("Redirecting {} to {}.", user, url);
 		try {
 			ExternalContext ec = facesContext.getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + url);
