@@ -16,7 +16,8 @@
 		<p:dataList value="#{SearchController.products}" var="product"
 			type="unordered" itemType="none" paginator="true" rows="5"
 			styleClass="paginated">
-			<h:outputLink value="#">
+			<h:outputLink value="productdetails.xhtml" action="#{searchController.submitProduct()}">
+			 <f:param name="id" value="#{product.productId}" />
 				<p:graphicImage name="todo.gif" />
 				<h2>
 					<h:outputText value="#{product.productId}">
