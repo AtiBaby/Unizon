@@ -217,16 +217,72 @@ INSERT INTO USER_TO_PHONE_NUMBER VALUES(1, 1);
 INSERT INTO USER_TO_PHONE_NUMBER VALUES(2, 2);
 INSERT INTO USER_TO_PHONE_NUMBER VALUES(2, 3);
 
-INSERT INTO IMAGE VALUES(1,'dummy');
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(5,
+"http://www.nikecipo-webshop.hu/wp-content/uploads/S.729809_011-1-546x480.jpg");
+
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(4,
+"http://www.intersport.si/wcsstore/Intersport/images/products/a081/887231908882_01_mega.jpg");
+
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(6,
+"http://s3emagst.akamaized.net/products/1072/1071426/images/res_43dcd7b9f15c65c4e7cc3ce1427b3eec_350x350c_spnr.jpg?v2");
+
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(3,
+"http://www.adidascenter.com/img/p/6735-11143-thickbox.jpg");
+
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(1,
+"http://www.trusteegaps.com/images/large/nikefreefutcip/Adidas-Cip-Feh-r-K-k-Piros-472ie3860_02_LRG.jpg");
+
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(2,
+"http://playersroom.hu/upload_files/products/AO2891_5.jpg");
+
+
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(8,
+"http://www.eshop-gyorsan.hu/fotky2550/fotos/_vyrn_164Beige-2014-wholesale-GEL-Running-Shoes-for-women-and-Men-girl-Ourdoor-casual-Shoes-brand-Noosa-tri.jpg");
+
+INSERT INTO `unizon`.`image`
+(`IMAGE_ID`,
+`IMAGE_URL`)
+VALUES
+(7,
+"http://sportwebshop.net/sites/default/files/asics_knit_noi_kapucnis_pulover_2015.jpg");
+
 
 INSERT INTO PRODUCT VALUES(1,'Adidas pulcsi', 2100,210,'fehér/fekete',1);
-INSERT INTO PRODUCT VALUES(2,'Adidas cipő', 2990,210,'piros/fekete',1);
-INSERT INTO PRODUCT VALUES(3,'Adidas nadrág', 3990,210,'piros/kék',1);
-INSERT INTO PRODUCT VALUES(4,'Nike pulcsi', 12990,210,'piros/fekete',1);
-INSERT INTO PRODUCT VALUES(5,'Nike cipő', 22990,210,'piros/fekete',1);
-INSERT INTO PRODUCT VALUES(6,'Nike nadrág', 29490,210,'piros/kék',1);
-INSERT INTO PRODUCT VALUES(7,'Asics pulcsi', 1290,210,'piros/zöld',1);
-INSERT INTO PRODUCT VALUES(8,'Asics cipő', 2990,210,'zöld/fekete',1);
+INSERT INTO PRODUCT VALUES(2,'Adidas cipő', 2990,210,'piros/fekete',2);
+INSERT INTO PRODUCT VALUES(3,'Adidas nadrág', 3990,210,'piros/kék',3);
+INSERT INTO PRODUCT VALUES(4,'Nike pulcsi', 12990,210,'piros/fekete',4);
+INSERT INTO PRODUCT VALUES(5,'Nike cipő', 22990,210,'piros/fekete',5);
+INSERT INTO PRODUCT VALUES(6,'Nike nadrág', 29490,210,'piros/kék',6);
+INSERT INTO PRODUCT VALUES(7,'Asics pulcsi', 1290,210,'piros/zöld',7);
+INSERT INTO PRODUCT VALUES(8,'Asics cipő', 2990,210,'zöld/fekete',8);
 
 INSERT INTO CATEGORY VALUES(1,'Cipő');
 INSERT INTO CATEGORY VALUES(2,'Pulcsi');
