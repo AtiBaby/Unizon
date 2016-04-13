@@ -1,7 +1,8 @@
 
 .ui-outputpanel {
-	height: 300px;
-	width:300px;
+	
+	height: auto;
+	width:auto;
 }
 
 .prodimage{
