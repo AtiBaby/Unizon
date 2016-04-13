@@ -6,6 +6,7 @@
 package hu.unideb.inf.Unizon.facade;
 
 import hu.unideb.inf.Unizon.model.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -46,4 +47,8 @@ public class UserFacade extends AbstractFacade<User> {
 			return null;
 		}
 	}
+        
+        public List<User> findUsersWithoutAdmins() {
+            return em.createNamedQuery("User.findAllWithoutAdmins").getResultList();
+        }
 }

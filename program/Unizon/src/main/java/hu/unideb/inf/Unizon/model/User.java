@@ -30,7 +30,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.eMail = :eMail")
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.eMail = :eMail"),
+    @NamedQuery(name = "User.findAllWithoutAdmins", query = "SELECT u FROM User u WHERE u.userId NOT IN (SELECT a.userId FROM Administrator a)"),
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
