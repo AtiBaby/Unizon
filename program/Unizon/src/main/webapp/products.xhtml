@@ -1,40 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="title">
 		Products
 	</ui:define>
 	<ui:define name="products">
 		<f:facet name="last">
-			<h:outputStylesheet library="default" name="css/datalist.css" />
+			<h:outputStylesheet name="css/datagrid.css" />
 		</f:facet>
 		<p:growl id="messages" life="4000" showDetail="true" />
-		<p:dataList value="#{SearchController.products}" var="product"
-			type="unordered" itemType="none" paginator="true" rows="5"
-			styleClass="paginated">
-			<h:outputLink value="productdetails.xhtml" action="#{searchController.submitProduct()}">
-			 <f:param name="id" value="#{product.productId}" />
-				<p:graphicImage name="todo.gif" />
-				<h2>
-					<h:outputText value="#{product.productId}">
-					</h:outputText>
-				</h2>
-				<p>
-					<h:outputText value="#{product.title}">
-					</h:outputText>
-				</p>
-				<p>
+		<p:dataGrid var="product" value="#{SearchController.products}" columns="3" layout="grid" rows="12"
+			paginator="true" id="products"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,15">
+
+			<p:panel style="text-align:center;">
+				<h:panelGrid columns="1">
+					<h:outputLink class="prodlink" value="productdetails.xhtml" action="#{searchController.submitProduct()}">
+						<f:param name="id" value="#{product.productId}" />
+						<p:outputPanel>
+							<h:graphicImage class="prodimage" value="#{product.image.imageUrl}" />
+						</p:outputPanel>
+						<br />
+						<h:outputText value="#{product.title}" class="prodtitle" />
+					</h:outputLink>
 					<h:outputText value="#{product.price}">
 						<f:convertNumber currencyCode="HUF" type="currency" />
 					</h:outputText>
-				</p>
-			</h:outputLink>
-		</p:dataList>
-
-
+					<h:outputText value="In stock amount: #{product.amount}" />
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
 	</ui:define>
 </ui:composition>
