@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="title">
+		Product upload
+	</ui:define>
+	<ui:define name="fullBody">
+		<p:growl id="messages" life="4000" showDetail="true" />
+		<h:form id="product_upload_form">
+			<center>
+				<p:panel>
+					<p:panelGrid columns="2" style="font-size: 0.8em;">
+						<p:outputLabel value="Title"/>
+						<p:inputText value="#{productUploadController.valami}"/>
+						<p:outputLabel value="Price"/>
+						<p:inputText value="#{productUploadController.product.price}"/>
+						<p:outputLabel value="Amount:"/>
+						<p:inputText value="#{productUploadController.product.amount}"/>
+						<p:outputLabel value="Description:"/>
+						<p:inputText value="#{productUploadController.product.description}"/>
+						<p:commandButton id="upload" value="Upload" actionListener="#{productUploadController.upload()}" ajax="true"
+                                   		update=":messages, :product_upload_form"/>
+					</p:panelGrid>
+				</p:panel>
+			</center>
+		</h:form>
+	</ui:define>
+</ui:composition>
