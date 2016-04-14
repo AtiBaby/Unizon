@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
+import hu.unideb.inf.Unizon.facade.UserActivationFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.facade.UserStatusFacade;
 import hu.unideb.inf.Unizon.model.Address;
@@ -49,6 +50,9 @@ public class RegistrationController implements Serializable {
 
 	@EJB
 	private UserStatusFacade userStatusFacade;
+
+	@EJB
+	private UserActivationFacade userActivationFacade;
 
 	@EJB
 	private PhoneNumberFacade phoneNumberFacade;
@@ -109,16 +113,13 @@ public class RegistrationController implements Serializable {
 		newUser.setUserStatus(userStatus);
 
 		userFacade.create(newUser);
-		newUser = userFacade.findByUsername(newUser.getUsername());
 
 		UserActivation userActivation = new UserActivation();
 		userActivation.setActivationKey(UUID.randomUUID().toString());
 		userActivation.setUser(newUser);
 		userActivation.setUserId(newUser.getUserId());
-
-		newUser.setUserActivation(userActivation);
-		newUser = userFacade.edit(newUser);
-
+		userActivationFacade.create(userActivation);
+		
 		init();
 
 		try {
