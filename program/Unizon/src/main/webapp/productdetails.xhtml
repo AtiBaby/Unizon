@@ -9,10 +9,46 @@
 		Product
 	</ui:define>
 	<ui:define name="products">
-	 <f:metadata>
-<!--         <f:viewParam name="id" value="#{myBean.id}" />  -->
-<!-- use your bean for id product id parameter. I hope it will be works-->
-    </f:metadata>
-<!--     #{myBean.id} -->
+		<!--  <h:graphicImage value="#{myBean.src}" width="200" height="171" />
+		<h:outputText value="#{myBean.title}" />
+		<h:outputText value="#{myBean.price}" />
+		<h:outputText value="#{myBean.description}" /> -->
+		
+							<div class="col-sm-6">
+						<div id="mainImage">
+							<img src="#{request.contextPath}/resources/images/iphone6s.jpg" />
+						</div>						
+					</div>
+					<div class="col-sm-6">
+						<div class="box">
+							<form>
+								<p class="title">Iphone 6S</p>
+								<p class="price">12.000 Ft</p>
+								<p class="addToCart">
+									<button type="submit" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+								</p>
+							</form>
+						</div>
+						<div class="row" id="productImages">
+							<h:outputText style="border-bottom:2px solid black;" />
+							<div class="col-xs-4">
+                                        <a href="images/iphone6s.jpg" class="thumb active">
+                                            <img src="#{request.contextPath}/resources/images/iphone6s.jpg" class="img-responsive"/>
+                                        </a>
+                            </div>
+							<div class="col-xs-4">
+                                        <a href="images/iphone6s.jpg" class="thumb">
+                                            <img src="#{request.contextPath}/resources/images/iphone6s.jpg" class="img-responsive"/>
+                                        </a>
+                            </div>
+							<div class="col-xs-4">
+                                        <a href="images/iphone6s.jpg" class="thumb active">
+                                            <img src="#{request.contextPath}/resources/images/iphone6s.jpg" class="img-responsive"/>
+                                        </a>
+                            </div>
+						</div>
+					</div>
+		
+		
 	</ui:define>
 </ui:composition>

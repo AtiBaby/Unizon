@@ -26,7 +26,7 @@ body {
 #header {
     color:white;
     font-size: 16px;
-    height: 50px;
+    height: 65px;
     //position: relative;
     background-color: #222;
     width: 100%;
@@ -63,13 +63,13 @@ a {
     padding: 0 5px;
 }
 
-.container {
+
+.cont {
     margin:0 auto;
     max-width: 1000px;
     min-width: 320px;
     width: 100%;
     position: relative;
- 
 }
 
 .logo img {
@@ -123,7 +123,7 @@ li a:hover {
 .products {
     position: relative;
     top: 20px;
-    min-height: 800px;
+    height: 800px;
     border: solid 2px black;
     border-radius: 2px;
 }
@@ -131,10 +131,9 @@ li a:hover {
 #footer {
     position: relative;
     top: 40px;
-    height: auto;
+    height: 100px;
     border: solid 2px black;
     border-radius: 2px;
-    margin-bottom: 50px;
 }
 
 #footer p {
@@ -147,6 +146,28 @@ li a:hover {
 
 .footer-logo {
     text-align: center;
+}
+
+#productMain .title {
+	text-align: center;
+	font-size: 30px;
+	margin-top: 50px;
+}
+
+#productMain .price {
+	font-size: 40px;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 40px;
+}
+
+.addToCart {
+	text-align: center;
+	margin-top: 80px;
+}
+
+#productImages {
+	margin-top: 30px;
 }
 
 @media screen and (max-width: 1000px) {
