@@ -58,22 +58,6 @@ public class Product implements Serializable {
 		)
 	private List<Category> categories;
 
-	//bi-directional many-to-one association to ProdToOrder
-	@OneToMany(mappedBy="product", fetch=FetchType.EAGER)
-	private List<ProdToOrder> prodToOrders;
-
-	//bi-directional many-to-one association to ProdToTag
-	@OneToMany(mappedBy="product1", fetch=FetchType.EAGER)
-	private List<ProdToTag> prodToTags1;
-
-	//bi-directional many-to-one association to ProdToTag
-	@OneToMany(mappedBy="product2", fetch=FetchType.EAGER)
-	private List<ProdToTag> prodToTags2;
-
-	//bi-directional many-to-many association to Tag
-	@ManyToMany(mappedBy="products", fetch=FetchType.EAGER)
-	private List<Tag> tags;
-
 	//bi-directional many-to-one association to Image
 	@ManyToOne
 	@JoinColumn(name="DEFAULT_IMAGE_ID", nullable=false)
@@ -91,6 +75,22 @@ public class Product implements Serializable {
 			}
 		)
 	private List<Image> images;
+
+	//bi-directional many-to-one association to ProdToOrder
+	@OneToMany(mappedBy="product", fetch=FetchType.EAGER)
+	private List<ProdToOrder> prodToOrders;
+
+	//bi-directional many-to-one association to ProdToTag
+	@OneToMany(mappedBy="product1", fetch=FetchType.EAGER)
+	private List<ProdToTag> prodToTags1;
+
+	//bi-directional many-to-one association to ProdToTag
+	@OneToMany(mappedBy="product2", fetch=FetchType.EAGER)
+	private List<ProdToTag> prodToTags2;
+
+	//bi-directional many-to-many association to Tag
+	@ManyToMany(mappedBy="products", fetch=FetchType.EAGER)
+	private List<Tag> tags;
 
 	public Product() {
 	}
@@ -187,6 +187,22 @@ public class Product implements Serializable {
 		this.categories = categories;
 	}
 
+	public Image getImage() {
+		return this.image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public List<Image> getImages() {
+		return this.images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
 	public List<ProdToOrder> getProdToOrders() {
 		return this.prodToOrders;
 	}
@@ -259,22 +275,6 @@ public class Product implements Serializable {
 
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
-	}
-
-	public Image getImage() {
-		return this.image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	public List<Image> getImages() {
-		return this.images;
-	}
-
-	public void setImages(List<Image> images) {
-		this.images = images;
 	}
 
 }

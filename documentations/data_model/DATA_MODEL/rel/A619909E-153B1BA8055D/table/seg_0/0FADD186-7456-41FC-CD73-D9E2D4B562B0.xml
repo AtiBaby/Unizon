@@ -1,0 +1,56 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0FADD186-7456-41FC-CD73-D9E2D4B562B0" name="USER_STATUS">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_17</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="STATUS_ID" id="03C8CB3A-0640-3D4D-6F5B-729E992EF837">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STATUS_NAME" id="C7A8EDC6-66CF-C327-AB3D-9B0DF776BE4E">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BE1CB9FE-352B-2704-330B-0408C8A8C97A" name="USER_STATUS_PK">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="03C8CB3A-0640-3D4D-6F5B-729E992EF837"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F5AEFC3F-88C8-C22A-1FB3-85BB6E88EA66" name="USER_STATUS__UN">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C7A8EDC6-66CF-C327-AB3D-9B0DF776BE4E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

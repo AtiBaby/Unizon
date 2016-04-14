@@ -47,8 +47,8 @@ public class UserFacade extends AbstractFacade<User> {
 			return null;
 		}
 	}
-        
-        public List<User> findUsersWithoutAdmins() {
-            return em.createNamedQuery("User.findAllWithoutAdmins").getResultList();
-        }
+
+    public List<User> findUsersWithoutAdmins() {
+        return em.createNamedQuery("User.findAllWithoutAdmins").getResultList();
+    }
 }
