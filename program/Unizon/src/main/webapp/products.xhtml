@@ -10,27 +10,36 @@
 			<h:outputStylesheet name="css/datagrid.css" />
 		</f:facet>
 		<p:growl id="messages" life="4000" showDetail="true" />
-		<p:dataGrid var="product" value="#{SearchController.products}" columns="3" layout="grid" rows="12"
-			paginator="true" id="products"
-			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="6,12,15">
-
-			<p:panel style="text-align:center;">
-				<h:panelGrid columns="1">
-					<h:outputLink class="prodlink" value="productdetails.xhtml" action="#{searchController.submitProduct()}">
-						<f:param name="id" value="#{product.productId}" />
-						<p:outputPanel>
-							<h:graphicImage class="prodimage" value="#{product.image.imageUrl}" />
-						</p:outputPanel>
-						<br />
-						<h:outputText value="#{product.title}" class="prodtitle" />
-					</h:outputLink>
-					<h:outputText value="#{product.price}">
-						<f:convertNumber currencyCode="HUF" type="currency" />
-					</h:outputText>
-					<h:outputText value="In stock amount: #{product.amount}" />
-				</h:panelGrid>
-			</p:panel>
-		</p:dataGrid>
+		<h:form>
+			<p:dataGrid var="product" value="#{SearchController.products}" columns="3" layout="grid"
+				rows="12" paginator="true" id="products"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="6,12,15">
+				<f:facet name="header">
+					<h:outputLabel>Sorting by </h:outputLabel>
+					<h:selectOneMenu value="#{SearchController.selectedSort}" onchange="submit()"
+						valueChangeListener="#{SearchController.sortChangeListener}">
+						<f:selectItems value="#{SearchController.sortingOptions}" />
+					</h:selectOneMenu>
+				</f:facet>
+				<p:panel style="text-align:center;">
+					<h:panelGrid columns="1">
+						<h:outputLink class="prodlink" value="productdetails.xhtml"
+							action="#{searchController.submitProduct()}">
+							<f:param name="id" value="#{product.productId}" />
+							<p:outputPanel>
+								<h:graphicImage class="prodimage" value="#{product.image.imageUrl}" />
+							</p:outputPanel>
+							<br />
+							<h:outputText value="#{product.title}" class="prodtitle" />
+						</h:outputLink>
+						<h:outputText value="#{product.price}">
+							<f:convertNumber currencyCode="HUF" type="currency" />
+						</h:outputText>
+						<h:outputText value="In stock amount: #{product.amount}" />
+					</h:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
 	</ui:define>
 </ui:composition>
