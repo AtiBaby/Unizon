@@ -17,7 +17,7 @@ import hu.unideb.inf.Unizon.facade.ProductFacade;
 import hu.unideb.inf.Unizon.model.Product;
 
 @Stateless
-@ManagedBean(name = "ProductDetailController")
+@ManagedBean
 @SessionScoped
 public class ProductDetailController implements Serializable {
 
@@ -37,7 +37,6 @@ public class ProductDetailController implements Serializable {
 	
 	public void init() {
 		actualProduct = productFacade.findById(productId);
-
 	}
 
 	public Product getActualProduct() {
