@@ -6,49 +6,64 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="title">
-		Product
+		Product details
 	</ui:define>
 	<ui:define name="products">
 		<!--  <h:graphicImage value="#{myBean.src}" width="200" height="171" />
-		<h:outputText value="#{myBean.title}" />
+		<h:outputText value="#{ProductDetailController.actualProduct.title}" />
 		<h:outputText value="#{myBean.price}" />
 		<h:outputText value="#{myBean.description}" /> -->
-		
-							<div class="col-sm-6">
-						<div id="mainImage">
-							<img src="#{request.contextPath}/resources/images/iphone6s.jpg" />
-						</div>						
+		<f:metadata>
+			<f:viewParam name="id" value="#{ProductDetailController.productId}" />
+			<f:viewAction action="#{ProductDetailController.init()}" />
+		</f:metadata>
+			<div id="details">
+				<div class="col-sm-6">
+					<div id="mainImage">
+						<!--<img src="#{request.contextPath}/resources/images/iphone6s.jpg" />-->
+						<h:graphicImage class="prodimage" value="#{ProductDetailController.actualProduct.image.imageUrl}" styleClass="img-responsive"/>
 					</div>
-					<div class="col-sm-6">
-						<div class="box">
-							<form>
-								<p class="title">Iphone 6S</p>
-								<p class="price">12.000 Ft</p>
-								<p class="addToCart">
-									<button type="submit" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Add to cart</button>
-								</p>
-							</form>
-						</div>
-						<div class="row" id="productImages">
-							<h:outputText style="border-bottom:2px solid black;" />
-							<div class="col-xs-4">
-                                        <a href="images/iphone6s.jpg" class="thumb active">
-                                            <img src="#{request.contextPath}/resources/images/iphone6s.jpg" class="img-responsive"/>
-                                        </a>
-                            </div>
-							<div class="col-xs-4">
-                                        <a href="images/iphone6s.jpg" class="thumb">
-                                            <img src="#{request.contextPath}/resources/images/iphone6s.jpg" class="img-responsive"/>
-                                        </a>
-                            </div>
-							<div class="col-xs-4">
-                                        <a href="images/iphone6s.jpg" class="thumb active">
-                                            <img src="#{request.contextPath}/resources/images/iphone6s.jpg" class="img-responsive"/>
-                                        </a>
-                            </div>
-						</div>
+					<div id="description">
+						<h:outputText value="Description: #{ProductDetailController.actualProduct.description}" />
+						<h:outputText value="&lt;br/&gt;" escape="false" />
+						<h:outputText value="Amount: #{ProductDetailController.actualProduct.amount}" />
+						<p>Lorem ipsum dolor sit amet, eros enim sit malesuada et, mus viverra eget massa eaque ut sapien, ultricies mi ultrices ullamcorper lorem.</p>
+					</div>						
+				</div>
+				<div class="col-sm-6">
+					<div class="box">
+						<form>
+							<p class="title"><h:outputText value="#{ProductDetailController.actualProduct.title}"/></p>
+							<p class="price">
+								<h:outputText value="#{ProductDetailController.actualProduct.price}">
+									<f:convertNumber currencyCode="HUF" type="currency" />
+								</h:outputText>
+							</p>
+							<p class="addToCart">
+								<button type="submit" class="btn btn-primary"> Add to cart</button>
+							</p>
+						</form>
 					</div>
-		
+					<div class="row" id="productImages">
+						<h:outputText style="border-bottom:2px solid black;" />
+						<div class="col-xs-4 smallImage">
+							<a href="#" class="thumb active">
+		                    	<img src="#{ProductDetailController.actualProduct.image.imageUrl}" class="img-responsive"/>
+		                    </a>
+		                </div>
+						<div class="col-xs-4 smallImage">
+		                	<a href="#" class="thumb">
+		                    	<img src="#{ProductDetailController.actualProduct.image.imageUrl}" class="img-responsive"/>
+		                    </a>
+		                </div>
+						<div class="col-xs-4 smallImage">
+		                	<a href="#" class="thumb active">
+		                    	<img src="#{ProductDetailController.actualProduct.image.imageUrl}" class="img-responsive"/>
+		                    </a>
+		                 </div>
+					</div>	
+				</div>
+			</div>
 		
 	</ui:define>
 </ui:composition>

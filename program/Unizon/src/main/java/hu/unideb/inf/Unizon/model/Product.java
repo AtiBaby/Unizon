@@ -13,6 +13,7 @@ import java.util.List;
 @Table(name="PRODUCT")
 @NamedQueries({
 	@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+	@NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
 	@NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId"),
 	@NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.title LIKE :term"),
 	@NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId AND p.title LIKE :term")
