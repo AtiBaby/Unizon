@@ -1,25 +1,10 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the UNI_USER database table.
@@ -30,7 +15,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.eMail = :eMail")
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.eMail = :eMail"),
+    @NamedQuery(name = "User.findAllWithoutAdmins", query = "SELECT u FROM User u WHERE u.userId NOT IN (SELECT a.userId FROM Administrator a)"),
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -89,6 +75,15 @@ public class User implements Serializable {
 			}
 		)
 	private List<PhoneNumber> phoneNumbers;
+
+	//bi-directional many-to-one association to UserStatus
+	@ManyToOne
+	@JoinColumn(name="STATUS_ID", nullable=false)
+	private UserStatus userStatus;
+
+	//bi-directional one-to-one association to UserActivation
+	@OneToOne(mappedBy="user")
+	private UserActivation userActivation;
 
 	public User() {
 	}
@@ -187,6 +182,22 @@ public class User implements Serializable {
 		this.phoneNumbers = phoneNumbers;
 	}
 
+	public UserStatus getUserStatus() {
+		return this.userStatus;
+	}
+
+	public void setUserStatus(UserStatus userStatus) {
+		this.userStatus = userStatus;
+	}
+
+	public UserActivation getUserActivation() {
+		return this.userActivation;
+	}
+
+	public void setUserActivation(UserActivation userActivation) {
+		this.userActivation = userActivation;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

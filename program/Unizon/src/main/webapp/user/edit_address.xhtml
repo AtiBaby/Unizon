@@ -29,13 +29,13 @@
 						<p:inputText value="#{addressController.newAddress.street}" required="true" requiredMessage="Street is required!" tabindex="4" />
 						
 						<p:outputLabel value="Street number:" styleClass="required" />
-						<p:inputText value="#{addressController.newAddress.strNumber}" required="true" requiredMessage="Street number is required!" styleClass="required" tabindex="5" />
+						<p:inputText value="#{addressController.newAddress.strNumber}" required="true" requiredMessage="Street number is required!" styleClass="required" tabindex="5" converterMessage="Please enter digits only." />
 						
 						<p:outputLabel value="Floor:" />
-						<p:inputText value="#{addressController.newAddress.floor}" tabindex="6" />
+						<p:inputText value="#{addressController.newAddress.floor}" tabindex="6" converterMessage="Please enter digits only." />
 						
 						<p:outputLabel value="Door:" />
-						<p:inputText value="#{addressController.newAddress.door}" tabindex="7" />
+						<p:inputText value="#{addressController.newAddress.door}" tabindex="7" converterMessage="Please enter digits only." />
 					</p:panelGrid>
 					
 					<br />

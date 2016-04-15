@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D5698932-8375-36CD-DA18-91F891750020" name="USER_ACTIVATION">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<ordsAlias>table_16</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USER_ID" id="0D696030-2B3D-68B3-5976-F3158EFD4207">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2ABDAE2C-E8D7-3BBA-DD7E-914CF6AFB13F" referredColumn="CB2B820A-6667-4446-336D-17385CB07591"/>
+</associations>
+</Column>
+<Column name="ACTIVATION_KEY" id="A2D2A8C1-707A-7328-7F4B-8C7BB6F4E822">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5C217770-A7F5-CCB3-52F4-3FF153349EFE" name="USER_ACTIVATION_PK">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:05 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0D696030-2B3D-68B3-5976-F3158EFD4207"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="25675C93-0574-90F1-2FA4-BBA6E2DFB805" name="USER_ACTIVATION_UNI_USER_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:58:46 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0D696030-2B3D-68B3-5976-F3158EFD4207"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

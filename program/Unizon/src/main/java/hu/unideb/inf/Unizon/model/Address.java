@@ -1,23 +1,13 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * The persistent class for the ADDRESS database table.
- *
+ * 
  */
 @Entity
 @Table(name="ADDRESS")
@@ -193,7 +183,7 @@ public class Address implements Serializable {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

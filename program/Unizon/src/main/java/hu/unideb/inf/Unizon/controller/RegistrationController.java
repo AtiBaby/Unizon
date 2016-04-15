@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -19,10 +20,14 @@ import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
+import hu.unideb.inf.Unizon.facade.UserActivationFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
+import hu.unideb.inf.Unizon.facade.UserStatusFacade;
 import hu.unideb.inf.Unizon.model.Address;
 import hu.unideb.inf.Unizon.model.PhoneNumber;
 import hu.unideb.inf.Unizon.model.User;
+import hu.unideb.inf.Unizon.model.UserActivation;
+import hu.unideb.inf.Unizon.model.UserStatus;
 import password.Password;
 
 @ManagedBean
@@ -44,14 +49,19 @@ public class RegistrationController implements Serializable {
 	private AddressFacade addressFacade;
 
 	@EJB
+	private UserStatusFacade userStatusFacade;
+
+	@EJB
+	private UserActivationFacade userActivationFacade;
+
+	@EJB
 	private PhoneNumberFacade phoneNumberFacade;
 
 	private User newUser;
 	private PhoneNumber newPhoneNumber;
 	private Address newAddress;
-        private boolean isAgree;
+	private boolean isAgree;
 
-        
 	@PostConstruct
 	public void init() {
 		this.newUser = new User();
@@ -90,6 +100,8 @@ public class RegistrationController implements Serializable {
 			newAddress = existingAddress;
 		}
 
+		UserStatus userStatus = userStatusFacade.findByStatusName("inactive");
+
 		try {
 			newUser.setPassword(Password.getSaltedHash(newUser.getPassword()));
 		} catch (Exception ex) {
@@ -98,9 +110,16 @@ public class RegistrationController implements Serializable {
 		newUser.setRegistrationDate(new Date());
 		newUser.getAddresses().add(newAddress);
 		newUser.getPhoneNumbers().add(newPhoneNumber);
+		newUser.setUserStatus(userStatus);
 
 		userFacade.create(newUser);
 
+		UserActivation userActivation = new UserActivation();
+		userActivation.setActivationKey(UUID.randomUUID().toString());
+		userActivation.setUser(newUser);
+		userActivation.setUserId(newUser.getUserId());
+		userActivationFacade.create(userActivation);
+		
 		init();
 
 		try {
@@ -139,13 +158,13 @@ public class RegistrationController implements Serializable {
 	public void setNewAddress(Address newAddress) {
 		this.newAddress = newAddress;
 	}
-        
-        public void setIsAgree(boolean isAgree) {
-                this.isAgree = isAgree;
-        }
 
-        public boolean getIsAgree() {
-            return this.isAgree;
-        }
+	public void setIsAgree(boolean isAgree) {
+		this.isAgree = isAgree;
+	}
+
+	public boolean getIsAgree() {
+		return this.isAgree;
+	}
 
 }

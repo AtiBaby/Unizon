@@ -72,6 +72,19 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="STATUS_ID" id="2E4DEB68-A957-A770-671C-0A439B0D1625">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:54:39 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AA79091A-F9B9-DB2D-1392-59A1FF53B493" referredColumn="03C8CB3A-0640-3D4D-6F5B-729E992EF837"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="1FF1AA6D-1BFB-E8FB-262A-7782B06A4F53" name="UNI_USER_PK">
@@ -103,6 +116,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="52B683F0-C339-570E-7F1D-ABF99C37BF3A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DC61F1AA-F772-DEC9-8B41-91FCC1220A42" name="UNI_USER_USER_STATUS_FK">
+<createdBy>adam</createdBy>
+<createdTime>2016-04-14 13:59:06 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2E4DEB68-A957-A770-671C-0A439B0D1625"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

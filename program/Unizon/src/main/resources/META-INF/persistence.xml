@@ -26,15 +26,17 @@
 		<class>hu.unideb.inf.Unizon.model.CatToProd</class>
 		<class>hu.unideb.inf.Unizon.model.CatToProdPK</class>
 		<class>hu.unideb.inf.Unizon.model.Image</class>
-		<class>hu.unideb.inf.Unizon.model.Order</class>
 		<class>hu.unideb.inf.Unizon.model.PhoneNumber</class>
+		<class>hu.unideb.inf.Unizon.model.Product</class>
 		<class>hu.unideb.inf.Unizon.model.ProdToOrder</class>
 		<class>hu.unideb.inf.Unizon.model.ProdToOrderPK</class>
 		<class>hu.unideb.inf.Unizon.model.ProdToTag</class>
 		<class>hu.unideb.inf.Unizon.model.ProdToTagPK</class>
-		<class>hu.unideb.inf.Unizon.model.Product</class>
 		<class>hu.unideb.inf.Unizon.model.Tag</class>
+		<class>hu.unideb.inf.Unizon.model.Order</class>
 		<class>hu.unideb.inf.Unizon.model.User</class>
+		<class>hu.unideb.inf.Unizon.model.UserActivation</class>
+		<class>hu.unideb.inf.Unizon.model.UserStatus</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<!-- Properties for Hibernate -->

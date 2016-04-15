@@ -50,6 +50,10 @@ public class SearchController implements Serializable {
 		}
 	}
 
+	public String submitProduct(Integer id) {
+		return "/?faces-redirect=true&id=" + id;
+	}
+
 	public List<String> autoCompleteProductName(String term) {
 		log.debug("Search category and term: " + category + " - " + term);
 		List<String> productNames = new ArrayList<>();
