@@ -48,6 +48,8 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false)
 	private User user;
+	
+	private long sum;
 
 	public Order() {
 	}
@@ -114,6 +116,14 @@ public class Order implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public long getSum() {
+		return sum;
+	}
+
+	public void setSum(long sum) {
+		this.sum = sum;
+	}
+	
 	public User getUser() {
 		return this.user;
 	}
