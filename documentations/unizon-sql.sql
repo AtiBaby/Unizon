@@ -13,9 +13,19 @@ NOT DEREFERRABLE
 
 ADMIN USER: USERNAME: admin 
             PASSWORD: admin
+            USERNAME: admin2 
+            PASSWORD: admin2
+            
 TEST USER: USERNAME: teszt
            PASSWORD: teszt
+           USERNAME: teszt2
+           PASSWORD: teszt2
+           USERNAME: teszt3
+           PASSWORD: teszt3
+           USERNAME: teszt4
+           PASSWORD: teszt4
 */
+
 
 DROP DATABASE IF EXISTS unizon;
 
@@ -233,16 +243,16 @@ INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DAT
     VALUES(-2,'teszt','KIkvsQZnyEk0LQLlYred1uylvnldBomKstriJL95CsE=$rQWuk868O5zFfigoWjnG+Hlmy6bpMnXjslZw+mOzV2Y=','teszt@gmail.com','teszt', '2016-04-09', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-3,'teszt2','TZpGuKBYR/QjJCViOdvUf+e5WqSJ8gqexk86Np7tJLo=$QplC/APJIN1zPzLF9jbwyJ9j7idJIj9zNkuqLfo+d/c=','teszt2@gmail.com','teszt2', '2015-03-04', -2);
+    VALUES(-3,'teszt2','/fpiWSuy39OgLlmMJPSQilOr/yp4OIYM+6zOkooZU4M=$LkhrNgGpBMS19lrX1m8mqaxYpJircexufcQwebJGrQc=','teszt2@gmail.com','teszt2', '2015-03-04', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-4,'teszt3','TZpGuKBYR/QjJCViOdvUf+e5WqSJ8gqexk86Np7tJLo=$QplC/APJIN1zPzLF9jbwyJ9j7idJIj9zNkuqLfo+d/c=','teszt3@gmail.com','teszt3', '2015-03-04', -1);
+    VALUES(-4,'teszt3','TOaLOIaQ2As1yERxeuTDoRHG3Y5EQ1N2doVftmGGZp4=$UqdPv+KKJZXwx8bq7L+f9GfD50ojVjqUtvc2UBfSOzg=','teszt3@gmail.com','teszt3', '2015-03-04', -1);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-5,'teszt4','TZpGuKBYR/QjJCViOdvUf+e5WqSJ8gqexk86Np7tJLo=$QplC/APJIN1zPzLF9jbwyJ9j7idJIj9zNkuqLfo+d/c=','teszt4@gmail.com','teszt4', '2015-03-04', -3);
+    VALUES(-5,'teszt4','HDH3+sVnG9WQhiY0d/oHy93lUFtytIsHX4JfDfyp+iU=$PfsNsXS2L+O8mIUPHAGND+1df1bCy+92TniW1Zwvemk=','teszt4@gmail.com','teszt4', '2015-03-04', -3);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-6,'admin2','TZpGuKBYR/QjJCViOdvUf+e5WqSJ8gqexk86Np7tJLo=$QplC/APJIN1zPzLF9jbwyJ9j7idJIj9zNkuqLfo+d/c=','admin2@gmail.com','admin2', '2013-03-04', -2);
+    VALUES(-6,'admin2','hI+CNsDo2vixy5gMeorczH7Bl2YlxEqWF2022mxkOWo=$jhuFFXytReV39fagWOz030LM+g8ZevWGnctVRWiI294=','admin2@gmail.com','admin2', '2013-03-04', -2);
 
 
 
