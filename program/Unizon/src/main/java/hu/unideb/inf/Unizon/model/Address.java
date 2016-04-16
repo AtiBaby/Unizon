@@ -3,6 +3,7 @@ package hu.unideb.inf.Unizon.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -63,7 +64,7 @@ public class Address implements Serializable {
 
 	//bi-directional many-to-many association to User
 	@ManyToMany(mappedBy="addresses", fetch=FetchType.EAGER)
-	private List<User> users;
+	private Set<User> users;
 
 	public Address() {
 	}
@@ -176,13 +177,13 @@ public class Address implements Serializable {
 		return orders2;
 	}
 
-	public List<User> getUsers() {
-		return this.users;
-	}
+    public Set<User> getUsers() {
+        return users;
+    }
 
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 	
 	@Override
 	public int hashCode() {

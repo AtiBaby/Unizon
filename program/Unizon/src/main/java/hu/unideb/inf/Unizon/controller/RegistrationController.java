@@ -28,6 +28,7 @@ import hu.unideb.inf.Unizon.model.PhoneNumber;
 import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.model.UserActivation;
 import hu.unideb.inf.Unizon.model.UserStatus;
+import java.util.HashSet;
 import password.Password;
 
 @ManagedBean
@@ -65,8 +66,8 @@ public class RegistrationController implements Serializable {
 	@PostConstruct
 	public void init() {
 		this.newUser = new User();
-		this.newUser.setAddresses(new ArrayList<>());
-		this.newUser.setPhoneNumbers(new ArrayList<>());
+		this.newUser.setAddresses(new HashSet<>());
+		this.newUser.setPhoneNumbers(new HashSet<>());
 
 		this.newPhoneNumber = new PhoneNumber();
 		this.newAddress = new Address();

@@ -55,7 +55,7 @@ public class AddressController implements Serializable {
 		originalAddress = addressFacade.find(addressId);
 
 		newAddress = new Address();
-		newAddress.setUsers(new ArrayList<>());
+		newAddress.setUsers(new HashSet<>());
 
 		if (originalAddress != null) {
 			newAddress.setCity(originalAddress.getCity());
@@ -127,7 +127,7 @@ public class AddressController implements Serializable {
 
 	private void addAddressToUser(Address address) {
 		user.getAddresses().add(address);
-		user.setAddresses(new ArrayList<>(new HashSet<>(user.getAddresses())));
+		user.setAddresses(new HashSet<>(new HashSet<>(user.getAddresses())));
 
 		user = userFacade.edit(user);
 		loginController.setUser(user);
