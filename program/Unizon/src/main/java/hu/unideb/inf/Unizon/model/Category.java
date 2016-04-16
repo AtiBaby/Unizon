@@ -3,6 +3,7 @@ package hu.unideb.inf.Unizon.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -36,7 +37,7 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-many association to Product
 	@ManyToMany(mappedBy="categories", fetch=FetchType.EAGER)
-	private List<Product> products;
+	private Set<Product> products;
 
 	public Category() {
 	}
@@ -101,12 +102,12 @@ public class Category implements Serializable {
 		return catToProds2;
 	}
 
-	public List<Product> getProducts() {
-		return this.products;
-	}
+    public Set<Product> getProducts() {
+        return products;
+    }
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
 }

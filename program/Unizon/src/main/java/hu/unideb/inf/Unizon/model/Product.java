@@ -3,278 +3,275 @@ package hu.unideb.inf.Unizon.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
-
+import java.util.Set;
 
 /**
  * The persistent class for the PRODUCT database table.
- * 
+ *
  */
 @Entity
-@Table(name="PRODUCT")
+@Table(name = "PRODUCT")
 @NamedQueries({
-	@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-	@NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId"),
-	@NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.title LIKE :term"),
-	@NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId AND p.title LIKE :term")
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId"),
+    @NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.title LIKE :term"),
+    @NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE cats.categoryId = :catId AND p.title LIKE :term")
 })
 public class Product implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="PRODUCT_ID", unique=true, nullable=false)
-	private int productId;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name="AMOUNT")
-	private int amount;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PRODUCT_ID", unique = true, nullable = false)
+    private int productId;
 
-	@Column(name="DESCRIPTION", length=1000)
-	private String description;
+    @Column(name = "AMOUNT")
+    private int amount;
 
-	@Column(name="PRICE")
-	private int price;
+    @Column(name = "DESCRIPTION", length = 1000)
+    private String description;
 
-	@Column(name="TITLE", nullable=false, length=100)
-	private String title;
+    @Column(name = "PRICE")
+    private int price;
 
-	//bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy="product1", fetch=FetchType.EAGER)
-	private List<CatToProd> catToProds1;
+    @Column(name = "TITLE", nullable = false, length = 100)
+    private String title;
 
-	//bi-directional many-to-one association to CatToProd
-	@OneToMany(mappedBy="product2", fetch=FetchType.EAGER)
-	private List<CatToProd> catToProds2;
+    //bi-directional many-to-one association to CatToProd
+    @OneToMany(mappedBy = "product1", fetch = FetchType.EAGER)
+    private List<CatToProd> catToProds1;
 
-	//bi-directional many-to-many association to Category
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="CAT_TO_PROD"
-		, joinColumns={
-			@JoinColumn(name="PRODUCT_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="CATEGORY_ID", nullable=false)
-			}
-		)
-	private List<Category> categories;
+    //bi-directional many-to-one association to CatToProd
+    @OneToMany(mappedBy = "product2", fetch = FetchType.EAGER)
+    private List<CatToProd> catToProds2;
 
-	//bi-directional many-to-one association to Image
-	@ManyToOne
-	@JoinColumn(name="DEFAULT_IMAGE_ID", nullable=false)
-	private Image image;
+    //bi-directional many-to-many association to Category
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "CAT_TO_PROD", joinColumns = {
+                @JoinColumn(name = "PRODUCT_ID", nullable = false)
+            }, inverseJoinColumns = {
+                @JoinColumn(name = "CATEGORY_ID", nullable = false)
+            }
+    )
+    private Set<Category> categories;
 
-	//bi-directional many-to-many association to Image
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="PRODUCT_TO_IMAGE"
-		, joinColumns={
-			@JoinColumn(name="PRODUCT_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="IMAGE_ID", nullable=false)
-			}
-		)
-	private List<Image> images;
+    //bi-directional many-to-one association to Image
+    @ManyToOne
+    @JoinColumn(name = "DEFAULT_IMAGE_ID", nullable = false)
+    private Image image;
 
-	//bi-directional many-to-one association to ProdToOrder
-	@OneToMany(mappedBy="product", fetch=FetchType.EAGER)
-	private List<ProdToOrder> prodToOrders;
+    //bi-directional many-to-many association to Image
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "PRODUCT_TO_IMAGE", joinColumns = {
+                @JoinColumn(name = "PRODUCT_ID", nullable = false)
+            }, inverseJoinColumns = {
+                @JoinColumn(name = "IMAGE_ID", nullable = false)
+            }
+    )
+    private Set<Image> images;
 
-	//bi-directional many-to-one association to ProdToTag
-	@OneToMany(mappedBy="product1", fetch=FetchType.EAGER)
-	private List<ProdToTag> prodToTags1;
+    //bi-directional many-to-one association to ProdToOrder
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<ProdToOrder> prodToOrders;
 
-	//bi-directional many-to-one association to ProdToTag
-	@OneToMany(mappedBy="product2", fetch=FetchType.EAGER)
-	private List<ProdToTag> prodToTags2;
+    //bi-directional many-to-one association to ProdToTag
+    @OneToMany(mappedBy = "product1", fetch = FetchType.EAGER)
+    private List<ProdToTag> prodToTags1;
 
-	//bi-directional many-to-many association to Tag
-	@ManyToMany(mappedBy="products", fetch=FetchType.EAGER)
-	private List<Tag> tags;
+    //bi-directional many-to-one association to ProdToTag
+    @OneToMany(mappedBy = "product2", fetch = FetchType.EAGER)
+    private List<ProdToTag> prodToTags2;
 
-	public Product() {
-	}
+    //bi-directional many-to-many association to Tag
+    @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
+    private Set<Tag> tags;
 
-	public int getProductId() {
-		return this.productId;
-	}
+    public Product() {
+    }
 
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+    public int getProductId() {
+        return this.productId;
+    }
 
-	public int getAmount() {
-		return this.amount;
-	}
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
+    public int getAmount() {
+        return this.amount;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return this.description;
+    }
 
-	public int getPrice() {
-		return this.price;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public int getPrice() {
+        return this.price;
+    }
 
-	public String getTitle() {
-		return this.title;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return this.title;
+    }
 
-	public List<CatToProd> getCatToProds1() {
-		return this.catToProds1;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setCatToProds1(List<CatToProd> catToProds1) {
-		this.catToProds1 = catToProds1;
-	}
+    public List<CatToProd> getCatToProds1() {
+        return this.catToProds1;
+    }
 
-	public CatToProd addCatToProds1(CatToProd catToProds1) {
-		getCatToProds1().add(catToProds1);
-		catToProds1.setProduct1(this);
+    public void setCatToProds1(List<CatToProd> catToProds1) {
+        this.catToProds1 = catToProds1;
+    }
 
-		return catToProds1;
-	}
+    public CatToProd addCatToProds1(CatToProd catToProds1) {
+        getCatToProds1().add(catToProds1);
+        catToProds1.setProduct1(this);
 
-	public CatToProd removeCatToProds1(CatToProd catToProds1) {
-		getCatToProds1().remove(catToProds1);
-		catToProds1.setProduct1(null);
+        return catToProds1;
+    }
 
-		return catToProds1;
-	}
+    public CatToProd removeCatToProds1(CatToProd catToProds1) {
+        getCatToProds1().remove(catToProds1);
+        catToProds1.setProduct1(null);
 
-	public List<CatToProd> getCatToProds2() {
-		return this.catToProds2;
-	}
+        return catToProds1;
+    }
 
-	public void setCatToProds2(List<CatToProd> catToProds2) {
-		this.catToProds2 = catToProds2;
-	}
+    public List<CatToProd> getCatToProds2() {
+        return this.catToProds2;
+    }
 
-	public CatToProd addCatToProds2(CatToProd catToProds2) {
-		getCatToProds2().add(catToProds2);
-		catToProds2.setProduct2(this);
+    public void setCatToProds2(List<CatToProd> catToProds2) {
+        this.catToProds2 = catToProds2;
+    }
 
-		return catToProds2;
-	}
+    public CatToProd addCatToProds2(CatToProd catToProds2) {
+        getCatToProds2().add(catToProds2);
+        catToProds2.setProduct2(this);
 
-	public CatToProd removeCatToProds2(CatToProd catToProds2) {
-		getCatToProds2().remove(catToProds2);
-		catToProds2.setProduct2(null);
+        return catToProds2;
+    }
 
-		return catToProds2;
-	}
+    public CatToProd removeCatToProds2(CatToProd catToProds2) {
+        getCatToProds2().remove(catToProds2);
+        catToProds2.setProduct2(null);
 
-	public List<Category> getCategories() {
-		return this.categories;
-	}
+        return catToProds2;
+    }
 
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
-	}
+    public Set<Category> getCategories() {
+        return categories;
+    }
 
-	public Image getImage() {
-		return this.image;
-	}
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
-	public void setImage(Image image) {
-		this.image = image;
-	}
+    public Image getImage() {
+        return this.image;
+    }
 
-	public List<Image> getImages() {
-		return this.images;
-	}
+    public void setImage(Image image) {
+        this.image = image;
+    }
 
-	public void setImages(List<Image> images) {
-		this.images = images;
-	}
+    public Set<Image> getImages() {
+        return images;
+    }
 
-	public List<ProdToOrder> getProdToOrders() {
-		return this.prodToOrders;
-	}
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
 
-	public void setProdToOrders(List<ProdToOrder> prodToOrders) {
-		this.prodToOrders = prodToOrders;
-	}
+    public List<ProdToOrder> getProdToOrders() {
+        return this.prodToOrders;
+    }
 
-	public ProdToOrder addProdToOrder(ProdToOrder prodToOrder) {
-		getProdToOrders().add(prodToOrder);
-		prodToOrder.setProduct(this);
+    public void setProdToOrders(List<ProdToOrder> prodToOrders) {
+        this.prodToOrders = prodToOrders;
+    }
 
-		return prodToOrder;
-	}
+    public ProdToOrder addProdToOrder(ProdToOrder prodToOrder) {
+        getProdToOrders().add(prodToOrder);
+        prodToOrder.setProduct(this);
 
-	public ProdToOrder removeProdToOrder(ProdToOrder prodToOrder) {
-		getProdToOrders().remove(prodToOrder);
-		prodToOrder.setProduct(null);
+        return prodToOrder;
+    }
 
-		return prodToOrder;
-	}
+    public ProdToOrder removeProdToOrder(ProdToOrder prodToOrder) {
+        getProdToOrders().remove(prodToOrder);
+        prodToOrder.setProduct(null);
 
-	public List<ProdToTag> getProdToTags1() {
-		return this.prodToTags1;
-	}
+        return prodToOrder;
+    }
 
-	public void setProdToTags1(List<ProdToTag> prodToTags1) {
-		this.prodToTags1 = prodToTags1;
-	}
+    public List<ProdToTag> getProdToTags1() {
+        return this.prodToTags1;
+    }
 
-	public ProdToTag addProdToTags1(ProdToTag prodToTags1) {
-		getProdToTags1().add(prodToTags1);
-		prodToTags1.setProduct1(this);
+    public void setProdToTags1(List<ProdToTag> prodToTags1) {
+        this.prodToTags1 = prodToTags1;
+    }
 
-		return prodToTags1;
-	}
+    public ProdToTag addProdToTags1(ProdToTag prodToTags1) {
+        getProdToTags1().add(prodToTags1);
+        prodToTags1.setProduct1(this);
 
-	public ProdToTag removeProdToTags1(ProdToTag prodToTags1) {
-		getProdToTags1().remove(prodToTags1);
-		prodToTags1.setProduct1(null);
+        return prodToTags1;
+    }
 
-		return prodToTags1;
-	}
+    public ProdToTag removeProdToTags1(ProdToTag prodToTags1) {
+        getProdToTags1().remove(prodToTags1);
+        prodToTags1.setProduct1(null);
 
-	public List<ProdToTag> getProdToTags2() {
-		return this.prodToTags2;
-	}
+        return prodToTags1;
+    }
 
-	public void setProdToTags2(List<ProdToTag> prodToTags2) {
-		this.prodToTags2 = prodToTags2;
-	}
+    public List<ProdToTag> getProdToTags2() {
+        return this.prodToTags2;
+    }
 
-	public ProdToTag addProdToTags2(ProdToTag prodToTags2) {
-		getProdToTags2().add(prodToTags2);
-		prodToTags2.setProduct2(this);
+    public void setProdToTags2(List<ProdToTag> prodToTags2) {
+        this.prodToTags2 = prodToTags2;
+    }
 
-		return prodToTags2;
-	}
+    public ProdToTag addProdToTags2(ProdToTag prodToTags2) {
+        getProdToTags2().add(prodToTags2);
+        prodToTags2.setProduct2(this);
 
-	public ProdToTag removeProdToTags2(ProdToTag prodToTags2) {
-		getProdToTags2().remove(prodToTags2);
-		prodToTags2.setProduct2(null);
+        return prodToTags2;
+    }
 
-		return prodToTags2;
-	}
+    public ProdToTag removeProdToTags2(ProdToTag prodToTags2) {
+        getProdToTags2().remove(prodToTags2);
+        prodToTags2.setProduct2(null);
 
-	public List<Tag> getTags() {
-		return this.tags;
-	}
+        return prodToTags2;
+    }
 
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
-	}
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 
 }
