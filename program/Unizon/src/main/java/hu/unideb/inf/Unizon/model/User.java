@@ -4,233 +4,229 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
+import java.util.Set;
 
 /**
  * The persistent class for the UNI_USER database table.
- * 
+ *
  */
 @Entity
-@Table(name="UNI_USER")
+@Table(name = "UNI_USER")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.eMail = :eMail"),
-    @NamedQuery(name = "User.findAllWithoutAdmins", query = "SELECT u FROM User u WHERE u.userId NOT IN (SELECT a.userId FROM Administrator a)"),
-})
+    @NamedQuery(name = "User.findAllWithoutAdmins", query = "SELECT u FROM User u WHERE u.userId NOT IN (SELECT a.userId FROM Administrator a)"),})
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="USER_ID", unique=true, nullable=false)
-	private int userId;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name="E_MAIL", nullable=false, length=100)
-	private String eMail;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "USER_ID", unique = true, nullable = false)
+    private int userId;
 
-	@Column(name="NAME", nullable=false, length=100)
-	private String name;
+    @Column(name = "E_MAIL", nullable = false, length = 100)
+    private String eMail;
 
-	@Column(name="PASSWORD", nullable=false, length=100)
-	private String password;
+    @Column(name = "NAME", nullable = false, length = 100)
+    private String name;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="REGISTRATION_DATE", nullable=false)
-	private Date registrationDate;
+    @Column(name = "PASSWORD", nullable = false, length = 100)
+    private String password;
 
-	@Column(name="USERNAME", nullable=false, length=100)
-	private String username;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "REGISTRATION_DATE", nullable = false)
+    private Date registrationDate;
 
-	//bi-directional one-to-one association to Administrator
-	@OneToOne(mappedBy="user")
-	private Administrator administrator;
+    @Column(name = "USERNAME", nullable = false, length = 100)
+    private String username;
 
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private List<Order> orders;
+    //bi-directional one-to-one association to Administrator
+    @OneToOne(mappedBy = "user")
+    private Administrator administrator;
 
-	//bi-directional many-to-many association to Address
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="ADDRESS_TO_USER"
-		, joinColumns={
-			@JoinColumn(name="USER_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="ADDRESS_ID", nullable=false)
-			}
-		)
-	private List<Address> addresses;
+    //bi-directional many-to-one association to Order
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Order> orders;
 
-	//bi-directional many-to-many association to PhoneNumber
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="USER_TO_PHONE_NUMBER"
-		, joinColumns={
-			@JoinColumn(name="USER_ID", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="PHONE_NUMBER_ID", nullable=false)
-			}
-		)
-	private List<PhoneNumber> phoneNumbers;
+    //bi-directional many-to-many association to Address
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "ADDRESS_TO_USER", joinColumns = {
+                @JoinColumn(name = "USER_ID", nullable = false)
+            }, inverseJoinColumns = {
+                @JoinColumn(name = "ADDRESS_ID", nullable = false)
+            }
+    )
+    private Set<Address> addresses;
 
-	//bi-directional many-to-one association to UserStatus
-	@ManyToOne
-	@JoinColumn(name="STATUS_ID", nullable=false)
-	private UserStatus userStatus;
+    //bi-directional many-to-many association to PhoneNumber
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "USER_TO_PHONE_NUMBER", joinColumns = {
+                @JoinColumn(name = "USER_ID", nullable = false)
+            }, inverseJoinColumns = {
+                @JoinColumn(name = "PHONE_NUMBER_ID", nullable = false)
+            }
+    )
+    private Set<PhoneNumber> phoneNumbers;
 
-	//bi-directional one-to-one association to UserActivation
-	@OneToOne(mappedBy="user")
-	private UserActivation userActivation;
+    //bi-directional many-to-one association to UserStatus
+    @ManyToOne
+    @JoinColumn(name = "STATUS_ID", nullable = false)
+    private UserStatus userStatus;
 
-	public User() {
-	}
+    //bi-directional one-to-one association to UserActivation
+    @OneToOne(mappedBy = "user")
+    private UserActivation userActivation;
 
-	public int getUserId() {
-		return this.userId;
-	}
+    public User() {
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public int getUserId() {
+        return this.userId;
+    }
 
-	public String getEMail() {
-		return this.eMail;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public void setEMail(String eMail) {
-		this.eMail = eMail;
-	}
+    public String getEMail() {
+        return this.eMail;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void setEMail(String eMail) {
+        this.eMail = eMail;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public String getPassword() {
-		return this.password;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return this.password;
+    }
 
-	public Date getRegistrationDate() {
-		return this.registrationDate;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setRegistrationDate(Date registrationDate) {
-		this.registrationDate = registrationDate;
-	}
+    public Date getRegistrationDate() {
+        return this.registrationDate;
+    }
 
-	public String getUsername() {
-		return this.username;
-	}
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return this.username;
+    }
 
-	public Administrator getAdministrator() {
-		return this.administrator;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setAdministrator(Administrator administrator) {
-		this.administrator = administrator;
-	}
+    public Administrator getAdministrator() {
+        return this.administrator;
+    }
 
-	public List<Order> getOrders() {
-		return this.orders;
-	}
+    public void setAdministrator(Administrator administrator) {
+        this.administrator = administrator;
+    }
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
+    public List<Order> getOrders() {
+        return this.orders;
+    }
 
-	public Order addOrder(Order order) {
-		getOrders().add(order);
-		order.setUser(this);
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
-		return order;
-	}
+    public Order addOrder(Order order) {
+        getOrders().add(order);
+        order.setUser(this);
 
-	public Order removeOrder(Order order) {
-		getOrders().remove(order);
-		order.setUser(null);
+        return order;
+    }
 
-		return order;
-	}
+    public Order removeOrder(Order order) {
+        getOrders().remove(order);
+        order.setUser(null);
 
-	public List<Address> getAddresses() {
-		return this.addresses;
-	}
+        return order;
+    }
 
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
 
-	public List<PhoneNumber> getPhoneNumbers() {
-		return this.phoneNumbers;
-	}
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 
-	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
-	}
+    public Set<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
+    }
 
-	public UserStatus getUserStatus() {
-		return this.userStatus;
-	}
+    public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
 
-	public void setUserStatus(UserStatus userStatus) {
-		this.userStatus = userStatus;
-	}
+    public UserStatus getUserStatus() {
+        return this.userStatus;
+    }
 
-	public UserActivation getUserActivation() {
-		return this.userActivation;
-	}
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
+    }
 
-	public void setUserActivation(UserActivation userActivation) {
-		this.userActivation = userActivation;
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
+    public UserActivation getUserActivation() {
+        return this.userActivation;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof User)) {
-			return false;
-		}
-		User other = (User) obj;
-		if (username == null) {
-			if (other.username != null) {
-				return false;
-			}
-		} else if (!username.equals(other.username)) {
-			return false;
-		}
-		return true;
-	}
+    public void setUserActivation(UserActivation userActivation) {
+        this.userActivation = userActivation;
+    }
 
-	@Override
-	public String toString() {
-		return String.format("User [id=%s, %s]", userId, username);
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        User other = (User) obj;
+        if (username == null) {
+            if (other.username != null) {
+                return false;
+            }
+        } else if (!username.equals(other.username)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User [id=%s, %s]", userId, username);
+    }
 
 }
