@@ -122,13 +122,13 @@
 			        </p:tab>
 			        <p:tab title="Previous orders">
 							<p:panel>
-								<h:dataTable value="#{loginController.user.orders}" var="order" border="1" tyleClass="address-table"
+								<h:dataTable value="#{loginController.user.orders}" var="order" border="1" styleClass="address-table"
 					    			headerClass="address-table-header" rowClasses="address-table-odd-row,order-table-even-row">
 									<h:column>
 					    					<f:facet name="header">Order Date</f:facet>
 											<center><p:outputLabel value="#{order.orderDate}" /></center>
 									</h:column>
-									<h:column var="osszeg">
+									<h:column>
 										<f:facet name="header">Order Properties</f:facet>
 									<h:dataTable value="#{order.prodToOrders}" var="prodtoorder" border="0"
 										styleClass="address-table"
@@ -136,60 +136,33 @@
 					    				rowClasses="address-table-odd-row,order-table-even-row">
 					    				<h:column>
 					    					<f:facet name="header">Your order amount</f:facet>
-											<p:outputLabel value="#{prodtoorder.amount}" />
+											<center><p:outputLabel value="#{prodtoorder.amount}" /></center>
 										</h:column>
 										<h:column>
 											<f:facet name="header">Product title</f:facet>
-											<p:outputLabel value="#{prodtoorder.product.title}" />
+											<center><p:outputLabel value="#{prodtoorder.product.title}" /></center>
 										</h:column>
 										<h:column>
 											<f:facet name="header">Price</f:facet>
-											<p:outputLabel value="#{prodtoorder.product.price}" /> Ft
+											<center><p:outputLabel value="#{prodtoorder.product.price} Ft" /> </center>
 										</h:column>
 										<h:column>
 											<f:facet name="header">Description</f:facet>
-											<p:outputLabel value="#{prodtoorder.product.description}" />
+											<center><p:outputLabel value="#{prodtoorder.product.description}" /></center>
 										</h:column>
 										<h:column>
 											<f:facet name="header">You paid</f:facet>
-											<p:outputLabel value="#{(prodtoorder.product.price)*(prodtoorder.amount)}" /> Ft
+											<center><p:outputLabel value="#{(prodtoorder.product.price)*(prodtoorder.amount)}  Ft" /></center>
 										</h:column>
 									</h:dataTable>
+									<center><p:outputLabel value="Billing address: #{order.address2.zip} #{order.address2.country}, 
+									#{order.address2.city}, #{order.address2.street}, #{order.address2.strNumber}">
+									</p:outputLabel></center>
 									<center><p:outputLabel value="Shipping address: #{order.address1.zip} #{order.address1.country}, 
 									#{order.address1.city}, #{order.address1.street}, #{order.address1.strNumber}">
 									</p:outputLabel></center>
-									<center><p:outputLabel value="Your have paid so far #{order.sum} HUF.">
+									<center><p:outputLabel value="Your have paid so far #{loginController.orderPrice[order.orderId]} HUF.">
 									</p:outputLabel></center>
-										<h:dataTable value="#{order.prodToOrders}" var="prodtoorder" border="0"
-											styleClass="address-table"
-						    				headerClass="address-table-header"
-						    				rowClasses="address-table-odd-row,order-table-even-row">
-						    				<h:column>
-						    					<f:facet name="header">Your order amount</f:facet>
-												<p:outputLabel value="#{prodtoorder.amount}" />
-											</h:column>
-											<h:column>
-												<f:facet name="header">Product title</f:facet>
-												<p:outputLabel value="#{prodtoorder.product.title}" />
-											</h:column>
-											<h:column>
-												<f:facet name="header">Price</f:facet>
-												<p:outputLabel value="#{prodtoorder.product.price}" /> Ft
-											</h:column>
-											<h:column>
-												<f:facet name="header">Description</f:facet>
-												<p:outputLabel value="#{prodtoorder.product.description}" />
-											</h:column>
-											<h:column>
-												<f:facet name="header">You paid</f:facet>
-												<p:outputLabel value="#{(prodtoorder.product.price)*(prodtoorder.amount)}" /> Ft
-											</h:column>
-										</h:dataTable>
-										<center>
-											<p:outputLabel value="Shipping address: #{order.address1.zip} #{order.address1.country}, 
-											#{order.address1.city}, #{order.address1.street}, #{order.address1.strNumber}">
-											</p:outputLabel>
-										</center>
 									</h:column>
 								</h:dataTable>
 							</p:panel>

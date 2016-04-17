@@ -49,8 +49,6 @@ public class Order implements Serializable {
 	@JoinColumn(name="USER_ID", nullable=false)
 	private User user;
 	
-	private long sum;
-
 	public Order() {
 	}
 
@@ -114,14 +112,6 @@ public class Order implements Serializable {
 
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	public long getSum() {
-		return sum;
-	}
-
-	public void setSum(long sum) {
-		this.sum = sum;
 	}
 	
 	public User getUser() {
