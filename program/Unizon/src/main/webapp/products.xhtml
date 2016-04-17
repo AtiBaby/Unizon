@@ -41,7 +41,7 @@
 							<f:convertNumber currencyCode="HUF" type="currency" />
 						</h:outputText>
 						<h:outputText value="In stock amount: #{product.amount}" />
-						<ui:repeat value="#{product.categories}" var="cat">
+						<ui:repeat value="#{product.categories.toArray()}" var="cat">
 							<h:outputText value="Categories: #{cat.name}" />
 						</ui:repeat>
 					</h:panelGrid>
