@@ -11,16 +11,20 @@
 		</f:facet>
 		<p:growl id="messages" life="4000" showDetail="true" />
 		<h:form>
+
 			<p:dataGrid var="product" value="#{SearchController.products}" columns="3" layout="grid"
 				rows="12" paginator="true" id="products"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="6,12,15">
 				<f:facet name="header">
-					<h:outputLabel>Sorting by </h:outputLabel>
-					<h:selectOneMenu value="#{SearchController.selectedSort}" onchange="submit()"
-						valueChangeListener="#{SearchController.sortChangeListener}">
-						<f:selectItems value="#{SearchController.sortingOptions}" />
-					</h:selectOneMenu>
+					<div style="float: right;">
+						<h:outputLabel>Sorting by </h:outputLabel>
+						<h:selectOneMenu value="#{SearchController.selectedSort}" onchange="submit()"
+							valueChangeListener="#{SearchController.sortChangeListener}">
+							<f:selectItems value="#{SearchController.sortingOptions}" />
+						</h:selectOneMenu>
+					</div>
+					<br />
 				</f:facet>
 				<p:panel style="text-align:center;">
 					<h:panelGrid columns="1">
@@ -37,6 +41,9 @@
 							<f:convertNumber currencyCode="HUF" type="currency" />
 						</h:outputText>
 						<h:outputText value="In stock amount: #{product.amount}" />
+						<ui:repeat value="#{product.categories}" var="cat">
+							<h:outputText value="Categories: #{cat.name}" />
+						</ui:repeat>
 					</h:panelGrid>
 				</p:panel>
 			</p:dataGrid>
