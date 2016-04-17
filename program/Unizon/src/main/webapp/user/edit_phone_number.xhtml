@@ -23,7 +23,9 @@
 							<f:validateRegex pattern="^[0-9]*$" />
 						</p:inputText>
 					</p:panelGrid>
-					
+					<p style="margin-top:6pt">
+					<h:outputText styleClass="required" value="The fields with asterisk are required!"/>
+					</p>
 					<br />
 					
 					<p:commandButton value="Cancel" actionListener="#{loginController.showUserProfile()}" ajax="true" immediate="true" tabindex="2" />

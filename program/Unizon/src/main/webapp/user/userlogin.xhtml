@@ -31,7 +31,9 @@
 							requiredMessage="Please type in your password!"
 							value="#{loginController.password}" />
 					</p:panelGrid>
-					
+					<p style="margin-top:6pt">
+					<h:outputText styleClass="required" value="The fields with asterisk are required!"/>
+					</p>
 					<br />
 	                
 	                <p:commandButton value="Login" type="submit" actionListener="#{loginController.login()}" ajax="true" update=":messages, :loginForm" />

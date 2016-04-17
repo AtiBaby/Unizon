@@ -2,6 +2,7 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -43,14 +44,14 @@ public class LoginController implements Serializable {
 	private User user;
 	private String username;
 	private String password;
+	private HashMap<Integer,Long> orderPrice = new HashMap<Integer,Long>();
+	private long sum;
 
 	@PostConstruct
 	public void init() {
 		this.user = null;
 		this.username = null;
 		this.password = null;
-		
-		/**/
 	}
 
 	public void showUserProfile() {
@@ -66,11 +67,15 @@ public class LoginController implements Serializable {
 				if (Password.check(password, user.getPassword())) {
 					this.user = user;
 					log.info("{} successfully authenticated.", user);
-					for(Order ord : this.getUser().getOrders()){
+					
+					for(Order ord : user.getOrders()){
+						sum=0;
 						for(ProdToOrder pto : ord.getProdToOrders()){
-							ord.setSum(ord.getSum() + pto.getAmount() * pto.getProduct().getPrice());
-						}						
+							sum = sum + pto.getAmount() * pto.getProduct().getPrice();
+						}
+						orderPrice.put(ord.getOrderId(), sum);
 					}
+					
 					redirect("/index.jsf?faces-redirect=true");
 					return;
 				}
@@ -143,6 +148,22 @@ public class LoginController implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public long getSum() {
+		return sum;
+	}
+
+	public void setSum(long sum) {
+		this.sum = sum;
+	}
+	
+	public HashMap<Integer,Long> getOrderPrice() {
+		return orderPrice;
+	}
+
+	public void setOrderPrice(HashMap<Integer,Long> orderPrice) {
+		this.orderPrice = orderPrice;
 	}
 
 }

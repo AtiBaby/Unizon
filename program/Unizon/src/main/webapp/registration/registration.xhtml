@@ -50,26 +50,22 @@
 						<p:outputLabel value="Door:" />
 						<p:inputText value="#{registrationController.newAddress.door}" />
 					</p:panelGrid>
-                                        
-                                    <h:outputText styleClass="required" value="The fields with asterisk are required!"/>
-					<br />
-                                        
-                                        <a href="#{request.contextPath}/registration/terms.xhtml">Terms and Conditions</a><br/>
-                                        <a href="#{request.contextPath}/registration/policy.xhtml">Privacy Policy</a><br/>
-					
-                                        <p:selectBooleanCheckbox 
-                                                                 itemLabel="I have read and agree to the Terms and Conditions and Privacy Policy"
-                                                                 id="agree" value="#{registrationController.isAgree}" requiredMessage="You have to accept the Terms and Conditions and Privacy Policy!">
-                                                                <f:validator validatorId="requiredCheckboxValidator" />
-                                        </p:selectBooleanCheckbox>
-                                        <br/>
-                                        
-                                        
-                                        <p:commandButton id="register"
-                                                        value="Register" actionListener="#{registrationController.register()}"
-                                                        ajax="true"
-                                                        update=":messages, :registrationForm"
-                                        /><br/>
+						<h:outputText styleClass="required" value="The fields with asterisk are required!"/>
+					<br />               
+                    <a href="#{request.contextPath}/registration/terms.xhtml">Terms and Conditions</a><br/>
+                    <a href="#{request.contextPath}/registration/policy.xhtml">Privacy Policy</a><br/>
+                    <p:selectBooleanCheckbox 
+                        itemLabel="I have read and agree to the Terms and Conditions and Privacy Policy"
+                        id="agree" value="#{registrationController.isAgree}" requiredMessage="You have to accept the Terms and Conditions and Privacy Policy!">
+                        <f:validator validatorId="requiredCheckboxValidator" />
+                     </p:selectBooleanCheckbox>
+                     <br/>
+                     
+                     <p:commandButton id="register"
+                                value="Register" actionListener="#{registrationController.register()}"
+                                ajax="true"
+                                update=":messages, :registrationForm"
+                     /><br/>
 				</p:panel>
 			</center>
 		</h:form>
