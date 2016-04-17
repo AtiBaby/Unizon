@@ -6,9 +6,6 @@
 		Products
 	</ui:define>
 	<ui:define name="products">
-		<f:facet name="last">
-			<h:outputStylesheet name="css/datagrid.css" />
-		</f:facet>
 		<p:growl id="messages" life="4000" showDetail="true" />
 		<h:form>
 
@@ -21,7 +18,7 @@
 						<h:outputLabel>Sorting by </h:outputLabel>
 						<h:selectOneMenu value="#{SearchController.selectedSort}" onchange="submit()"
 							valueChangeListener="#{SearchController.sortChangeListener}">
-							<f:selectItems value="#{SearchController.sortingOptions}" />
+							<f:selectItems value="#{SearchController.sortingOptions}"  />
 						</h:selectOneMenu>
 					</div>
 					<br />
