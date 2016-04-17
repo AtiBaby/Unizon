@@ -3,7 +3,6 @@ package hu.unideb.inf.Unizon.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -48,7 +47,7 @@ public class User implements Serializable {
 
     //bi-directional many-to-one association to Order
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Order> orders;
+    private Set<Order> orders;
 
     //bi-directional many-to-many association to Address
     @ManyToMany(fetch = FetchType.EAGER)
@@ -140,11 +139,11 @@ public class User implements Serializable {
         this.administrator = administrator;
     }
 
-    public List<Order> getOrders() {
+    public Set<Order> getOrders() {
         return this.orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 

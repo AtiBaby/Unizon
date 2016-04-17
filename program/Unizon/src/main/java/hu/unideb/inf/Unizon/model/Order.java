@@ -3,7 +3,8 @@ package hu.unideb.inf.Unizon.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -27,7 +28,7 @@ public class Order implements Serializable {
 
 	//bi-directional many-to-one association to ProdToOrder
 	@OneToMany(mappedBy="order", fetch=FetchType.EAGER)
-	private List<ProdToOrder> prodToOrders;
+	private Set<ProdToOrder> prodToOrders;
 
 	//bi-directional many-to-one association to Address
 	@ManyToOne
@@ -70,11 +71,11 @@ public class Order implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public List<ProdToOrder> getProdToOrders() {
+	public Set<ProdToOrder> getProdToOrders() {
 		return this.prodToOrders;
 	}
 
-	public void setProdToOrders(List<ProdToOrder> prodToOrders) {
+	public void setProdToOrders(Set<ProdToOrder> prodToOrders) {
 		this.prodToOrders = prodToOrders;
 	}
 
@@ -132,4 +133,34 @@ public class Order implements Serializable {
 		this.user = user;
 	}
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.orderId;
+        hash = 17 * hash + Objects.hashCode(this.orderDate);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Order other = (Order) obj;
+        if (this.orderId != other.orderId) {
+            return false;
+        }
+        if (!Objects.equals(this.orderDate, other.orderDate)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }
