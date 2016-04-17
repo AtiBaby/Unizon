@@ -2,6 +2,8 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -41,8 +43,16 @@ public class SearchController implements Serializable {
 
 	private List<Product> products;
 
+	private String selectedSort;
+	private List<String> sortingOptions;
+
 	@PostConstruct
 	public void init() {
+		sortingOptions = new ArrayList<>();
+		sortingOptions.add("Title - Low to High");
+		sortingOptions.add("Title - High to Low");
+		sortingOptions.add("Price - Low to High");
+		sortingOptions.add("Price - High to Low");
 		categoryNames = new ArrayList<>();
 		List<Category> categories = categoryFacade.findAll();
 		for (Category category : categories) {
@@ -74,6 +84,19 @@ public class SearchController implements Serializable {
 		category = (String) event.getNewValue();
 	}
 
+	public void sortChangeListener(ValueChangeEvent e) {
+		String sorting = e.getNewValue().toString();
+		if (sorting.equals("Title - Low to High")) {
+			Collections.sort(products, ProductNameASCComparator);
+		} else if (sorting.equals("Title - High to Low")) {
+			Collections.sort(products, ProductNameDESCComparator);
+		} else if (sorting.equals("Price - Low to High")) {
+			Collections.sort(products, PriceASCComparator);
+		} else if (sorting.equals("Price - High to Low")) {
+			Collections.sort(products, PriceDESCComparator);
+		}
+	}
+
 	public void search() {
 		if (productName != null && !productName.isEmpty()) {
 			if (category == null || category.equals("all")) {
@@ -90,6 +113,7 @@ public class SearchController implements Serializable {
 				setProducts(productFacade.findAll(cat));
 			}
 		}
+		Collections.sort(products, ProductNameASCComparator);
 	}
 
 	public String getCategory() {
@@ -122,6 +146,55 @@ public class SearchController implements Serializable {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public static Comparator<Product> ProductNameASCComparator = new Comparator<Product>() {
+		@Override
+		public int compare(Product p1, Product p2) {
+			String pName1 = p1.getTitle().toUpperCase();
+			String pName2 = p2.getTitle().toUpperCase();
+			return pName1.compareTo(pName2);
+		}
+	};
+	public static Comparator<Product> ProductNameDESCComparator = new Comparator<Product>() {
+		@Override
+		public int compare(Product p1, Product p2) {
+			String pName1 = p1.getTitle().toUpperCase();
+			String pName2 = p2.getTitle().toUpperCase();
+			return pName2.compareTo(pName1);
+		}
+	};
+	public static Comparator<Product> PriceDESCComparator = new Comparator<Product>() {
+		@Override
+		public int compare(Product p1, Product p2) {
+			Integer pPrice1 = p1.getPrice();
+			Integer pPrice2 = p2.getPrice();
+			return pPrice2.compareTo(pPrice1);
+		}
+	};
+	public static Comparator<Product> PriceASCComparator = new Comparator<Product>() {
+		@Override
+		public int compare(Product p1, Product p2) {
+			Integer pPrice1 = p1.getPrice();
+			Integer pPrice2 = p2.getPrice();
+			return pPrice1.compareTo(pPrice2);
+		}
+	};
+
+	public String getSelectedSort() {
+		return selectedSort;
+	}
+
+	public void setSelectedSort(String selectedSort) {
+		this.selectedSort = selectedSort;
+	}
+
+	public List<String> getSortingOptions() {
+		return sortingOptions;
+	}
+
+	public void setSortingOptions(List<String> sortingOptions) {
+		this.sortingOptions = sortingOptions;
 	}
 
 }

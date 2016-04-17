@@ -1,8 +1,8 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,7 +26,7 @@ public class Image implements Serializable {
 
     //bi-directional many-to-one association to Product
     @OneToMany(mappedBy = "image", fetch = FetchType.EAGER)
-    private List<Product> products1;
+    private Set<Product> products1;
 
     //bi-directional many-to-many association to Product
     @ManyToMany(mappedBy = "images", fetch = FetchType.EAGER)
@@ -51,11 +51,11 @@ public class Image implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public List<Product> getProducts1() {
+    public Set<Product> getProducts1() {
         return this.products1;
     }
 
-    public void setProducts1(List<Product> products1) {
+    public void setProducts1(Set<Product> products1) {
         this.products1 = products1;
     }
 
@@ -79,6 +79,35 @@ public class Image implements Serializable {
 
     public void setProducts2(Set<Product> products2) {
         this.products2 = products2;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.imageId;
+        hash = 89 * hash + Objects.hashCode(this.imageUrl);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Image other = (Image) obj;
+        if (this.imageId != other.imageId) {
+            return false;
+        }
+        if (!Objects.equals(this.imageUrl, other.imageUrl)) {
+            return false;
+        }
+        return true;
     }
 
 }
