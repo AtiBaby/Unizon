@@ -5,16 +5,17 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import hu.unideb.inf.Unizon.facade.ImageFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
+import hu.unideb.inf.Unizon.model.Image;
 import hu.unideb.inf.Unizon.model.Product;
 
-@ManagedBean
+@ManagedBean(name="productUploadController")
 @ViewScoped
 public class ProductUploadController implements Serializable {
 
@@ -23,22 +24,40 @@ public class ProductUploadController implements Serializable {
 	@Inject
 	private Logger log;
 
-	@Inject
-	private FacesContext facesContext;
-
 	@EJB
 	private ProductFacade productFacade;
+	
+	@EJB
+	private ImageFacade imageFacade;
 
 	private Product product;
-	private String valami;
+	private Image image;
+	private Image storedImage;
 
 	@PostConstruct
 	public void init() {
-		log.debug("itten**********************************************");
+		log.info("Init product upload: ******************************");
 		this.product = new Product();
+		this.image = new Image();
+		this.storedImage = new Image();
 	}
 
 	public void upload() {
+		log.info("########################uploadban");
+		imageFacade.create(image);
+		for(Image i : imageFacade.findAll()){
+			if(i.getImageUrl().equals(image.getImageUrl())){
+				log.info("########################match");
+				storedImage=i;
+			}
+		}
+		if(image == null){
+			log.info("########################null");
+		} else {
+			log.info("########################" + storedImage.getImageId() + storedImage.getImageUrl());
+		}
+
+		product.setImage(storedImage);
 		productFacade.create(product);
 	}
 
@@ -50,13 +69,12 @@ public class ProductUploadController implements Serializable {
 		this.product = product;
 	}
 
-	public String getValami() {
-		return valami;
+	public Image getImage() {
+		return image;
 	}
 
-	public void setValami(String valami) {
-		this.valami = valami;
+	public void setImage(Image image) {
+		this.image = image;
 	}
-	
 	
 }
