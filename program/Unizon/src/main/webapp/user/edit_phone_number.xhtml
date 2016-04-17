@@ -6,31 +6,46 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="title">Edit address</ui:define>
+	<ui:define name="title">
+		<ui:fragment rendered="#{phoneNumberController.edit}">Edit Phone Number</ui:fragment>
+		<ui:fragment rendered="#{!phoneNumberController.edit}">Add Phone Number</ui:fragment>
+	</ui:define>
 
 	<ui:define name="fullBody">
 		<p:growl id="messages" life="4000" showDetail="true" />
 		<center>
 			<h:form id="phoneNumberForm" rendered="#{loginController.loggedIn}">
+				<p:defaultCommand target="update" rendered="#{phoneNumberController.edit}" />
+				<p:defaultCommand target="add" rendered="#{!phoneNumberController.edit}" />
+				
+				<h1>
+					<h:outputText value="Edit Phone Number" rendered="#{phoneNumberController.edit}" />
+					<h:outputText value="Add Phone Number" rendered="#{!phoneNumberController.edit}" />
+				</h1>
+				
+				<br />
+				
 				<p:panelGrid columns="2" style="font-size: 0.8em;">
-						<p:outputLabel value="Phone number:" styleClass="required" />
-						<p:inputText
-							value="#{phoneNumberController.newPhoneNumber}"
-							tabindex="1"
-							required="true"
-							requiredMessage="Phone number is required!"
-							validatorMessage="Phone number must contain only numbers!">
-							<f:validateRegex pattern="^[0-9]*$" />
-						</p:inputText>
-					</p:panelGrid>
-					<p style="margin-top:6pt">
+					<p:outputLabel value="Phone number:" styleClass="required" />
+					<p:inputText
+						value="#{phoneNumberController.newPhoneNumber}"
+						tabindex="1"
+						required="true"
+						requiredMessage="Phone number is required!"
+						validatorMessage="Phone number must contain only numbers!">
+						<f:validateRegex pattern="^[0-9]*$" />
+					</p:inputText>
+				</p:panelGrid>
+				
+				<p style="margin-top:6pt">
 					<h:outputText styleClass="required" value="The fields with asterisk are required!"/>
-					</p>
-					<br />
-					
-					<p:commandButton value="Cancel" actionListener="#{loginController.showUserProfile()}" ajax="true" immediate="true" tabindex="2" />
-					<p:commandButton value="Update" actionListener="#{phoneNumberController.editPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{not empty phoneNumberController.newPhoneNumber}" tabindex="3" />
-					<p:commandButton value="Add" actionListener="#{phoneNumberController.addPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{empty phoneNumberController.newPhoneNumber}" tabindex="3" />
+				</p>
+				
+				<br />
+				
+				<p:commandButton id="cancel" value="Cancel" actionListener="#{loginController.showUserProfile()}" ajax="true" immediate="true" tabindex="2" />
+				<p:commandButton id="update" value="Update" actionListener="#{phoneNumberController.editPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{phoneNumberController.edit}" tabindex="3" />
+				<p:commandButton id="add" value="Add" actionListener="#{phoneNumberController.addPhoneNumber()}" ajax="true" update=":messages, :phoneNumberForm" rendered="#{!phoneNumberController.edit}" tabindex="3" />
 			</h:form>
 		</center>
 	</ui:define>
