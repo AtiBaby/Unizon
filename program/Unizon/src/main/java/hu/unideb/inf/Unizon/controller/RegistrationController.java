@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
+import hu.unideb.inf.Unizon.facade.UserActivationFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.facade.UserStatusFacade;
 import hu.unideb.inf.Unizon.model.Address;
@@ -27,6 +28,7 @@ import hu.unideb.inf.Unizon.model.PhoneNumber;
 import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.model.UserActivation;
 import hu.unideb.inf.Unizon.model.UserStatus;
+import java.util.HashSet;
 import password.Password;
 
 @ManagedBean
@@ -51,6 +53,9 @@ public class RegistrationController implements Serializable {
 	private UserStatusFacade userStatusFacade;
 
 	@EJB
+	private UserActivationFacade userActivationFacade;
+
+	@EJB
 	private PhoneNumberFacade phoneNumberFacade;
 
 	private User newUser;
@@ -61,8 +66,8 @@ public class RegistrationController implements Serializable {
 	@PostConstruct
 	public void init() {
 		this.newUser = new User();
-		this.newUser.setAddresses(new ArrayList<>());
-		this.newUser.setPhoneNumbers(new ArrayList<>());
+		this.newUser.setAddresses(new HashSet<>());
+		this.newUser.setPhoneNumbers(new HashSet<>());
 
 		this.newPhoneNumber = new PhoneNumber();
 		this.newAddress = new Address();
@@ -109,16 +114,13 @@ public class RegistrationController implements Serializable {
 		newUser.setUserStatus(userStatus);
 
 		userFacade.create(newUser);
-		newUser = userFacade.findByUsername(newUser.getUsername());
 
 		UserActivation userActivation = new UserActivation();
 		userActivation.setActivationKey(UUID.randomUUID().toString());
 		userActivation.setUser(newUser);
 		userActivation.setUserId(newUser.getUserId());
-
-		newUser.setUserActivation(userActivation);
-		newUser = userFacade.edit(newUser);
-
+		userActivationFacade.create(userActivation);
+		
 		init();
 
 		try {

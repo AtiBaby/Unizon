@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.AdministratorFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
+import hu.unideb.inf.Unizon.model.Order;
 import hu.unideb.inf.Unizon.model.ProdToOrder;
 import hu.unideb.inf.Unizon.model.User;
 import password.Password;
@@ -39,7 +40,6 @@ public class LoginController implements Serializable {
 	@EJB
 	private AdministratorFacade administratorFacade;
 
-	private long sum;
 	private User user;
 	private String username;
 	private String password;
@@ -49,10 +49,8 @@ public class LoginController implements Serializable {
 		this.user = null;
 		this.username = null;
 		this.password = null;
-		this.sum=0;
-		/*for(ProdToOrder pto : this.getUser().){
-			sum = sum + pto.getAmount() * pto.getProduct().getPrice();
-		}*/
+		
+		/**/
 	}
 
 	public void showUserProfile() {
@@ -68,7 +66,11 @@ public class LoginController implements Serializable {
 				if (Password.check(password, user.getPassword())) {
 					this.user = user;
 					log.info("{} successfully authenticated.", user);
-
+					for(Order ord : this.getUser().getOrders()){
+						for(ProdToOrder pto : ord.getProdToOrders()){
+							ord.setSum(ord.getSum() + pto.getAmount() * pto.getProduct().getPrice());
+						}						
+					}
 					redirect("/index.jsf?faces-redirect=true");
 					return;
 				}
@@ -133,14 +135,6 @@ public class LoginController implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public long getSum() {
-		return sum;
-	}
-
-	public void setSum(long sum) {
-		this.sum = sum;
 	}
 	
 	public String getPassword() {

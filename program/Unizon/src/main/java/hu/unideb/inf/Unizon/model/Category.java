@@ -1,8 +1,9 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -28,15 +29,15 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to CatToProd
 	@OneToMany(mappedBy="category1", fetch=FetchType.EAGER)
-	private List<CatToProd> catToProds1;
+	private Set<CatToProd> catToProds1;
 
 	//bi-directional many-to-one association to CatToProd
 	@OneToMany(mappedBy="category2", fetch=FetchType.EAGER)
-	private List<CatToProd> catToProds2;
+	private Set<CatToProd> catToProds2;
 
 	//bi-directional many-to-many association to Product
 	@ManyToMany(mappedBy="categories", fetch=FetchType.EAGER)
-	private List<Product> products;
+	private Set<Product> products;
 
 	public Category() {
 	}
@@ -57,11 +58,11 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public List<CatToProd> getCatToProds1() {
+	public Set<CatToProd> getCatToProds1() {
 		return this.catToProds1;
 	}
 
-	public void setCatToProds1(List<CatToProd> catToProds1) {
+	public void setCatToProds1(Set<CatToProd> catToProds1) {
 		this.catToProds1 = catToProds1;
 	}
 
@@ -79,11 +80,11 @@ public class Category implements Serializable {
 		return catToProds1;
 	}
 
-	public List<CatToProd> getCatToProds2() {
+	public Set<CatToProd> getCatToProds2() {
 		return this.catToProds2;
 	}
 
-	public void setCatToProds2(List<CatToProd> catToProds2) {
+	public void setCatToProds2(Set<CatToProd> catToProds2) {
 		this.catToProds2 = catToProds2;
 	}
 
@@ -101,12 +102,41 @@ public class Category implements Serializable {
 		return catToProds2;
 	}
 
-	public List<Product> getProducts() {
-		return this.products;
-	}
+    public Set<Product> getProducts() {
+        return products;
+    }
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + this.categoryId;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Category other = (Category) obj;
+        if (this.categoryId != other.categoryId) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
+    }
 
 }

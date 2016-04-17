@@ -116,7 +116,7 @@ public class PhoneNumberController implements Serializable {
 
 	private void addPhoneNumberToUser(PhoneNumber phoneNumber) {
 		user.getPhoneNumbers().add(phoneNumber);
-		user.setPhoneNumbers(new ArrayList<>(new HashSet<>(user.getPhoneNumbers())));
+		user.setPhoneNumbers(new HashSet<>(new HashSet<>(user.getPhoneNumbers())));
 
 		user = userFacade.edit(user);
 		loginController.setUser(user);
