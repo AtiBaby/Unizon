@@ -2,11 +2,9 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -47,18 +45,14 @@ public class PhoneNumberController implements Serializable {
 	private String newPhoneNumber;
 	private User user;
 
-	@PostConstruct
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
-		
-		if(params.get("phoneNumberId") != null)
-		{
+
+		if (params.get("phoneNumberId") != null) {
 			int phoneNumberId = Integer.parseInt(params.get("phoneNumberId"));
 			originalPhoneNumber = phoneNumberFacade.find(phoneNumberId);
-		}
-		else
-		{
-			originalPhoneNumber  = null;
+		} else {
+			originalPhoneNumber = null;
 		}
 
 		if (originalPhoneNumber == null) {
@@ -67,6 +61,15 @@ public class PhoneNumberController implements Serializable {
 
 		newPhoneNumber = originalPhoneNumber.getPhoneNumber();
 		user = loginController.getUser();
+	}
+
+	public void addPhoneNumberListen() {
+		this.newPhoneNumber = null;
+		this.user = loginController.getUser();
+	}
+
+	public void editPhoneNumberListen() {
+		init();
 	}
 
 	public void addPhoneNumber() {
@@ -89,6 +92,8 @@ public class PhoneNumberController implements Serializable {
 	}
 
 	public void removePhoneNumberFromUser() {
+		init();
+
 		removePhoneNumberFromUser(originalPhoneNumber);
 
 		deleteFromDatabaseIfRequired(originalPhoneNumber.getPhoneNumber());
