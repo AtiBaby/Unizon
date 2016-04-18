@@ -2,11 +2,9 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -47,20 +45,17 @@ public class AddressController implements Serializable {
 	private Address originalAddress;
 	private User user;
 
-	@PostConstruct
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
-	
-		if(params.get("addressId") != null)
-		{
+
+		System.out.println("addressId: " + params.get("addressId"));
+
+		if (params.get("addressId") != null) {
 			int addressId = Integer.parseInt(params.get("addressId"));
 			originalAddress = addressFacade.find(addressId);
-		}
-		else
-		{
+		} else {
 			originalAddress = null;
 		}
-
 
 		newAddress = new Address();
 		newAddress.setUsers(new HashSet<>());
@@ -76,6 +71,15 @@ public class AddressController implements Serializable {
 		}
 
 		user = loginController.getUser();
+	}
+
+	public void addAddressListen() {
+		this.newAddress = new Address();
+		this.user = loginController.getUser();
+	}
+
+	public void editAddressListen() {
+		init();
 	}
 
 	public void addAddress() {
@@ -100,6 +104,8 @@ public class AddressController implements Serializable {
 	}
 
 	public void removeAddress() {
+		init();
+
 		removeAddressFromUser(originalAddress);
 
 		deleteFromDatabaseIfRequired(originalAddress);
