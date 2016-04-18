@@ -304,3 +304,11 @@
 	margin-bottom: 20px !important;
 	-webkit-margin-bottom: 20px !important;
 }
+
+@media all and (max-width:1200px) {
+
+.slide_holder_productpage{
+	 min-height:300px; !important;
+}
+
+}

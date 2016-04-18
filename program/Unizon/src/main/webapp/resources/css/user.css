@@ -376,3 +376,54 @@ address_label{
 	position: fixed;
 	bottom: 0;
 }
+
+@media all and (max-width:1200px) {
+
+#addAddressDialog{
+	width:30% !important;
+	top:115px !important;
+	scrollable: true !important;
+	height: 355px !important;
+	overflow: auto;
+}
+
+#editAddressDialog{
+	width:30% !important;
+	top:115px !important;
+	scrollable: true !important;
+	height: 355px !important;
+	overflow: auto;
+}
+
+#addPhoneNumberDialog{
+	width: 30% !important;
+}
+
+#editPhoneNumberDialog{
+	width: 30% !important;
+}
+
+.login_form_container input{
+	margin: 5px 0 !important; 
+}
+.po_prod_empty {
+	width:8%;
+	
+}
+
+.po_prod_imgcol {
+	width: 20%;	
+}
+
+.po_prod_name {
+	width: 40%;	
+}
+
+.po_prod_amount {
+	width: 15%;	
+}
+
+.po_prod_price {
+	width: 15%;	
+}
+}
