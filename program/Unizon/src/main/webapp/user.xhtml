@@ -10,7 +10,7 @@
 	<ui:define name="custom_js"></ui:define>
 
 	<ui:define name="fullBody">
-		<p:dialog header="Add Address" id="addAddressDialog" closeOnEscape="true" modal="true" widgetVar="addAddressDialogVar">
+		<p:dialog header="Add Address" resizable="false" draggable="false" styleClass="address_modal" id="addAddressDialog" closeOnEscape="true" modal="true" widgetVar="addAddressDialogVar">
 			<!-- Add address form -->
 			<div class="login_form_container">
 				<h:form id="addAddressDialogForm" class="login_form">
@@ -50,7 +50,7 @@
 			</div>
 		</p:dialog>
 		
-		<p:dialog header="Edit Address" id="editAddressDialog" closeOnEscape="true" modal="true" widgetVar="editAddressDialogVar">
+		<p:dialog header="Edit Address" resizable="false" draggable="false" styleClass="address_modal" id="editAddressDialog" closeOnEscape="true" modal="true" widgetVar="editAddressDialogVar">
 			<!-- Edit address form -->
 			<div class="login_form_container">
 				<h:form id="editAddressDialogForm" class="login_form">
@@ -90,7 +90,7 @@
 			</div>
 		</p:dialog>
 		
-		<p:dialog header="Add Phone Number" id="addPhoneNumberDialog" closeOnEscape="true" modal="true" widgetVar="addPhoneNumberDialogVar">
+		<p:dialog header="Add Phone Number" resizable="false" draggable="false" styleClass="phone_modal" id="addPhoneNumberDialog" closeOnEscape="true" modal="true" widgetVar="addPhoneNumberDialogVar">
 			<!-- Add phone number form -->
 			<div class="login_form_container">
 				<h:form id="addPhoneNumberDialogForm" class="login_form">
@@ -108,7 +108,7 @@
 			</div>
 		</p:dialog>
 		
-		<p:dialog header="Edit Phone Number" id="editPhoneNumberDialog" closeOnEscape="true" modal="true" widgetVar="editPhoneNumberDialogVar">
+		<p:dialog header="Edit Phone Number" resizable="false" draggable="false" styleClass="phone_modal" id="editPhoneNumberDialog" closeOnEscape="true" modal="true" widgetVar="editPhoneNumberDialogVar">
 			<!-- Edit phone number form -->
 			<div class="login_form_container">
 				<h:form id="editPhoneNumberDialogForm" class="login_form">
@@ -366,7 +366,7 @@
 											<h:outputText class="empty_cell" value=" " />
 										</p:column>
 										<p:column class="po_prod_imgcol">
-											<p:graphicImage class="po_prod_img" value="#{prod.product.image.getImageUrl()}" />
+											<p:graphicImage class="po_prod_img" name="#{prod.product.image.getImageUrl()}" />
 										</p:column>
 										<p:column class="po_prod_name" headerText="Product name">
 											<h:outputText class="po_celltext" value="#{prod.product.title}" />

@@ -139,6 +139,16 @@ top: 120px !important;
 	position:relative;
 }
 
+.address_modal{
+	width:20% !important;
+	top:115px !important;
+}
+
+.phone_modal{
+	width:15% !important;
+	top:200px !important;
+}
+
 #phone_header{
 	display:table;
 	position:relative;
@@ -161,6 +171,10 @@ top: 120px !important;
 	position:relative;
 	float:left;
 	padding-right: 2px;
+}
+
+.header_cell a{
+	cursor: pointer;
 }
 
 #address_content{
@@ -200,6 +214,10 @@ top: 120px !important;
 	float: left;
 }
 
+.phone_cell a{
+	cursor:pointer;
+}
+
 .address_row label a{
 	padding: 10px 0 0 5px;
 	font-size: 15px !important;
@@ -220,6 +238,7 @@ address_label{
 
 .address_cell a{
 	padding-top: 15px;
+	cursor: pointer;
 }
 
 .address_cell:first-child{
