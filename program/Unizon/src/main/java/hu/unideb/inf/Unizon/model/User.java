@@ -47,9 +47,11 @@ public class User implements Serializable {
 
     //bi-directional many-to-one association to Order
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OrderBy("orderDate DESC")
     private Set<Order> orders;
 
     //bi-directional many-to-many association to Address
+    @OrderBy("zip, country, city, street, strNumber, door, floor")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "ADDRESS_TO_USER", joinColumns = {
@@ -61,6 +63,7 @@ public class User implements Serializable {
     private Set<Address> addresses;
 
     //bi-directional many-to-many association to PhoneNumber
+    @OrderBy("phoneNumber ASC")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_TO_PHONE_NUMBER", joinColumns = {

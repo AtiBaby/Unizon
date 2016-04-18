@@ -274,10 +274,15 @@ public class Address implements Serializable {
 
 	@Override
 	public String toString() {
-		if(floor != null && door != null)
-			return 	new String(String.valueOf(strNumber) + " " + street + " " + door + "/" + floor + " " + city + " " + zip + " " + country);	
-		else
-			return 	new String(String.valueOf(strNumber) + " " + street  + " " + city + " " + zip + " " + country);	
+		if(floor != null && door != null) {
+			return String.valueOf(strNumber) + " " + street + " " + door + "/" + floor + " " + city + " " + zip + " " + country;
+		} else if (floor != null && door == null) {
+			return String.valueOf(strNumber) + " " + street + " " + "/" + floor + " " + city + " " + zip + " " + country;
+		} else if (floor == null && door != null) {
+			return String.valueOf(strNumber) + " " + street + " " + door + "/" + " " + city + " " + zip + " " + country;
+		} else {
+			return String.valueOf(strNumber) + " " + street  + " " + city + " " + zip + " " + country;
+		}
 	}
 
 }
