@@ -50,9 +50,16 @@ public class PhoneNumberController implements Serializable {
 	@PostConstruct
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
-		int phoneNumberId = Integer.parseInt(params.get("phoneNumberId"));
-
-		originalPhoneNumber = phoneNumberFacade.find(phoneNumberId);
+		
+		if(params.get("phoneNumberId") != null)
+		{
+			int phoneNumberId = Integer.parseInt(params.get("phoneNumberId"));
+			originalPhoneNumber = phoneNumberFacade.find(phoneNumberId);
+		}
+		else
+		{
+			originalPhoneNumber  = null;
+		}
 
 		if (originalPhoneNumber == null) {
 			originalPhoneNumber = new PhoneNumber();
@@ -67,7 +74,7 @@ public class PhoneNumberController implements Serializable {
 
 		addPhoneNumberToUser(phoneNumber);
 
-		redirect("/user/user.jsf?faces-redirect=true");
+		redirect("/user.jsf?faces-redirect=true");
 	}
 
 	public void editPhoneNumber() {
@@ -78,7 +85,7 @@ public class PhoneNumberController implements Serializable {
 
 		deleteFromDatabaseIfRequired(originalPhoneNumber.getPhoneNumber());
 
-		redirect("/user/user.jsf?faces-redirect=true");
+		redirect("/user.jsf?faces-redirect=true");
 	}
 
 	public void removePhoneNumberFromUser() {
@@ -86,7 +93,7 @@ public class PhoneNumberController implements Serializable {
 
 		deleteFromDatabaseIfRequired(originalPhoneNumber.getPhoneNumber());
 
-		redirect("/user/user.jsf?faces-redirect=true");
+		redirect("/user.jsf?faces-redirect=true");
 	}
 
 	private void removePhoneNumberFromUser(PhoneNumber phoneNumber) {

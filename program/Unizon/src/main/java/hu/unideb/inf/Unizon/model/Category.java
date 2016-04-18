@@ -29,11 +29,11 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to CatToProd
 	@OneToMany(mappedBy="category1", fetch=FetchType.EAGER)
-	private List<CatToProd> catToProds1;
+	private Set<CatToProd> catToProds1;
 
 	//bi-directional many-to-one association to CatToProd
 	@OneToMany(mappedBy="category2", fetch=FetchType.EAGER)
-	private List<CatToProd> catToProds2;
+	private Set<CatToProd> catToProds2;
 
 	//bi-directional many-to-many association to Product
 	@ManyToMany(mappedBy="categories", fetch=FetchType.EAGER)
@@ -58,11 +58,11 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public List<CatToProd> getCatToProds1() {
+	public Set<CatToProd> getCatToProds1() {
 		return this.catToProds1;
 	}
 
-	public void setCatToProds1(List<CatToProd> catToProds1) {
+	public void setCatToProds1(Set<CatToProd> catToProds1) {
 		this.catToProds1 = catToProds1;
 	}
 
@@ -80,11 +80,11 @@ public class Category implements Serializable {
 		return catToProds1;
 	}
 
-	public List<CatToProd> getCatToProds2() {
+	public Set<CatToProd> getCatToProds2() {
 		return this.catToProds2;
 	}
 
-	public void setCatToProds2(List<CatToProd> catToProds2) {
+	public void setCatToProds2(Set<CatToProd> catToProds2) {
 		this.catToProds2 = catToProds2;
 	}
 

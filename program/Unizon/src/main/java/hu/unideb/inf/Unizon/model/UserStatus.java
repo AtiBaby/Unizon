@@ -2,7 +2,7 @@ package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -28,7 +28,7 @@ public class UserStatus implements Serializable {
 
 	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="userStatus", fetch=FetchType.EAGER)
-	private List<User> users;
+	private Set<User> users;
 
 	public UserStatus() {
 	}
@@ -49,11 +49,11 @@ public class UserStatus implements Serializable {
 		this.statusName = statusName;
 	}
 
-	public List<User> getUsers() {
+	public Set<User> getUsers() {
 		return this.users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
 

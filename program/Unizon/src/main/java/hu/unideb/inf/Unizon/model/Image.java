@@ -26,7 +26,7 @@ public class Image implements Serializable {
 
     //bi-directional many-to-one association to Product
     @OneToMany(mappedBy = "image", fetch = FetchType.EAGER)
-    private List<Product> products1;
+    private Set<Product> products1;
 
     //bi-directional many-to-many association to Product
     @ManyToMany(mappedBy = "images", fetch = FetchType.EAGER)
@@ -51,11 +51,11 @@ public class Image implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public List<Product> getProducts1() {
+    public Set<Product> getProducts1() {
         return this.products1;
     }
 
-    public void setProducts1(List<Product> products1) {
+    public void setProducts1(Set<Product> products1) {
         this.products1 = products1;
     }
 

@@ -1,0 +1,359 @@
+html {
+    height:100%;
+}
+
+body {
+	background-color: #FFF !important;
+	font-family: Raleway !important;
+	font-weight: 400px !important;
+	padding-bottom: 140px;
+}
+
+.ui-growl {
+right: 20px !important;
+top: 120px !important;
+}
+
+#tab_container{
+	border: none !important;
+	display: block;
+	padding: 0;
+	background-color: #FFF ;
+	height: 100%;
+}
+
+.ui-tabs-selected a{
+	outline: 0;
+}
+
+.info_panel{
+	display:block;
+	width:40%;
+	box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+	margin: 0 auto 15px auto;
+}
+
+.info_panel label
+ {
+	font-family: Raleway !important;
+	font-weight: 400px !important;
+}
+
+.login_form label{
+	font-family: Raleway !important;
+}
+
+#info_container{
+	border: none;
+	display: block;
+	padding: 20px 0 2px 10px;
+	width: 100%;
+	border-radius: 3px;
+
+}
+
+.info_header{
+	display: block;
+	position: relative;
+	padding: 0 0 0 15px;
+}
+
+.info_header h3{
+	margin:0;
+	padding: 0 0 5px 0;
+	font-size: 16px;
+	color: #2E75B6;
+	
+}
+
+.table{
+	border: none;
+	display: table;
+	position: relative;
+	width: 30%;
+	
+}
+
+.table p{
+	font-family: Raleway !important;	
+}
+
+.table_row{
+	display: table-row;
+}
+
+.table_element{
+	width: 40%;
+	display: table-cell;
+	position: relative;
+	float: left;
+	padding-left:5px;
+}
+
+.table_element:first-child{
+	width: 3% !important;
+	padding-left:0 !important;
+}
+
+.table_element:last-child{
+	width: 57% !important;
+	padding-left:0 !important;
+}
+
+.table_element p{
+	font-size: 16px;
+	font-family: Raleway;
+	font-weight: 400px;
+	margin: 0;
+	padding: 5px 0;
+}
+
+.address_cell p{
+		font-size: 16px;
+	font-family: Raleway;
+}
+
+.phone_cell p{
+		font-size: 16px;
+	font-family: Raleway;
+}
+
+#address_table{
+	display:block;
+	position:relative;
+	width: 100%;
+	padding: 20px 0 20px 10px;
+}
+
+#phone_table{
+	display:block;
+	position:relative;
+	width: 100%;
+	padding: 20px 0 20px 10px;
+	margin-bottom: 15px;
+}
+
+#address_header{
+	display:table;
+	position:relative;
+}
+
+#phone_header{
+	display:table;
+	position:relative;
+}
+
+.header_row{
+	display: table-row;
+	position: relative;
+}
+
+.header_row h3{
+	margin:0;
+	padding: 0 0 10px 0;
+	font-size: 16px;
+	color: #2E75B6;
+}
+
+.header_cell{
+	display:table-cell;
+	position:relative;
+	float:left;
+	padding-right: 2px;
+}
+
+#address_content{
+	display:table;
+	position:relative;
+	width:100%;
+}
+
+#phone_content{
+	display:table;
+	position:relative;
+	width:100%;
+}
+
+.address_row{
+	display:table-row;
+	position:relative;
+	padding: 15px 0;
+	width: 100%;
+}
+
+.phone_row{
+	display:table-row;
+	position:relative;
+	padding: 15px 0;
+	width: 100%;
+}
+
+.phone_row label a{
+	padding: 10px 0 0 5px;
+	font-size: 15px !important;
+}
+.phone_cell{
+	width: 7%;
+	display: table-cell;
+	position: relative;
+	float: left;
+}
+
+.address_row label a{
+	padding: 10px 0 0 5px;
+	font-size: 15px !important;
+	
+}
+
+address_label{
+	font-weight: 400px !important;
+}
+
+.address_cell{
+	width: 7%;
+	display: table-cell;
+	position: relative;
+	float: left;
+	vertical-align: middle;
+}
+
+.address_cell a{
+	padding-top: 15px;
+}
+
+.address_cell:first-child{
+	width: 86% !important;
+	padding-left:15px !important;
+}
+
+.custom_button{
+	font-family: Raleway !important;
+	display: inline-block;
+	margin: 5px 5px 5px 0 !important;
+	width: 85px;
+	height: 40px;
+	border-radius: 7px;
+	text-align: center !important;
+	font-size: 14px;
+	font-weight: 350px;
+}
+
+.address_cell:last-child{
+	width: 7% !important;
+	padding-left:0 !important;
+}
+
+.phone_cell:first-child{
+	width: 86% !important;
+	padding-left:15px !important;
+}
+
+.phone_cell:last-child{
+	width: 7% !important;
+	padding-left:0 !important;
+}
+
+/* PREVIOUS ORDERS */
+
+.ui-datatable.borderless thead th,
+.ui-datatable.borderless tbody,
+.ui-datatable.borderless tbody tr,
+.ui-datatable.borderless tbody td {
+    border-style: none;
+    background-color: #FFFFFF;
+	font-family: Raleway;
+	font-weight: 400px;
+	font-size: 16px;
+	text-align: left;
+}
+
+.po_rowtoggler {
+	width: 3%;	
+}
+
+.po_id {
+	width: 3%;
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.po_celltext {
+	color: #000000;
+	font-size: 14px;
+	vertical-align: middle;
+}
+
+
+.po_date {
+	width: 10%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.po_saddress {
+	width: 34%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.po_baddress {
+	width: 34%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.po_phone {
+	width: 16%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.inner_table {
+	width: 60%;
+}
+
+.po_prod_img {
+	display: block;
+	max-width: 75px;
+	max-height: 75px;
+    overflow: auto;
+	
+}
+
+.po_prod_empty {
+	width:8%;
+	
+}
+
+.po_prod_imgcol {
+	width: 30%;	
+}
+
+.po_prod_name {
+	width: 40%;	
+	color: #2e6da4 !important;
+	font-size: 14px !important;	
+}
+
+.po_prod_amount {
+	width: 10%;	
+	color: #2e6da4 !important;
+	font-size: 14px !important;	
+}
+
+.po_prod_price {
+	width: 10%;	
+	color: #2e6da4 !important;
+	font-size: 14px !important;	
+}
+
+.footer{
+	position: fixed;
+	bottom: 0;
+}

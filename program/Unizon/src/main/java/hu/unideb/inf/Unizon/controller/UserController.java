@@ -65,7 +65,7 @@ public class UserController implements Serializable {
 //				facesContext.getExternalContext().getFlash().setKeepMessages(true);
 				RequestContext.getCurrentInstance().update("messages");
 
-				redirect("/user/user.jsf?faces-redirect=true");
+				redirect("/user.jsf?faces-redirect=true");
 			} else {
 				log.info("{} failed to match current password.", user);
 				addErrorMessage("Current password did not match!");

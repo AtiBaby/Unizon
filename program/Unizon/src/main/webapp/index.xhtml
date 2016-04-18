@@ -5,8 +5,60 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
+	
+<ui:define name="custom_css">
+	<h:outputStylesheet name="css/index.css" />
+	<h:outputStylesheet name="css/responsive_slider.css" />
+</ui:define>
 
-	<ui:define name="products">
-        Hello World!
-    </ui:define>
+<ui:define name="custom_js">
+	<h:outputScript target="head" library="js" name="index_responsive_slider.js"/>
+</ui:define>
+	
+<ui:define name="fullBody">
+	<div id="table_container" class="container">
+		<div class="search_holder">
+			<form class="" method="post" action="">
+				<input type="text" placeholder="Let's find your dreams..." /> <input
+					type="submit" value="" />
+			</form>
+		</div>
+
+		<div class="table">
+			<!-- elso sor -->
+			<!-- elso elem -->
+			<div class="table_element" id="bal_fel">
+				<ul class="rslides rslides1">
+					<li><a target="_self" href="#"><h:graphicImage name="images/Consumer electronics/notebook.jpg" /></a>
+						<div class="slider_text">Lorem ipsum dolor sit amet.</div></li>
+					<li><a target="_self" href="#"><h:graphicImage name="images/Consumer electronics/ps4-rhombox-cropped.jpg"/></a>
+						<div class="slider_text right">Nullam nec odio odio.</div></li>
+					<li><a target="_self" href="#"><h:graphicImage name="images/Consumer electronics/smarttv.jpg"/></a>
+						<div class="slider_text">Pellentesque sodales eleifend.</div></li>
+				</ul>
+			</div>
+			<!-- masodik elem -->
+			<div class="table_element" id="jobb_fel">
+				<h:graphicImage name="images/other/jobb_fel.png"/>
+			</div>
+			<!-- masodik sor -->
+			<!-- elso elem -->
+			<div class="table_element" id="bal_le">
+				<h:graphicImage name="images/other/bal_le.png"/>
+			</div>
+			<!-- masodik elem -->
+			<div class="table_element" id="jobb_le">
+				<ul class="rslides rslides2">
+					<li><a target="_self" href="#"><h:graphicImage name="images/Mobile phones/iPhone-6-vs-iPhone-6-Plus.jpg"/></a>
+						<div class="slider_text">Lorem ipsum dolor sit amet.</div></li>
+					<li><a target="_self" href="#"><h:graphicImage name="images/Mobile phones/gx8-1.jpg"/></a>
+						<div class="slider_text right">Nullam nec odio odio.</div></li>
+					<li><a target="_self" href="#"><h:graphicImage name="images/Mobile phones/SamsungGalaxySIIImini45schraeg_24261.jpg"/></a>
+						<div class="slider_text">Pellentesque sodales eleifend.</div></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</ui:define>
+
 </ui:composition>

@@ -50,9 +50,17 @@ public class AddressController implements Serializable {
 	@PostConstruct
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
-		int addressId = Integer.parseInt(params.get("addressId"));
+	
+		if(params.get("addressId") != null)
+		{
+			int addressId = Integer.parseInt(params.get("addressId"));
+			originalAddress = addressFacade.find(addressId);
+		}
+		else
+		{
+			originalAddress = null;
+		}
 
-		originalAddress = addressFacade.find(addressId);
 
 		newAddress = new Address();
 		newAddress.setUsers(new HashSet<>());
@@ -75,7 +83,7 @@ public class AddressController implements Serializable {
 
 		addAddressToUser(address);
 
-		redirect("/user/user.jsf?faces-redirect=true");
+		redirect("/user.jsf?faces-redirect=true");
 	}
 
 	public void editAddress() {
@@ -88,7 +96,7 @@ public class AddressController implements Serializable {
 			deleteFromDatabaseIfRequired(originalAddress);
 		}
 
-		redirect("/user/user.jsf?faces-redirect=true");
+		redirect("/user.jsf?faces-redirect=true");
 	}
 
 	public void removeAddress() {
@@ -96,7 +104,7 @@ public class AddressController implements Serializable {
 
 		deleteFromDatabaseIfRequired(originalAddress);
 
-		redirect("/user/user.jsf?faces-redirect=true");
+		redirect("/user.jsf?faces-redirect=true");
 	}
 
 	private void removeAddressFromUser(Address address) {

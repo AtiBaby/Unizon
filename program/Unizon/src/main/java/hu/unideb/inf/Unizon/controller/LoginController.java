@@ -56,7 +56,7 @@ public class LoginController implements Serializable {
 	}
 
 	public void showUserProfile() {
-		redirect(isLoggedIn() ? "/user/user.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
+		redirect(isLoggedIn() ? "/user.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
 	}
 
 	public void login() {

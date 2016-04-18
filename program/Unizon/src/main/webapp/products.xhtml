@@ -1,36 +1,239 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="title">
-		Products
-	</ui:define>
-	<ui:define name="products">
-		<f:facet name="last">
-			<h:outputStylesheet name="css/datagrid.css" />
-		</f:facet>
-		<p:growl id="messages" life="4000" showDetail="true" />
-		<p:dataGrid var="product" value="#{SearchController.products}" columns="3" layout="grid" rows="12"
-			paginator="true" id="products"
-			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="6,12,15">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
 
-			<p:panel style="text-align:center;">
-				<h:panelGrid columns="1">
-					<h:outputLink class="prodlink" value="productdetails.xhtml" action="#{searchController.submitProduct()}">
-						<f:param name="id" value="#{product.productId}" />
-						<p:outputPanel>
-							<h:graphicImage class="prodimage" value="#{product.image.imageUrl}" />
-						</p:outputPanel>
-						<br />
-						<h:outputText value="#{product.title}" class="prodtitle" />
-					</h:outputLink>
-					<h:outputText value="#{product.price}">
-						<f:convertNumber currencyCode="HUF" type="currency" />
-					</h:outputText>
-					<h:outputText value="In stock amount: #{product.amount}" />
-				</h:panelGrid>
-			</p:panel>
-		</p:dataGrid>
+	<ui:define name="custom_css">
+		<h:outputStylesheet name="css/def.css" />
+		<h:outputStylesheet name="css/product.css" />
+		<h:outputStylesheet name="css/product_slider.css" />
 	</ui:define>
+
+	<ui:define name="custom_js">
+		<h:outputScript target="head" library="js" name="index_responsive_slider.js"/>
+		<h:outputScript target="head" library="js" name="imagesloaded.pkgd.min.js" />
+		<h:outputScript target="head" library="js" name="jquery-imagefill.js" />
+		<h:outputScript target="head" library="js" name="jquery.fancybox.pack.js" />
+		<h:outputScript target="head" library="js" name="products.js" />
+	</ui:define>
+
+	<ui:define name="fullBody">
+
+		<div class="wrapper product clear-after">
+			<div class="left_bar">
+				<h2>Search</h2>
+				<div class="search_holder">
+					<form class="" method="post" action="">
+						<input type="text" placeholder="Search..." /> <input
+							type="submit" value="" />
+					</form>
+				</div>
+
+				<h2>categories</h2>
+				<div class="left_box">
+					<ul class="category_list">
+						<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i><a href="#">All categories</a></li>
+						<ui:repeat var="cat" value="#{SearchController.categoryNames}">
+							<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i><a
+								href="#">#{cat}</a></li>
+						</ui:repeat>
+					</ul>
+				</div>
+				<h2>Sort</h2>
+				<div class="sort_holder">
+				    <h:form id="sort_select">
+				            <p:outputLabel value="Sort by: " class="tabl_label"/>
+				            <p:selectOneMenu id="sort_change">
+				                <f:selectItem itemLabel="None" itemValue="None" noSelectionOption="false" />
+				                <f:selectItem itemLabel="Name asc" itemValue="Name asc" noSelectionOption="false" />
+				                <f:selectItem itemLabel="Name desc" itemValue="Name desc" noSelectionOption="false" />
+				                <f:selectItem itemLabel="Price asc" itemValue="Price asc" noSelectionOption="false" />
+				                <f:selectItem itemLabel="Price desc" itemValue="Price desc" noSelectionOption="false" />
+				            </p:selectOneMenu>
+				 	</h:form>
+				</div>
+
+			</div>
+			<div class="right_bar clear-after">
+				<div class="slide_holder_productpage">
+					<ul class="rslides rslides1">
+						<li><a target="_self" href="#"><h:graphicImage name="images/product_slider_1.jpg" /></a>
+							<div class="slider_text">Lorem ipsum dolor sit amet.</div></li>
+						<li><a target="_self" href="#"><h:graphicImage name="images/product_slider_2.jpg"/></a>
+							<div class="slider_text right">Nullam nec odio odio.</div></li>
+					</ul>
+				</div>
+				<div class="product_box_container">
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage name="images/Consumer electronics/notebook.jpg" />
+							</div>
+						</div>
+						<div class="name">Lorem ipsum dolor site amet</div>
+						<div class="price">19.987 Ft.-</div>
+						<div class="amount">In stock amount: amount...</div>
+						<div class="prod_box_cat">Category: category...</div>
+						<div class="buttons clear-after">
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a> <a href="#" class="button view"><i
+								class="fa fa-eye fa-lg" aria-hidden="true"></i> View</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</ui:define>
+
+
 </ui:composition>

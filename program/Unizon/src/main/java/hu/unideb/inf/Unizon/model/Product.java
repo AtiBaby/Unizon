@@ -40,11 +40,11 @@ public class Product implements Serializable {
 
     //bi-directional many-to-one association to CatToProd
     @OneToMany(mappedBy = "product1", fetch = FetchType.EAGER)
-    private List<CatToProd> catToProds1;
+    private Set<CatToProd> catToProds1;
 
     //bi-directional many-to-one association to CatToProd
     @OneToMany(mappedBy = "product2", fetch = FetchType.EAGER)
-    private List<CatToProd> catToProds2;
+    private Set<CatToProd> catToProds2;
 
     //bi-directional many-to-many association to Category
     @ManyToMany(fetch = FetchType.EAGER)
@@ -75,15 +75,15 @@ public class Product implements Serializable {
 
     //bi-directional many-to-one association to ProdToOrder
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    private List<ProdToOrder> prodToOrders;
+    private Set<ProdToOrder> prodToOrders;
 
     //bi-directional many-to-one association to ProdToTag
     @OneToMany(mappedBy = "product1", fetch = FetchType.EAGER)
-    private List<ProdToTag> prodToTags1;
+    private Set<ProdToTag> prodToTags1;
 
     //bi-directional many-to-one association to ProdToTag
     @OneToMany(mappedBy = "product2", fetch = FetchType.EAGER)
-    private List<ProdToTag> prodToTags2;
+    private Set<ProdToTag> prodToTags2;
 
     //bi-directional many-to-many association to Tag
     @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
@@ -132,11 +132,11 @@ public class Product implements Serializable {
         this.title = title;
     }
 
-    public List<CatToProd> getCatToProds1() {
+    public Set<CatToProd> getCatToProds1() {
         return this.catToProds1;
     }
 
-    public void setCatToProds1(List<CatToProd> catToProds1) {
+    public void setCatToProds1(Set<CatToProd> catToProds1) {
         this.catToProds1 = catToProds1;
     }
 
@@ -154,11 +154,11 @@ public class Product implements Serializable {
         return catToProds1;
     }
 
-    public List<CatToProd> getCatToProds2() {
+    public Set<CatToProd> getCatToProds2() {
         return this.catToProds2;
     }
 
-    public void setCatToProds2(List<CatToProd> catToProds2) {
+    public void setCatToProds2(Set<CatToProd> catToProds2) {
         this.catToProds2 = catToProds2;
     }
 
@@ -200,11 +200,11 @@ public class Product implements Serializable {
         this.images = images;
     }
 
-    public List<ProdToOrder> getProdToOrders() {
+    public Set<ProdToOrder> getProdToOrders() {
         return this.prodToOrders;
     }
 
-    public void setProdToOrders(List<ProdToOrder> prodToOrders) {
+    public void setProdToOrders(Set<ProdToOrder> prodToOrders) {
         this.prodToOrders = prodToOrders;
     }
 
@@ -222,11 +222,11 @@ public class Product implements Serializable {
         return prodToOrder;
     }
 
-    public List<ProdToTag> getProdToTags1() {
+    public Set<ProdToTag> getProdToTags1() {
         return this.prodToTags1;
     }
 
-    public void setProdToTags1(List<ProdToTag> prodToTags1) {
+    public void setProdToTags1(Set<ProdToTag> prodToTags1) {
         this.prodToTags1 = prodToTags1;
     }
 
@@ -244,11 +244,11 @@ public class Product implements Serializable {
         return prodToTags1;
     }
 
-    public List<ProdToTag> getProdToTags2() {
+    public Set<ProdToTag> getProdToTags2() {
         return this.prodToTags2;
     }
 
-    public void setProdToTags2(List<ProdToTag> prodToTags2) {
+    public void setProdToTags2(Set<ProdToTag> prodToTags2) {
         this.prodToTags2 = prodToTags2;
     }
 

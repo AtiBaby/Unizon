@@ -3,7 +3,7 @@ package hu.unideb.inf.Unizon.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -27,7 +27,7 @@ public class Order implements Serializable {
 
 	//bi-directional many-to-one association to ProdToOrder
 	@OneToMany(mappedBy="order", fetch=FetchType.EAGER)
-	private List<ProdToOrder> prodToOrders;
+	private Set<ProdToOrder> prodToOrders;
 
 	//bi-directional many-to-one association to Address
 	@ManyToOne
@@ -68,11 +68,11 @@ public class Order implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public List<ProdToOrder> getProdToOrders() {
+	public Set<ProdToOrder> getProdToOrders() {
 		return this.prodToOrders;
 	}
 
-	public void setProdToOrders(List<ProdToOrder> prodToOrders) {
+	public void setProdToOrders(Set<ProdToOrder> prodToOrders) {
 		this.prodToOrders = prodToOrders;
 	}
 
