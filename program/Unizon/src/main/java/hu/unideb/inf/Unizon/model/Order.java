@@ -1,9 +1,23 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -48,7 +62,7 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false)
 	private User user;
-
+	
 	public Order() {
 	}
 
@@ -113,7 +127,7 @@ public class Order implements Serializable {
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	
 	public User getUser() {
 		return this.user;
 	}
@@ -121,5 +135,34 @@ public class Order implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.orderId;
+        hash = 17 * hash + Objects.hashCode(this.orderDate);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Order other = (Order) obj;
+        if (this.orderId != other.orderId) {
+            return false;
+        }
+        if (!Objects.equals(this.orderDate, other.orderDate)) {
+            return false;
+        }
+        return true;
+    }
 
 }

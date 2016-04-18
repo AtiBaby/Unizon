@@ -1,9 +1,19 @@
 package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the IMAGE database table.
@@ -79,6 +89,35 @@ public class Image implements Serializable {
 
     public void setProducts2(Set<Product> products2) {
         this.products2 = products2;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.imageId;
+        hash = 89 * hash + Objects.hashCode(this.imageUrl);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Image other = (Image) obj;
+        if (this.imageId != other.imageId) {
+            return false;
+        }
+        if (!Objects.equals(this.imageUrl, other.imageUrl)) {
+            return false;
+        }
+        return true;
     }
 
 }

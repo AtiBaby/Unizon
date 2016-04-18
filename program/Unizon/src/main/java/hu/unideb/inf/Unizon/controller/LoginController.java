@@ -2,6 +2,7 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -17,6 +18,7 @@ import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.AdministratorFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
+import hu.unideb.inf.Unizon.model.Order;
 import hu.unideb.inf.Unizon.model.ProdToOrder;
 import hu.unideb.inf.Unizon.model.User;
 import password.Password;
@@ -39,20 +41,17 @@ public class LoginController implements Serializable {
 	@EJB
 	private AdministratorFacade administratorFacade;
 
-	private long sum;
 	private User user;
 	private String username;
 	private String password;
+	private HashMap<Integer, Long> orderPrice = new HashMap<Integer, Long>();
+	private long sum;
 
 	@PostConstruct
 	public void init() {
 		this.user = null;
 		this.username = null;
 		this.password = null;
-		this.sum=0;
-		/*for(ProdToOrder pto : this.getUser().){
-			sum = sum + pto.getAmount() * pto.getProduct().getPrice();
-		}*/
 	}
 
 	public void showUserProfile() {
@@ -68,6 +67,14 @@ public class LoginController implements Serializable {
 				if (Password.check(password, user.getPassword())) {
 					this.user = user;
 					log.info("{} successfully authenticated.", user);
+
+					for (Order ord : user.getOrders()) {
+						sum = 0;
+						for (ProdToOrder pto : ord.getProdToOrders()) {
+							sum = sum + pto.getAmount() * pto.getProduct().getPrice();
+						}
+						orderPrice.put(ord.getOrderId(), sum);
+					}
 
 					redirect("/index.jsf?faces-redirect=true");
 					return;
@@ -135,6 +142,14 @@ public class LoginController implements Serializable {
 		this.username = username;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public long getSum() {
 		return sum;
 	}
@@ -142,13 +157,13 @@ public class LoginController implements Serializable {
 	public void setSum(long sum) {
 		this.sum = sum;
 	}
-	
-	public String getPassword() {
-		return password;
+
+	public HashMap<Integer, Long> getOrderPrice() {
+		return orderPrice;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setOrderPrice(HashMap<Integer, Long> orderPrice) {
+		this.orderPrice = orderPrice;
 	}
 
 }

@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -73,6 +75,13 @@ public class PhoneNumberController implements Serializable {
 	}
 
 	public void addPhoneNumber() {
+		PhoneNumber pn = new PhoneNumber();
+		pn.setPhoneNumber(newPhoneNumber);
+		if (user.getPhoneNumbers().contains(pn)) {
+			addErrorMessage("Phone number already added to your profile!");
+			return;
+		}
+
 		PhoneNumber phoneNumber = createOrFindPhoneNumber(newPhoneNumber);
 
 		addPhoneNumberToUser(phoneNumber);
@@ -81,6 +90,13 @@ public class PhoneNumberController implements Serializable {
 	}
 
 	public void editPhoneNumber() {
+		PhoneNumber pn = new PhoneNumber();
+		pn.setPhoneNumber(newPhoneNumber);
+		if (user.getPhoneNumbers().contains(pn)) {
+			addErrorMessage("Phone number already added to your profile!");
+			return;
+		}
+
 		removePhoneNumberFromUser(originalPhoneNumber);
 
 		PhoneNumber phoneNumber = createOrFindPhoneNumber(newPhoneNumber);
@@ -174,6 +190,15 @@ public class PhoneNumberController implements Serializable {
 		} catch (IOException e) {
 			log.error(e.getMessage());
 		}
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
 	}
 
 	public Logger getLog() {
