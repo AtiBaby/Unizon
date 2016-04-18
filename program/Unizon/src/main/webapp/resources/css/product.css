@@ -299,3 +299,8 @@
 	text-decoration: none;
 	outline: none;
 }
+
+#products{
+	margin-bottom: 20px !important;
+	-webkit-margin-bottom: 20px !important;
+}
