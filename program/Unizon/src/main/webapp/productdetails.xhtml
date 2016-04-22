@@ -5,14 +5,69 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="title">
-		Product
+
+	<ui:define name="custom_css">
+		<h:outputStylesheet name="css/def.css" />
+		<h:outputStylesheet name="css/product.css" />
+		<h:outputStylesheet name="css/product_slider.css" />
 	</ui:define>
-	<ui:define name="products">
-	 <f:metadata>
-<!--         <f:viewParam name="id" value="#{myBean.id}" />  -->
-<!-- use your bean for id product id parameter. I hope it will be works-->
-    </f:metadata>
-<!--     #{myBean.id} -->
+
+	<ui:define name="custom_js">
+		<h:outputScript target="head" library="js"
+			name="index_responsive_slider.js" />
+		<h:outputScript target="head" library="js"
+			name="imagesloaded.pkgd.min.js" />
+		<h:outputScript target="head" library="js" name="jquery-imagefill.js" />
+		<h:outputScript target="head" library="js"
+			name="jquery.fancybox.pack.js" />
+		<h:outputScript target="head" library="js" name="products.js" />
+	</ui:define>
+	<f:metadata>
+		<f:viewParam name="id" value="#{productDetailController.productId}" />
+		<f:viewAction action="#{productDetailController.init()}" />
+	</f:metadata>
+
+	<ui:define name="fullBody">
+		<div class="wrapper product clear-after">
+
+			<div class="right_bar clear-after">
+				<h3>
+					<h:outputText
+						value="#{productDetailController.actualProduct.title}" />
+				</h3>
+				<div class="product_box_container">
+					<div class="product_box">
+						<div class="product_box_imageholder">
+							<div class="product_box_imageholder_cell">
+								<h:graphicImage
+									name="#{productDetailController.actualProduct.image.imageUrl}" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="info_container">
+					<div class="info_header">
+						<h3>
+							<h:outputText
+								value="Description: #{productDetailController.actualProduct.description}" />
+							<h:outputText value="&lt;br/&gt;" escape="false" />
+							<h:outputText
+								value="Amount: #{productDetailController.actualProduct.amount}" />
+							<h:outputText value="&lt;br/&gt;" escape="false" />
+							<h:outputText
+								value="Price: #{productDetailController.actualProduct.price} USD" />
+						</h3>
+					</div>
+					<div class="buttons clear-after">
+						<h3>
+							<a href="#" class="button cart"><i
+								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
+								Cart</a>
+						</h3>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>
