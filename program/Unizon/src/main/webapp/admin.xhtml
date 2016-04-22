@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	
+<ui:define name="custom_css">
+	<h:outputStylesheet name="css/about.css" />
+</ui:define>
+
+<ui:define name="fullBody">
+		<div id="tab_container" class="container">
+			<p:tabView>
+<!-- 				<p:growl id="messages" life="4000" showDetail="true" /> -->
+				<p:tab class="tab" title="Administrator information" id="first_tab">
+					<li><a href="#{request.contextPath}/administrator/manage_administrator.jsf">Admin</a></li>
+					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
+				</p:tab>
+				<p:tab class="tab" title="Product information">
+					<li><a href="#{request.contextPath}/administrator/edit_products.jsf">Products</a></li>
+					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
+				</p:tab>
+				<p:tab class="tab" title="Product upload">
+				Ennek meg majd az előző tabon kéne csinálni egy gombot "Add" néven, és felugró ablakként megjelenhetne.
+				<p:growl id="messages" life="4000" showDetail="true" />
+				<h:form id="product_upload_form">
+					<center>
+					<p:panelGrid columns="2" style="font-size: 0.8em;">
+						<p:outputLabel value="Title"/>
+						<p:inputText value="#{productUploadController.product.title}"/>
+						<p:outputLabel value="Price"/>
+						<p:inputText value="#{productUploadController.product.price}"/>
+						<p:outputLabel value="Amount:"/>
+						<p:inputText value="#{productUploadController.product.amount}"/>
+						<p:outputLabel value="Description:"/>
+						<p:inputText value="#{productUploadController.product.description}"/>
+						<p:outputLabel value="URL"/>
+						<p:inputText value="#{productUploadController.image.imageUrl}" />
+						<p:commandButton id="upload" value="Upload" actionListener="#{productUploadController.upload()}" ajax="true"
+                                   		update=":messages"/>
+					</p:panelGrid>
+					</center>
+				</h:form>
+				</p:tab>
+			</p:tabView>
+		</div>
+</ui:define>
+
+</ui:composition>
