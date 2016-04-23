@@ -9,6 +9,7 @@
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/about.css" />
 		<h:outputStylesheet name="css/address-table.css" />
+		<h:outputStylesheet name="css/admin.css" />
 	</ui:define>
 
 	<ui:define name="fullBody">
@@ -25,6 +26,7 @@
 							onclick="addProductRemoteCommand([{name:'productId', value:0}]);">
 							<i class="fa fa-plus"></i>
 						</a>
+						<div class="add_new_prod">Add new product</div>
 					</h:form>
 					<p:dataTable value="#{productController.products}" var="products"
 						styleClass="address-table" headerClass="address-table-header"
@@ -62,24 +64,24 @@
 		
 		
 		
-		
+		<!-- Add Product Dialog -->
 		<p:dialog header="Add product" resizable="false" draggable="false" styleClass="product_modal" id="addProductDialog" closeOnEscape="true" modal="true" widgetVar="addProductDialogVar">
 			<div class="product_form_container">
-				<h:form id="addProductDialogForm" class="product_form">
+				<h:form id="addProductDialogForm" styleClass="product_form">
 					<p:outputLabel value="Title:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.title}" required="true" requiredMessage="ZIP code is required!" tabindex="1" />
+					<p:inputText value="#{productUploadController.product.title}" required="true" requiredMessage="Title is required!" tabindex="1" />
 
 					<p:outputLabel value="Price:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.price}" required="true" requiredMessage="Country is required!" tabindex="2" />
+					<p:inputText value="#{productUploadController.product.price}" required="true" requiredMessage="Price is required!" tabindex="2" />
 
 					<p:outputLabel value="Amount:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.amount}" required="true" requiredMessage="City is required!" tabindex="3" />
+					<p:inputText value="#{productUploadController.product.amount}" required="true" requiredMessage="Amount is required!" tabindex="3" />
 
 					<p:outputLabel value="Description:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.description}" required="true" requiredMessage="Street is required!" tabindex="4" />
+					<p:inputText value="#{productUploadController.product.description}" required="true" requiredMessage="Description is required!" tabindex="4" />
 
 					<p:outputLabel value="URL:" styleClass="required" />
-					<p:inputText value="#{productUploadController.image.imageUrl}" required="true" requiredMessage="Street number is required!" styleClass="required" tabindex="5" />
+					<p:inputText value="#{productUploadController.image.imageUrl}" required="true" requiredMessage="URL is required!" styleClass="required" tabindex="5" />
 
 					<p:commandButton value="Add" styleClass="custom_button"
 						actionListener="#{productUploadController.upload()}" ajax="true"
