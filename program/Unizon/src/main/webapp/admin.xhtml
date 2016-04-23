@@ -5,47 +5,94 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-	
-<ui:define name="custom_css">
-	<h:outputStylesheet name="css/about.css" />
-</ui:define>
 
-<ui:define name="fullBody">
+	<ui:define name="custom_css">
+		<h:outputStylesheet name="css/about.css" />
+		<h:outputStylesheet name="css/address-table.css" />
+	</ui:define>
+
+	<ui:define name="fullBody">
 		<div id="tab_container" class="container">
 			<p:tabView>
-<!-- 				<p:growl id="messages" life="4000" showDetail="true" /> -->
-				<p:tab class="tab" title="Administrator information" id="first_tab">
-					<li><a href="#{request.contextPath}/administrator/manage_administrator.jsf">Admin</a></li>
-					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
-				</p:tab>
+				<!-- 				<p:growl id="messages" life="4000" showDetail="true" /> -->
 				<p:tab class="tab" title="Product information">
-					<li><a href="#{request.contextPath}/administrator/edit_products.jsf">Products</a></li>
-					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
+					<h:form>
+						<p:remoteCommand name="addProductRemoteCommand"
+							update="addProductDialog"
+							oncomplete="PF('addProductDialogVar').show()" />
+
+						<a id="new_product_trigger" rel="leanModal"
+							onclick="addProductRemoteCommand([{name:'productId', value:0}]);">
+							<i class="fa fa-plus"></i>
+						</a>
+					</h:form>
+					<p:dataTable value="#{productController.products}" var="products"
+						styleClass="address-table" headerClass="address-table-header"
+						rowClasses="address-table-odd-row,address-table-even-row">
+						<p:column class="prod_id" headerText="Id">
+							<h:outputText class="prod_celltext" value="#{products.productId}" />
+						</p:column>
+						<p:column class="prod_title" headerText="Title">
+							<h:outputText class="prod_celltext" value="#{products.title}" />
+						</p:column>
+						<p:column class="prod_price" headerText="Price">
+							<h:outputText class="prod_celltext" value="#{products.price}" />
+						</p:column>
+						<p:column class="prod_amount" headerText="Amount">
+							<h:outputText class="prod_celltext" value="#{products.amount}" />
+						</p:column>
+						<p:column class="prod_description" headerText="Description">
+							<h:outputText class="prod_celltext" value="#{products.description}" />
+						</p:column>
+						<p:column>
+							<a href="#{request.contextPath}/administrator/edit_product.jsf"><i class="fa fa-pencil"></i></a>
+						</p:column>
+						<p:column>
+							<a href="#"><i class="fa fa-remove"></i></a>
+						</p:column>
+					</p:dataTable>
 				</p:tab>
-				<p:tab class="tab" title="Product upload">
-				Ennek meg majd az előző tabon kéne csinálni egy gombot "Add" néven, és felugró ablakként megjelenhetne.
-				<p:growl id="messages" life="4000" showDetail="true" />
-				<h:form id="product_upload_form">
-					<center>
-					<p:panelGrid columns="2" style="font-size: 0.8em;">
-						<p:outputLabel value="Title"/>
-						<p:inputText value="#{productUploadController.product.title}"/>
-						<p:outputLabel value="Price"/>
-						<p:inputText value="#{productUploadController.product.price}"/>
-						<p:outputLabel value="Amount:"/>
-						<p:inputText value="#{productUploadController.product.amount}"/>
-						<p:outputLabel value="Description:"/>
-						<p:inputText value="#{productUploadController.product.description}"/>
-						<p:outputLabel value="URL"/>
-						<p:inputText value="#{productUploadController.image.imageUrl}" />
-						<p:commandButton id="upload" value="Upload" actionListener="#{productUploadController.upload()}" ajax="true"
-                                   		update=":messages"/>
-					</p:panelGrid>
-					</center>
-				</h:form>
+				<p:tab class="tab" title="Administrator information" id="first_tab">
+					<li><a
+						href="#{request.contextPath}/administrator/manage_administrator.jsf">Admin</a></li>
+					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
 				</p:tab>
 			</p:tabView>
 		</div>
-</ui:define>
+		
+		
+		
+		
+		<p:dialog header="Add product" resizable="false" draggable="false" styleClass="product_modal" id="addProductDialog" closeOnEscape="true" modal="true" widgetVar="addProductDialogVar">
+			<div class="product_form_container">
+				<h:form id="addProductDialogForm" class="product_form">
+					<p:outputLabel value="Title:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.title}" required="true" requiredMessage="ZIP code is required!" tabindex="1" />
+
+					<p:outputLabel value="Price:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.price}" required="true" requiredMessage="Country is required!" tabindex="2" />
+
+					<p:outputLabel value="Amount:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.amount}" required="true" requiredMessage="City is required!" tabindex="3" />
+
+					<p:outputLabel value="Description:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.description}" required="true" requiredMessage="Street is required!" tabindex="4" />
+
+					<p:outputLabel value="URL:" styleClass="required" />
+					<p:inputText value="#{productUploadController.image.imageUrl}" required="true" requiredMessage="Street number is required!" styleClass="required" tabindex="5" />
+
+					<p:commandButton value="Add" styleClass="custom_button"
+						actionListener="#{productUploadController.upload()}" ajax="true"
+						update=":messages, :addProductDialogForm" tabindex="6" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{productUploadController.showProducts()}" ajax="true"
+						immediate="true" tabindex="7" />
+				</h:form>
+			</div>
+		</p:dialog>
+		
+		
+		
+	</ui:define>
 
 </ui:composition>

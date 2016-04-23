@@ -1,10 +1,13 @@
 package hu.unideb.inf.Unizon.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
@@ -24,6 +27,9 @@ public class ProductUploadController implements Serializable {
 	@Inject
 	private Logger log;
 
+	@Inject
+	private FacesContext facesContext;
+	
 	@EJB
 	private ProductFacade productFacade;
 	
@@ -36,34 +42,39 @@ public class ProductUploadController implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		log.info("Init product upload: ******************************");
 		this.product = new Product();
 		this.image = new Image();
 		this.storedImage = new Image();
 	}
 
 	public void upload() {
-		log.info("########################uploadban");
-		System.out.println(image.getImageUrl());
+		log.info("Uploading a product!");
 		imageFacade.create(image);
 		for(Image i : imageFacade.findAll()){
-			log.info("########################image:{}", image);
-			log.info("########################i:{}", i);
 			if(i.getImageUrl().equals(image.getImageUrl())){
-				log.info("########################match");
 				storedImage=i;
 			}
 		}
-		if(image == null){
-			log.info("########################null");
-		} else {
-			log.info("########################" + storedImage.getImageId() + storedImage.getImageUrl());
-		}
-
 		product.setImage(storedImage);
 		productFacade.create(product);
+		log.info("Product uploaded, name:{}.", product.getTitle());
+		redirect("/admin.jsf?faces-redirect=true");
 	}
 
+	public void showProducts(){
+		redirect("/admin.jsf?faces-redirect=true");
+	}
+	
+	private void redirect(String url) {
+		log.info("Redirecting to {}.", url);
+		try {
+			ExternalContext ec = facesContext.getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + url);
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
+	}
+	
 	public Product getProduct() {
 		return product;
 	}
