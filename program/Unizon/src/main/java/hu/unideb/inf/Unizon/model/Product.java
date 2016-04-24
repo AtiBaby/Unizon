@@ -52,6 +52,10 @@ public class Product implements Serializable {
     @Column(name = "TITLE", nullable = false, length = 100)
     private String title;
 
+    @Column(name = "DELETED", nullable = false)
+    private int deleted;
+
+    
     //bi-directional many-to-one association to CatToProd
     @OneToMany(mappedBy = "product1", fetch = FetchType.EAGER)
     private Set<CatToProd> catToProds1;
@@ -145,6 +149,15 @@ public class Product implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
+    
 
     public Set<CatToProd> getCatToProds1() {
         return this.catToProds1;
@@ -296,6 +309,7 @@ public class Product implements Serializable {
         hash = 73 * hash + Objects.hashCode(this.description);
         hash = 73 * hash + this.price;
         hash = 73 * hash + Objects.hashCode(this.title);
+        hash = 73 * hash + this.deleted;
         return hash;
     }
 
@@ -320,6 +334,11 @@ public class Product implements Serializable {
         if (this.price != other.price) {
             return false;
         }
+        
+        if (this.deleted != other.deleted){
+            return false;
+        }
+        
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
