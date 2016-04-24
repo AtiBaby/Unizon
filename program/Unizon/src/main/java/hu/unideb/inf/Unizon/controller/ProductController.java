@@ -2,12 +2,10 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.event.Event;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -17,14 +15,12 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import hu.unideb.inf.Unizon.facade.ImageFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
-import hu.unideb.inf.Unizon.model.CatToProd;
-import hu.unideb.inf.Unizon.model.ProdToOrder;
-import hu.unideb.inf.Unizon.model.ProdToTag;
+import hu.unideb.inf.Unizon.model.Image;
 import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.User;
-import java.util.List;
 
 @ManagedBean
 @ViewScoped
@@ -45,19 +41,23 @@ public class ProductController implements Serializable {
 	private ProductFacade productFacade;
 
 	@EJB
+	private ImageFacade imageFacade;
+	
+	@EJB
 	private UserFacade userFacade;
 
+	@Inject
+	private Event<Product> productEventSrc;
+
+	private Image image;
+	private Image storedImage;
 	private Product newProduct;
 	private Product originalProduct;
 	private User user;
-	private ProdToOrder proToOrder;
-	private ProdToTag prodToTag;
-	private CatToProd catToProd;
-    private List<Product> products;
 
-	@PostConstruct
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+		System.out.println("productId: " + params.get("productId"));
 		if (params.get("productId") != null) {
 			int productId = Integer.parseInt(params.get("productId"));
 			originalProduct = productFacade.find(productId);
@@ -68,76 +68,68 @@ public class ProductController implements Serializable {
 		newProduct = new Product();
 
 		if (originalProduct != null) {
-                        newProduct.setTitle(originalProduct.getTitle());
-                        newProduct.setAmount(originalProduct.getAmount());
-                        newProduct.setPrice(originalProduct.getPrice());
-                        newProduct.setDescription(originalProduct.getDescription());
+			newProduct.setProductId(originalProduct.getProductId());
+			newProduct.setTitle(originalProduct.getTitle());
+			newProduct.setAmount(originalProduct.getAmount());
+			newProduct.setPrice(originalProduct.getPrice());
+			newProduct.setDescription(originalProduct.getDescription());
+			newProduct.setImage(originalProduct.getImage());
 		}
 
-        
-        user = loginController.getUser();     
-        products = productFacade.findAll();
+		user = loginController.getUser();
+		this.image = new Image();
+		this.storedImage = new Image();
 	}
-	
-        
-    public void showAllProducts(){
-        redirect("/edit_products.jsf?faces-redirect=true");
-    }
-    
-    public void editProductListen() {
+
+	public void showAllProducts() {
+		redirect("/admin.jsf?faces-redirect=true");
+	}
+
+	public void editProductListen() {
+		System.out.println("Halló world!");
 		init();
 	}
 
-	public void editProduct() {
-		if (!newProduct.equals(originalProduct)) {
-			newProduct = createOrFindProduct(newProduct);
+	public void upload() {
+		log.info("Uploading a product!");
+		imageFacade.create(image);
+		for (Image i : imageFacade.findAll()) {
+			if (i.getImageUrl().equals(image.getImageUrl())) {
+				storedImage = i;
+			}
+		}
+		newProduct.setImage(storedImage);
+		productFacade.create(newProduct);
+		log.info("Product uploaded, name: {}.", newProduct.getTitle());
+		redirect("/admin.jsf?faces-redirect=true");
+	}
 
-			removeProductFromProdToOrder(originalProduct);
-			addProductToProdToOrder(newProduct);
-			removeProductFromProdToTag(originalProduct);
-			addProductToProdProdToTag(newProduct);
-			removeProductFromCatToProd(originalProduct);
-			addProductToCatToProd(newProduct);
-			
-			
+	public void editProduct() {
+		if (newProduct.getDeleted() == true) {
+			System.out.println("You cannot edit a deleted product!");
+		} else {
+			if (!newProduct.equals(originalProduct)) {
+				newProduct = productFacade.edit(newProduct);
+			}
 		}
 
-		redirect("/edit_products.jsf?faces-redirect=true");
+		productEventSrc.fire(newProduct);
+
+		redirect("/admin.jsf?faces-redirect=true");
 	}
 
-	public Product createOrFindProduct(Product newProduct){
-		return newProduct;
-	}
-	
-	public void removeProductFromProdToOrder(Product originalProduct){
-		
-	}
-	
-	public void addProductToProdToOrder(Product newProduct){
-		
-	}
-	
-	public void removeProductFromProdToTag(Product originalProduct){
-		
-	}
-	
-	public void addProductToProdProdToTag(Product newProduct){
-		
-	}
-	
-	public void removeProductFromCatToProd(Product originalProduct){
-		
-	}
-	
-	public void addProductToCatToProd(Product newProduct){
-		
-	}
-	
 	public void removeProduct() {
+		init();
 
-		redirect("/edit_products.jsf?faces-redirect=true");
+		if (newProduct.getDeleted() == false) {
+			newProduct.setDeleted(true);
+			newProduct = productFacade.edit(newProduct);
+		}
+
+		productEventSrc.fire(newProduct);
+
+		redirect("/admin.jsf?faces-redirect=true");
 	}
-
 
 	private void redirect(String url) {
 		log.info("Redirecting {} to {}.", user, url);
@@ -180,54 +172,36 @@ public class ProductController implements Serializable {
 	public void setNewProduct(Product product) {
 		this.newProduct = product;
 	}
-        
-        public Product getOriginalProduct() {
+
+	public Product getOriginalProduct() {
 		return originalProduct;
 	}
 
 	public void setOriginalProduct(Product product) {
 		this.originalProduct = product;
 	}
-        
-        public List<Product> getProducts() {
-		return products;
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-    public User getUser() {
-        return user;
-    }
+	public Image getImage() {
+		return image;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-    
-    public CatToProd getCatToProd() {
-		return catToProd;
+	public void setImage(Image image) {
+		this.image = image;
 	}
-    
-    public void setCatToProd(CatToProd catToProd) {
-		this.catToProd = catToProd;
+
+	public void setStoredImage(Image storedImage) {
+		this.storedImage = storedImage;
 	}
-    
-    public ProdToTag getProdToTag() {
-		return prodToTag;
+
+	public Image getStoredImage() {
+		return storedImage;
 	}
-    
-    public void setProdToTag(ProdToTag prodToTag) {
-		this.prodToTag = prodToTag;
-	}
-    
-    public ProdToOrder getProToOrder() {
-		return proToOrder;
-	}
-    
-    public void setProToOrder(ProdToOrder proToOrder) {
-		this.proToOrder = proToOrder;
-	}
-    
 }
-
