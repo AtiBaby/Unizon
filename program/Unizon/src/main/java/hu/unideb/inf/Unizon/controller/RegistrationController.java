@@ -26,7 +26,7 @@ import hu.unideb.inf.Unizon.facade.UserStatusFacade;
 import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.model.UserActivation;
 import hu.unideb.inf.Unizon.model.UserStatus;
-import password.Password;
+import hu.unideb.inf.Unizon.util.Password;
 
 @ManagedBean
 @ViewScoped

@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.User;
-import password.Password;
+import hu.unideb.inf.Unizon.util.Password;
 
 @ManagedBean
 @ViewScoped
