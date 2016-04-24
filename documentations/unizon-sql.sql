@@ -12,14 +12,14 @@ ADMIN USER: USERNAME: admin
             USERNAME: admin2 
             PASSWORD: admin2
             
-TEST USER: USERNAME: teszt
-           PASSWORD: teszt
-           USERNAME: teszt2
-           PASSWORD: teszt2
-           USERNAME: teszt3
-           PASSWORD: teszt3
-           USERNAME: teszt4
-           PASSWORD: teszt4
+TEST USER: USERNAME: test
+           PASSWORD: test
+           USERNAME: test2
+           PASSWORD: test2
+           USERNAME: test3
+           PASSWORD: test3
+           USERNAME: test4
+           PASSWORD: test4
 */
 
 
@@ -233,23 +233,24 @@ INSERT INTO USER_STATUS(STATUS_ID, STATUS_NAME) VALUES(-1, 'inactive');
 INSERT INTO USER_STATUS(STATUS_ID, STATUS_NAME) VALUES(-2, 'active');
 INSERT INTO USER_STATUS(STATUS_ID, STATUS_NAME) VALUES(-3, 'final');
 
-INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-1,'admin', 'cveqGRZfe2VtNuO0yDGhYviUTZWxmiIt3aZmzqm80n8=$NaOrIMoClDCyLPGoVsClrEYLGKw7U5uYFJkrhAhC0R4=','admin@gmail.com','admin','2016-04-09', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-2,'teszt','KIkvsQZnyEk0LQLlYred1uylvnldBomKstriJL95CsE=$rQWuk868O5zFfigoWjnG+Hlmy6bpMnXjslZw+mOzV2Y=','teszt@gmail.com','teszt', '2016-04-09', -2);
+    VALUES(-1,'admin', 'cveqGRZfe2VtNuO0yDGhYviUTZWxmiIt3aZmzqm80n8=$NaOrIMoClDCyLPGoVsClrEYLGKw7U5uYFJkrhAhC0R4=','admin@gmail.com','Admin User','2016-04-09', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-3,'teszt2','/fpiWSuy39OgLlmMJPSQilOr/yp4OIYM+6zOkooZU4M=$LkhrNgGpBMS19lrX1m8mqaxYpJircexufcQwebJGrQc=','teszt2@gmail.com','teszt2', '2015-03-04', -2);
+    VALUES(-2,'test','ZbOS5o2SpVBah+t9MMLWpf3a2rxatJVo2hV5hnY4dQ4=$1iz88I5xleACNlQGK9eZdKvSBMo/Us2aKXTAlG8Tmms=','test@gmail.com','Test User', '2016-04-09', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-4,'teszt3','TOaLOIaQ2As1yERxeuTDoRHG3Y5EQ1N2doVftmGGZp4=$UqdPv+KKJZXwx8bq7L+f9GfD50ojVjqUtvc2UBfSOzg=','teszt3@gmail.com','teszt3', '2015-03-04', -1);
+    VALUES(-3,'test2','FxkWGMkAwbq3c4kCqLKqSvgnkv7Q6fmlmg0qpNyf+ds=$UAAlW4+ipWxfoE7eVHXD5OA48azauOhEWIiUV/dA0X4=','test2@gmail.com','Test2 User', '2015-03-04', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-5,'teszt4','HDH3+sVnG9WQhiY0d/oHy93lUFtytIsHX4JfDfyp+iU=$PfsNsXS2L+O8mIUPHAGND+1df1bCy+92TniW1Zwvemk=','teszt4@gmail.com','teszt4', '2015-03-04', -3);
+    VALUES(-4,'test3','Nh0+SvHXJoJzrFK71qXs693ftunFkoQ60N/qT5AphOI=$k2xO8Xgy7UbUxKdnAf+8ghdViNeHxFm0jgWpapOgbdE=','test3@gmail.com','Test3 User', '2015-03-04', -1);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-6,'admin2','hI+CNsDo2vixy5gMeorczH7Bl2YlxEqWF2022mxkOWo=$jhuFFXytReV39fagWOz030LM+g8ZevWGnctVRWiI294=','admin2@gmail.com','admin2', '2013-03-04', -2);
+    VALUES(-5,'test4','xxZiRzrq4yeNuS/O/K/JIwQZb8aL9l6AhoJ4anTlFNU=$Wo+3DXAYNs1euay9WtgMG7iCirIXPfZQBqmGiuygJWY=','test4@gmail.com','Test4 User', '2015-03-04', -3);
+
+INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
+    VALUES(-6,'admin2','hI+CNsDo2vixy5gMeorczH7Bl2YlxEqWF2022mxkOWo=$jhuFFXytReV39fagWOz030LM+g8ZevWGnctVRWiI294=','admin2@gmail.com','Admin2 User', '2013-03-04', -2);
 
 
 
