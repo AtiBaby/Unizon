@@ -78,6 +78,17 @@
 <colAssociation fkAssociation="92A3804A-C85D-6C23-76FA-52F16BFEC0A3" referredColumn="8F5417DF-AA61-D092-EA39-EB1DFD0C0A5D"/>
 </associations>
 </Column>
+<Column name="DELETED" id="6712D0C8-86FF-966B-5FF3-7C652F33EDD4">
+<createdBy>Attila</createdBy>
+<createdTime>2016-04-22 17:17:22 UTC</createdTime>
+<ownerDesignName>DATA_MODEL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="1A88F2A0-530A-C430-4FEF-F6FB876D975E" name="PRODUCT_PK">

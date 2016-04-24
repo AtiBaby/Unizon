@@ -44,6 +44,11 @@
 				<li><a href="#{request.contextPath}/products.jsf">Products</a></li>
 				<li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
 				<li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+				<h:panelGroup
+					rendered="#{loginController.loggedIn and loginController.administrator}">
+					<li><a href="#{request.contextPath}/administrator/manage_administrator.jsf">Manage admins</a></li>
+					<li><a href="#{request.contextPath}/edit_products.jsf">Edit products</a></li>
+				</h:panelGroup>
 				<li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
 				<h:panelGroup rendered="#{loginController.loggedIn}">
 					<h:form id="logout">

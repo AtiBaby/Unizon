@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="custom_css">
+		<h:outputStylesheet name="css/user.css" />
+	</ui:define>
+    <ui:define name="title">Edit products</ui:define>
+    <ui:define name="fullBody">
+    <p:dialog header="Edit Product" resizable="false" draggable="false" styleClass="address_modal" id="editProductDialog" closeOnEscape="true" modal="true" widgetVar="editProductDialogVar">
+			<!-- Edit address form -->
+			<div class="login_form_container">
+				<h:form id="editProductDialogForm" class="login_form">
+					<p:outputLabel value="Title:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.title}" required="true" requiredMessage="Title is required!"
+						tabindex="1" />
+
+					<p:outputLabel value="Amount:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.amount}" required="true" requiredMessage="Amount is required!"
+						tabindex="2" />
+
+					<p:outputLabel value="Price:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.price}" required="true" requiredMessage="Price is required!"
+						tabindex="3" />
+
+					<p:outputLabel value="Description:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.description}" required="true" requiredMessage="Description is required!"
+						tabindex="4" />
+
+					<p:commandButton value="Edit" styleClass="custom_button" actionListener="#{productController.editProduct()}"
+						ajax="true" update=":messages, :editProductDialogForm" tabindex="8" />
+					<p:commandButton value="Cancel" styleClass="custom_button" actionListener="#{productController.showAllProducts()}"
+						ajax="true" immediate="true" tabindex="9" />
+				</h:form>
+			</div>
+		</p:dialog>
+    <center>
+        <h:form id="userform" rendered="#{loginController.loggedIn}">
+            <p:panel>
+                <h:dataTable
+                    value="#{productController.products}" var="products" styleClass="address-table"
+                	headerClass="address-table-header" rowClasses="address-table-odd-row,address-table-even-row">
+                        <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                <center><p:outputLabel value="#{products.title}" /></center>
+                        </h:column>
+                        <h:column>
+                                <f:facet name="header">Price</f:facet>
+                                <center><p:outputLabel value="#{products.price}" /></center>
+                        </h:column>
+                        <h:column>
+                                <f:facet name="header">Amount</f:facet>
+                                <center><p:outputLabel value="#{products.amount}" /></center>
+                        </h:column>
+                        <h:column>
+                            <div class="address_cell">
+								<h:form>
+									<p:remoteCommand name="editProductRemoteCommand" actionListener="#{productController.editProductListen()}"
+										update="editProductDialog" oncomplete="PF('editProductDialogVar').show()" />
+
+									<a id="edit_product_trigger" rel="leanModal" data-toggle="modal" data-id="#{products.productId}"
+										onclick="editProductRemoteCommand([{name:'productId', value:#{products.productId}}]);">
+										<i class="fa fa-edit"></i>
+									</a>
+								</h:form>
+							</div>
+                        </h:column>
+                        <h:column>
+                                <div class="address_cell">
+											<h:form transient="true" id="removeProductForm">
+												<p:remoteCommand
+													name="removeProductRemoteCommand"
+													actionListener="#{productController.removeProduct}"
+													process="@this"
+													onstart="return confirm('Are you sure you want to delete this product?');"
+													oncomplete="location.reload();" />
+
+												<h:commandLink
+													id="remove"
+													onclick="removeProductRemoteCommand([{name:'productId', value:#{products.productId}}]);">
+													<f:ajax render="@form" />
+													<i class="fa fa-remove"></i>
+												</h:commandLink>
+											</h:form>
+										</div>
+                        </h:column>
+                </h:dataTable>
+                
+										
+                
+            </p:panel>
+        </h:form>
+    </center>
+    </ui:define>
+</ui:composition>
