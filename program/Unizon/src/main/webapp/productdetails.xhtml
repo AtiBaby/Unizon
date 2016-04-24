@@ -9,6 +9,7 @@
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/def.css" />
 		<h:outputStylesheet name="css/product.css" />
+		<h:outputStylesheet name="css/productdetails.css" />
 		<h:outputStylesheet name="css/product_slider.css" />
 	</ui:define>
 
@@ -32,27 +33,37 @@
 			<div class="left_bar">
 				<h2>Search</h2>
 				<div class="search_holder">
+
 					<h:form id="searchform" method="post" action="">
 						<h:inputText placeholder="Search..." type="text"
 							value="#{SearchController.productName}" />
+
 						<h:commandButton type="submit" styleclass="" value=""
+							onclick="window.location.href='products.jsf'; return false;"
 							actionListener="#{SearchController.search()}" ajax="false" />
+
 					</h:form>
+
 				</div>
 
 				<h2>categories</h2>
 				<div class="left_box">
+
 					<h:form>
 						<ul class="category_list">
+
 							<li class="cat_picker"><i class="fa fa-dot-circle-o"
 								aria-hidden="true"></i> <h:commandLink
-									action="#{SearchController.catSelectSearch}">
+									action="#{SearchController.catSelectSearch}"
+									onclick="window.location.href='products.jsf'; return false;">
 									<f:setPropertyActionListener
 										target="#{SearchController.category}" value="all" />All
 									categories</h:commandLink></li>
+
 							<ui:repeat var="cat" value="#{SearchController.categoryNames}">
 								<li class="cat_picker"><i class="fa fa-dot-circle-o"
 									aria-hidden="true"></i> <h:commandLink
+										onclick="window.location.href='products.jsf'; return false;"
 										action="#{SearchController.catSelectSearch}">
 										<f:setPropertyActionListener
 											target="#{SearchController.category}" value="#{cat}" />#{cat}
@@ -60,6 +71,7 @@
 							</ui:repeat>
 						</ul>
 					</h:form>
+
 				</div>
 				<h2>Sort</h2>
 				<div class="sort_holder">
@@ -80,29 +92,30 @@
 					<h:outputText
 						value="#{productDetailController.actualProduct.title}" />
 				</h1>
-				<div class="product_box_container">
+				<div class="product_box_container col-sm-6">
 					<div class="product_box">
 						<div class="product_box_imageholder">
 							<div class="product_box_imageholder_cell">
 								<h:graphicImage
-									name="#{productDetailController.actualProduct.image.imageUrl}" />
+									name="#{productDetailController.actualProduct.image.imageUrl}"
+									style="height:310px;" />
 							</div>
 						</div>
 					</div>
 				</div>
-				<div id="info_container">
+				<div id="info_container col-sm-6">
 					<div class="info_header">
 						<h3>
-							<h:outputText
-								value="Description: #{productDetailController.actualProduct.description}" />
-							<h:outputText value="&lt;br/&gt;" escape="false" />
+
 							<h:outputText
 								value="Amount: #{productDetailController.actualProduct.amount}" />
 							<h:outputText value="&lt;br/&gt;" escape="false" />
 							<h:outputText
 								value="Price: #{productDetailController.actualProduct.price} USD" />
 						</h3>
+
 					</div>
+
 					<div class="buttons clear-after">
 						<h3>
 							<a href="#" class="button cart"><i
@@ -110,8 +123,35 @@
 								Cart</a>
 						</h3>
 					</div>
+					<div class="row" id="productImages">
+						<h:outputText style="border-bottom:2px solid black;" />
+						<div class="smallImage">
+							<a href="#" class="thumb active"> <h:graphicImage
+									class="img-responsive"
+									name="#{productDetailController.actualProduct.image.imageUrl}" />
+							</a>
+						</div>
+						<div class="smallImage">
+							<a href="#" class="thumb"> <h:graphicImage
+									class="img-responsive"
+									name="#{productDetailController.actualProduct.image.imageUrl}" />
+							</a>
+						</div>
+						<div class="smallImage">
+							<a href="#" class="thumb active"> <h:graphicImage
+									class="img-responsive"
+									name="#{productDetailController.actualProduct.image.imageUrl}" />
+							</a>
+						</div>
+					</div>
 				</div>
-
+				<h4>
+					<h:outputText value="&lt;br/&gt;" escape="false" />
+					<h:outputText value="&lt;br/&gt;" escape="false" />
+					<h:outputText
+						value="Description: #{productDetailController.actualProduct.description}" />
+					<h:outputText value="&lt;br/&gt;" escape="false" />
+				</h4>
 			</div>
 		</div>
 	</ui:define>
