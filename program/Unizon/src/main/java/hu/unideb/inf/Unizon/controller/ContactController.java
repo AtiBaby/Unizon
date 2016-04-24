@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.primefaces.context.RequestContext;

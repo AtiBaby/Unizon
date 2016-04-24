@@ -7,16 +7,11 @@ package hu.unideb.inf.Unizon.email;
 
 import java.io.UnsupportedEncodingException;
 import javax.ejb.Stateless;
-import java.util.Date;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 /**
  *
