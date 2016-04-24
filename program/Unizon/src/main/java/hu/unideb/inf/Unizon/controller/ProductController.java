@@ -19,6 +19,9 @@ import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.ProductFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
+import hu.unideb.inf.Unizon.model.CatToProd;
+import hu.unideb.inf.Unizon.model.ProdToOrder;
+import hu.unideb.inf.Unizon.model.ProdToTag;
 import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.User;
 import java.util.List;
@@ -47,15 +50,20 @@ public class ProductController implements Serializable {
 	private Product newProduct;
 	private Product originalProduct;
 	private User user;
-        
-        private List<Product> products;
+	private ProdToOrder proToOrder;
+	private ProdToTag prodToTag;
+	private CatToProd catToProd;
+    private List<Product> products;
 
 	@PostConstruct
 	public void init() {
-		/*Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
-		int productId = Integer.parseInt(params.get("productId"));
-
-		originalProduct = productFacade.find(productId);*/
+		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+		if (params.get("productId") != null) {
+			int productId = Integer.parseInt(params.get("productId"));
+			originalProduct = productFacade.find(productId);
+		} else {
+			originalProduct = null;
+		}
 
 		newProduct = new Product();
 
@@ -66,38 +74,68 @@ public class ProductController implements Serializable {
                         newProduct.setDescription(originalProduct.getDescription());
 		}
 
-                originalProduct = new Product();
-                user = loginController.getUser();
-                
-                products = productFacade.findAll();
-	}
         
-    public List<Product> listAll(){
-        return productFacade.findAll();
-    }
+        user = loginController.getUser();     
+        products = productFacade.findAll();
+	}
+	
         
     public void showAllProducts(){
-        redirect("/administrator/edit_products.jsf?faces-redirect=true");
+        redirect("/edit_products.jsf?faces-redirect=true");
     }
+    
+    public void editProductListen() {
+		init();
+	}
 
 	public void editProduct() {
 		if (!newProduct.equals(originalProduct)) {
-			//newProduct = productFacade.find(newProduct);
+			newProduct = createOrFindProduct(newProduct);
 
-			originalProduct.setDescription(newProduct.getDescription());
-                        originalProduct.setTitle(newProduct.getTitle());
-                        originalProduct.setAmount(newProduct.getAmount());
-                        originalProduct.setPrice(newProduct.getPrice());
-                        
-                        newProduct = productFacade.edit(newProduct);
+			removeProductFromProdToOrder(originalProduct);
+			addProductToProdToOrder(newProduct);
+			removeProductFromProdToTag(originalProduct);
+			addProductToProdProdToTag(newProduct);
+			removeProductFromCatToProd(originalProduct);
+			addProductToCatToProd(newProduct);
+			
+			
 		}
 
-		redirect("/administrator/edit_products.jsf?faces-redirect=true");
+		redirect("/edit_products.jsf?faces-redirect=true");
 	}
 
+	public Product createOrFindProduct(Product newProduct){
+		return newProduct;
+	}
+	
+	public void removeProductFromProdToOrder(Product originalProduct){
+		
+	}
+	
+	public void addProductToProdToOrder(Product newProduct){
+		
+	}
+	
+	public void removeProductFromProdToTag(Product originalProduct){
+		
+	}
+	
+	public void addProductToProdProdToTag(Product newProduct){
+		
+	}
+	
+	public void removeProductFromCatToProd(Product originalProduct){
+		
+	}
+	
+	public void addProductToCatToProd(Product newProduct){
+		
+	}
+	
 	public void removeProduct() {
 
-		redirect("/administrator/edit_products.jsf?faces-redirect=true");
+		redirect("/edit_products.jsf?faces-redirect=true");
 	}
 
 
@@ -159,12 +197,37 @@ public class ProductController implements Serializable {
 		this.products = products;
 	}
 
-        public User getUser() {
-            return user;
-        }
+    public User getUser() {
+        return user;
+    }
 
-        public void setUser(User user) {
-            this.user = user;
-        }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    public CatToProd getCatToProd() {
+		return catToProd;
+	}
+    
+    public void setCatToProd(CatToProd catToProd) {
+		this.catToProd = catToProd;
+	}
+    
+    public ProdToTag getProdToTag() {
+		return prodToTag;
+	}
+    
+    public void setProdToTag(ProdToTag prodToTag) {
+		this.prodToTag = prodToTag;
+	}
+    
+    public ProdToOrder getProToOrder() {
+		return proToOrder;
+	}
+    
+    public void setProToOrder(ProdToOrder proToOrder) {
+		this.proToOrder = proToOrder;
+	}
+    
 }
 

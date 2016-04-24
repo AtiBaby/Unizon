@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
 
-<ui:define name="custom_css">
-	<h:outputStylesheet name="css/contact.css" />
-</ui:define>
+    <ui:define name="custom_css">
+        <h:outputStylesheet name="css/contact.css" />
+    </ui:define>
 
-<ui:define name="custom_js">
-	<h:outputScript target="head" library="js" name="map.js"/>
-	<script async='async' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLIbQVFUyz056QbOtMKOO5r4aUWy2OBNU&amp;callback=initMap"></script>
-</ui:define>
+    <ui:define name="custom_js">
+        <h:outputScript target="head" library="js" name="map.js"/>
+        <script async='async' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLIbQVFUyz056QbOtMKOO5r4aUWy2OBNU&amp;callback=initMap"></script>
+    </ui:define>
 
-<ui:define name="fullBody">
-<div id="table_container" class="container">
-		<div class="table">
-			<!-- elso sor -->
-			<!-- elso elem -->
-			<div class="table_element" id="bal_fel">
-				<h1>Contact</h1>
-				<span id="contact_info">Please feel free fill out the form on
-					the right and send us your feedback or questions. We try to process
-					your inquery as fast as we can and get back to you shortly!</span> <span
-					id="contact_info_mobile">Please feel free fill out the form
-					below and send us your feedback or questions. We try to process
-					your inquery as fast as we can and get back to you shortly!</span>
-			</div>
-			<!-- masodik elem -->
-			<div class="table_element" id="jobb_fel">
-				<div class="form_holder">
-					<!-- action="MAILTO:someone@example.com" -->
-					<form id="contact_form" name="contact_form">
-						<div class="contact_form_row inputfield">
-							<input class="name" type="text" placeholder="Name"/>
-						</div>
-						<div class="contact_form_row inputfield">
-							<input class="email" type="text" placeholder="E-mail"/>
-						</div>
-						<div class="contact_form_row inputfield">
-							<input class="subject" type="text" placeholder="Subject"/>
-						</div>
-						<div class="contact_form_row inputfield">
-							<textarea class="message" type="text" placeholder="Message"></textarea>
-						</div>
-						<div class="contact_form_row">
-							<input class="submit_button" type="submit" value="Send" />
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- masodik sor -->
-			<!-- elso elem -->
-			<div id="bal_le" class="table_element">
-				<div id="map"></div>
-			</div>
-			<!-- masodik elem -->
-			<div class="table_element" id="jobb_le">
-				<h1>uniZON Ltd.</h1>
-				<br /> <span>26 Kassai street DEDBRECEN</span><br /> <span>4028
-					HUNGARY</span><br /> <br /> <span>Phone: +36 52 000-111</span><br /> <span>Mobile:
-					+36 30 123 4567</span><br /> <span>E-mail: unizonwebshop@gmail.com</span><br />
-			</div>
-		</div>
-	</div>
-</ui:define>
+    <ui:define name="fullBody">
+        <div id="table_container" class="container" onload="#{contactController.init()}">
+            <div class="table">
+                <!-- elso sor -->
+                <!-- elso elem -->
+                <div class="table_element" id="bal_fel">
+                    <h1>Contact</h1>
+                    <span id="contact_info">Please feel free fill out the form on
+                        the right and send us your feedback or questions. We try to process
+                        your inquery as fast as we can and get back to you shortly!</span> <span
+                        id="contact_info_mobile">Please feel free fill out the form
+                        below and send us your feedback or questions. We try to process
+                        your inquery as fast as we can and get back to you shortly!</span>
+                </div>
+                <!-- masodik elem -->
+                <div class="table_element" id="jobb_fel">
+                    <div class="form_holder">
+                        <!-- action="MAILTO:someone@example.com" -->
+                        <h:form id="contact_form">
+                            <div class="contact_form_row inputfield">
+                                <p:inputText class="name" value="#{contactController.name}" type="text" placeholder="Name"/>
+                            </div>
+                            <div class="contact_form_row inputfield">
+                                <p:inputText class="email" value="#{contactController.from}" type="text" placeholder="E-mail" required="true" requiredMessage="E-mail address is required!"
+                                             validatorMessage="Please add a valid e-mail address!">
+                                    <f:validateRegex
+                                        pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[ A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$" />
+                                </p:inputText>
+                            </div>
+                            <div class="contact_form_row inputfield">
+                                <p:inputText class="subject" value="#{contactController.subject}" type="text" placeholder="Subject"/>
+                            </div>
+                            <div class="contact_form_row inputfield">
+                                <p:inputTextarea class="message" value="#{contactController.text}" autoResize="false" placeholder="Message"/>
+                            </div>
+                            <div class="contact_form_row">
+                                <center>
+                                    <p:commandButton class="submit_button" type="submit" update=":contact_form, :messages" actionListener="#{contactController.sendEmail}" value="Send" />
+                                </center>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <!-- masodik sor -->
+                <!-- elso elem -->
+                <div id="bal_le" class="table_element">
+                    <div id="map"></div>
+                </div>
+                <!-- masodik elem -->
+                <div class="table_element" id="jobb_le">
+                    <h1>uniZON Ltd.</h1>
+                    <br /> <span>26 Kassai street DEDBRECEN</span><br /> <span>4028
+                        HUNGARY</span><br /> <br /> <span>Phone: +36 52 000-111</span><br /> <span>Mobile:
+                        +36 30 123 4567</span><br /> <span>E-mail: unizonwebshop@gmail.com</span><br />
+                </div>
+            </div>
+        </div>
+    </ui:define>
 </ui:composition>

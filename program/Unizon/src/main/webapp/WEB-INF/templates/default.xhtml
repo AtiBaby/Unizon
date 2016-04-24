@@ -1,196 +1,210 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-	
-<h:head>
-	<title><ui:insert name="title">Unizon</ui:insert></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
-	
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/font_awesome/css/font-awesome.min.css"/>
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-	<link href="http://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet" type="text/css" />	
-	<h:outputStylesheet name="css/default.css" />
-	<ui:insert name="custom_css"></ui:insert>
-	
-	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-	<h:outputScript target="head" library="js" name="jquery.leanModal.min.js"/>	
-	
-	<h:outputScript target="head" library="js" name="resize.js"/>	
-    <h:outputScript target="head" library="js" name="login.js"/>	
-	<h:outputScript target="head" library="js" name="signup.js"/>
-	<h:outputScript target="head" library="js" name="site.js"/>
-	<script src='https://www.google.com/recaptcha/api.js'></script>
-	<ui:insert name="custom_js"></ui:insert>
-</h:head>
+    <h:head>
+        <style>
+            .ui-growl-item-container {
+                position:fixed;
+                top:220px;
+            }
+        </style>
+        <title><ui:insert name="title">Unizon</ui:insert></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
 
-<h:body>
-	<ui:insert name="nav">
-	<div id="top_main_nav" class="navbar navbar-default navbar-fixed-top">
-		<div class="container" id="header_container">
-			<div id="logo">
-				<div class="logo_holder">
-					<a href="./"><img src="./resources/images/other/logo.png" /></a>
-				</div>
-			</div>
-			<ul class="navigation">
-				<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
-				<li><a href="#{request.contextPath}/products.jsf">Products</a></li>
-				<li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
-				<li><a href="#{request.contextPath}/about.jsf">About us</a></li>
-				<li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
-				<h:panelGroup rendered="#{loginController.loggedIn}">
-					<h:form id="logout">
-					<li><a href="#{request.contextPath}/user.jsf">#{loginController.user.name}</a></li>
-					<li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
-					</h:form>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{!loginController.loggedIn}">
-					<li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
-					<li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
-				</h:panelGroup>
-			</ul>
-			<div id="mobile_menu_button">&nbsp;</div>
-			<a href="#"><i id="mobile_cart_image" class="fa fa-shopping-cart fa-3x"></i></a>
-		</div>
-	</div>
-	</ui:insert>
-	<ui:insert name="mobil">
-	<div id="menu_panel">
-		<ul class="navigation_mobile">
-			<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
-			<li><a href="#{request.contextPath}/products.jsf">Products</a></li>
-			<li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
-			<li><a href="#{request.contextPath}/about.jsf">About us</a></li>
-			<h:panelGroup rendered="#{loginController.loggedIn}">
-					<h:form id="logout_mobil">
-					<li><a href="#{request.contextPath}/user.jsf">#{loginController.user.name}</a></li>
-					<li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
-					</h:form>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{!loginController.loggedIn}">
-					<li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
-					<li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
-				</h:panelGroup>
-		</ul>
-	</div>
-	</ui:insert>
-	
-	<ui:insert name="login">
-	<div id="modal_log" class="popupContainer" style="display: none;">
-		<div class="popupHeader">
-			<span class="header_title">Login</span> <span id="close_modal_log" class="modal_close"><i
-				class="fa fa-times"></i></span>
-		</div>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/font_awesome/css/font-awesome.min.css"/>
 
-		<div class="popupBody">
+        <link href="http://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet" type="text/css" />	
+        <h:outputStylesheet name="css/default.css" />
+        <ui:insert name="custom_css"></ui:insert>
 
-			<!-- Login form -->
-			<div class="login_form_container">
-				<h:form id="log_form" class="login_form" action="#{request.contextPath}/contact.jsf">
-					<p:outputLabel value="Username:" styleClass="required" />
-						<p:inputText
-							id="username"
-							required="true"
-							requiredMessage="Please type in your username!"
-							value="#{loginController.username}" />
-						<p:outputLabel value="Password:" styleClass="required" />
-						<p:password
-							id="password"
-							required="true"
-							requiredMessage="Please type in your password!"
-							value="#{loginController.password}" />
-					
-					<p:commandButton styleClass="form_button" value="Login" actionListener="#{loginController.login()}" ajax="true" update=":messages, :log_form" />
-					<a id="forgot_pw" >Forgot password?</a>
-				</h:form>
-			</div>
-		</div>
-	</div>
-	</ui:insert>
-	
-	<ui:insert name="register">
-	<div id="modal_reg" class="popupContainer" style="display: none;">
-		<div class="popupHeader">
-			<span class="header_title">Register</span> 
-			<span id="close_modal_reg" class="modal_close"><i class="fa fa-times"></i></span>
-		</div>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript target="head" library="js" name="jquery.leanModal.min.js"/>	
 
-		<div class="popupBody">
-			<!-- Register Form -->
-			<div class="reg_form_container" >
-				<p:growl id="messages" life="8000" showDetail="true" />
-				<h:form id="reg_form" class="reg_form" action="#">
-						
-						<p:outputLabel value="Username:" styleClass="required" />
-						<p:inputText value="#{registrationController.newUser.username}" required="true" requiredMessage="Username is required!" />
-						
-						<p:outputLabel value="Name:" styleClass="required" />
-						<p:inputText value="#{registrationController.newUser.name}" required="true" requiredMessage="Name is required!" />
-						
-						<p:outputLabel value="E-mail:" styleClass="required" />
-						<p:inputText value="#{registrationController.newUser.EMail}" required="true" requiredMessage="E-mail address is required!"
-							validatorMessage="Please add a valid e-mail address!">
-							<f:validateRegex
-								pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[ A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$" />
-						</p:inputText>
-						
-						<p:outputLabel value="Password:" styleClass="required" />
-						<p:password value="#{registrationController.newUser.password}" required="true" requiredMessage="Password is required!"
-							match="passwordAgain" validatorMessage="The passwords did not match!" />
-						<p:outputLabel value="Confirm password:" styleClass="required" />
-						<p:password id="passwordAgain" />
-						
-						<p:commandButton id="register"	styleClass="form_button"
-                                                        value="Register" actionListener="#{registrationController.register()}"
-                                                        ajax="true"
-                                                        update=":messages, :reg_form"
-                                        />
-				</h:form>
-			</div>
-		</div>
-	</div>
-	</ui:insert>
-	
-	<ui:insert name="fullBody">
-	</ui:insert>
+        <h:outputScript target="head" library="js" name="resize.js"/>	
+        <h:outputScript target="head" library="js" name="login.js"/>	
+        <h:outputScript target="head" library="js" name="signup.js"/>
+        <h:outputScript target="head" library="js" name="site.js"/>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <ui:insert name="custom_js"></ui:insert>
+    </h:head>
 
-	<ui:insert name="footer">
-	<div class="footer">
-		<div class="container" id="footer_container">
-			<ul class="social_media">
-				<li><a href="https://www.facebook.com/"><i
-						class="fa fa-facebook-square fa-lg soc_media_element"></i></a></li>
-				<li><a href="https://www.twitter.com/"><i
-						class="fa fa-twitter-square fa-lg soc_media_element"></i></a></li>
-				<li><a href="https://www.instagram.com/"><i
-						class="fa fa-instagram fa-lg soc_media_element"></i></a></li>
-			</ul>
-			<p class="text-muted" id="footer_text">
-				YOU CHOOSE, WE DELIVER &nbsp; <i class="fa fa-desktop fa-lg"></i>
-				&nbsp; MADE IN DEBRECEN, 2016
-			</p>
-			<ul id="footer_text_mobile">
-				<li><p>YOU CHOOSE, WE DELIVER</p></li>
-				<li><p>
-						<i class="fa fa-desktop fa-lg"></i>
-					</p></li>
-				<li><p>MADE IN DEBRECEN, 2016</p></li>
-			</ul>
-		</div>
-		<div id="all_rights">
-			<p>
-				<i class="fa fa-copyright fa-lg"></i> &nbsp; Debreceni Egyetem SZRT.
-				All rights reserved.
-			</p>
-		</div>
-	</div>
-	</ui:insert>
-</h:body>
+    <h:body>
+        <ui:insert name="nav">
+            <div id="top_main_nav" class="navbar navbar-default navbar-fixed-top">
+                <div class="container" id="header_container">
+                    <div id="logo">
+                        <div class="logo_holder">
+                            <a href="./"><img src="./resources/images/other/logo.png" /></a>
+                        </div>
+                    </div>
+                    <ul class="navigation">
+                        <h:panelGroup rendered="#{loginController.loggedIn and loginController.administrator }">
+                            <li><a href="#{request.contextPath}/admin.jsf">!PUSH</a></li>
+                        </h:panelGroup>
+                        <li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
+                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+                        <h:panelGroup
+                            rendered="#{loginController.loggedIn and loginController.administrator}">
+                            <li><a href="#{request.contextPath}/manage_administrator.jsf">Manage admins</a></li>
+                            <li><a href="#{request.contextPath}/edit_products.jsf">Edit products</a></li>
+                        </h:panelGroup>
+                        <li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
+                        <h:panelGroup rendered="#{loginController.loggedIn}">
+                            <h:form id="logout">
+                                <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.name}</a></li>
+                                <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
+                            </h:form>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{!loginController.loggedIn}">
+                            <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
+                            <li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
+                        </h:panelGroup>
+                    </ul>
+                    <div id="mobile_menu_button">&nbsp;</div>
+                    <a href="#"><i id="mobile_cart_image" class="fa fa-shopping-cart fa-3x"></i></a>
+                    <p:growl id="messages" life="8000" showDetail="true"/>
+                </div>
+            </div>
+        </ui:insert>
+        <ui:insert name="mobil">
+            <div id="menu_panel">
+                <ul class="navigation_mobile">
+                    <li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+                    <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+                    <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
+                    <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+                    <h:panelGroup rendered="#{loginController.loggedIn}">
+                        <h:form id="logout_mobil">
+                            <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.name}</a></li>
+                            <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
+                        </h:form>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!loginController.loggedIn}">
+                        <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
+                        <li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
+                    </h:panelGroup>
+                </ul>
+            </div>
+        </ui:insert>
+
+        <ui:insert name="login">
+            <div id="modal_log" class="popupContainer" style="display: none;">
+                <div class="popupHeader">
+                    <span class="header_title">Login</span> <span id="close_modal_log" class="modal_close"><i
+                            class="fa fa-times"></i></span>
+                </div>
+
+                <div class="popupBody">
+
+                    <!-- Login form -->
+                    <div class="login_form_container">
+                        <h:form id="log_form" class="login_form" action="#{request.contextPath}/contact.jsf">
+                            <p:outputLabel value="Username:" styleClass="required" />
+                            <p:inputText
+                                id="username"
+                                required="true"
+                                requiredMessage="Please type in your username!"
+                                value="#{loginController.username}" />
+                            <p:outputLabel value="Password:" styleClass="required" />
+                            <p:password
+                                id="password"
+                                required="true"
+                                requiredMessage="Please type in your password!"
+                                value="#{loginController.password}" />
+
+                            <p:commandButton styleClass="form_button" value="Login" actionListener="#{loginController.login()}" ajax="true" update=":messages, :log_form" />
+                            <a id="forgot_pw" >Forgot password?</a>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </ui:insert>
+
+        <ui:insert name="register">
+            <div id="modal_reg" class="popupContainer" style="display: none;">
+                <div class="popupHeader">
+                    <span class="header_title">Register</span> 
+                    <span id="close_modal_reg" class="modal_close"><i class="fa fa-times"></i></span>
+                </div>
+
+                <div class="popupBody">
+                    <!-- Register Form -->
+                    <div class="reg_form_container" >
+                        <h:form id="reg_form" class="reg_form" action="#">
+
+                            <p:outputLabel value="Username:" styleClass="required" />
+                            <p:inputText value="#{registrationController.newUser.username}" required="true" requiredMessage="Username is required!" />
+
+                            <p:outputLabel value="Name:" styleClass="required" />
+                            <p:inputText value="#{registrationController.newUser.name}" required="true" requiredMessage="Name is required!" />
+
+                            <p:outputLabel value="E-mail:" styleClass="required" />
+                            <p:inputText value="#{registrationController.newUser.EMail}" required="true" requiredMessage="E-mail address is required!"
+                                         validatorMessage="Please add a valid e-mail address!">
+                                <f:validateRegex
+                                    pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[ A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+
+                            <p:outputLabel value="Password:" styleClass="required" />
+                            <p:password value="#{registrationController.newUser.password}" required="true" requiredMessage="Password is required!"
+                                        match="passwordAgain" validatorMessage="The passwords did not match!" />
+                            <p:outputLabel value="Confirm password:" styleClass="required" />
+                            <p:password id="passwordAgain" />
+
+                            <p:commandButton id="register"	styleClass="form_button"
+                                             value="Register" actionListener="#{registrationController.register()}"
+                                             ajax="true"
+                                             update=":messages, :reg_form"
+                                             />
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </ui:insert>
+
+        <ui:insert name="fullBody">
+        </ui:insert>
+
+        <ui:insert name="footer">
+            <div class="footer">
+                <div class="container" id="footer_container">
+                    <ul class="social_media">
+                        <li><a href="https://www.facebook.com/"><i
+                                    class="fa fa-facebook-square fa-lg soc_media_element"></i></a></li>
+                        <li><a href="https://www.twitter.com/"><i
+                                    class="fa fa-twitter-square fa-lg soc_media_element"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i
+                                    class="fa fa-instagram fa-lg soc_media_element"></i></a></li>
+                    </ul>
+                    <p class="text-muted" id="footer_text">
+                        YOU CHOOSE, WE DELIVER &nbsp; <i class="fa fa-desktop fa-lg"></i>
+                        &nbsp; MADE IN DEBRECEN, 2016
+                    </p>
+                    <ul id="footer_text_mobile">
+                        <li><p>YOU CHOOSE, WE DELIVER</p></li>
+                        <li><p>
+                                <i class="fa fa-desktop fa-lg"></i>
+                            </p></li>
+                        <li><p>MADE IN DEBRECEN, 2016</p></li>
+                    </ul>
+                </div>
+                <div id="all_rights">
+                    <p>
+                        <i class="fa fa-copyright fa-lg"></i> &nbsp; Debreceni Egyetem SZRT.
+                        All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </ui:insert>
+    </h:body>
 </html>

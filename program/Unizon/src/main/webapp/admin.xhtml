@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="custom_css">
+		<h:outputStylesheet name="css/admin.css" />
+		<h:outputStylesheet name="css/def.css" />
+	</ui:define>
+
+	<ui:define name="fullBody">
+		<div id="tab_container" class="container">
+			<p:tabView>
+				<!-- 				<p:growl id="messages" life="4000" showDetail="true" /> -->
+				<p:tab class="tab" title="Product information">
+					<h:form styleClass="add_product_form">
+						<p:remoteCommand name="addProductRemoteCommand"
+							update="addProductDialog"
+							oncomplete="PF('addProductDialogVar').show()" />
+						<a id="new_product_trigger" rel="leanModal"
+							onclick="addProductRemoteCommand([{name:'productId', value:0}]);">
+							<i class="fa fa-plus"></i>
+						</a>
+						<div class="add_new_prod">Add new product</div>
+					</h:form>
+					<p:dataTable value="#{productController.products}" var="products" styleClass="borderless" paginator="true" rows="30" 
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="15,30,60">
+						<p:column class="prod_id" headerText="Id">
+							<h:outputText class="prod_celltext" value="#{products.productId}" />
+						</p:column>
+						<p:column class="prod_title" headerText="Title">
+							<h:outputText class="prod_celltext" value="#{products.title}" />
+						</p:column>
+						<p:column class="prod_price" headerText="Price">
+							<h:outputText class="prod_celltext" value="#{products.price}" />
+						</p:column>
+						<p:column class="prod_amount" headerText="Amount">
+							<h:outputText class="prod_celltext" value="#{products.amount}" />
+						</p:column>
+						<p:column class="prod_description" headerText="Description">
+							<h:outputText class="prod_celltext" value="#{products.description}" />
+						</p:column>
+						<p:column class="prod_edit">
+							<a href="#{request.contextPath}/administrator/edit_product.jsf"><i class="fa fa-pencil"></i></a>
+						</p:column>
+						<p:column class="prod_remove">
+							<a href="#"><i class="fa fa-remove"></i></a>
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+				<p:tab class="tab" title="Administrator information" id="first_tab">
+					<li><a
+						href="#{request.contextPath}/administrator/manage_administrator.jsf">Admin</a></li>
+					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
+				</p:tab>
+			</p:tabView>
+		</div>
+		
+		
+		
+		<!-- Add Product Dialog -->
+		<p:dialog header="Add product" resizable="false" draggable="false" styleClass="product_modal" id="addProductDialog" closeOnEscape="true" modal="true" widgetVar="addProductDialogVar">
+			<div class="product_form_container">
+				<h:form id="addProductDialogForm" styleClass="product_form">
+					<p:outputLabel value="Title:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.title}" required="true" requiredMessage="Title is required!" tabindex="1" />
+
+					<p:outputLabel value="Price:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.price}" required="true" requiredMessage="Price is required!" tabindex="2" />
+
+					<p:outputLabel value="Amount:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.amount}" required="true" requiredMessage="Amount is required!" tabindex="3" />
+
+					<p:outputLabel value="Description:" styleClass="required" />
+					<p:inputText value="#{productUploadController.product.description}" required="true" requiredMessage="Description is required!" tabindex="4" />
+
+					<p:outputLabel value="URL:" styleClass="required" />
+					<p:inputText value="#{productUploadController.image.imageUrl}" required="true" requiredMessage="URL is required!" styleClass="required" tabindex="5" />
+
+					<p:commandButton value="Add" styleClass="custom_button"
+						actionListener="#{productUploadController.upload()}" ajax="true"
+						update=":messages, :addProductDialogForm" tabindex="6" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{productUploadController.showProducts()}" ajax="true"
+						immediate="true" tabindex="7" />
+				</h:form>
+			</div>
+		</p:dialog>
+		
+		
+		
+	</ui:define>
+
+</ui:composition>

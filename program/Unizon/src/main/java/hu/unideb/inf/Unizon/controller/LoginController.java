@@ -21,7 +21,7 @@ import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.Order;
 import hu.unideb.inf.Unizon.model.ProdToOrder;
 import hu.unideb.inf.Unizon.model.User;
-import password.Password;
+import hu.unideb.inf.Unizon.util.Password;
 
 @ManagedBean
 @SessionScoped
