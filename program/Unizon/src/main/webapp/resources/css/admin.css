@@ -1,0 +1,155 @@
+html {
+    height:100%;
+}
+
+body {
+	background-color: #FFF !important;
+	font-family: Raleway !important;
+	font-weight: 400px !important;
+}
+
+.add_product_form{
+	padding-bottom: 10px !important;
+	text-align: right !important;
+}
+
+.add_new_prod {
+	display: inline;
+	margin: 0;
+	padding: 0 0 10px 0;
+	font-size: 17px;
+	font-family: Raleway;
+	color: #2E75B6;
+}
+
+.product_modal{
+	width: 20% !important;
+	top: 115px !important;
+}
+
+.product_form_container input{
+	margin: 5px 0 !important;
+	display: block;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box; 
+}
+
+.product_form label{
+	font-family: Raleway !important;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.custom_button{
+	font-family: Raleway !important;
+	display: inline-block;
+	margin: 5px 5px 5px 0 !important;
+	width: 85px;
+	height: 40px;
+	border-radius: 7px;
+	text-align: center !important;
+	font-size: 14px;
+	font-weight: 350px;
+}
+
+/* PRODUCT TABLE */
+
+.ui-datatable.borderless thead th,
+.ui-datatable.borderless tbody,
+.ui-datatable.borderless tbody tr,
+.ui-datatable.borderless tbody td {
+    border-style: none;
+    background-color: #FFFFFF;
+	font-family: Raleway;
+	font-weight: 400px;
+	font-size: 16px;
+	text-align: left;
+	padding-top: 15px;
+}
+
+.prod_celltext {
+	color: #000000;
+	font-size: 14px;
+	vertical-align: middle;
+}
+
+.prod_id {
+	width: 8%;
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.prod_title {
+	width: 29%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.prod_price {
+	width: 10%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.prod_amount {
+	width: 10%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.prod_description {
+	width: 30%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.prod_edit {
+	width: 5%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+.prod_remove {
+	width: 5%;	
+	color: #2e6da4 !important;
+	font-size: 16px !important;
+	font-face: bold !important;	
+}
+
+
+@media all and (max-width:1400px) {
+
+	#addAddressDialog{
+		width:30% !important;
+		top:115px !important;
+		scrollable: true !important;
+		height: 355px !important;
+		overflow: auto;
+	}
+	
+	.product_form_container input{
+		margin: 5px 0 !important; 
+	}
+}
+
+@media all and (max-width:1200px) {
+
+	#addAddressDialog{
+		width:30% !important;
+		top:115px !important;
+		scrollable: true !important;
+		height: 355px !important;
+		overflow: auto;
+	}
+		
+	.product_form_container input{
+		margin: 5px 0 !important; 
+	}
+}

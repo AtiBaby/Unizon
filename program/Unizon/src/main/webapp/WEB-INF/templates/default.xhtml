@@ -40,6 +40,9 @@
 				</div>
 			</div>
 			<ul class="navigation">
+				<h:panelGroup rendered="#{loginController.loggedIn and loginController.administrator }">
+					<li><a href="#{request.contextPath}/admin.jsf">!PUSH</a></li>
+				</h:panelGroup>
 				<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
 				<li><a href="#{request.contextPath}/products.jsf">Products</a></li>
 				<li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
