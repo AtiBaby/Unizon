@@ -85,10 +85,10 @@
 		</p:dialog>
 
 		<div id="tab_container" class="container">
-			<p:tabView
+			<p:tabView id="adminTabView"
 				rendered="#{loginController.loggedIn and loginController.administrator}">
 				<!-- 				<p:growl id="messages" life="4000" showDetail="true" /> -->
-				<p:tab class="tab" title="Product information">
+				<p:tab class="tab" title="Product information" id="productTab">
 					<h:form styleClass="add_product_form">
 						<p:remoteCommand name="addProductRemoteCommand"
 							actionListener="#{productController.init}"
@@ -158,10 +158,86 @@
 						</p:column>
 					</p:dataTable>
 				</p:tab>
-				<p:tab class="tab" title="Administrator information" id="first_tab">
-					<li><a
-						href="#{request.contextPath}/administrator/manage_administrator.jsf">Admin</a></li>
-					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
+				<p:tab class="tab" title="Manage admin" id="userAdminTab">
+					<center>
+						<h:form id="userTableForm">
+							<p:dataTable id="userTable" widgetVar="userTableWidget"
+								var="user" value="#{manageAdminController.usersWithoutAdmins}"
+								rowKey="#{user.userId}" disabledSelection="false"
+								selectionMode="single"
+								selection="#{manageAdminController.selectedUser}"
+								paginator="true"
+								filteredValue="#{manageAdminController.filteredUser}" rows="10">
+								<f:facet name="header">
+				                            Users
+				                        </f:facet>
+								<p:ajax event="rowSelect"
+									listener="#{manageAdminController.selectUser}" />
+								<p:column headerText="Username" filterBy="#{user.username}"
+									filterMatchMode="contains">
+									<h:outputText value="#{user.username}" />
+								</p:column>
+								<p:column headerText="E-mail" filterBy="#{user.EMail}"
+									filterMatchMode="contains">
+									<h:outputText value="#{user.EMail}" />
+								</p:column>
+								<p:column headerText="Name" filterBy="#{user.name}"
+									filterMatchMode="contains">
+									<h:outputText value="#{user.name}" />
+								</p:column>
+								<p:column headerText="Registration date"
+									filterBy="#{user.registrationDate}" filterMatchMode="contains">
+									<h:outputText value="#{user.registrationDate}" />
+								</p:column>
+							</p:dataTable>
+							<center>
+								<p:commandButton value="Make admin"
+									actionListener="#{manageAdminController.makeAdministrator()}"
+									ajax="true" update=":messages" />
+							</center>
+						</h:form>
+						<h:form id="adminTableForm">
+							<p:dataTable id="adminTable" widgetVar="adminTableWidget"
+								var="admin" value="#{manageAdminController.admins}"
+								rowKey="#{admin.userId}" disabledSelection="false"
+								selectionMode="single"
+								selection="#{manageAdminController.selectedAdministrator}"
+								paginator="true" rows="10">
+								<f:facet name="header">
+				                            Administrators
+				                        </f:facet>
+								<p:ajax event="rowSelect"
+									listener="#{manageAdminController.selectAdministrator}" />
+								<p:column headerText="Username">
+									<h:outputText value="#{admin.user.username}" />
+								</p:column>
+								<p:column headerText="E-mail">
+									<h:outputText value="#{admin.user.EMail}" />
+								</p:column>
+								<p:column headerText="Name">
+									<h:outputText value="#{admin.user.name}" />
+								</p:column>
+								<p:column headerText="Registration date">
+									<h:outputText value="#{admin.user.registrationDate}" />
+								</p:column>
+							</p:dataTable>
+							<center>
+								<p:commandButton value="Delete"
+									actionListener="#{manageAdminController.deleteAdministrator()}"
+									ajax="true" update=":messages">
+									<p:confirm header="Confirmation" message="Are you sure?"
+										icon="ui-icon-alert" />
+								</p:commandButton>
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+									<p:commandButton value="Yes" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="No" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+							</center>
+						</h:form>
+					</center>
 				</p:tab>
 			</p:tabView>
 		</div>

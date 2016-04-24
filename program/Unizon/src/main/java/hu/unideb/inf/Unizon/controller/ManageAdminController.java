@@ -5,24 +5,26 @@
  */
 package hu.unideb.inf.Unizon.controller;
 
-import hu.unideb.inf.Unizon.facade.AdministratorFacade;
-import hu.unideb.inf.Unizon.facade.UserFacade;
-import hu.unideb.inf.Unizon.model.Administrator;
-import hu.unideb.inf.Unizon.model.User;
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.FacesContext;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
+
+import hu.unideb.inf.Unizon.facade.AdministratorFacade;
+import hu.unideb.inf.Unizon.facade.UserFacade;
+import hu.unideb.inf.Unizon.model.Administrator;
+import hu.unideb.inf.Unizon.model.User;
 
 /**
  *
@@ -32,7 +34,9 @@ import org.slf4j.Logger;
 @ViewScoped
 public class ManageAdminController implements Serializable {
 
-    @Inject
+	private static final long serialVersionUID = 1L;
+
+	@Inject
     private Logger log;
 
     @ManagedProperty("#{loginController}")
@@ -80,8 +84,8 @@ public class ManageAdminController implements Serializable {
         log.info("{} has added admin rights to {}.", loginController.getUser(), selectedUser);
         init();
         RequestContext rc = RequestContext.getCurrentInstance();
-        rc.update("adminTableForm");
-        rc.update("userTableForm");
+        rc.update("adminTabView:adminTableForm");
+        rc.update("adminTabView:userTableForm");
     }
     
     public void deleteAdministrator() {
@@ -96,8 +100,8 @@ public class ManageAdminController implements Serializable {
         log.info("{} has removed {} from administrators.", loginController.getUser(), selectedAdministrator);
         init();
         RequestContext rc = RequestContext.getCurrentInstance();
-        rc.update("adminTableForm");
-        rc.update("userTableForm");
+        rc.update("adminTabView:adminTableForm");
+        rc.update("adminTabView:userTableForm");
     }
 
     /**
