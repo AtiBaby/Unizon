@@ -74,6 +74,7 @@ public class ProductController implements Serializable {
 			newProduct.setPrice(originalProduct.getPrice());
 			newProduct.setDescription(originalProduct.getDescription());
 			newProduct.setImage(originalProduct.getImage());
+			newProduct.setDeleted(originalProduct.getDeleted());
 		}
 
 		user = loginController.getUser();
@@ -86,7 +87,6 @@ public class ProductController implements Serializable {
 	}
 
 	public void editProductListen() {
-		System.out.println("Halló world!");
 		init();
 	}
 
