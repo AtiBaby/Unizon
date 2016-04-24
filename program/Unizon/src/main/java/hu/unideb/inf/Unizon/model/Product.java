@@ -156,6 +156,7 @@ public class Product implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+    
 
     public Set<CatToProd> getCatToProds1() {
         return this.catToProds1;
