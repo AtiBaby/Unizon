@@ -29,7 +29,52 @@
 
 	<ui:define name="fullBody">
 		<div class="wrapper product clear-after">
+			<div class="left_bar">
+				<h2>Search</h2>
+				<div class="search_holder">
+					<h:form id="searchform" method="post" action="">
+						<h:inputText placeholder="Search..." type="text"
+							value="#{SearchController.productName}" />
+						<h:commandButton type="submit" styleclass="" value=""
+							actionListener="#{SearchController.search()}" ajax="false" />
+					</h:form>
+				</div>
 
+				<h2>categories</h2>
+				<div class="left_box">
+					<h:form>
+						<ul class="category_list">
+							<li class="cat_picker"><i class="fa fa-dot-circle-o"
+								aria-hidden="true"></i> <h:commandLink
+									action="#{SearchController.catSelectSearch}">
+									<f:setPropertyActionListener
+										target="#{SearchController.category}" value="all" />All
+									categories</h:commandLink></li>
+							<ui:repeat var="cat" value="#{SearchController.categoryNames}">
+								<li class="cat_picker"><i class="fa fa-dot-circle-o"
+									aria-hidden="true"></i> <h:commandLink
+										action="#{SearchController.catSelectSearch}">
+										<f:setPropertyActionListener
+											target="#{SearchController.category}" value="#{cat}" />#{cat}
+								</h:commandLink></li>
+							</ui:repeat>
+						</ul>
+					</h:form>
+				</div>
+				<h2>Sort</h2>
+				<div class="sort_holder">
+					<h:form id="sort_select">
+						<p:outputLabel value="Sort by: " class="tabl_label" />
+						<p:selectOneMenu value="#{SearchController.selectedSort}"
+							onchange="submit()"
+							valueChangeListener="#{SearchController.sortChangeListener}"
+							id="sort_change">
+							<f:selectItems value="#{SearchController.sortingOptions}" />
+						</p:selectOneMenu>
+					</h:form>
+				</div>
+
+			</div>
 			<div class="right_bar clear-after">
 				<h1>
 					<h:outputText
