@@ -101,6 +101,9 @@ public class ProductController implements Serializable {
 		newProduct.setImage(storedImage);
 		productFacade.create(newProduct);
 		log.info("Product uploaded, name: {}.", newProduct.getTitle());
+
+		productEventSrc.fire(newProduct);
+
 		redirect("/admin.jsf?faces-redirect=true");
 	}
 
