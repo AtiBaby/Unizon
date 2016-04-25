@@ -12,87 +12,237 @@
 	</ui:define>
 
 	<ui:define name="fullBody">
+		<!-- Add Product Dialog -->
+		<p:dialog header="Add product" resizable="false" draggable="false"
+			styleClass="product_modal" id="addProductDialog" closeOnEscape="true"
+			modal="true" widgetVar="addProductDialogVar">
+			<div class="product_form_container">
+				<h:form id="addProductDialogForm" styleClass="product_form">
+					<p:outputLabel value="Title:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.title}"
+						required="true" requiredMessage="Title is required!" tabindex="1" />
+
+					<p:outputLabel value="Price:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.price}"
+						required="true" requiredMessage="Price is required!" tabindex="2" />
+
+					<p:outputLabel value="Amount:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.amount}"
+						required="true" requiredMessage="Amount is required!" tabindex="3" />
+
+					<p:outputLabel value="Description:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.description}"
+						required="true" requiredMessage="Description is required!"
+						tabindex="4" />
+
+					<p:outputLabel value="URL:" styleClass="required" />
+					<p:inputText value="#{productController.image.imageUrl}"
+						required="true" requiredMessage="URL is required!"
+						styleClass="required" tabindex="5" />
+
+					<p:commandButton value="Add" styleClass="custom_button"
+						actionListener="#{productController.upload()}" ajax="true"
+						update=":messages, :addProductDialogForm" tabindex="6" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{productController.showAllProducts()}"
+						ajax="true" immediate="true" tabindex="7" />
+				</h:form>
+			</div>
+		</p:dialog>
+
+		<!-- Edit Product Dialog -->
+		<p:dialog header="Edit Product" resizable="false" draggable="false"
+			styleClass="address_modal" id="editProductDialog"
+			closeOnEscape="true" modal="true" widgetVar="editProductDialogVar">
+			<!-- Edit address form -->
+			<div class="login_form_container">
+				<h:form id="editProductDialogForm" class="login_form">
+					<p:outputLabel value="Title:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.title}"
+						required="true" requiredMessage="Title is required!" tabindex="1" />
+
+					<p:outputLabel value="Amount:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.amount}"
+						required="true" requiredMessage="Amount is required!" tabindex="2" />
+
+					<p:outputLabel value="Price:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.price}"
+						required="true" requiredMessage="Price is required!" tabindex="3" />
+
+					<p:outputLabel value="Description:" styleClass="required" />
+					<p:inputText value="#{productController.newProduct.description}"
+						required="true" requiredMessage="Description is required!"
+						tabindex="4" />
+
+					<p:commandButton value="Edit" styleClass="custom_button"
+						actionListener="#{productController.editProduct()}" ajax="true"
+						update=":messages, :editProductDialogForm" tabindex="8" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{productController.showAllProducts()}"
+						ajax="true" immediate="true" tabindex="9" />
+				</h:form>
+			</div>
+		</p:dialog>
+
 		<div id="tab_container" class="container">
-			<p:tabView>
+			<p:tabView id="adminTabView"
+				rendered="#{loginController.loggedIn and loginController.administrator}">
 				<!-- 				<p:growl id="messages" life="4000" showDetail="true" /> -->
-				<p:tab class="tab" title="Product information">
+				<p:tab class="tab" title="Product information" id="productTab">
 					<h:form styleClass="add_product_form">
 						<p:remoteCommand name="addProductRemoteCommand"
+							actionListener="#{productController.init}"
 							update="addProductDialog"
 							oncomplete="PF('addProductDialogVar').show()" />
 						<a id="new_product_trigger" rel="leanModal"
 							onclick="addProductRemoteCommand([{name:'productId', value:0}]);">
 							<i class="fa fa-plus"></i>
+							Add new product
 						</a>
-						<div class="add_new_prod">Add new product</div>
+						
 					</h:form>
-					<p:dataTable value="#{productController.products}" var="products" styleClass="borderless" paginator="true" rows="30" 
+					<p:dataTable value="#{products}" var="product"
+						styleClass="borderless" paginator="true" rows="60"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="15,30,60">
 						<p:column class="prod_id" headerText="Id">
-							<h:outputText class="prod_celltext" value="#{products.productId}" />
+							<h:outputText class="prod_celltext" value="#{product.productId}" />
 						</p:column>
 						<p:column class="prod_title" headerText="Title">
-							<h:outputText class="prod_celltext" value="#{products.title}" />
+							<h:outputText class="prod_celltext" value="#{product.title}" />
 						</p:column>
 						<p:column class="prod_price" headerText="Price">
-							<h:outputText class="prod_celltext" value="#{products.price}" />
+							<h:outputText class="prod_celltext" value="#{product.price}" />
 						</p:column>
 						<p:column class="prod_amount" headerText="Amount">
-							<h:outputText class="prod_celltext" value="#{products.amount}" />
+							<h:outputText class="prod_celltext" value="#{product.amount}" />
 						</p:column>
 						<p:column class="prod_description" headerText="Description">
-							<h:outputText class="prod_celltext" value="#{products.description}" />
+							<h:outputText class="prod_celltext"
+								value="#{product.description}" />
+						</p:column>
+						<p:column class="prod_amount" headerText="Deleted">
+							<h:outputText class="prod_celltext" value="#{product.deleted}" />
 						</p:column>
 						<p:column class="prod_edit">
-							<a href="#{request.contextPath}/administrator/edit_product.jsf"><i class="fa fa-pencil"></i></a>
+							<div class="address_cell">
+								<h:form>
+									<p:remoteCommand name="editProductRemoteCommand"
+										actionListener="#{productController.editProductListen}"
+										update="editProductDialog"
+										oncomplete="PF('editProductDialogVar').show()" />
+
+									<a id="edit_product_trigger" rel="leanModal"
+										data-toggle="modal" data-id="#{product.productId}"
+										onclick="editProductRemoteCommand([{name:'productId', value:#{product.productId}}]);">
+										<i class="fa fa-edit"></i>
+									</a>
+								</h:form>
+							</div>
 						</p:column>
 						<p:column class="prod_remove">
-							<a href="#"><i class="fa fa-remove"></i></a>
+							<div class="address_cell">
+								<h:form transient="true" id="removeProductForm">
+									<p:remoteCommand name="removeProductRemoteCommand"
+										actionListener="#{productController.removeProduct}"
+										process="@this"
+										onstart="return confirm('Are you sure you want to delete this product?');"
+										oncomplete="location.reload();" />
+									<h:commandLink id="remove"
+										onclick="removeProductRemoteCommand([{name:'productId', value:#{product.productId}}]);">
+										<f:ajax render="@form" />
+										<i class="fa fa-remove"></i>
+									</h:commandLink>
+								</h:form>
+							</div>
+
 						</p:column>
 					</p:dataTable>
 				</p:tab>
-				<p:tab class="tab" title="Administrator information" id="first_tab">
-					<li><a
-						href="#{request.contextPath}/administrator/manage_administrator.jsf">Admin</a></li>
-					Itt majd nem külön oldalra kéne irányítani, hanem az oldal tartalmát ide bevarázsolni.
+				<p:tab class="tab" title="Manage admin" id="userAdminTab">
+					<center>
+						<h:form id="userTableForm">
+							<p:dataTable id="userTable" widgetVar="userTableWidget"
+								var="user" value="#{manageAdminController.usersWithoutAdmins}"
+								rowKey="#{user.userId}" disabledSelection="false"
+								selectionMode="single"
+								selection="#{manageAdminController.selectedUser}"
+								paginator="true"
+								filteredValue="#{manageAdminController.filteredUser}" rows="10">
+								<f:facet name="header">
+				                            Users
+				                        </f:facet>
+								<p:ajax event="rowSelect"
+									listener="#{manageAdminController.selectUser}" />
+								<p:column headerText="Username" filterBy="#{user.username}"
+									filterMatchMode="contains">
+									<h:outputText value="#{user.username}" />
+								</p:column>
+								<p:column headerText="E-mail" filterBy="#{user.EMail}"
+									filterMatchMode="contains">
+									<h:outputText value="#{user.EMail}" />
+								</p:column>
+								<p:column headerText="Name" filterBy="#{user.name}"
+									filterMatchMode="contains">
+									<h:outputText value="#{user.name}" />
+								</p:column>
+								<p:column headerText="Registration date"
+									filterBy="#{user.registrationDate}" filterMatchMode="contains">
+									<h:outputText value="#{user.registrationDate}" />
+								</p:column>
+							</p:dataTable>
+							<center>
+								<p:commandButton value="Make admin"
+									actionListener="#{manageAdminController.makeAdministrator()}"
+									ajax="true" update=":messages" />
+							</center>
+						</h:form>
+						<h:form id="adminTableForm">
+							<p:dataTable id="adminTable" widgetVar="adminTableWidget"
+								var="admin" value="#{manageAdminController.admins}"
+								rowKey="#{admin.userId}" disabledSelection="false"
+								selectionMode="single"
+								selection="#{manageAdminController.selectedAdministrator}"
+								paginator="true" rows="10">
+								<f:facet name="header">
+				                            Administrators
+				                        </f:facet>
+								<p:ajax event="rowSelect"
+									listener="#{manageAdminController.selectAdministrator}" />
+								<p:column headerText="Username">
+									<h:outputText value="#{admin.user.username}" />
+								</p:column>
+								<p:column headerText="E-mail">
+									<h:outputText value="#{admin.user.EMail}" />
+								</p:column>
+								<p:column headerText="Name">
+									<h:outputText value="#{admin.user.name}" />
+								</p:column>
+								<p:column headerText="Registration date">
+									<h:outputText value="#{admin.user.registrationDate}" />
+								</p:column>
+							</p:dataTable>
+							<center>
+								<p:commandButton value="Delete"
+									actionListener="#{manageAdminController.deleteAdministrator()}"
+									ajax="true" update=":messages">
+									<p:confirm header="Confirmation" message="Are you sure?"
+										icon="ui-icon-alert" />
+								</p:commandButton>
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+									<p:commandButton value="Yes" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="No" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+							</center>
+						</h:form>
+					</center>
 				</p:tab>
 			</p:tabView>
 		</div>
-		
-		
-		
-		<!-- Add Product Dialog -->
-		<p:dialog header="Add product" resizable="false" draggable="false" styleClass="product_modal" id="addProductDialog" closeOnEscape="true" modal="true" widgetVar="addProductDialogVar">
-			<div class="product_form_container">
-				<h:form id="addProductDialogForm" styleClass="product_form">
-					<p:outputLabel value="Title:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.title}" required="true" requiredMessage="Title is required!" tabindex="1" />
 
-					<p:outputLabel value="Price:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.price}" required="true" requiredMessage="Price is required!" tabindex="2" />
-
-					<p:outputLabel value="Amount:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.amount}" required="true" requiredMessage="Amount is required!" tabindex="3" />
-
-					<p:outputLabel value="Description:" styleClass="required" />
-					<p:inputText value="#{productUploadController.product.description}" required="true" requiredMessage="Description is required!" tabindex="4" />
-
-					<p:outputLabel value="URL:" styleClass="required" />
-					<p:inputText value="#{productUploadController.image.imageUrl}" required="true" requiredMessage="URL is required!" styleClass="required" tabindex="5" />
-
-					<p:commandButton value="Add" styleClass="custom_button"
-						actionListener="#{productUploadController.upload()}" ajax="true"
-						update=":messages, :addProductDialogForm" tabindex="6" />
-					<p:commandButton value="Cancel" styleClass="custom_button"
-						actionListener="#{productUploadController.showProducts()}" ajax="true"
-						immediate="true" tabindex="7" />
-				</h:form>
-			</div>
-		</p:dialog>
-		
-		
-		
 	</ui:define>
 
 </ui:composition>

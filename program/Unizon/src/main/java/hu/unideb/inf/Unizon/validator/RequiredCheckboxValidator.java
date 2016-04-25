@@ -15,33 +15,27 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator()
+@FacesValidator
 public class RequiredCheckboxValidator implements Validator {
-    
 
-    @Override
-    public void validate(FacesContext context, UIComponent component, Object value)
-        throws ValidatorException
-    {
-        if (value.equals(Boolean.FALSE)) {
-            String requiredMessage = ((UIInput) component).getRequiredMessage();
+	@Override
+	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+		if (value.equals(Boolean.FALSE)) {
+			String requiredMessage = ((UIInput) component).getRequiredMessage();
 
-            if (requiredMessage == null) {
-                Object label = component.getAttributes().get("label");
-                if (label == null || (label instanceof String && ((String) label).length() == 0)) {
-                    label = component.getValueExpression("label");
-                }
-                if (label == null) {
-                    label = component.getClientId(context);
-                }
-                requiredMessage = MessageFormat.format(UIInput.REQUIRED_MESSAGE_ID, label);
-            }
+			if (requiredMessage == null) {
+				Object label = component.getAttributes().get("label");
+				if (label == null || (label instanceof String && ((String) label).length() == 0)) {
+					label = component.getValueExpression("label");
+				}
+				if (label == null) {
+					label = component.getClientId(context);
+				}
+				requiredMessage = MessageFormat.format(UIInput.REQUIRED_MESSAGE_ID, label);
+			}
 
-            throw new ValidatorException(
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, requiredMessage, requiredMessage));
-        }
-    }
-    
-    
-
+			throw new ValidatorException(
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, requiredMessage, requiredMessage));
+		}
+	}
 }

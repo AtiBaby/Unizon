@@ -12,14 +12,14 @@ ADMIN USER: USERNAME: admin
             USERNAME: admin2 
             PASSWORD: admin2
             
-TEST USER: USERNAME: teszt
-           PASSWORD: teszt
-           USERNAME: teszt2
-           PASSWORD: teszt2
-           USERNAME: teszt3
-           PASSWORD: teszt3
-           USERNAME: teszt4
-           PASSWORD: teszt4
+TEST USER: USERNAME: test
+           PASSWORD: test
+           USERNAME: test2
+           PASSWORD: test2
+           USERNAME: test3
+           PASSWORD: test3
+           USERNAME: test4
+           PASSWORD: test4
 */
 
 
@@ -98,7 +98,8 @@ CREATE TABLE PRODUCT
     PRICE            INT ,
     AMOUNT           INT ,
     DESCRIPTION      VARCHAR(1000) ,
-    DEFAULT_IMAGE_ID INT NOT NULL
+    DEFAULT_IMAGE_ID INT NOT NULL,
+    DELETED BOOLEAN NOT NULL
   ) ;
 ALTER TABLE PRODUCT ADD CONSTRAINT PRODUCT_PK PRIMARY KEY ( PRODUCT_ID ) ;
 
@@ -232,23 +233,24 @@ INSERT INTO USER_STATUS(STATUS_ID, STATUS_NAME) VALUES(-1, 'inactive');
 INSERT INTO USER_STATUS(STATUS_ID, STATUS_NAME) VALUES(-2, 'active');
 INSERT INTO USER_STATUS(STATUS_ID, STATUS_NAME) VALUES(-3, 'final');
 
-INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-1,'admin', 'cveqGRZfe2VtNuO0yDGhYviUTZWxmiIt3aZmzqm80n8=$NaOrIMoClDCyLPGoVsClrEYLGKw7U5uYFJkrhAhC0R4=','admin@gmail.com','admin','2016-04-09', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-2,'teszt','KIkvsQZnyEk0LQLlYred1uylvnldBomKstriJL95CsE=$rQWuk868O5zFfigoWjnG+Hlmy6bpMnXjslZw+mOzV2Y=','teszt@gmail.com','teszt', '2016-04-09', -2);
+    VALUES(-1,'admin', 'cveqGRZfe2VtNuO0yDGhYviUTZWxmiIt3aZmzqm80n8=$NaOrIMoClDCyLPGoVsClrEYLGKw7U5uYFJkrhAhC0R4=','admin@gmail.com','Admin User','2016-04-09', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-3,'teszt2','/fpiWSuy39OgLlmMJPSQilOr/yp4OIYM+6zOkooZU4M=$LkhrNgGpBMS19lrX1m8mqaxYpJircexufcQwebJGrQc=','teszt2@gmail.com','teszt2', '2015-03-04', -2);
+    VALUES(-2,'test','ZbOS5o2SpVBah+t9MMLWpf3a2rxatJVo2hV5hnY4dQ4=$1iz88I5xleACNlQGK9eZdKvSBMo/Us2aKXTAlG8Tmms=','test@gmail.com','Test User', '2016-04-09', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-4,'teszt3','TOaLOIaQ2As1yERxeuTDoRHG3Y5EQ1N2doVftmGGZp4=$UqdPv+KKJZXwx8bq7L+f9GfD50ojVjqUtvc2UBfSOzg=','teszt3@gmail.com','teszt3', '2015-03-04', -1);
+    VALUES(-3,'test2','FxkWGMkAwbq3c4kCqLKqSvgnkv7Q6fmlmg0qpNyf+ds=$UAAlW4+ipWxfoE7eVHXD5OA48azauOhEWIiUV/dA0X4=','test2@gmail.com','Test2 User', '2015-03-04', -2);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-5,'teszt4','HDH3+sVnG9WQhiY0d/oHy93lUFtytIsHX4JfDfyp+iU=$PfsNsXS2L+O8mIUPHAGND+1df1bCy+92TniW1Zwvemk=','teszt4@gmail.com','teszt4', '2015-03-04', -3);
+    VALUES(-4,'test3','Nh0+SvHXJoJzrFK71qXs693ftunFkoQ60N/qT5AphOI=$k2xO8Xgy7UbUxKdnAf+8ghdViNeHxFm0jgWpapOgbdE=','test3@gmail.com','Test3 User', '2015-03-04', -1);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-6,'admin2','hI+CNsDo2vixy5gMeorczH7Bl2YlxEqWF2022mxkOWo=$jhuFFXytReV39fagWOz030LM+g8ZevWGnctVRWiI294=','admin2@gmail.com','admin2', '2013-03-04', -2);
+    VALUES(-5,'test4','xxZiRzrq4yeNuS/O/K/JIwQZb8aL9l6AhoJ4anTlFNU=$Wo+3DXAYNs1euay9WtgMG7iCirIXPfZQBqmGiuygJWY=','test4@gmail.com','Test4 User', '2015-03-04', -3);
+
+INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
+    VALUES(-6,'admin2','hI+CNsDo2vixy5gMeorczH7Bl2YlxEqWF2022mxkOWo=$jhuFFXytReV39fagWOz030LM+g8ZevWGnctVRWiI294=','admin2@gmail.com','Admin2 User', '2013-03-04', -2);
 
 
 
@@ -395,51 +397,51 @@ INSERT INTO IMAGE VALUES(-49,"images/Consumer electronics/picture_49.jpg");
 INSERT INTO IMAGE VALUES(-50,"images/Consumer electronics/picture_50.jpg");
 
 
-INSERT INTO PRODUCT VALUES(-1,'Adidas shoes', 29.9,210,'red/black', -1);
-INSERT INTO PRODUCT VALUES(-2,'Adidas sweater', 21,210,'white/black', -2);
-INSERT INTO PRODUCT VALUES(-3,'Adidas trousers', 39.9,210,'red/blue', -3);
-INSERT INTO PRODUCT VALUES(-4,'Nike sweater', 129.9,210,'red/black', -4);
-INSERT INTO PRODUCT VALUES(-5,'Nike shoes', 229.9,210,'red/black', -5);
-INSERT INTO PRODUCT VALUES(-6,'Nike trousers', 294.9,210,'red/blue', -6);
-INSERT INTO PRODUCT VALUES(-7,'Asics sweater', 12,210,'red/green', -7);
-INSERT INTO PRODUCT VALUES(-8,'Asics shoes', 29,210,'green/black', -8);
-INSERT INTO PRODUCT VALUES(-9,'Samsung GALAXY S4 Mini', 599,100,'white/black', -9);
-INSERT INTO PRODUCT VALUES(-10,'Samsung GALAXY S4', 790,210,'white/black', -10);
-INSERT INTO PRODUCT VALUES(-11,'LG G3', 330,100,'white/black', -11);
-INSERT INTO PRODUCT VALUES(-12,'LG 32LF5610', 599,50,'Full HD TV', -12);
-INSERT INTO PRODUCT VALUES(-13,'Samsung UE32J5500', 790,60,'Full HD TV', -13);
-INSERT INTO PRODUCT VALUES(-14,'NIKON D5200 camera', 390,200,'size: 6016 x 4000 (Large), 4512 x 3000 (Medium), 3008 x 2000 (Small)', -14);
-INSERT INTO PRODUCT VALUES(-15,'Zanussi ZRT 18100 WA fridge', 1090,300,'white', -15);
-INSERT INTO PRODUCT VALUES(-16,'Electrolux EWT1062TDW washing machine', 890,100,'white', -16);
-INSERT INTO PRODUCT VALUES(-17,'Electrolux EKG54151OW cooker', 790,200,'black', -17);
-INSERT INTO PRODUCT VALUES(-18,'Bosch BGB45331 vacuum cleaner', 290,210,'black', -18);
-INSERT INTO PRODUCT VALUES(-19,'Electrolux EMS28201OW microwave oven', 590,100,'white/black', -19);
-INSERT INTO PRODUCT VALUES(-20,'Chanel Coco Mademoiselle woman perfume', 90,200,'EDP, 100 ml', -20);
-INSERT INTO PRODUCT VALUES(-21,'Calvin Klein Eternity woman perfume', 70,200,'EDP, 100 ml', -21);
-INSERT INTO PRODUCT VALUES(-22,'Giorgio Armani Si woman perfume', 120,100,'EDP, 100 ml', -22);
-INSERT INTO PRODUCT VALUES(-23,'Medisana upper-arm blood pressure monitor', 290, 70,'digital', -23);
-INSERT INTO PRODUCT VALUES(-24,'Beurer GL blood glucose meter', 390,40,'42 mmol/L', -24);
-INSERT INTO PRODUCT VALUES(-25,'Omron Eco Temp Smart thermometer', 30,210,'digital', -25);
-INSERT INTO PRODUCT VALUES(-26,'Robust Turbo Speed Bike exercise bike', 790,20,'with pulse meter', -26);
-INSERT INTO PRODUCT VALUES(-27,'Robust Marathon treadmill', 1290,10,'with pulse meter', -27);
-INSERT INTO PRODUCT VALUES(-28,'Robust Magnum weight bench', 990,10,'', -28);
-INSERT INTO PRODUCT VALUES(-29,'Guess woman bag', 40,100,'pink/red/brown/black', -29);
-INSERT INTO PRODUCT VALUES(-30,'Ralph Lauren dress', 30,100,'blue/claret/pink', -30);
-INSERT INTO PRODUCT VALUES(-31,'Bracelet', 40,100,'gold', -31);
-INSERT INTO PRODUCT VALUES(-32,'Bracelet', 40,100,'gold/silver', -32);
-INSERT INTO PRODUCT VALUES(-33,'Amie Black Faux Suede boots', 30,100,'black/brown', -33);
-INSERT INTO PRODUCT VALUES(-34,'Williams Legato Piano',230,100,'88 keys', -34);
-INSERT INTO PRODUCT VALUES(-35,'Alesis Demo Drums', 280,100,'electric', -35);
-INSERT INTO PRODUCT VALUES(-36,'Palmer PD21 Guitar', 90,100,'acustic', -36);
-INSERT INTO PRODUCT VALUES(-37,'Jenga', 10,100,'4+ years', -37);
-INSERT INTO PRODUCT VALUES(-38,'Hasbro Connect4', 7,100,'8+ years', -38);
-INSERT INTO PRODUCT VALUES(-39,'Uno', 10,100,'8+ years', -39);
-INSERT INTO PRODUCT VALUES(-40,'Rubiks cube', 20,100,'8+ years', -40);
-INSERT INTO PRODUCT VALUES(-41,'Annie 2014', 15,100,'musical, comedy', -41);
-INSERT INTO PRODUCT VALUES(-42,'Kate and Leopold', 15,100,'romance, comedy', -42);
-INSERT INTO PRODUCT VALUES(-43,'Road to Avonlea', 15,100,'series, costume', -43);
-INSERT INTO PRODUCT VALUES(-44,'Friends', 15,100,'series, sitcom', -44);
-INSERT INTO PRODUCT VALUES(-45,'How I met your mother', 15,100,'series, sitcom', -45);
+INSERT INTO PRODUCT VALUES(-1,'Adidas shoes', 29.9,210,'red/black', -1, false);
+INSERT INTO PRODUCT VALUES(-2,'Adidas sweater', 21,210,'white/black', -2, false);
+INSERT INTO PRODUCT VALUES(-3,'Adidas trousers', 39.9,210,'red/blue', -3, false);
+INSERT INTO PRODUCT VALUES(-4,'Nike sweater', 129.9,210,'red/black', -4, false);
+INSERT INTO PRODUCT VALUES(-5,'Nike shoes', 229.9,210,'red/black', -5, false);
+INSERT INTO PRODUCT VALUES(-6,'Nike trousers', 294.9,210,'red/blue', -6, false);
+INSERT INTO PRODUCT VALUES(-7,'Asics sweater', 12,210,'red/green', -7, false);
+INSERT INTO PRODUCT VALUES(-8,'Asics shoes', 29,210,'green/black', -8, false);
+INSERT INTO PRODUCT VALUES(-9,'Samsung GALAXY S4 Mini', 599,100,'white/black', -9, false);
+INSERT INTO PRODUCT VALUES(-10,'Samsung GALAXY S4', 790,210,'white/black', -10, false);
+INSERT INTO PRODUCT VALUES(-11,'LG G3', 330,100,'white/black', -11, false);
+INSERT INTO PRODUCT VALUES(-12,'LG 32LF5610', 599,50,'Full HD TV', -12, false);
+INSERT INTO PRODUCT VALUES(-13,'Samsung UE32J5500', 790,60,'Full HD TV', -13, false);
+INSERT INTO PRODUCT VALUES(-14,'NIKON D5200 camera', 390,200,'size: 6016 x 4000 (Large), 4512 x 3000 (Medium), 3008 x 2000 (Small)', -14, false);
+INSERT INTO PRODUCT VALUES(-15,'Zanussi ZRT 18100 WA fridge', 1090,300,'white', -15, false);
+INSERT INTO PRODUCT VALUES(-16,'Electrolux EWT1062TDW washing machine', 890,100,'white', -16, false);
+INSERT INTO PRODUCT VALUES(-17,'Electrolux EKG54151OW cooker', 790,200,'black', -17, false);
+INSERT INTO PRODUCT VALUES(-18,'Bosch BGB45331 vacuum cleaner', 290,210,'black', -18, false);
+INSERT INTO PRODUCT VALUES(-19,'Electrolux EMS28201OW microwave oven', 590,100,'white/black', -19, false);
+INSERT INTO PRODUCT VALUES(-20,'Chanel Coco Mademoiselle woman perfume', 90,200,'EDP, 100 ml', -20, false);
+INSERT INTO PRODUCT VALUES(-21,'Calvin Klein Eternity woman perfume', 70,200,'EDP, 100 ml', -21, false);
+INSERT INTO PRODUCT VALUES(-22,'Giorgio Armani Si woman perfume', 120,100,'EDP, 100 ml', -22, false);
+INSERT INTO PRODUCT VALUES(-23,'Medisana upper-arm blood pressure monitor', 290, 70,'digital', -23, false);
+INSERT INTO PRODUCT VALUES(-24,'Beurer GL blood glucose meter', 390,40,'42 mmol/L', -24, false);
+INSERT INTO PRODUCT VALUES(-25,'Omron Eco Temp Smart thermometer', 30,210,'digital', -25, false);
+INSERT INTO PRODUCT VALUES(-26,'Robust Turbo Speed Bike exercise bike', 790,20,'with pulse meter', -26, false);
+INSERT INTO PRODUCT VALUES(-27,'Robust Marathon treadmill', 1290,10,'with pulse meter', -27, false);
+INSERT INTO PRODUCT VALUES(-28,'Robust Magnum weight bench', 990,10,'', -28, false);
+INSERT INTO PRODUCT VALUES(-29,'Guess woman bag', 40,100,'pink/red/brown/black', -29, false);
+INSERT INTO PRODUCT VALUES(-30,'Ralph Lauren dress', 30,100,'blue/claret/pink', -30, false);
+INSERT INTO PRODUCT VALUES(-31,'Bracelet', 40,100,'gold', -31, false);
+INSERT INTO PRODUCT VALUES(-32,'Bracelet', 40,100,'gold/silver', -32, false);
+INSERT INTO PRODUCT VALUES(-33,'Amie Black Faux Suede boots', 30,100,'black/brown', -33, false);
+INSERT INTO PRODUCT VALUES(-34,'Williams Legato Piano',230,100,'88 keys', -34, false);
+INSERT INTO PRODUCT VALUES(-35,'Alesis Demo Drums', 280,100,'electric', -35, false);
+INSERT INTO PRODUCT VALUES(-36,'Palmer PD21 Guitar', 90,100,'acustic', -36, false);
+INSERT INTO PRODUCT VALUES(-37,'Jenga', 10,100,'4+ years', -37, false);
+INSERT INTO PRODUCT VALUES(-38,'Hasbro Connect4', 7,100,'8+ years', -38, false);
+INSERT INTO PRODUCT VALUES(-39,'Uno', 10,100,'8+ years', -39, false);
+INSERT INTO PRODUCT VALUES(-40,'Rubiks cube', 20,100,'8+ years', -40, false);
+INSERT INTO PRODUCT VALUES(-41,'Annie 2014', 15,100,'musical, comedy', -41, false);
+INSERT INTO PRODUCT VALUES(-42,'Kate and Leopold', 15,100,'romance, comedy', -42, false);
+INSERT INTO PRODUCT VALUES(-43,'Road to Avonlea', 15,100,'series, costume', -43, false);
+INSERT INTO PRODUCT VALUES(-44,'Friends', 15,100,'series, sitcom', -44, false);
+INSERT INTO PRODUCT VALUES(-45,'How I met your mother', 15,100,'series, sitcom', -45, false);
 
 INSERT INTO PRODUCT_TO_IMAGE VALUES (-1,-1);
 INSERT INTO PRODUCT_TO_IMAGE VALUES (-2,-2);
