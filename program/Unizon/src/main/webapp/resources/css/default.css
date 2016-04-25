@@ -191,7 +191,7 @@ body {
 	font-size: 20px;
 }
 
-#logout{
+#logout1, #logout2 {
 	display: table-cell;
 	vertical-align: middle;
 }

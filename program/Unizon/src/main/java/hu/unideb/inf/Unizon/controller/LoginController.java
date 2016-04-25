@@ -75,8 +75,8 @@ public class LoginController implements Serializable {
 						}
 						orderPrice.put(ord.getOrderId(), sum);
 					}
-
-					redirect("/index.jsf?faces-redirect=true");
+					
+					redirect(isAdministrator() ? "/admin.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
 					return;
 				}
 			} catch (Exception e) {
