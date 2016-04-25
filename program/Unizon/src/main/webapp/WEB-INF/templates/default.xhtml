@@ -9,8 +9,8 @@
     <h:head>
         <style>
             .ui-growl-item-container {
-                position:fixed;
-                top:220px;
+                position:relative;
+                top:100px;
             }
         </style>
         <title><ui:insert name="title">Unizon</ui:insert></title>
@@ -56,7 +56,7 @@
                         <li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
                         <h:panelGroup rendered="#{loginController.loggedIn}">
                             <h:form id="logout">
-                                <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.name}</a></li>
+                                <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.username}</a></li>
                                 <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
                             </h:form>
                         </h:panelGroup>
