@@ -34,6 +34,12 @@ public class ProductFacade extends AbstractFacade<Product> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> findAll() {
+		return em.createNamedQuery("Product.findAll").getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Product> findByNameStartingWith(String term, Integer num) {
 		return em.createNamedQuery("Product.findAllContain").setParameter("term", term + "%").setMaxResults(num)
 				.getResultList();
