@@ -1,17 +1,23 @@
 package hu.unideb.inf.Unizon.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import com.sun.mail.imap.protocol.IMAPSaslAuthenticator;
+
 import hu.unideb.inf.Unizon.facade.ProductFacade;
+import hu.unideb.inf.Unizon.model.Image;
 import hu.unideb.inf.Unizon.model.Product;
 
 @Stateless
@@ -28,13 +34,27 @@ public class ProductDetailController implements Serializable {
 	private ProductFacade productFacade;
 
 	private Product actualProduct;
-
+	private Set<Image> images;
+	private List<Image> productImages;
+	private int size;
 	private int productId;
-	private int id;
+	private String actualImageUrl;
 
 	public void init() {
 		actualProduct = productFacade.findById(productId);
+		images = actualProduct.getImages();
+		size = 0;
+		actualImageUrl = actualProduct.getImage().getImageUrl();
+		productImages = new ArrayList<>();
+		for (Iterator<Image> it = images.iterator(); it.hasNext();) {
+			Image f = it.next();
+			productImages.add(f);
+		}
+		size = productImages.size();
+	}
 
+	public void pictureClick(String imageUrl) {
+		setActualImageUrl(imageUrl);
 	}
 
 	public Product getActualProduct() {
@@ -53,12 +73,28 @@ public class ProductDetailController implements Serializable {
 		this.productId = productId;
 	}
 
-	public int getId() {
-		return id;
+	public List<Image> getProductImages() {
+		return productImages;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setProductImages(List<Image> productImages) {
+		this.productImages = productImages;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public String getActualImageUrl() {
+		return actualImageUrl;
+	}
+
+	public void setActualImageUrl(String actualImageUrl) {
+		this.actualImageUrl = actualImageUrl;
 	}
 
 }
