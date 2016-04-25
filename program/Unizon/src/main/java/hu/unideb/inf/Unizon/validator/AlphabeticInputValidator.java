@@ -31,10 +31,10 @@ public class AlphabeticInputValidator implements Validator {
 
 		if (((String) value).length() > 100) {
 			detail += "cannot be longer than 100 characters.";
-		}
-
-		if (!PATTERN.matcher((String) value).matches()) {
+		} else if (!PATTERN.matcher((String) value).matches()) {
 			detail += "consists of alphabetic, space and other characters (like '-').";
+		} else {
+			return;
 		}
 
 		throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
