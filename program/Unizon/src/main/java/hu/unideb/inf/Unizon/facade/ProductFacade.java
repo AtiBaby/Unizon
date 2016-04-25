@@ -34,9 +34,8 @@ public class ProductFacade extends AbstractFacade<Product> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Product> findAll() {
-		return em.createNamedQuery("Product.findAll").getResultList();
+	public List<Product> findAllNotDeleted() {
+		return em.createNamedQuery("Product.findAllNotDeleted").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
