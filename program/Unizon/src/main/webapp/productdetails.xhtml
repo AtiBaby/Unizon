@@ -39,8 +39,8 @@
 							value="#{SearchController.productName}" />
 
 						<h:commandButton type="submit" styleclass="" value=""
-							action="/products?faces-redirect=true"
-							actionListener="#{SearchController.search()}" ajax="false" />
+							actionListener="#{SearchController.catSelectBehindProductDetails()}"
+							ajax="false" />
 
 					</h:form>
 
@@ -54,8 +54,7 @@
 
 							<li class="cat_picker"><i class="fa fa-dot-circle-o"
 								aria-hidden="true"></i> <h:commandLink
-									action="#{SearchController.catSelectSearch}"
-									onclick="window.location.href='products.jsf'; return false;">
+									action="#{SearchController.catSelectBehindProductDetails()}">
 									<f:setPropertyActionListener
 										target="#{SearchController.category}" value="all" />All
 									categories</h:commandLink></li>
@@ -96,8 +95,7 @@
 					<div class="smallImage">
 						<div class="product_box_imageholder">
 							<div class="product_box_imageholder_cell">
-								<h:graphicImage
-									name="#{productDetailController.actualImageUrl}"
+								<h:graphicImage name="#{productDetailController.actualImageUrl}"
 									style="height:250px; margin-bottom:1cm;" />
 							</div>
 						</div>
