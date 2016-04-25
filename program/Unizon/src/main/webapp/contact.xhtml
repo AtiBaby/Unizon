@@ -11,8 +11,6 @@
     </ui:define>
 
     <ui:define name="custom_js">
-        <h:outputScript target="head" library="js" name="map.js"/>
-        <script async='async' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLIbQVFUyz056QbOtMKOO5r4aUWy2OBNU&amp;callback=initMap"></script>
     </ui:define>
 
     <ui:define name="fullBody">
@@ -72,5 +70,8 @@
                 </div>
             </div>
         </div>
+        
+        <h:outputScript target="head" library="js" name="map.js"/>
+        <script async='async' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLIbQVFUyz056QbOtMKOO5r4aUWy2OBNU&amp;callback=initMap"></script>
     </ui:define>
 </ui:composition>

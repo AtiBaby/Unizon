@@ -42,28 +42,51 @@
                 <div class="container" id="header_container">
                     <div id="logo">
                         <div class="logo_holder">
-                            <a href="./"><img src="./resources/images/other/logo.png" /></a>
+                            <h:panelGroup rendered="#{loginController.loggedIn and loginController.administrator}">
+                            	<a href="#{request.contextPath}/admin.jsf"><img src="./resources/images/other/logo.png" /></a>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{loginController.loggedIn and not loginController.administrator}">
+                            	<a href="./"><img src="./resources/images/other/logo.png" /></a>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{not loginController.loggedIn}">
+                            	<a href="./"><img src="./resources/images/other/logo.png" /></a>
+                            </h:panelGroup>
                         </div>
                     </div>
                     <ul class="navigation">
-                        <h:panelGroup rendered="#{loginController.loggedIn and loginController.administrator }">
-                            <li><a href="#{request.contextPath}/admin.jsf">Admin</a></li>
-                        </h:panelGroup>
-                        <li><a href="#{request.contextPath}/index.jsf">Home</a></li>
-                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
-                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
-                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
-                        <h:panelGroup rendered="#{loginController.loggedIn}">
-                            <h:form id="logout">
-                                <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.name}</a></li>
+                        <h:panelGroup rendered="#{loginController.loggedIn and loginController.administrator}">
+                            <li><a href="#{request.contextPath}/admin.jsf">Manage</a></li>
+	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+                            <h:form id="logout2">
+                                <li><a>#{loginController.user.username}</a></li>
                                 <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
                             </h:form>
                         </h:panelGroup>
-                        <h:panelGroup rendered="#{!loginController.loggedIn}">
+                        
+                        <h:panelGroup rendered="#{loginController.loggedIn and not loginController.administrator}">
+                        	<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+	                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
+	                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+	                        <li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
+                            <h:form id="logout1">
+                                <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.username}</a></li>
+                                <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
+                            </h:form>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{not loginController.loggedIn}">
+                        	<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+	                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
+	                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+	                        <li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
                             <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
                             <li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
                         </h:panelGroup>
+                        
                     </ul>
                     <div id="mobile_menu_button">&nbsp;</div>
                     <a href="#"><i id="mobile_cart_image" class="fa fa-shopping-cart fa-3x"></i></a>
@@ -80,7 +103,7 @@
                     <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
                     <h:panelGroup rendered="#{loginController.loggedIn}">
                         <h:form id="logout_mobil">
-                            <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.name}</a></li>
+                            <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.username}</a></li>
                             <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
                         </h:form>
                     </h:panelGroup>

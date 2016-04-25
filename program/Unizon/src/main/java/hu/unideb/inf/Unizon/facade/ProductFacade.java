@@ -34,6 +34,11 @@ public class ProductFacade extends AbstractFacade<Product> {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Product> findAllNotDeleted() {
+		return em.createNamedQuery("Product.findAllNotDeleted").getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Product> findByNameStartingWith(String term, Integer num) {
 		return em.createNamedQuery("Product.findAllContain").setParameter("term", term + "%").setMaxResults(num)
 				.getResultList();
