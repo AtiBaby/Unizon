@@ -9,7 +9,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator()
+@FacesValidator
 public class AlphabeticInputValidator implements Validator {
 
 	// Pattern starting with alphabetic character, continued with alphabetic,
@@ -24,7 +24,7 @@ public class AlphabeticInputValidator implements Validator {
 		}
 
 		String comp = component.getAttributes().get("componentname").toString().toLowerCase();
-		comp = checkComponentName(comp);
+		comp = addNameToComponent(comp);
 		String summary = "Not appropriate " + comp + "!";
 		comp = comp.substring(0, 1).toUpperCase() + comp.substring(1);
 		String detail = comp + " ";
@@ -40,14 +40,16 @@ public class AlphabeticInputValidator implements Validator {
 		throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
 	}
 
-	private static String checkComponentName(String component) {
+	/**
+	 * Adds " name" to static XHTML arguments (user.xhtml).
+	 */
+	private static String addNameToComponent(String component) {
 		switch (component) {
 		case "country":
-			return "country name";
 		case "city":
-			return "city name";
+			return component + " name";
 		default:
-			return "";
+			return component;
 		}
 	}
 }

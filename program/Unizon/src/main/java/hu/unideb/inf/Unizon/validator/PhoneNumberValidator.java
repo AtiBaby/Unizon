@@ -9,7 +9,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator()
+@FacesValidator
 public class PhoneNumberValidator implements Validator {
 
 	private static Pattern PATTERN = Pattern.compile("[+]??\\d{11}");
