@@ -59,7 +59,7 @@ public class SearchController implements Serializable {
 			categoryNames.add(category.getName());
 		}
 		
-		products = productFacade.findAll();
+		products = productFacade.findAllNotDeleted();
 	}
 
 	public String submitProduct(Integer id) {
@@ -114,7 +114,7 @@ public class SearchController implements Serializable {
 			}
 		} else {
 			if (category == null || category.equals("all")) {
-				setProducts(productFacade.findAll());
+				setProducts(productFacade.findAllNotDeleted());
 			} else {
 				Category cat = categoryFacade.findByName(category);
 				setProducts(productFacade.findAll(cat));

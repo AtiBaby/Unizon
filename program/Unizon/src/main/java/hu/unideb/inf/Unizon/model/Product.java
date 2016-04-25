@@ -26,7 +26,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PRODUCT")
 @NamedQueries({
-		@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p WHERE p.deleted=false"),
+		@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+		@NamedQuery(name = "Product.findAllNotDeleted", query = "SELECT p FROM Product p WHERE p.deleted=false"),
 		@NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE p.deleted=false AND cats.categoryId = :catId"),
 		@NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.deleted=false AND p.title LIKE :term"),
 		@NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE  p.deleted=false AND cats.categoryId = :catId AND p.title LIKE :term")
