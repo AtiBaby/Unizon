@@ -58,6 +58,8 @@ public class SearchController implements Serializable {
 		for (Category category : categories) {
 			categoryNames.add(category.getName());
 		}
+		
+		products = productFacade.findAll();
 	}
 
 	public String submitProduct(Integer id) {

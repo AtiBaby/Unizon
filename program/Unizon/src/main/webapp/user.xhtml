@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="custom_css">
@@ -10,125 +13,190 @@
 	<ui:define name="custom_js"></ui:define>
 
 	<ui:define name="fullBody">
-		<p:dialog header="Add Address" resizable="false" draggable="false" styleClass="address_modal" id="addAddressDialog" closeOnEscape="true" modal="true" widgetVar="addAddressDialogVar">
+		<p:dialog header="Add Address" resizable="false" draggable="false"
+			styleClass="address_modal" id="addAddressDialog" closeOnEscape="true"
+			modal="true" widgetVar="addAddressDialogVar">
 			<!-- Add address form -->
 			<div class="login_form_container">
 				<h:form id="addAddressDialogForm" class="login_form">
 					<p:outputLabel value="ZIP code:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.zip}" required="true" requiredMessage="ZIP code is required!"
-						tabindex="1" />
+					<p:inputText value="#{addressController.newAddress.zip}"
+						maxlength="10" required="true"
+						requiredMessage="ZIP code is required!" tabindex="1">
+						<f:attribute name="componentname" value="zipcode" />
+					</p:inputText>
 
 					<p:outputLabel value="Country:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.country}" required="true" requiredMessage="Country is required!"
-						tabindex="2" />
+					<p:inputText value="#{addressController.newAddress.country}"
+						maxlength="100" required="true"
+						requiredMessage="Country is required!"
+						validator="alphabeticInputValidator" tabindex="2">
+						<f:attribute name="componentname" value="country" />
+					</p:inputText>
 
 					<p:outputLabel value="City:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.city}" required="true" requiredMessage="City is required!"
-						tabindex="3" />
+					<p:inputText value="#{addressController.newAddress.city}"
+						maxlength="100" required="true"
+						requiredMessage="City is required!"
+						validator="alphabeticInputValidator" tabindex="3">
+						<f:attribute name="componentname" value="city" />
+					</p:inputText>
 
 					<p:outputLabel value="Street:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.street}" required="true" requiredMessage="Street is required!"
-						tabindex="4" />
+					<p:inputText value="#{addressController.newAddress.street}"
+						maxlength="100" required="true"
+						requiredMessage="Street is required!" tabindex="4">
+						<f:attribute name="componentname" value="streetname" />
+					</p:inputText>
 
 					<p:outputLabel value="Street number:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.strNumber}" required="true"
-						requiredMessage="Street number is required!" styleClass="required" tabindex="5"
-						converterMessage="Please enter digits only." />
+					<p:inputText value="#{addressController.newAddress.strNumber}"
+						required="true" requiredMessage="Street number is required!"
+						styleClass="required" tabindex="5"
+						converterMessage="Please enter digits only.">
+						<f:attribute name="componentname" value="streetnumber" />
+					</p:inputText>
 
 					<p:outputLabel value="Floor:" />
-					<p:inputText value="#{addressController.newAddress.floor}" tabindex="6"
-						converterMessage="Please enter digits only." />
+					<p:inputText value="#{addressController.newAddress.floor}"
+						tabindex="6" converterMessage="Please enter digits only.">
+						<f:attribute name="componentname" value="floor" />
+					</p:inputText>
 
 					<p:outputLabel value="Door:" />
-					<p:inputText value="#{addressController.newAddress.door}" tabindex="7" converterMessage="Please enter digits only." />
+					<p:inputText value="#{addressController.newAddress.door}"
+						tabindex="7" converterMessage="Please enter digits only.">
+						<f:attribute name="componentname" value="door" />
+					</p:inputText>
 
-					<p:commandButton value="Add" styleClass="custom_button" actionListener="#{addressController.addAddress()}"
-						ajax="true" update=":messages, :addAddressDialogForm" tabindex="8" />
-					<p:commandButton value="Cancel" styleClass="custom_button" actionListener="#{loginController.showUserProfile()}"
-						ajax="true" immediate="true" tabindex="9" />
+					<p:commandButton value="Add" styleClass="custom_button"
+						actionListener="#{addressController.addAddress()}" ajax="true"
+						update=":messages, :addAddressDialogForm" tabindex="8" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{loginController.showUserProfile()}" ajax="true"
+						immediate="true" tabindex="9" />
 				</h:form>
 			</div>
 		</p:dialog>
-		
-		<p:dialog header="Edit Address" resizable="false" draggable="false" styleClass="address_modal" id="editAddressDialog" closeOnEscape="true" modal="true" widgetVar="editAddressDialogVar">
+
+		<p:dialog header="Edit Address" resizable="false" draggable="false"
+			styleClass="address_modal" id="editAddressDialog"
+			closeOnEscape="true" modal="true" widgetVar="editAddressDialogVar">
 			<!-- Edit address form -->
 			<div class="login_form_container">
 				<h:form id="editAddressDialogForm" class="login_form">
 					<p:outputLabel value="ZIP code:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.zip}" required="true" requiredMessage="ZIP code is required!"
-						tabindex="1" />
+					<p:inputText value="#{addressController.newAddress.zip}"
+						maxlength="10" required="true"
+						requiredMessage="ZIP code is required!" tabindex="1">
+						<f:attribute name="componentname" value="zipcode" />
+					</p:inputText>
 
 					<p:outputLabel value="Country:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.country}" required="true" requiredMessage="Country is required!"
-						tabindex="2" />
+					<p:inputText value="#{addressController.newAddress.country}"
+						maxlength="100" required="true"
+						requiredMessage="Country is required!"
+						validator="alphabeticInputValidator" tabindex="2">
+						<f:attribute name="componentname" value="country" />
+					</p:inputText>
 
 					<p:outputLabel value="City:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.city}" required="true" requiredMessage="City is required!"
-						tabindex="3" />
+					<p:inputText value="#{addressController.newAddress.city}"
+						maxlength="100" required="true"
+						requiredMessage="City is required!"
+						validator="alphabeticInputValidator" tabindex="3">
+						<f:attribute name="componentname" value="city" />
+					</p:inputText>
 
 					<p:outputLabel value="Street:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.street}" required="true" requiredMessage="Street is required!"
-						tabindex="4" />
+					<p:inputText value="#{addressController.newAddress.street}"
+						maxlength="100" required="true"
+						requiredMessage="Street is required!" tabindex="4">
+						<f:attribute name="componentname" value="streetname" />
+					</p:inputText>
 
 					<p:outputLabel value="Street number:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.strNumber}" required="true"
-						requiredMessage="Street number is required!" styleClass="required" tabindex="5"
-						converterMessage="Please enter digits only." />
+					<p:inputText value="#{addressController.newAddress.strNumber}"
+						required="true" requiredMessage="Street number is required!"
+						styleClass="required" tabindex="5"
+						converterMessage="Please enter digits only.">
+						<f:attribute name="componentname" value="streetnumber" />
+					</p:inputText>
 
 					<p:outputLabel value="Floor:" />
-					<p:inputText value="#{addressController.newAddress.floor}" tabindex="6"
-						converterMessage="Please enter digits only." />
+					<p:inputText value="#{addressController.newAddress.floor}"
+						tabindex="6" converterMessage="Please enter digits only.">
+						<f:attribute name="componentname" value="floor" />
+					</p:inputText>
 
 					<p:outputLabel value="Door:" />
-					<p:inputText value="#{addressController.newAddress.door}" tabindex="7" converterMessage="Please enter digits only." />
+					<p:inputText value="#{addressController.newAddress.door}"
+						tabindex="7" converterMessage="Please enter digits only.">
+						<f:attribute name="componentname" value="door" />
+					</p:inputText>
 
-					<p:commandButton value="Edit" styleClass="custom_button" actionListener="#{addressController.editAddress()}"
-						ajax="true" update=":messages, :editAddressDialogForm" tabindex="8" />
-					<p:commandButton value="Cancel" styleClass="custom_button" actionListener="#{loginController.showUserProfile()}"
-						ajax="true" immediate="true" tabindex="9" />
+					<p:commandButton value="Edit" styleClass="custom_button"
+						actionListener="#{addressController.editAddress()}" ajax="true"
+						update=":messages, :editAddressDialogForm" tabindex="8" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{loginController.showUserProfile()}" ajax="true"
+						immediate="true" tabindex="9" />
 				</h:form>
 			</div>
 		</p:dialog>
-		
-		<p:dialog header="Add Phone Number" resizable="false" draggable="false" styleClass="phone_modal" id="addPhoneNumberDialog" closeOnEscape="true" modal="true" widgetVar="addPhoneNumberDialogVar">
+
+		<p:dialog header="Add Phone Number" resizable="false"
+			draggable="false" styleClass="phone_modal" id="addPhoneNumberDialog"
+			closeOnEscape="true" modal="true" widgetVar="addPhoneNumberDialogVar">
 			<!-- Add phone number form -->
 			<div class="login_form_container">
 				<h:form id="addPhoneNumberDialogForm" class="login_form">
 					<p:outputLabel value="Phone number:" styleClass="required" />
-						<p:inputText value="#{phoneNumberController.newPhoneNumber}" tabindex="1" required="true"
-							requiredMessage="Phone number is required!" validatorMessage="Phone number must contain only numbers!">
-							<f:validateRegex pattern="^[0-9]*$" />
-						</p:inputText>
+					<p:inputText value="#{phoneNumberController.newPhoneNumber}"
+						tabindex="1" required="true"
+						requiredMessage="Phone number is required!" maxlength="12"
+						validator="phoneNumberValidator">
+					</p:inputText>
 
-						<p:commandButton value="Add" styleClass="custom_button" actionListener="#{phoneNumberController.addPhoneNumber()}"
-							ajax="true" update=":messages, :addPhoneNumberDialogForm" />
-						<p:commandButton value="Cancel" styleClass="custom_button" actionListener="#{loginController.showUserProfile()}"
-							ajax="true" immediate="true" tabindex="2" />
+					<p:commandButton value="Add" styleClass="custom_button"
+						actionListener="#{phoneNumberController.addPhoneNumber()}"
+						ajax="true" update=":messages, :addPhoneNumberDialogForm" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{loginController.showUserProfile()}" ajax="true"
+						immediate="true" tabindex="2" />
 				</h:form>
 			</div>
 		</p:dialog>
-		
-		<p:dialog header="Edit Phone Number" resizable="false" draggable="false" styleClass="phone_modal" id="editPhoneNumberDialog" closeOnEscape="true" modal="true" widgetVar="editPhoneNumberDialogVar">
+
+		<p:dialog header="Edit Phone Number" resizable="false"
+			draggable="false" styleClass="phone_modal" id="editPhoneNumberDialog"
+			closeOnEscape="true" modal="true"
+			widgetVar="editPhoneNumberDialogVar">
 			<!-- Edit phone number form -->
 			<div class="login_form_container">
 				<h:form id="editPhoneNumberDialogForm" class="login_form">
 					<p:outputLabel value="Phone number:" styleClass="required" />
-						<p:inputText value="#{phoneNumberController.newPhoneNumber}" tabindex="1" required="true"
-							requiredMessage="Phone number is required!" validatorMessage="Phone number must contain only numbers!">
-							<f:validateRegex pattern="^[0-9]*$" />
-						</p:inputText>
+					<p:inputText value="#{phoneNumberController.newPhoneNumber}"
+						tabindex="1" required="true"
+						requiredMessage="Phone number is required!" maxlength="12"
+						validator="phoneNumberValidator">
+					</p:inputText>
 
-						<p:commandButton value="Edit" styleClass="custom_button" actionListener="#{phoneNumberController.editPhoneNumber()}"
-							ajax="true" update=":messages, :editPhoneNumberDialogForm" />
-						<p:commandButton value="Cancel" styleClass="custom_button" actionListener="#{loginController.showUserProfile()}"
-							ajax="true" immediate="true" tabindex="2" />
+					<p:commandButton value="Edit" styleClass="custom_button"
+						actionListener="#{phoneNumberController.editPhoneNumber()}"
+						ajax="true" update=":messages, :editPhoneNumberDialogForm" />
+					<p:commandButton value="Cancel" styleClass="custom_button"
+						actionListener="#{loginController.showUserProfile()}" ajax="true"
+						immediate="true" tabindex="2" />
 				</h:form>
 			</div>
 		</p:dialog>
 
-		<div id="modal_change_pw" class="popupContainer" style="display: none;">
+		<div id="modal_change_pw" class="popupContainer"
+			style="display: none;">
 			<div class="popupHeader">
-				<span class="header_title">Change Password</span> <span id="close_modal_change_pw" class="modal_close"><i
+				<span class="header_title">Change Password</span> <span
+					id="close_modal_change_pw" class="modal_close"><i
 					class="fa fa-times"></i></span>
 			</div>
 
@@ -138,20 +206,24 @@
 				<div class="login_form_container">
 					<h:form id="changePasswordForm">
 						<p:outputLabel value="Current password:" styleClass="required" />
-						<p:password value="#{userController.currentPassword}" required="true" requiredMessage="Password is required!"
+						<p:password value="#{userController.currentPassword}"
+							required="true" requiredMessage="Password is required!"
 							tabindex="1" />
 
 						<p:outputLabel value="New password:" styleClass="required" />
-						<p:password value="#{userController.newPassword}" required="true" requiredMessage="Password is required!"
-							match="passwordAgain" validatorMessage="The passwords did not match!" tabindex="2" />
+						<p:password value="#{userController.newPassword}" required="true"
+							requiredMessage="Password is required!" match="passwordAgain"
+							validatorMessage="The passwords did not match!" tabindex="2" />
 
 						<p:outputLabel value="Confirm password:" styleClass="required" />
 						<p:password id="passwordAgain" tabindex="3" />
 
-						<p:commandButton value="Change" styleClass="custom_button" actionListener="#{userController.changePassword()}"
-							ajax="true" update=":messages" tabindex="5" />
-						<p:commandButton value="Cancel" styleClass="custom_button" actionListener="#{loginController.showUserProfile()}"
-							ajax="true" immediate="true" tabindex="4" />
+						<p:commandButton value="Change" styleClass="custom_button"
+							actionListener="#{userController.changePassword()}" ajax="true"
+							update=":messages" tabindex="5" />
+						<p:commandButton value="Cancel" styleClass="custom_button"
+							actionListener="#{loginController.showUserProfile()}" ajax="true"
+							immediate="true" tabindex="4" />
 					</h:form>
 				</div>
 			</div>
@@ -183,7 +255,8 @@
 								<!-- Row 2 -->
 								<div class="table_row">
 									<div class="table_element">
-										<a id="change_pw_trigger" class="modal_trigger" rel="leanModal" href="#modal_change_pw"><i
+										<a id="change_pw_trigger" class="modal_trigger"
+											rel="leanModal" href="#modal_change_pw"><i
 											class="fa fa-lock"></i></a>
 									</div>
 									<div class="table_element">
@@ -226,10 +299,13 @@
 								<div class="header_row">
 									<div class="header_cell">
 										<h:form>
-											<p:remoteCommand name="addAddressRemoteCommand" actionListener="#{addressController.addAddressListen}"
-												update="addAddressDialog" oncomplete="PF('addAddressDialogVar').show()" />
-											
-											<a id="new_address_trigger" rel="leanModal" onclick="addAddressRemoteCommand([{name:'addressId', value:0}]);">
+											<p:remoteCommand name="addAddressRemoteCommand"
+												actionListener="#{addressController.addAddressListen}"
+												update="addAddressDialog"
+												oncomplete="PF('addAddressDialogVar').show()" />
+
+											<a id="new_address_trigger" rel="leanModal"
+												onclick="addAddressRemoteCommand([{name:'addressId', value:0}]);">
 												<i class="fa fa-plus"></i>
 											</a>
 										</h:form>
@@ -240,7 +316,8 @@
 								</div>
 							</div>
 							<div id="address_content">
-								<ui:repeat value="#{loginController.user.addresses.toArray()}" var="address">
+								<ui:repeat value="#{loginController.user.addresses.toArray()}"
+									var="address">
 
 									<div class="address_row">
 										<div class="address_cell">
@@ -248,10 +325,13 @@
 										</div>
 										<div class="address_cell">
 											<h:form>
-												<p:remoteCommand name="editAddressRemoteCommand" actionListener="#{addressController.editAddressListen}"
-													update="editAddressDialog" oncomplete="PF('editAddressDialogVar').show()" />
+												<p:remoteCommand name="editAddressRemoteCommand"
+													actionListener="#{addressController.editAddressListen}"
+													update="editAddressDialog"
+													oncomplete="PF('editAddressDialogVar').show()" />
 
-												<a id="edit_address_trigger" rel="leanModal" data-toggle="modal" data-id="#{address.addressId}"
+												<a id="edit_address_trigger" rel="leanModal"
+													data-toggle="modal" data-id="#{address.addressId}"
 													onclick="editAddressRemoteCommand([{name:'addressId', value:#{address.addressId}}]);">
 													<i class="fa fa-edit"></i>
 												</a>
@@ -259,15 +339,13 @@
 										</div>
 										<div class="address_cell">
 											<h:form transient="true" id="removeAddressForm">
-												<p:remoteCommand
-													name="removeAddressRemoteCommand"
+												<p:remoteCommand name="removeAddressRemoteCommand"
 													actionListener="#{addressController.removeAddress}"
 													process="@this"
 													onstart="return confirm('Are you sure you want to delete this address?');"
 													oncomplete="location.reload();" />
 
-												<h:commandLink
-													id="remove"
+												<h:commandLink id="remove"
 													onclick="removeAddressRemoteCommand([{name:'addressId', value:#{address.addressId}}]);">
 													<f:ajax render="@form" />
 													<i class="fa fa-remove"></i>
@@ -285,10 +363,13 @@
 								<div class="header_row">
 									<div class="header_cell">
 										<h:form>
-											<p:remoteCommand name="addPhoneNumberRemoteCommand" actionListener="#{phoneNumberController.addPhoneNumberListen}"
-												update="addPhoneNumberDialog" oncomplete="PF('addPhoneNumberDialogVar').show()" />
-											
-											<a id="new_phone_trigger" rel="leanModal" onclick="addPhoneNumberRemoteCommand([{name:'phoneNumberId', value:0}]);">
+											<p:remoteCommand name="addPhoneNumberRemoteCommand"
+												actionListener="#{phoneNumberController.addPhoneNumberListen}"
+												update="addPhoneNumberDialog"
+												oncomplete="PF('addPhoneNumberDialogVar').show()" />
+
+											<a id="new_phone_trigger" rel="leanModal"
+												onclick="addPhoneNumberRemoteCommand([{name:'phoneNumberId', value:0}]);">
 												<i class="fa fa-plus"></i>
 											</a>
 										</h:form>
@@ -299,17 +380,21 @@
 								</div>
 							</div>
 							<div id="phone_content">
-								<ui:repeat value="#{loginController.user.phoneNumbers.toArray()}" var="pn">
+								<ui:repeat
+									value="#{loginController.user.phoneNumbers.toArray()}" var="pn">
 									<div class="address_row">
 										<div class="phone_cell">
 											<p>#{pn.toString()}</p>
 										</div>
 										<div class="phone_cell">
 											<h:form>
-												<p:remoteCommand name="editPhoneNumberRemoteCommand" actionListener="#{phoneNumberController.editPhoneNumberListen}"
-													update="editPhoneNumberDialog" oncomplete="PF('editPhoneNumberDialogVar').show()" />
+												<p:remoteCommand name="editPhoneNumberRemoteCommand"
+													actionListener="#{phoneNumberController.editPhoneNumberListen}"
+													update="editPhoneNumberDialog"
+													oncomplete="PF('editPhoneNumberDialogVar').show()" />
 
-												<a id="edit_phone_number_trigger" rel="leanModal" data-toggle="modal"
+												<a id="edit_phone_number_trigger" rel="leanModal"
+													data-toggle="modal"
 													onclick="editPhoneNumberRemoteCommand([{name:'phoneNumberId', value:#{pn.phoneNumberId}}]);">
 													<i class="fa fa-edit"></i>
 												</a>
@@ -317,15 +402,13 @@
 										</div>
 										<div class="phone_cell">
 											<h:form transient="true" id="removeAddressForm">
-												<p:remoteCommand
-													name="removePhoneNumberRemoteCommand"
+												<p:remoteCommand name="removePhoneNumberRemoteCommand"
 													actionListener="#{phoneNumberController.removePhoneNumberFromUser}"
 													process="@this"
 													onstart="return confirm('Are you sure you want to delete this address?');"
 													oncomplete="location.reload();" />
 
-												<h:commandLink
-													id="remove"
+												<h:commandLink id="remove"
 													onclick="removePhoneNumberRemoteCommand([{name:'phoneNumberId', value:#{pn.phoneNumberId}}]);">
 													<f:ajax render="@form" />
 													<i class="fa fa-remove"></i>
@@ -341,7 +424,9 @@
 				<p:tab class="tab" title="Previous orders">
 					<div id="order_container">
 						<div id="datatable_container">
-							<p:dataTable var="ord" value="#{loginController.user.orders.toArray()}" styleClass="borderless">
+							<p:dataTable var="ord"
+								value="#{loginController.user.orders.toArray()}"
+								styleClass="borderless">
 								<p:column class="po_rowtoggler">
 									<p:rowToggler />
 								</p:column>
@@ -358,24 +443,29 @@
 									<h:outputText class="po_celltext" value="#{ord.address2}" />
 								</p:column>
 								<p:column class="po_phone" headerText="Phone number">
-									<h:outputText class="po_celltext" value="#{ord.phoneNumber.phoneNumber}" />
+									<h:outputText class="po_celltext"
+										value="#{ord.phoneNumber.phoneNumber}" />
 								</p:column>
 								<p:rowExpansion>
-									<p:dataTable class="inner_table" var="prod" value="#{ord.prodToOrders.toArray()}">
+									<p:dataTable class="inner_table" var="prod"
+										value="#{ord.prodToOrders.toArray()}">
 										<p:column class="po_prod_empty">
 											<h:outputText class="empty_cell" value=" " />
 										</p:column>
 										<p:column class="po_prod_imgcol">
-											<p:graphicImage class="po_prod_img" name="#{prod.product.image.getImageUrl()}" />
+											<p:graphicImage class="po_prod_img"
+												name="#{prod.product.image.getImageUrl()}" />
 										</p:column>
 										<p:column class="po_prod_name" headerText="Product name">
-											<h:outputText class="po_celltext" value="#{prod.product.title}" />
+											<h:outputText class="po_celltext"
+												value="#{prod.product.title}" />
 										</p:column>
 										<p:column class="po_prod_amount" headerText="Amount">
 											<h:outputText class="po_celltext" value="#{prod.amount}" />
 										</p:column>
 										<p:column class="po_prod_price" headerText="Price">
-											<h:outputText class="po_celltext" value="$#{prod.product.price}" />
+											<h:outputText class="po_celltext"
+												value="$#{prod.product.price}" />
 										</p:column>
 									</p:dataTable>
 								</p:rowExpansion>
