@@ -1,16 +1,20 @@
 package hu.unideb.inf.Unizon.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 
@@ -58,8 +62,9 @@ public class SearchController implements Serializable {
 		for (Category category : categories) {
 			categoryNames.add(category.getName());
 		}
-		
-		products = productFacade.findAll();
+
+		products = productFacade.findAllNotDeleted();
+
 	}
 
 	public String submitProduct(Integer id) {
@@ -114,13 +119,23 @@ public class SearchController implements Serializable {
 			}
 		} else {
 			if (category == null || category.equals("all")) {
-				setProducts(productFacade.findAll());
+				setProducts(productFacade.findAllNotDeleted());
 			} else {
 				Category cat = categoryFacade.findByName(category);
 				setProducts(productFacade.findAll(cat));
 			}
 		}
 		Collections.sort(products, ProductNameASCComparator);
+	}
+
+	public void catSelectBehindProductDetails() {
+		catSelectSearch();
+		try {
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + "/products.jsf?faces-redirect=true");
+		} catch (IOException ex) {
+			java.util.logging.Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	public String getCategory() {

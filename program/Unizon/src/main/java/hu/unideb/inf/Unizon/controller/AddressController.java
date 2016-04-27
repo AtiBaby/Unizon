@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -83,6 +85,11 @@ public class AddressController implements Serializable {
 	}
 
 	public void addAddress() {
+		if (user.getAddresses().contains(newAddress)) {
+			addErrorMessage("Address already added to your profile!");
+			return;
+		}
+
 		Address address = createOrFindAddress(newAddress);
 
 		addAddressToUser(address);
@@ -91,6 +98,11 @@ public class AddressController implements Serializable {
 	}
 
 	public void editAddress() {
+		if (user.getAddresses().contains(newAddress)) {
+			addErrorMessage("Address already added to your profile!");
+			return;
+		}
+
 		if (!newAddress.equals(originalAddress)) {
 			newAddress = createOrFindAddress(newAddress);
 
@@ -185,6 +197,15 @@ public class AddressController implements Serializable {
 		} catch (IOException e) {
 			log.error(e.getMessage());
 		}
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
 	}
 
 	public Logger getLog() {

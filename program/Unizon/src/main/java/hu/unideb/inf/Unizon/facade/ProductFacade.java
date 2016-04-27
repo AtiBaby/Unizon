@@ -34,6 +34,11 @@ public class ProductFacade extends AbstractFacade<Product> {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Product> findAllNotDeleted() {
+		return em.createNamedQuery("Product.findAllNotDeleted").getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Product> findByNameStartingWith(String term, Integer num) {
 		return em.createNamedQuery("Product.findAllContain").setParameter("term", term + "%").setMaxResults(num)
 				.getResultList();
@@ -63,4 +68,7 @@ public class ProductFacade extends AbstractFacade<Product> {
 		return em.createNamedQuery("Product.findAllByCat").setParameter("catId", cat.getCategoryId()).getResultList();
 	}
 
+	public Product findById(int productId) {
+		return (Product) em.createNamedQuery("Product.findById").setParameter("productId", productId).getSingleResult();
+	}
 }
