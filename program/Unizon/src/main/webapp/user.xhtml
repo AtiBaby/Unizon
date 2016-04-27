@@ -230,7 +230,7 @@
 		</div>
 
 		<div id="tab_container" class="container">
-			<p:tabView>
+			<p:tabView rendered="#{loginController.loggedIn}">
 				<p:growl id="messages" life="4000" showDetail="true" />
 				<p:tab class="tab" title="User information">
 					<div class="info_panel">
