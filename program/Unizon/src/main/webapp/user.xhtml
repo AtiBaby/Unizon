@@ -451,6 +451,11 @@
 									<h:outputText class="po_celltext"
 										value="#{ord.phoneNumber.phoneNumber}" />
 								</p:column>
+								<p:column class="po_total_price" headerText="Total price">
+									<h:outputText class="po_celltext" value="#{ord.prodToOrders.stream().map(prod -> prod.product.price).sum()}">
+										<f:convertNumber currencyCode="USD" type="currency" />
+									</h:outputText>
+								</p:column>
 								<p:rowExpansion>
 									<p:dataTable class="inner_table" var="prod"
 										value="#{ord.prodToOrders.toArray()}">
