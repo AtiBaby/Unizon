@@ -137,19 +137,24 @@
 								</h:form>
 							</div>
 						</p:column>
-						<p:column class="prod_remove">
+						<p:column class="prod_remove" rendered="#{not product.deleted}">
 							<div class="address_cell">
 								<h:form transient="true" id="removeProductForm">
 									<p:remoteCommand name="removeProductRemoteCommand"
 										actionListener="#{productController.removeProduct}"
 										process="@this"
-										onstart="return confirm('Are you sure you want to delete this product?');"
-										oncomplete="location.reload();" />
-									<h:commandLink id="remove"
+										oncomplete="location.reload();">
+									</p:remoteCommand>
+									<p:commandLink id="remove"
 										onclick="removeProductRemoteCommand([{name:'productId', value:#{product.productId}}]);">
 										<f:ajax render="@form" />
 										<i class="fa fa-remove"></i>
-									</h:commandLink>
+										<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+									</p:commandLink>
+									<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+										<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+										<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+									</p:confirmDialog>
 								</h:form>
 							</div>
 
