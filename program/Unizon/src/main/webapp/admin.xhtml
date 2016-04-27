@@ -89,7 +89,7 @@
 				rendered="#{loginController.loggedIn and loginController.administrator}">
 				<!-- 				<p:growl id="messages" life="4000" showDetail="true" /> -->
 				<p:tab class="tab" title="Product information" id="productTab">
-					<h:form styleClass="add_product_form">
+					<h:form>
 						<p:remoteCommand name="addProductRemoteCommand"
 							actionListener="#{productController.init}"
 							update="addProductDialog"
