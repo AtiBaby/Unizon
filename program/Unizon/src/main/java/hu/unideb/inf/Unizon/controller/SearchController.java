@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 
+import org.primefaces.event.SlideEndEvent;
 import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.CategoryFacade;
@@ -46,9 +47,13 @@ public class SearchController implements Serializable {
 	private String productName;
 
 	private List<Product> products;
+	private List<Product> filteredProducts;
 
 	private String selectedSort;
 	private List<String> sortingOptions;
+
+	private Integer minPrice;
+	private Integer maxPrice;
 
 	@PostConstruct
 	public void init() {
@@ -64,7 +69,13 @@ public class SearchController implements Serializable {
 		}
 
 		products = productFacade.findAllNotDeleted();
+		filteredProducts = products;
+		Collections.sort(products, PriceASCComparator);
 
+		if (products.get(0) != null) {
+			minPrice = products.get(0).getPrice();
+			maxPrice = products.get(products.size() - 1).getPrice();
+		}
 	}
 
 	public String submitProduct(Integer id) {
@@ -96,6 +107,15 @@ public class SearchController implements Serializable {
 		category = (String) event.getNewValue();
 	}
 
+	public void onSlideEndPrice(SlideEndEvent event) {
+		filteredProducts = new ArrayList<>();
+		for (Product prod : products) {
+			if (prod.getPrice() >= minPrice && prod.getPrice() <= maxPrice) {
+				filteredProducts.add(prod);
+			}
+		}
+	}
+
 	public void sortChangeListener(ValueChangeEvent e) {
 		String sorting = e.getNewValue().toString();
 		if (sorting.equals("Title - Low to High")) {
@@ -107,6 +127,7 @@ public class SearchController implements Serializable {
 		} else if (sorting.equals("Price - High to Low")) {
 			Collections.sort(products, PriceDESCComparator);
 		}
+		filteredProducts = products;
 	}
 
 	public void search() {
@@ -125,7 +146,21 @@ public class SearchController implements Serializable {
 				setProducts(productFacade.findAll(cat));
 			}
 		}
-		Collections.sort(products, ProductNameASCComparator);
+		if (products.get(0) != null) {
+			minPrice = products.get(0).getPrice();
+			maxPrice = products.get(0).getPrice();
+		} else {
+			minPrice = 0;
+			maxPrice = 0;
+		}
+		for (int i = 0; i < products.size(); ++i) {
+			if (minPrice > products.get(i).getPrice()) {
+				minPrice = products.get(i).getPrice();
+			} else if (maxPrice < products.get(i).getPrice()) {
+				maxPrice = products.get(i).getPrice();
+			}
+		}
+		filteredProducts = products;
 	}
 
 	public void catSelectBehindProductDetails() {
@@ -217,6 +252,30 @@ public class SearchController implements Serializable {
 
 	public void setSortingOptions(List<String> sortingOptions) {
 		this.sortingOptions = sortingOptions;
+	}
+
+	public Integer getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Integer minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Integer getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(Integer maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
+	public List<Product> getFilteredProducts() {
+		return filteredProducts;
+	}
+
+	public void setFilteredProducts(List<Product> filteredProducts) {
+		this.filteredProducts = filteredProducts;
 	}
 
 }
