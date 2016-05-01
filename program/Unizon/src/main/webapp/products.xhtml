@@ -34,13 +34,13 @@
 				<div class="left_box">
 					<h:form>
 						<ul class="category_list">
-							<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>
-							<h:commandLink action="#{SearchController.catSelectSearch}">
+							<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> <h:commandLink
+									action="#{SearchController.catSelectSearch}">
 									<f:setPropertyActionListener target="#{SearchController.category}" value="all" />All
 									categories</h:commandLink></li>
 							<ui:repeat var="cat" value="#{SearchController.categoryNames}">
-								<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>
-								<h:commandLink action="#{SearchController.catSelectSearch}">
+								<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> <h:commandLink
+										action="#{SearchController.catSelectSearch}">
 										<f:setPropertyActionListener target="#{SearchController.category}" value="#{cat}" />#{cat}
 								</h:commandLink></li>
 							</ui:repeat>
@@ -57,6 +57,20 @@
 						</p:selectOneMenu>
 					</h:form>
 				</div>
+				<h2>Filters</h2>
+				<div class="sort_holder">
+					<h:form id="priceFilter">
+						<p:outputLabel id="displayPriceRange" value="Price: #{SearchController.minPrice} USD - #{SearchController.maxPrice} USD" class="tabl_label" />
+							<p:slider minValue="#{SearchController.minPrice}" maxValue="#{SearchController.maxPrice}"
+								for="txtMin,txtMax" display="displayPriceRange" range="true"
+								displayTemplate="Price {min} - {max}">
+								<p:ajax event="slideEnd" listener="#{SearchController.onSlideEndPrice}" process="priceFilter"
+									update="products" />
+							</p:slider>
+						<h:inputHidden id="txtMin" value="#{SearchController.minPrice}" />
+						<h:inputHidden id="txtMax" value="#{SearchController.maxPrice}" />
+					</h:form>
+				</div>
 
 			</div>
 			<div class="right_bar clear-after">
@@ -70,7 +84,7 @@
 				</div>
 				<div class="product_box_container">
 
-					<p:dataGrid var="product" value="#{SearchController.products}" columns="3" layout="grid"
+					<p:dataGrid var="product" value="#{SearchController.filteredProducts}" columns="3" layout="grid"
 						rows="12" paginator="true" id="products"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="6,12,15">
@@ -78,7 +92,7 @@
 							<div class="product_box">
 								<div class="product_box_imageholder">
 									<div class="product_box_imageholder_cell">
-										<h:graphicImage	name="#{product.image.imageUrl}" />
+										<h:graphicImage name="#{product.image.imageUrl}" />
 									</div>
 								</div>
 								<div class="name">
