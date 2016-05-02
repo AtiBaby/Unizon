@@ -1,0 +1,385 @@
+body {
+	background-color: #3A495F;
+}
+
+#table_container {
+	border: none;
+	display: block;
+	padding: 0;
+}
+
+.table {
+	border: none;
+	display: table;
+	position: relative;
+	width: 100%;
+	padding-top: 25px;
+	background-color: #FFFFFF;
+}
+
+.table_element {
+	width: 50%;
+	display: table-cell;
+	position: relative;
+	float: left;
+}
+
+.table_element img {
+	width: 100%;
+	height: auto;
+	display: block;
+	position: relative;
+}
+
+#bal_fel {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: 0;
+	height: 390px;
+}
+
+#bal_fel h1 {
+	display: block;
+	padding: 70px 0 0 0;
+	color: #3A495F;
+	font-size: 40px;
+	margin: 0;
+}
+
+#bal_fel span {
+	display: block;
+	padding: 65px 0 0 0;
+	text-align: justify;
+	color: #3A495F;
+	font-size: 20px;
+	margin: 0;
+	vertical-align: middle;
+}
+
+#contact_info_mobile {
+	display: none !important;
+}
+
+#bal_le {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: 0;
+	height: 390px;
+}
+
+#jobb_fel {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: 0;
+	height: 390px;
+}
+
+#jobb_le {
+	margin: 0;
+	padding: 60px 0 0 0;
+	border: none;
+	outline: 0;
+	height: 390px;
+	text-align: center;
+}
+
+#jobb_le h1 {
+	display: inline-block;
+	color: #3A495F;
+	font-size: 40px;
+	margin: 0;
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+#jobb_le span {
+	display: inline-block;
+	color: #3A495F;
+	font-size: 20px;
+}
+
+.form_holder {
+	padding: 15px 0 15px 0;
+	width: 92%;
+	margin: 0 auto;
+}
+
+.form_holder form:after {
+	clear: both;
+	content: '';
+	display: block;
+}
+
+#contact_form {
+	display: block;
+	border-radius: 3px;
+	overflow: hidden;
+	background: #fff;
+	box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+	padding: 20px 0 0;
+	border-radius: 10px;
+}
+
+.contact_form_row {
+	width: 100%;
+	padding: 0px;
+	line-height: 40px;
+}
+
+.contact_form_row input {
+	display: block;
+	box-sizing: border-box;
+	background: #eee;
+	color: #3A495F;
+	height: 40px;
+	width: 90%;
+	margin: 0 auto 15px auto;
+	border-radius: 7px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	font-weight: bold;
+}
+
+.contact_form_row  textarea {
+	line-height: 3em;
+	display: block;
+	box-sizing: border-box;
+	background: #eee;
+	color: #3A495F;
+	width: 90%;
+	margin: 0 auto 15px auto;
+	border-radius: 7px;
+	padding: 0 10px;
+	resize: none;
+	border: 1px solid #ccc;
+	font-weight: bold;
+}
+
+
+/*Box Shadow off*/
+input:required:invalid {
+	box-shadow: none;
+}
+
+textarea:required:invalid {
+	box-shadow: none;
+}
+
+/*Valid*/
+.name:required:valid,
+.email:required:valid,
+.subject:required:valid,
+.message:required:valid
+{
+	border-color: #00CC00;
+	border-style: solid;
+	border-width: 1px;
+}
+
+/*Invalid*/
+.name:focus:required:invalid,
+.email:focus:required:invalid,
+.subject:focus:required:invalid,
+.message:focus:required:invalid
+{
+	border-color: #CC0000;
+	border-style: solid;
+	border-width: 1px;
+}
+
+/*Submit Button*/
+#contact_form input[type=submit] {
+	width: 85px;
+	border-left: 1px solid #d9d9d9;
+	border-radius: 7px;
+	background: #3A495F;
+	color: #fff;
+	border: none;
+	text-align: center;
+	font-weight: bold;
+}
+
+/*Google Maps*/
+#map {
+	width: 100%;
+	height: 390px;
+	box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+}
+
+/*Responsive*/
+@media all and (max-width:1200px) {
+	#bal_fel {
+		height: 350px;
+	}
+	#bal_le {
+		height: 350px;
+	}
+	#jobb_fel {
+		height: 350px;
+	}
+	#jobb_le {
+		height: 350px;
+		padding: 45px 0 0 0;
+	}
+	#map {
+		height: 350px;
+	}
+	.contact_form_row  textarea {
+		line-height: 2em;
+	}
+	.form_holder {
+		padding: 10px 0;
+	}
+}
+
+@media all and (max-width:992px)
+{
+	.table {
+		display: block;
+	}
+	.table .table_element {
+		float: none;
+		display: block;
+		width: 100%;
+	}
+	#contact_info {
+		display: none !important;
+	}
+	#contact_info_mobile {
+		display: block !important;
+	}
+	#bal_fel {
+		height: 200px;
+		width: 92%;
+		margin: 0 auto;
+	}
+	#bal_fel h1 {
+		padding: 10px 0 0 0;
+	}
+	#bal_fel span {
+		padding: 50px 0 0 0;
+	}
+	#jobb_fel {
+		height: 390px;
+	}
+	.form_holder {
+		padding: 15px 0 15px 0;
+		width: 92%;
+		margin: 0 auto;
+	}
+	.contact_form_row  textarea {
+		line-height: 3em;
+		width: 90%;
+		margin: 0 auto 15px auto;
+	}
+	.contact_form_row input {
+		width: 90%;
+		margin: 0 auto 15px auto;
+	}
+	#bal_le {
+		height: 390px;
+	}
+	#map {
+		margin: 0 auto;
+		width: 92%;
+		height: 390px;
+		width: 92%;
+	}
+	#jobb_le {
+		padding: 50px 0 0 0;
+	}
+}
+
+@media all and (max-width:768px) {
+	#bal_fel h1 {
+		padding: 10px 0 0 0;
+		font-size: 35px;
+	}
+	#bal_fel span {
+		padding: 50px 0 0 0;
+		font-size: 18px;
+	}
+	#jobb_fel {
+		height: 350px;
+	}
+	.form_holder {
+		padding: 10px 0;
+	}
+	.contact_form_row  textarea {
+		line-height: 2em;
+		width: 90%;
+		margin: 0 auto 15px auto;
+	}
+	.contact_form_row input {
+		width: 90%;
+		margin: 0 auto 15px auto;
+	}
+	#bal_le {
+		height: 350px;
+	}
+	#map {
+		margin: 0 auto;
+		width: 92%;
+		height: 350px;
+	}
+	#jobb_le {
+		height: 300px;
+		padding: 40px 0 0 0;
+	}
+	#jobb_le h1 {
+		margin-bottom: 35px;
+		font-size: 35px;
+	}
+	#jobb_le span {
+		font-size: 18px;
+	}
+}
+
+@media all and (max-width:480px) {
+	#bal_fel h1 {
+		padding: 10px 0 0 0;
+		font-size: 30px;
+	}
+	#bal_fel span {
+		padding: 50px 0 0 0;
+		font-size: 16px;
+	}
+	#jobb_fel {
+		height: 350px;
+	}
+	.form_holder {
+		padding: 10px 0;
+	}
+	.contact_form_row  textarea {
+		line-height: 2em;
+		width: 90%;
+		margin: 0 auto 15px auto;
+	}
+	.contact_form_row input {
+		width: 90%;
+		margin: 0 auto 15px auto;
+	}
+	#bal_le {
+		height: 300px;
+	}
+	#map {
+		margin: 0 auto;
+		width: 92%;
+		height: 300px;
+	}
+	#jobb_le {
+		height: 300px;
+		padding: 50px 0 0 0;
+	}
+	#jobb_le h1 {
+		margin-bottom: 40px;
+		font-size: 30px;
+	}
+	#jobb_le span {
+		font-size: 16px;
+	}
+}

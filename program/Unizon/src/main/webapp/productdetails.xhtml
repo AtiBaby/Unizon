@@ -118,11 +118,18 @@
 
 					<div class="buttons clear-after">
 						<h3>
-							<a href="#" class="button cart"><i
-								class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to
-								Cart</a>
+							<h:form>
+								<p:remoteCommand name="addProductToCartRemoteCommand"
+									actionListener="#{cartController.addProductToCartListen()}"
+									oncomplete="PF('addProductDialogVar').show()" />
+
+								<p:commandButton class="button cart"
+									update=":addProductDialogForm" value="Add to Cart"
+									onclick="addProductToCartRemoteCommand([{name:'productId', value:#{productDetailController.actualProduct.productId}}]);" />
+							</h:form>
 						</h3>
 					</div>
+
 					<div class="row" id="productImages">
 
 						<p:dataGrid var="image"
@@ -151,5 +158,25 @@
 				</h4>
 			</div>
 		</div>
+
+		<p:dialog header="Add product" resizable="false" draggable="false"
+			styleClass="address_modal" id="addProductDialog" closeOnEscape="true"
+			modal="true" widgetVar="addProductDialogVar">
+			<div class="login_form_container">
+				<h:form id="addProductDialogForm" class="login_form">
+					<p:outputLabel value="Amount:" for="minMax" styleClass="required" />
+					<p:spinner id="minMax"
+						value="#{cartController.selectedProductAmount}" min="1"
+						max="#{cartController.selectedProduct.amount}" />
+					<p:commandButton class="button cart" value="Add to Cart"
+						oncomplete="PF('addProductDialogVar').hide()"
+						actionListener="#{cartController.addProductToCart}"
+						update=":messages">
+						<!-- 						<i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> -->
+					</p:commandButton>
+				</h:form>
+			</div>
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>

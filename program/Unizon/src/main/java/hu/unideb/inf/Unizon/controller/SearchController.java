@@ -277,5 +277,4 @@ public class SearchController implements Serializable {
 	public void setFilteredProducts(List<Product> filteredProducts) {
 		this.filteredProducts = filteredProducts;
 	}
-
 }

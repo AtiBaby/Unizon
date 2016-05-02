@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.inf.Unizon.controller;
 
 import java.io.Serializable;
@@ -37,125 +32,125 @@ public class ManageAdminController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-    private Logger log;
+	private Logger log;
 
-    @ManagedProperty("#{loginController}")
-    private LoginController loginController;
+	@ManagedProperty("#{loginController}")
+	private LoginController loginController;
 
-    @EJB
-    private AdministratorFacade administratorFacade;
-    @EJB
-    private UserFacade userFacade;
+	@EJB
+	private AdministratorFacade administratorFacade;
+	@EJB
+	private UserFacade userFacade;
 
-    private List<Administrator> admins;
-    private List<User> usersWithoutAdmins;
-    private List<User> filteredUser;
+	private List<Administrator> admins;
+	private List<User> usersWithoutAdmins;
+	private List<User> filteredUser;
 
-    private Administrator selectedAdministrator;
-    private User selectedUser;
+	private Administrator selectedAdministrator;
+	private User selectedUser;
 
-    @PostConstruct
-    public void init() {
-        selectedAdministrator = null;
-        selectedUser = null;
-        admins = administratorFacade.findAll();
-        usersWithoutAdmins = userFacade.findUsersWithoutAdmins();
-    }
+	@PostConstruct
+	public void init() {
+		selectedAdministrator = null;
+		selectedUser = null;
+		admins = administratorFacade.findAll();
+		usersWithoutAdmins = userFacade.findUsersWithoutAdmins();
+	}
 
-    public void selectAdministrator(SelectEvent selectEvent) {
-        selectedAdministrator = (Administrator) selectEvent.getObject();
-    }
-    
-    public void selectUser(SelectEvent selectEvent) {
-        selectedUser = (User) selectEvent.getObject();
-    }
+	public void selectAdministrator(SelectEvent selectEvent) {
+		selectedAdministrator = (Administrator) selectEvent.getObject();
+	}
 
-    public void makeAdministrator() {
-        if (selectedUser == null) {
-            log.info("{} tried to create an admin without selecting a user.", loginController.getUser());
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Please select a user!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return;
-        }
-        Administrator admin = new Administrator();
-        admin.setUserId(selectedUser.getUserId());
-        admin.setUser(selectedUser);
-        administratorFacade.create(admin);
-        log.info("{} has added admin rights to {}.", loginController.getUser(), selectedUser);
-        init();
-        RequestContext rc = RequestContext.getCurrentInstance();
-        rc.update("adminTabView:adminTableForm");
-        rc.update("adminTabView:userTableForm");
-    }
-    
-    public void deleteAdministrator() {
-        if (selectedAdministrator == null) {
-            log.info("{} tried to remove an admin without selecting one.", loginController.getUser());
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Please select an administrator!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return;
-        }
+	public void selectUser(SelectEvent selectEvent) {
+		selectedUser = (User) selectEvent.getObject();
+	}
 
-        administratorFacade.remove(selectedAdministrator);
-        log.info("{} has removed {} from administrators.", loginController.getUser(), selectedAdministrator);
-        init();
-        RequestContext rc = RequestContext.getCurrentInstance();
-        rc.update("adminTabView:adminTableForm");
-        rc.update("adminTabView:userTableForm");
-    }
+	public void makeAdministrator() {
+		if (selectedUser == null) {
+			log.info("{} tried to create an admin without selecting a user.", loginController.getUser());
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Please select a user!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return;
+		}
+		Administrator admin = new Administrator();
+		admin.setUserId(selectedUser.getUserId());
+		admin.setUser(selectedUser);
+		administratorFacade.create(admin);
+		log.info("{} has added admin rights to {}.", loginController.getUser(), selectedUser);
+		init();
+		RequestContext rc = RequestContext.getCurrentInstance();
+		rc.update("adminTabView:adminTableForm");
+		rc.update("adminTabView:userTableForm");
+	}
 
-    /**
-     * Creates a new instance of ManageAdminController
-     */
-    public ManageAdminController() {
-    }
+	public void deleteAdministrator() {
+		if (selectedAdministrator == null) {
+			log.info("{} tried to remove an admin without selecting one.", loginController.getUser());
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
+					"Please select an administrator!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return;
+		}
 
-    public List<Administrator> getAdmins() {
-        return admins;
-    }
+		administratorFacade.remove(selectedAdministrator);
+		log.info("{} has removed {} from administrators.", loginController.getUser(), selectedAdministrator);
+		init();
+		RequestContext rc = RequestContext.getCurrentInstance();
+		rc.update("adminTabView:adminTableForm");
+		rc.update("adminTabView:userTableForm");
+	}
 
-    public void setAdmins(List<Administrator> admins) {
-        this.admins = admins;
-    }
+	/**
+	 * Creates a new instance of ManageAdminController
+	 */
+	public ManageAdminController() {
+	}
 
-    public List<User> getUsersWithoutAdmins() {
-        return usersWithoutAdmins;
-    }
+	public List<Administrator> getAdmins() {
+		return admins;
+	}
 
-    public void setUsersWithoutAdmins(List<User> usersWithoutAdmins) {
-        this.usersWithoutAdmins = usersWithoutAdmins;
-    }
+	public void setAdmins(List<Administrator> admins) {
+		this.admins = admins;
+	}
 
-    public Administrator getSelectedAdministrator() {
-        return selectedAdministrator;
-    }
+	public List<User> getUsersWithoutAdmins() {
+		return usersWithoutAdmins;
+	}
 
-    public void setSelectedAdministrator(Administrator selectedAdministrator) {
-        this.selectedAdministrator = selectedAdministrator;
-    }
+	public void setUsersWithoutAdmins(List<User> usersWithoutAdmins) {
+		this.usersWithoutAdmins = usersWithoutAdmins;
+	}
 
-    public LoginController getLoginController() {
-        return loginController;
-    }
+	public Administrator getSelectedAdministrator() {
+		return selectedAdministrator;
+	}
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
-    }
+	public void setSelectedAdministrator(Administrator selectedAdministrator) {
+		this.selectedAdministrator = selectedAdministrator;
+	}
 
-    public User getSelectedUser() {
-        return selectedUser;
-    }
+	public LoginController getLoginController() {
+		return loginController;
+	}
 
-    public void setSelectedUser(User selectedUser) {
-        this.selectedUser = selectedUser;
-    }
+	public void setLoginController(LoginController loginController) {
+		this.loginController = loginController;
+	}
 
-    public List<User> getFilteredUser() {
-        return filteredUser;
-    }
+	public User getSelectedUser() {
+		return selectedUser;
+	}
 
-    public void setFilteredUser(List<User> filteredUser) {
-        this.filteredUser = filteredUser;
-    }
+	public void setSelectedUser(User selectedUser) {
+		this.selectedUser = selectedUser;
+	}
 
+	public List<User> getFilteredUser() {
+		return filteredUser;
+	}
+
+	public void setFilteredUser(List<User> filteredUser) {
+		this.filteredUser = filteredUser;
+	}
 }

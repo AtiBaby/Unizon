@@ -232,5 +232,4 @@ public class PhoneNumberController implements Serializable {
 	public void setNewPhoneNumber(String newPhoneNumber) {
 		this.newPhoneNumber = newPhoneNumber;
 	}
-
 }

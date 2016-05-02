@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="custom_css">
+		<h:outputStylesheet name="css/admin.css" />
+	</ui:define>
+
+	<ui:define name="custom_js">
+	</ui:define>
+
+	<ui:define name="fullBody">
+		<p:dataTable id="cartDataTable"
+			value="#{cartItemController.products.entrySet()}" var="cart">
+
+			<f:facet name="header">
+				Products
+			</f:facet>
+
+			<p:column class="prod_title" headerText="Title">
+				<h:outputText class="prod_celltext" value="#{cart.key.title}" />
+			</p:column>
+
+			<p:column class="prod_price" headerText="Price">
+				<h:outputText class="prod_celltext" value="#{cart.key.price}" />
+			</p:column>
+
+			<p:column class="prod_description" headerText="Description">
+				<h:outputText class="prod_celltext" value="#{cart.key.description}" />
+			</p:column>
+
+			<p:column class="prod_amount" headerText="Amount">
+				<h:outputText class="prod_celltext" value="#{cart.value}" />
+			</p:column>
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
