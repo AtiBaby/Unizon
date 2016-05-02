@@ -167,7 +167,7 @@
 					<p:outputLabel value="Amount:" for="minMax" styleClass="required" />
 					<p:spinner id="minMax"
 						value="#{cartController.selectedProductAmount}" min="1"
-						max="#{cartController.selectedProduct.amount}" />
+						max="#{cartController.selectedProduct.amount}" style="padding-right:10px;"/>
 					<p:commandButton class="button cart" value="Add to Cart"
 						oncomplete="PF('addProductDialogVar').hide()"
 						actionListener="#{cartController.addProductToCart}"

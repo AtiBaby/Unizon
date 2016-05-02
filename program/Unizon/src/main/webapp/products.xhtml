@@ -76,34 +76,38 @@
 						<p:outputLabel id="displayPriceRange"
 							value="Price: #{SearchController.minPrice} USD - #{SearchController.maxPrice} USD"
 							class="tabl_label" />
-<<<<<<< HEAD
-						<p:slider minValue="#{SearchController.minPrice}" maxValue="#{SearchController.maxPrice}"
-							for="txtMin,txtMax" display="displayPriceRange" range="true"
-							displayTemplate="Price {min} USD - {max} USD">
-							<p:ajax event="slideEnd" listener="#{SearchController.onSlideEndPrice}" process="priceFilter"
-								update="products" />
-=======
+
 						<p:slider minValue="#{SearchController.minPrice}"
 							maxValue="#{SearchController.maxPrice}" for="txtMin,txtMax"
 							display="displayPriceRange" range="true"
-							displayTemplate="Price {min} - {max}">
+							displayTemplate="Price {min} USD - {max} USD">
 							<p:ajax event="slideEnd"
 								listener="#{SearchController.onSlideEndPrice}"
 								process="priceFilter" update="products" />
->>>>>>> refs/heads/ksa
-						</p:slider>
-						<h:inputHidden id="txtMin" value="#{SearchController.minPrice}" />
-						<h:inputHidden id="txtMax" value="#{SearchController.maxPrice}" />
+
+							<p:slider minValue="#{SearchController.minPrice}"
+								maxValue="#{SearchController.maxPrice}" for="txtMin,txtMax"
+								display="displayPriceRange" range="true"
+								displayTemplate="Price {min} - {max}">
+								<p:ajax event="slideEnd"
+									listener="#{SearchController.onSlideEndPrice}"
+									process="priceFilter" update="products" />
+
+							</p:slider>
+							<h:inputHidden id="txtMin" value="#{SearchController.minPrice}" />
+							<h:inputHidden id="txtMax" value="#{SearchController.maxPrice}" />
+							</p:slider>
 					</h:form>
 				</div>
-				<br/>
+				<br />
 				<div class="sort_holder">
 					<h:form id="tagFilter">
-						<p:selectManyCheckbox id="grid2" value="#{SearchController.tags2}" layout="responsive"
-							columns="1">
-							<f:selectItems value="#{SearchController.tags}" var="tag" itemLabel="#{tag.name}"
-								itemValue="#{tag.name}" />
-							<p:ajax listener="#{SearchController.tagFilterListener}" update="products" />
+						<p:selectManyCheckbox id="grid2" value="#{SearchController.tags2}"
+							layout="responsive" columns="1">
+							<f:selectItems value="#{SearchController.tags}" var="tag"
+								itemLabel="#{tag.name}" itemValue="#{tag.name}" />
+							<p:ajax listener="#{SearchController.tagFilterListener}"
+								update="products" />
 						</p:selectManyCheckbox>
 					</h:form>
 				</div>
@@ -121,7 +125,8 @@
 				</div>
 				<div class="product_box_container">
 
-					<p:dataGrid var="product" value="#{SearchController.filteredProducts}" columns="3"
+					<p:dataGrid var="product"
+						value="#{SearchController.filteredProducts}" columns="3"
 						layout="grid" rows="12" paginator="true" id="products"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="6,12,15">
@@ -183,7 +188,7 @@
 					<p:outputLabel value="Amount:" for="minMax" styleClass="required" />
 					<p:spinner id="minMax"
 						value="#{cartController.selectedProductAmount}" min="1"
-						max="#{cartController.selectedProduct.amount}" />
+						max="#{cartController.selectedProduct.amount}" style="padding-right:10px;" />
 					<p:commandButton class="button cart" value="Add to Cart"
 						oncomplete="PF('addProductDialogVar').hide()"
 						actionListener="#{cartController.addProductToCart}"

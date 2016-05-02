@@ -8,35 +8,76 @@
 
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/admin.css" />
+		<h:outputStylesheet name="css/def.css" />
 	</ui:define>
 
 	<ui:define name="custom_js">
 	</ui:define>
 
 	<ui:define name="fullBody">
-		<p:dataTable id="cartDataTable"
-			value="#{cartItemController.products.entrySet()}" var="cart">
+		<div id="tab_container" class="container">
+			<p:dataTable id="cartDataTable"
+				value="#{cartItemController.products.entrySet()}" var="cart">
 
-			<f:facet name="header">
+				<f:facet name="header">
 				Products
 			</f:facet>
 
-			<p:column class="prod_title" headerText="Title">
-				<h:outputText class="prod_celltext" value="#{cart.key.title}" />
-			</p:column>
+				<p:column class="prod_title" headerText="Title">
+					<h:outputText class="prod_celltext" value="#{cart.key.title}" />
+				</p:column>
 
-			<p:column class="prod_price" headerText="Price">
-				<h:outputText class="prod_celltext" value="#{cart.key.price}" />
-			</p:column>
+				<p:column class="prod_price" headerText="Price">
+					<h:outputText class="prod_celltext" value="#{cart.key.price}" />
+				</p:column>
 
-			<p:column class="prod_description" headerText="Description">
-				<h:outputText class="prod_celltext" value="#{cart.key.description}" />
-			</p:column>
+				<p:column class="prod_description" headerText="Description">
+					<h:outputText class="prod_celltext" value="#{cart.key.description}" />
+				</p:column>
 
-			<p:column class="prod_amount" headerText="Amount">
-				<h:outputText class="prod_celltext" value="#{cart.value}" />
-			</p:column>
-		</p:dataTable>
+				<p:column class="prod_amount" headerText="Amount">
+					<h:outputText class="prod_celltext" value="#{cart.value}" />
+				</p:column>
+
+				<p:column class="prod_edit">
+					<div class="address_cell">
+						<h:form>
+							<p:remoteCommand name="editProductInCartRemoteCommand"
+								actionListener="#{cartController.editProductInCartListen}"
+								update="editProductInCartDialog"
+								oncomplete="PF('editProductInCartDialogVar').show()" />
+							<a id="edit_product_in_cart_trigger" rel="leanModal"
+								data-toggle="modal" data-id="#{cart.key.productId}"
+								onclick="editProductInCartRemoteCommand([{name:'productId', value:#{cart.key.productId}},{name:'productAmount', value:#{cart.value}}]);">
+								<i class="fa fa-edit"></i>
+							</a>
+						</h:form>
+					</div>
+				</p:column>
+
+			</p:dataTable>
+		</div>
+
+		<p:dialog header="Edit amount" resizable="false" draggable="false"
+			styleClass="address_modal" id="editProductInCartDialog"
+			closeOnEscape="true" modal="true"
+			widgetVar="editProductInCartDialogVar">
+			<div class="login_form_container">
+				<h:form id="editProductInCartDialogForm" class="login_form">
+					<p:outputLabel value="Amount:" for="minMax" styleClass="required" />
+					<p:spinner id="minMax"
+						value="#{cartController.selectedProductAmount}" min="1"
+						max="#{cartController.selectedProduct.amount}"
+						style="padding-right:10px;" />
+					<p:commandButton class="button cart" value="Apply"
+						oncomplete="PF('editProductInCartDialogVar').hide()"
+						actionListener="#{cartController.editProductInCart}"
+						update=":messages">
+						<!-- 						<i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> -->
+					</p:commandButton>
+				</h:form>
+			</div>
+		</p:dialog>
 
 	</ui:define>
 </ui:composition>

@@ -55,6 +55,19 @@ public class CartController {
 		cartItemController.addProductToCart(selectedProduct, selectedProductAmount);
 	}
 
+	public void editProductInCartListen() {
+		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+		if (params.containsKey("productId")) {
+			int productId = Integer.parseInt(params.get("productId"));
+			selectedProduct = productFacade.findById(productId);
+			selectedProductAmount = Integer.parseInt(params.get("productAmount"));
+		}
+	}
+	
+	public void editProductInCart(){
+		cartItemController.editProductInCart(selectedProduct, selectedProductAmount);
+	}
+
 	public CartItemController getCartItemController() {
 		return cartItemController;
 	}

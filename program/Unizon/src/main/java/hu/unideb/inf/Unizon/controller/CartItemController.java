@@ -1,5 +1,6 @@
 package hu.unideb.inf.Unizon.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -8,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -64,6 +66,24 @@ public class CartItemController implements Serializable {
 			products.put(product, newAmount);
 			log.info("Amount of ({}) has been changed to ({}).", product, newAmount);
 			addInfoMessage(String.format("Amount of product in cart has been increased to %d.", newAmount));
+		}
+	}
+
+	public void editProductInCart(Product product, int amount) {
+
+		if (products.containsKey(product)) {
+			products.put(product, amount);
+			redirect("/cart.jsf?faces-redirect=true");
+		}
+	}
+
+	private void redirect(String url) {
+
+		try {
+			ExternalContext ec = facesContext.getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + url);
+		} catch (IOException e) {
+			log.error(e.getMessage());
 		}
 	}
 
