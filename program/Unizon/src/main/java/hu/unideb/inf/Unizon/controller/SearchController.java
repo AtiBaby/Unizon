@@ -25,6 +25,7 @@ import hu.unideb.inf.Unizon.facade.CategoryFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
 import hu.unideb.inf.Unizon.model.Category;
 import hu.unideb.inf.Unizon.model.Product;
+import hu.unideb.inf.Unizon.model.Tag;
 
 @Stateless
 @ManagedBean(name = "SearchController")
@@ -44,6 +45,9 @@ public class SearchController implements Serializable {
 
 	private String category;
 	private List<String> categoryNames;
+	private List<Tag> tags;
+	private List<String> tags2;
+
 	private String productName;
 
 	private List<Product> products;
@@ -69,13 +73,18 @@ public class SearchController implements Serializable {
 		}
 
 		products = productFacade.findAllNotDeleted();
-		filteredProducts = products;
+		tags = productFacade.findAllTags();
+		tags2 = new ArrayList<>();
+		for (Tag tag : tags) {
+			tags2.add(tag.getName());
+		}
 		Collections.sort(products, PriceASCComparator);
 
 		if (products.get(0) != null) {
 			minPrice = products.get(0).getPrice();
 			maxPrice = products.get(products.size() - 1).getPrice();
 		}
+		filteredProducts = products;
 	}
 
 	public String submitProduct(Integer id) {
@@ -108,10 +117,32 @@ public class SearchController implements Serializable {
 	}
 
 	public void onSlideEndPrice(SlideEndEvent event) {
+		tagFilterListener();
+	}
+
+	public void tagFilterListener() {
 		filteredProducts = new ArrayList<>();
 		for (Product prod : products) {
+			int o = 0;
 			if (prod.getPrice() >= minPrice && prod.getPrice() <= maxPrice) {
-				filteredProducts.add(prod);
+				if (prod.getTags().isEmpty()) {
+					filteredProducts.add(prod);
+					o = 1;
+				}
+			}
+			for (String tag : tags2) {
+				for (Tag pTag : prod.getTags()) {
+					if (prod.getPrice() >= minPrice && prod.getPrice() <= maxPrice) {
+						if (pTag.getName().equals(tag)) {
+							filteredProducts.add(prod);
+							o = 1;
+							break;
+						}
+					}
+				}
+				if (o == 1) {
+					break;
+				}
 			}
 		}
 	}
@@ -159,6 +190,26 @@ public class SearchController implements Serializable {
 			} else if (maxPrice < products.get(i).getPrice()) {
 				maxPrice = products.get(i).getPrice();
 			}
+		}
+		tags = new ArrayList<>();
+		for (Product prod : products) {
+			for (Tag tag : prod.getTags()) {
+				int o = 0;
+				for (Tag t : tags) {
+					if (t.getName().equals(tag.getName())) {
+						o = 1;
+						break;
+					}
+				}
+				if (o == 0) {
+					tags.add(tag);
+				}
+			}
+		}
+
+		tags2 = new ArrayList<>();
+		for (Tag tag : tags) {
+			tags2.add(tag.getName());
 		}
 		filteredProducts = products;
 	}
@@ -276,6 +327,22 @@ public class SearchController implements Serializable {
 
 	public void setFilteredProducts(List<Product> filteredProducts) {
 		this.filteredProducts = filteredProducts;
+	}
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	public List<String> getTags2() {
+		return tags2;
+	}
+
+	public void setTags2(List<String> tags2) {
+		this.tags2 = tags2;
 	}
 
 }

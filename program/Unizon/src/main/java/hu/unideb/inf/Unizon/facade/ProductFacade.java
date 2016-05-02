@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 
 import hu.unideb.inf.Unizon.model.Category;
 import hu.unideb.inf.Unizon.model.Product;
+import hu.unideb.inf.Unizon.model.Tag;
 
 /**
  *
@@ -70,5 +71,9 @@ public class ProductFacade extends AbstractFacade<Product> {
 
 	public Product findById(int productId) {
 		return (Product) em.createNamedQuery("Product.findById").setParameter("productId", productId).getSingleResult();
+	}
+
+	public List<Tag> findAllTags() {
+		return em.createNamedQuery("Product.findAllTags").getResultList();
 	}
 }

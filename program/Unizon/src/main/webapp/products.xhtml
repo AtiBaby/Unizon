@@ -60,18 +60,30 @@
 				<h2>Filters</h2>
 				<div class="sort_holder">
 					<h:form id="priceFilter">
-						<p:outputLabel id="displayPriceRange" value="Price: #{SearchController.minPrice} USD - #{SearchController.maxPrice} USD" class="tabl_label" />
-							<p:slider minValue="#{SearchController.minPrice}" maxValue="#{SearchController.maxPrice}"
-								for="txtMin,txtMax" display="displayPriceRange" range="true"
-								displayTemplate="Price {min} - {max}">
-								<p:ajax event="slideEnd" listener="#{SearchController.onSlideEndPrice}" process="priceFilter"
-									update="products" />
-							</p:slider>
+						<p:outputLabel id="displayPriceRange"
+							value="Price: #{SearchController.minPrice} USD - #{SearchController.maxPrice} USD"
+							class="tabl_label" />
+						<p:slider minValue="#{SearchController.minPrice}" maxValue="#{SearchController.maxPrice}"
+							for="txtMin,txtMax" display="displayPriceRange" range="true"
+							displayTemplate="Price {min} USD - {max} USD">
+							<p:ajax event="slideEnd" listener="#{SearchController.onSlideEndPrice}" process="priceFilter"
+								update="products" />
+						</p:slider>
 						<h:inputHidden id="txtMin" value="#{SearchController.minPrice}" />
 						<h:inputHidden id="txtMax" value="#{SearchController.maxPrice}" />
 					</h:form>
 				</div>
-
+				<br/>
+				<div class="sort_holder">
+					<h:form id="tagFilter">
+						<p:selectManyCheckbox id="grid2" value="#{SearchController.tags2}" layout="responsive"
+							columns="1">
+							<f:selectItems value="#{SearchController.tags}" var="tag" itemLabel="#{tag.name}"
+								itemValue="#{tag.name}" />
+							<p:ajax listener="#{SearchController.tagFilterListener}" update="products" />
+						</p:selectManyCheckbox>
+					</h:form>
+				</div>
 			</div>
 			<div class="right_bar clear-after">
 				<div class="slide_holder_productpage">
@@ -84,8 +96,8 @@
 				</div>
 				<div class="product_box_container">
 
-					<p:dataGrid var="product" value="#{SearchController.filteredProducts}" columns="3" layout="grid"
-						rows="12" paginator="true" id="products"
+					<p:dataGrid var="product" value="#{SearchController.filteredProducts}" columns="3"
+						layout="grid" rows="12" paginator="true" id="products"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="6,12,15">
 						<div>
