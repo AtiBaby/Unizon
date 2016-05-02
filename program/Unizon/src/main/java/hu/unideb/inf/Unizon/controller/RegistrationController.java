@@ -95,13 +95,11 @@ public class RegistrationController implements Serializable {
 		userActivation.setUser(newUser);
 		userActivation.setUserId(newUser.getUserId());
 		userActivationFacade.create(userActivation);
-		
+
 		init();
-	
-	    
 
 		try {
-			
+
 			ExternalContext ec = facesContext.getExternalContext();
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO",
 					"Registration is successful, now you can login!");

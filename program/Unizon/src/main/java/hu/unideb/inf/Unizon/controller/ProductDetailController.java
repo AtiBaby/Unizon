@@ -9,12 +9,11 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
-
-import com.sun.mail.imap.protocol.IMAPSaslAuthenticator;
 
 import hu.unideb.inf.Unizon.facade.ProductFacade;
 import hu.unideb.inf.Unizon.model.Image;
@@ -32,6 +31,9 @@ public class ProductDetailController implements Serializable {
 
 	@EJB
 	private ProductFacade productFacade;
+
+	@ManagedProperty("#{cartItemController}")
+	private CartItemController cartItemController;
 
 	private Product actualProduct;
 	private Set<Image> images;
@@ -97,4 +99,11 @@ public class ProductDetailController implements Serializable {
 		this.actualImageUrl = actualImageUrl;
 	}
 
+	public CartItemController getCartItemController() {
+		return cartItemController;
+	}
+
+	public void setCartItemController(CartItemController cartItemController) {
+		this.cartItemController = cartItemController;
+	}
 }

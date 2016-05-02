@@ -235,22 +235,22 @@ INSERT INTO USER_STATUS(STATUS_ID, STATUS_NAME) VALUES(-3, 'final');
 
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-1,'admin', 'cveqGRZfe2VtNuO0yDGhYviUTZWxmiIt3aZmzqm80n8=$NaOrIMoClDCyLPGoVsClrEYLGKw7U5uYFJkrhAhC0R4=','admin@gmail.com','Admin User','2016-04-09', -2);
+    VALUES(-1,'admin', 'cveqGRZfe2VtNuO0yDGhYviUTZWxmiIt3aZmzqm80n8=$NaOrIMoClDCyLPGoVsClrEYLGKw7U5uYFJkrhAhC0R4=','admin@gmail.com','Admin User','2016-04-09', -3);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-2,'test','ZbOS5o2SpVBah+t9MMLWpf3a2rxatJVo2hV5hnY4dQ4=$1iz88I5xleACNlQGK9eZdKvSBMo/Us2aKXTAlG8Tmms=','test@gmail.com','Test User', '2016-04-09', -2);
+    VALUES(-2,'test','ZbOS5o2SpVBah+t9MMLWpf3a2rxatJVo2hV5hnY4dQ4=$1iz88I5xleACNlQGK9eZdKvSBMo/Us2aKXTAlG8Tmms=','test@gmail.com','Test User', '2016-04-09', -3);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-3,'test2','FxkWGMkAwbq3c4kCqLKqSvgnkv7Q6fmlmg0qpNyf+ds=$UAAlW4+ipWxfoE7eVHXD5OA48azauOhEWIiUV/dA0X4=','test2@gmail.com','Test2 User', '2015-03-04', -2);
+    VALUES(-3,'test2','FxkWGMkAwbq3c4kCqLKqSvgnkv7Q6fmlmg0qpNyf+ds=$UAAlW4+ipWxfoE7eVHXD5OA48azauOhEWIiUV/dA0X4=','test2@gmail.com','Test2 User', '2015-03-04', -3);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-4,'test3','Nh0+SvHXJoJzrFK71qXs693ftunFkoQ60N/qT5AphOI=$k2xO8Xgy7UbUxKdnAf+8ghdViNeHxFm0jgWpapOgbdE=','test3@gmail.com','Test3 User', '2015-03-04', -1);
+    VALUES(-4,'test3','Nh0+SvHXJoJzrFK71qXs693ftunFkoQ60N/qT5AphOI=$k2xO8Xgy7UbUxKdnAf+8ghdViNeHxFm0jgWpapOgbdE=','test3@gmail.com','Test3 User', '2015-03-04', -3);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
     VALUES(-5,'test4','xxZiRzrq4yeNuS/O/K/JIwQZb8aL9l6AhoJ4anTlFNU=$Wo+3DXAYNs1euay9WtgMG7iCirIXPfZQBqmGiuygJWY=','test4@gmail.com','Test4 User', '2015-03-04', -3);
 
 INSERT INTO UNI_USER(USER_ID, USERNAME, PASSWORD, E_MAIL, NAME, REGISTRATION_DATE, STATUS_ID)
-    VALUES(-6,'admin2','hI+CNsDo2vixy5gMeorczH7Bl2YlxEqWF2022mxkOWo=$jhuFFXytReV39fagWOz030LM+g8ZevWGnctVRWiI294=','admin2@gmail.com','Admin2 User', '2013-03-04', -2);
+    VALUES(-6,'admin2','hI+CNsDo2vixy5gMeorczH7Bl2YlxEqWF2022mxkOWo=$jhuFFXytReV39fagWOz030LM+g8ZevWGnctVRWiI294=','admin2@gmail.com','Admin2 User', '2013-03-04', -3);
 
 
 

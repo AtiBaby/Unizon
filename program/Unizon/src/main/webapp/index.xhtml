@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/default.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/index.css" />
@@ -9,17 +12,19 @@
 	</ui:define>
 
 	<ui:define name="custom_js">
-		<h:outputScript target="head" library="js" name="index_responsive_slider.js" />
+		<h:outputScript target="head" library="js"
+			name="index_responsive_slider.js" />
 	</ui:define>
 
 	<ui:define name="fullBody">
 		<div id="table_container" class="container">
 			<div class="search_holder">
-				<h:form method="post"  action="#{request.contextPath}/products.jsf">
+				<h:form method="post" action="#{request.contextPath}/products.jsf">
 					<h:inputText placeholder="Let's find your dreams..." type="text"
 						value="#{SearchController.productName}" />
-					<h:commandButton value="" actionListener="#{SearchController.search()}"
-								action="/products?faces-redirect=true" ajax="false" />
+					<h:commandButton value=""
+						actionListener="#{SearchController.search()}"
+						action="/products?faces-redirect=true" ajax="false" />
 				</h:form>
 			</div>
 
@@ -54,7 +59,8 @@
 						<li><a target="_self" href="#"><h:graphicImage
 									name="images/Mobile phones/iPhone-6-vs-iPhone-6-Plus.jpg" /></a>
 							<div class="slider_text">Lorem ipsum dolor sit amet.</div></li>
-						<li><a target="_self" href="#"><h:graphicImage name="images/Mobile phones/gx8-1.jpg" /></a>
+						<li><a target="_self" href="#"><h:graphicImage
+									name="images/Mobile phones/gx8-1.jpg" /></a>
 							<div class="slider_text right">Nullam nec odio odio.</div></li>
 						<li><a target="_self" href="#"><h:graphicImage
 									name="images/Mobile phones/SamsungGalaxySIIImini45schraeg_24261.jpg" /></a>

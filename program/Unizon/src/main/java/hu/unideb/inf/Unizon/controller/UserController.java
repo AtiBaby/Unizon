@@ -62,7 +62,7 @@ public class UserController implements Serializable {
 				log.info("{} successfully changed password.", user);
 				addInfoMessage("Password successfully updated.");
 
-//				facesContext.getExternalContext().getFlash().setKeepMessages(true);
+				// facesContext.getExternalContext().getFlash().setKeepMessages(true);
 				RequestContext.getCurrentInstance().update("messages");
 
 				redirect("/user.jsf?faces-redirect=true");
@@ -142,5 +142,4 @@ public class UserController implements Serializable {
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
-
 }

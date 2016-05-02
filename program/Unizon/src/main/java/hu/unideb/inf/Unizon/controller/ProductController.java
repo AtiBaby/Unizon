@@ -42,7 +42,7 @@ public class ProductController implements Serializable {
 
 	@EJB
 	private ImageFacade imageFacade;
-	
+
 	@EJB
 	private UserFacade userFacade;
 

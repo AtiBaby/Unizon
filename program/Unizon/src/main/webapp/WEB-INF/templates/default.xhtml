@@ -70,7 +70,7 @@
 	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
 	                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
 	                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
-	                        <li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
+	                        <li><a href="#{request.contextPath}/cart.jsf"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
                             <h:form id="logout1">
                                 <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.username}</a></li>
                                 <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
@@ -82,14 +82,14 @@
 	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
 	                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
 	                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
-	                        <li><a href="#"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
+	                        <li><a href="#{request.contextPath}/cart.jsf"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
                             <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
                             <li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
                         </h:panelGroup>
                         
                     </ul>
                     <div id="mobile_menu_button">&nbsp;</div>
-                    <a href="#"><i id="mobile_cart_image" class="fa fa-shopping-cart fa-3x"></i></a>
+                    <a href="#{request.contextPath}/cart.jsf"><i id="mobile_cart_image" class="fa fa-shopping-cart fa-3x"></i></a>
                     <p:growl id="messages" life="8000" showDetail="true"/>
                 </div>
             </div>

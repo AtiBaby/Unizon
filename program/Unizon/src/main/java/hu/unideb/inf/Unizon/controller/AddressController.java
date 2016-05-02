@@ -239,5 +239,4 @@ public class AddressController implements Serializable {
 	public void setNewAddress(Address address) {
 		this.newAddress = address;
 	}
-
 }
