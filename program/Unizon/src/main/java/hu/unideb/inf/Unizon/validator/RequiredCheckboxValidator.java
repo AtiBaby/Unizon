@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.inf.Unizon.validator;
 
 import java.text.MessageFormat;
@@ -25,7 +20,7 @@ public class RequiredCheckboxValidator implements Validator {
 
 			if (requiredMessage == null) {
 				Object label = component.getAttributes().get("label");
-				if (label == null || (label instanceof String && ((String) label).length() == 0)) {
+				if (label == null || (label instanceof String && ((String) label).isEmpty())) {
 					label = component.getValueExpression("label");
 				}
 				if (label == null) {
@@ -35,7 +30,7 @@ public class RequiredCheckboxValidator implements Validator {
 			}
 
 			throw new ValidatorException(
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, requiredMessage, requiredMessage));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Checkbox must be selected!", requiredMessage));
 		}
 	}
 }

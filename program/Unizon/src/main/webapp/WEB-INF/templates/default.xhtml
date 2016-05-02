@@ -179,6 +179,13 @@
                             <p:outputLabel value="Confirm password:" styleClass="required" />
                             <p:password id="passwordAgain" />
 
+							<p:selectBooleanCheckbox
+								id="termsAndConidtionsCheckbox"
+								itemLabel="I accept the Terms and Conditions!"
+								requiredMessage="You have to accept the terms and conditions!">
+								<f:validator validatorId="requiredCheckboxValidator"/>
+							</p:selectBooleanCheckbox>
+
                             <p:commandButton id="register"	styleClass="form_button"
                                              value="Register" actionListener="#{registrationController.register()}"
                                              ajax="true"

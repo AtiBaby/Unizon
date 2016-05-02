@@ -290,6 +290,26 @@
 										<p>#{loginController.user.registrationDate}</p>
 									</div>
 								</div>
+								<!-- Row 5 -->
+								<div class="table_row">
+									<div class="table_element">
+										<h:outputText value="&#160;" />
+									</div>
+									<div class="table_element">
+										<p>Status:</p>
+									</div>
+									<div class="table_element">
+										<h:form id="userStatusForm">
+											<p>#{loginController.user.userStatus.statusName}</p>
+											<p:commandButton
+												actionListener="#{userController.sendActivationLink()}"
+												ajax="true"
+												update=":messages"
+												rendered="#{loginController.user.userStatus.statusName eq 'inactive'}"
+												value="Resend activation link" />
+										</h:form>
+									</div>
+								</div>
 							</div>
 						</div>
 

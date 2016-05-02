@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 
+import hu.unideb.inf.Unizon.exceptions.ActivationEmailException;
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.util.Password;
@@ -35,6 +36,9 @@ public class UserController implements Serializable {
 
 	@ManagedProperty("#{loginController}")
 	private LoginController loginController;
+
+	@ManagedProperty("#{emailActivationController}")
+	private EmailActivationController emailActivationController;
 
 	@EJB
 	private UserFacade userFacade;
@@ -61,8 +65,6 @@ public class UserController implements Serializable {
 
 				log.info("{} successfully changed password.", user);
 				addInfoMessage("Password successfully updated.");
-
-				// facesContext.getExternalContext().getFlash().setKeepMessages(true);
 				RequestContext.getCurrentInstance().update("messages");
 
 				redirect("/user.jsf?faces-redirect=true");
@@ -77,6 +79,16 @@ public class UserController implements Serializable {
 			log.error(e.getMessage());
 			addErrorMessage("Unkown error happened!");
 			RequestContext.getCurrentInstance().update("messages");
+		}
+	}
+
+	public void sendActivationLink() {
+		try {
+			emailActivationController.sendActivationEmail(user);
+			addInfoMessage("Activation link has been sent to your e-mail address.");
+		} catch (ActivationEmailException e) {
+			log.error(e.getMessage());
+			addErrorMessage("Failed to send activation link to your e-mail address.");
 		}
 	}
 
@@ -125,6 +137,14 @@ public class UserController implements Serializable {
 
 	public void setLoginController(LoginController loginController) {
 		this.loginController = loginController;
+	}
+
+	public EmailActivationController getEmailActivationController() {
+		return emailActivationController;
+	}
+
+	public void setEmailActivationController(EmailActivationController emailActivationController) {
+		this.emailActivationController = emailActivationController;
 	}
 
 	public String getCurrentPassword() {

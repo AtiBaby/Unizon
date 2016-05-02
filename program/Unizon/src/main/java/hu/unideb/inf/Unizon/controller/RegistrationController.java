@@ -9,7 +9,9 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -18,6 +20,7 @@ import javax.inject.Inject;
 import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 
+import hu.unideb.inf.Unizon.exceptions.ActivationEmailException;
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
 import hu.unideb.inf.Unizon.facade.UserActivationFacade;
@@ -33,6 +36,9 @@ import hu.unideb.inf.Unizon.util.Password;
 public class RegistrationController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	@ManagedProperty("#{emailActivationController}")
+	private EmailActivationController emailActivationController;
 
 	@Inject
 	private Logger log;
@@ -66,15 +72,12 @@ public class RegistrationController implements Serializable {
 
 	public void register() {
 		if (userFacade.findByUsername(newUser.getUsername()) != null) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "Username already exists!");
-			facesContext.addMessage(null, msg);
+			addErrorMessage("Username already exists!");
 			return;
 		}
 
 		if (userFacade.findByEmail(newUser.getEMail()) != null) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
-					"E-mail address already exists!");
-			facesContext.addMessage(null, msg);
+			addErrorMessage("E-mail address already exists!");
 			return;
 		}
 
@@ -87,7 +90,6 @@ public class RegistrationController implements Serializable {
 		}
 		newUser.setRegistrationDate(new Date());
 		newUser.setUserStatus(userStatus);
-
 		userFacade.create(newUser);
 
 		UserActivation userActivation = new UserActivation();
@@ -96,20 +98,49 @@ public class RegistrationController implements Serializable {
 		userActivation.setUserId(newUser.getUserId());
 		userActivationFacade.create(userActivation);
 
-		init();
+		newUser.setUserActivation(userActivation);
 
 		try {
+			emailActivationController.sendActivationEmail(newUser);
+		} catch (ActivationEmailException e) {
+			log.error(e.getMessage());
+		}
+
+		try {
+			addInfoMessage("Registration is successful, now you can login!");
+			addInfoMessage("Activation e-mail has been sent to your e-mail address.");
 
 			ExternalContext ec = facesContext.getExternalContext();
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO",
-					"Registration is successful, now you can login!");
-			facesContext.addMessage(null, msg);
 			ec.getFlash().setKeepMessages(true);
 			ec.redirect(ec.getRequestContextPath());
+
 			RequestContext.getCurrentInstance().update("messages");
+
+			init();
 		} catch (IOException e) {
 			log.error(e.getMessage());
 		}
+	}
+
+	private void addInfoMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_INFO, "INFO", detail);
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
+	}
+
+	public EmailActivationController getEmailActivationController() {
+		return emailActivationController;
+	}
+
+	public void setEmailActivationController(EmailActivationController emailActivationController) {
+		this.emailActivationController = emailActivationController;
 	}
 
 	public User getNewUser() {
@@ -119,4 +150,5 @@ public class RegistrationController implements Serializable {
 	public void setNewUser(User newUser) {
 		this.newUser = newUser;
 	}
+
 }

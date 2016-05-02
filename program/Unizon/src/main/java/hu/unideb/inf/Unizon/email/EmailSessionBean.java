@@ -1,59 +1,68 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.inf.Unizon.email;
 
 import java.io.UnsupportedEncodingException;
-import javax.ejb.Stateless;
 import java.util.Properties;
+
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author Czuczi
- */
+import org.slf4j.Logger;
+
 @Stateless
 public class EmailSessionBean {
-    
-    @Inject
-    private org.slf4j.Logger log;
 
-    private static final String USERNAME = "unizonwebshop@gmail.com";
-    private static final String PASSWORD = "szrt2016";
+	@Inject
+	private Logger log;
 
-    public void sendEmail(String from, String subject, String text, String name) {
+	public static final String E_MAIL = "unizonwebshop@gmail.com";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+	private static final String PASSWORD = "szrt2016";
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USERNAME, PASSWORD);
-            }
-        });
+	private static final Properties PROPS;
 
-        try {
-            Message message = new MimeMessage(session);
-            InternetAddress internetAddress = new InternetAddress(USERNAME);
-            internetAddress.setPersonal(name + " <" + from + ">");
-            message.setFrom(internetAddress);
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(USERNAME));
-            message.setSubject(subject);
-            message.setText(text);
+	static {
+		PROPS = new Properties();
+		PROPS.put("mail.smtp.auth", "true");
+		PROPS.put("mail.smtp.starttls.enable", "true");
+		PROPS.put("mail.smtp.host", "smtp.gmail.com");
+		PROPS.put("mail.smtp.port", "587");
+		PROPS.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+	}
 
-            Transport.send(message);
+	public void sendEmail(String from, String subject, String text, String name) {
+		sendEmail(from, E_MAIL, subject, text, name);
+	}
 
-        } catch (MessagingException | UnsupportedEncodingException e) {
-            log.error(e.getMessage());
-        }
-    }
+	public void sendEmail(String from, String to, String subject, String text, String name) {
+		Session session = Session.getInstance(PROPS, new javax.mail.Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(E_MAIL, PASSWORD);
+			}
+		});
+
+		try {
+			Message message = new MimeMessage(session);
+
+			InternetAddress internetAddress = new InternetAddress(E_MAIL);
+			internetAddress.setPersonal(name + " <" + from + ">");
+			message.setFrom(internetAddress);
+
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			message.setSubject(subject);
+			message.setText(text);
+
+			Transport.send(message);
+		} catch (MessagingException | UnsupportedEncodingException e) {
+			log.error(e.getMessage());
+		}
+	}
+
 }

@@ -76,11 +76,21 @@
 						<p:outputLabel id="displayPriceRange"
 							value="Price: #{SearchController.minPrice} USD - #{SearchController.maxPrice} USD"
 							class="tabl_label" />
+<<<<<<< HEAD
 						<p:slider minValue="#{SearchController.minPrice}" maxValue="#{SearchController.maxPrice}"
 							for="txtMin,txtMax" display="displayPriceRange" range="true"
 							displayTemplate="Price {min} USD - {max} USD">
 							<p:ajax event="slideEnd" listener="#{SearchController.onSlideEndPrice}" process="priceFilter"
 								update="products" />
+=======
+						<p:slider minValue="#{SearchController.minPrice}"
+							maxValue="#{SearchController.maxPrice}" for="txtMin,txtMax"
+							display="displayPriceRange" range="true"
+							displayTemplate="Price {min} - {max}">
+							<p:ajax event="slideEnd"
+								listener="#{SearchController.onSlideEndPrice}"
+								process="priceFilter" update="products" />
+>>>>>>> refs/heads/ksa
 						</p:slider>
 						<h:inputHidden id="txtMin" value="#{SearchController.minPrice}" />
 						<h:inputHidden id="txtMax" value="#{SearchController.maxPrice}" />

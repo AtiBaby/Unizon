@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="USER_ACTIVATION")
-@NamedQuery(name="UserActivation.findAll", query="SELECT u FROM UserActivation u")
+@NamedQueries({
+	@NamedQuery(name="UserActivation.findAll", query="SELECT u FROM UserActivation u"),
+	@NamedQuery(name="UserActivation.findByActivationKey", query="SELECT u FROM UserActivation u WHERE u.activationKey = :activationKey")
+})
 public class UserActivation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
