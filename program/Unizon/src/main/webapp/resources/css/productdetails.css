@@ -1,5 +1,27 @@
 @CHARSET "UTF-8";
 
+#product_title {
+	margin-top: 35px;
+	margin-bottom: 35px;
+	font-weight: bold;
+}
+
+#product_amount {
+	font-size: 20px;
+	text-align:center;
+}
+
+#product_price {
+	font-size: 20px;
+	text-align:center;
+	margin-top:75px;
+}
+
+#add_to_cart_button {
+	text-align:center;
+	margin-top: 85px;
+}
+
 .smallImage img {
 	height: 100px;
 	width: 150px;

@@ -87,7 +87,7 @@
 
 			</div>
 			<div class="right_bar clear-after">
-				<h1>
+				<h1 align="center" id="product_title">
 					<h:outputText
 						value="#{productDetailController.actualProduct.title}" />
 				</h1>
@@ -95,28 +95,22 @@
 					<div class="smallImage">
 						<div class="product_box_imageholder">
 							<div class="product_box_imageholder_cell">
-								<h:graphicImage name="#{productDetailController.actualImageUrl}"
-									style="height:250px; margin-bottom:1cm;" />
+								<h:graphicImage name="#{productDetailController.actualImageUrl}" style="height:270px; margin-bottom:1cm;" />
+								<h3 style="margin-top: 0">Images</h3>
+									
+									
 							</div>
 						</div>
 					</div>
-
 				</div>
-				<div id="info_container col-sm-6">
-					<div class="info_header">
-						<h3>
-
-							<h:outputText
-								value="Amount: #{productDetailController.actualProduct.amount}" />
-							<h:outputText value="&lt;br/&gt;" escape="false" />
-							<h:outputText value="&lt;br/&gt;" escape="false" />
-							<h:outputText
-								value="Price: #{productDetailController.actualProduct.price} USD" />
-						</h3>
-
+				<div id="col-sm-6">
+					<div id="product_amount">
+						<h:outputText  value="Amount: #{productDetailController.actualProduct.amount}" />					
 					</div>
-
-					<div class="buttons clear-after">
+					<div id="product_price">
+						<h:outputText  value="Price: #{productDetailController.actualProduct.price} USD" />
+					</div>					
+					<div class="buttons clear-after" id="add_to_cart_button">
 						<h3>
 							<h:form>
 								<p:remoteCommand name="addProductToCartRemoteCommand"
@@ -129,26 +123,16 @@
 							</h:form>
 						</h3>
 					</div>
-
-					<div class="row" id="productImages">
-
-						<p:dataGrid var="image"
-							value="#{productDetailController.productImages}"
-							columns="#{productDetailController.size}" layout="grid"
-							paginator="false" id="images" class="ui-datatable.borderless">
-							<div>
-								<div class="smallImage">
-									<a href="#" class="thumb"> <h:graphicImage
-											class="img-responsive" name="#{image.imageUrl}" />
-									</a>
-								</div>
-							</div>
-
-						</p:dataGrid>
-					</div>
-
-
 				</div>
+					<div class="row" id="productImages">
+						<p:lightBox styleClass="imagebox" id="lighbox1">
+							<ui:repeat value="#{productDetailController.actualProduct.images.toArray()}" var="image">	 
+								<h:outputLink value="/Unizon/javax.faces.resource/#{image.imageUrl}.jsf">
+									 <h:graphicImage name="#{image.imageUrl}" id="nature2" style="height: 77px; width: 100px" />
+								</h:outputLink>
+							</ui:repeat>
+						</p:lightBox>
+					</div>
 				<h4>
 					<h:outputText value="&lt;br/&gt;" escape="false" />
 					<h:outputText value="&lt;br/&gt;" escape="false" />
