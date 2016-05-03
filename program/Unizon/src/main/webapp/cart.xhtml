@@ -55,6 +55,31 @@
 					</div>
 				</p:column>
 
+				<p:column class="prod_remove" rendered="#{not product.deleted}">
+					<div class="address_cell">
+						<h:form transient="true" id="removeProductFromCartForm">
+							<p:remoteCommand name="removeProductFromCartRemoteCommand"
+								actionListener="#{cartController.removeProductFromCart}"
+								process="@this" oncomplete="location.reload();" />
+							<p:commandLink id="remove"
+								onclick="removeProductFromCartRemoteCommand([{name:'productId', value:#{cart.key.productId}}]);">
+								<f:ajax render="@form" />
+								<i class="fa fa-remove"></i>
+								<p:confirm header="Delete product" message="Are you sure?"
+									icon="ui-icon-alert" />
+							</p:commandLink>
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Yes" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<p:commandButton value="No" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
+						</h:form>
+					</div>
+
+				</p:column>
+
 			</p:dataTable>
 		</div>
 

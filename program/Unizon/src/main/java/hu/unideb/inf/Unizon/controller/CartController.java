@@ -64,6 +64,14 @@ public class CartController {
 		}
 	}
 	
+	public void removeProductFromCart() {
+		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+		if (params.containsKey("productId")) {
+			int productId = Integer.parseInt(params.get("productId"));
+			selectedProduct = productFacade.findById(productId);
+			cartItemController.deleteProductFromCart(selectedProduct);
+		}
+	}
 	public void editProductInCart(){
 		cartItemController.editProductInCart(selectedProduct, selectedProductAmount);
 	}
