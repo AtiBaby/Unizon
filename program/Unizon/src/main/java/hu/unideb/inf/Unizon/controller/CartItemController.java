@@ -76,7 +76,15 @@ public class CartItemController implements Serializable {
 			redirect("/cart.jsf?faces-redirect=true");
 		}
 	}
+	public void deleteProductFromCart(Product product) {
 
+		if (products.containsKey(product)) {
+			products.remove(product);
+			
+		}
+	}
+
+	
 	private void redirect(String url) {
 
 		try {
