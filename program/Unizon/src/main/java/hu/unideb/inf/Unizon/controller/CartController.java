@@ -1,9 +1,12 @@
 package hu.unideb.inf.Unizon.controller;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -31,6 +34,9 @@ public class CartController {
 
 	@ManagedProperty("#{cartItemController}")
 	private CartItemController cartItemController;
+
+	@ManagedProperty("#{loginController}")
+	private LoginController loginController;
 
 	private Product selectedProduct;
 	private int selectedProductAmount;
@@ -63,7 +69,7 @@ public class CartController {
 			selectedProductAmount = Integer.parseInt(params.get("productAmount"));
 		}
 	}
-	
+
 	public void removeProductFromCart() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
 		if (params.containsKey("productId")) {
@@ -72,8 +78,43 @@ public class CartController {
 			cartItemController.deleteProductFromCart(selectedProduct);
 		}
 	}
-	public void editProductInCart(){
+
+	public void editProductInCart() {
 		cartItemController.editProductInCart(selectedProduct, selectedProductAmount);
+	}
+
+	public boolean isCartNotEmpty() {
+		return !cartItemController.getProducts().isEmpty();
+	}
+
+	public void checkOut() {
+		if (!loginController.isLoggedIn()) {
+			addErrorMessage("You must be logged in!");
+		} else {
+			getAndDeleteProducts();
+		}
+
+	}
+
+	public synchronized void getAndDeleteProducts() {
+		for(Entry<Product, Integer> entry : cartItemController.getProducts().entrySet()) {
+		    Integer id = entry.getKey().getProductId();
+		    int amount = entry.getValue();
+		    Product p= productFacade.findById(id);
+		    if(p.getAmount()>=amount){
+		    	
+		    }
+		}
+
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
 	}
 
 	public CartItemController getCartItemController() {
@@ -99,4 +140,13 @@ public class CartController {
 	public void setSelectedProductAmount(int selectedProductAmount) {
 		this.selectedProductAmount = selectedProductAmount;
 	}
+
+	public LoginController getLoginController() {
+		return loginController;
+	}
+
+	public void setLoginController(LoginController loginController) {
+		this.loginController = loginController;
+	}
+
 }

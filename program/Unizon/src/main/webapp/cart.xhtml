@@ -81,11 +81,17 @@
 				</p:column>
 
 			</p:dataTable>
+			<p:commandButton type="button" value="Check out"
+				rendered="#{cartController.isCartNotEmpty()}"
+				style="margin:5px; float: right;"
+				actionListener="#{cartController.checkOut()}" update=":messages" />
+
 		</div>
 
-		<p:dialog header="Edit amount" resizable="false" draggable="false"
-			styleClass="address_modal" id="editProductInCartDialog"
-			closeOnEscape="true" modal="true"
+		<p:dialog header=" Edit
+				amount" resizable="false"
+			draggable="false" styleClass="address_modal"
+			id="editProductInCartDialog" closeOnEscape="true" modal="true"
 			widgetVar="editProductInCartDialogVar">
 			<div class="login_form_container">
 				<h:form id="editProductInCartDialogForm" class="login_form">
@@ -103,6 +109,5 @@
 				</h:form>
 			</div>
 		</p:dialog>
-
 	</ui:define>
 </ui:composition>
