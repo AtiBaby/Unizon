@@ -103,14 +103,16 @@ body {
 	width: 10%;	
 	color: #2e6da4 !important;
 	font-size: 16px !important;
-	font-face: bold !important;	
+	font-face: bold !important;
 }
 
 .prod_description {
 	width: 30%;	
 	color: #2e6da4 !important;
 	font-size: 16px !important;
-	font-face: bold !important;	
+	font-face: bold !important;
+	text-align: justify !important;
+    text-justify: inter-word !important;	
 }
 
 .prod_edit {
@@ -130,7 +132,7 @@ body {
 
 @media all and (max-width:1400px) {
 
-	#addAddressDialog{
+	#addProductDialog{
 		width:30% !important;
 		top:115px !important;
 		scrollable: true !important;
@@ -145,7 +147,7 @@ body {
 
 @media all and (max-width:1200px) {
 
-	#addAddressDialog{
+	#addProductDialog{
 		width:30% !important;
 		top:115px !important;
 		scrollable: true !important;
@@ -156,4 +158,5 @@ body {
 	.product_form_container input{
 		margin: 5px 0 !important; 
 	}
+	
 }
