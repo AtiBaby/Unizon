@@ -326,4 +326,8 @@
 	 min-height:300px; !important;
 }
 
+.product_box .button{
+	padding:5px 5px;
+}
+
 }
