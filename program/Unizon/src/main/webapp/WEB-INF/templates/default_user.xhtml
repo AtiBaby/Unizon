@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <style>
+            .ui-growl-item-container {
+                position:relative;
+                top:100px;
+            }
+        </style>
+        <title><ui:insert name="title">Unizon</ui:insert></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/font_awesome/css/font-awesome.min.css"/>
+
+        <link href="http://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet" type="text/css" />	
+        <h:outputStylesheet name="css/default.css" />
+        <ui:insert name="custom_css"></ui:insert>
+
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript target="head" library="js" name="jquery.leanModal.min.js"/>	
+
+        <h:outputScript target="head" library="js" name="resize.js"/>	
+        <h:outputScript target="head" library="js" name="login.js"/>	
+        <h:outputScript target="head" library="js" name="signup.js"/>
+        <h:outputScript target="head" library="js" name="site.js"/>
+        <h:outputScript target="head" library="js" name="terms.js"/>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <ui:insert name="custom_js"></ui:insert>
+    </h:head>
+
+    <h:body>
+        <ui:insert name="nav">
+            <div id="top_main_nav" class="navbar navbar-default navbar-fixed-top">
+                <div class="container" id="header_container">
+                    <div id="logo">
+                        <div class="logo_holder">
+                            	<a href="./"><img src="./resources/images/other/logo.png" /></a>
+                        </div>
+                    </div>
+                    <ul class="navigation"> 
+                        <h:panelGroup rendered="#{loginController.loggedIn}">
+                        	<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+	                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
+	                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+	                        <li><a href="#{request.contextPath}/cart.jsf"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
+                            <h:form id="logout1">
+                                <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.username}</a></li>
+                                <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
+                            </h:form>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{not loginController.loggedIn}">
+                        	<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+	                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
+	                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+	                        <li><a href="#{request.contextPath}/cart.jsf"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
+                            <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
+                            <li><a id="menu_reg" href="#regDialog">Sign up</a></li>
+                        </h:panelGroup>        
+                    </ul>
+                    <div id="mobile_menu_button">&nbsp;</div>
+                    <a href="#{request.contextPath}/cart.jsf"><i id="mobile_cart_image" class="fa fa-shopping-cart fa-3x"></i></a>
+                    <p:growl id="messages" life="8000" showDetail="true"/>
+                </div>
+            </div>
+        </ui:insert>
+        <ui:insert name="mobil">
+            <div id="menu_panel">
+                <ul class="navigation_mobile">
+                    <li><a href="#{request.contextPath}/index.jsf">Home</a></li>
+                    <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
+                    <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
+                    <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
+                    <h:panelGroup rendered="#{loginController.loggedIn}">
+                        <h:form id="logout_mobil">
+                            <li><a href="#{request.contextPath}/user.jsf">#{loginController.user.username}</a></li>
+                            <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
+                        </h:form>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!loginController.loggedIn}">
+                        <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
+                        <li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
+                    </h:panelGroup>
+                </ul>
+            </div>
+        </ui:insert>
+
+            <div id="modal_log" class="popupContainer" style="display: none;">
+                <div class="popupHeader">
+                    <span class="header_title">Login</span> <span id="close_modal_log" class="modal_close"><i
+                            class="fa fa-times"></i></span>
+                </div>
+
+                <div class="popupBody">
+
+                    <!-- Login form -->
+                    <div class="login_form_container">
+                        <h:form id="log_form" class="login_form" action="#{request.contextPath}/contact.jsf">
+                            <p:outputLabel value="Username:" styleClass="required" />
+                            <p:inputText
+                                id="username"
+                                required="true"
+                                requiredMessage="Please type in your username!"
+                                value="#{loginController.username}" />
+                            <p:outputLabel value="Password:" styleClass="required" />
+                            <p:password
+                                id="password"
+                                required="true"
+                                requiredMessage="Please type in your password!"
+                                value="#{loginController.password}" />
+
+                            <p:commandButton styleClass="form_button" value="Login" actionListener="#{loginController.login()}" ajax="true" update=":messages, :log_form" />
+                            <a id="forgot_pw" >Forgot password?</a>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        
+        <p:dialog header="Registration" resizable="false" draggable="false"
+			styleClass="reg_modal" id="regDialog" closeOnEscape="true"
+			modal="true" widgetVar="regd">
+			<!-- reg form -->
+			<div class="login_form_container">
+				  <h:form id="reg_form" class="login_form" action="#">
+                            <p:outputLabel for="uname" value="Username:" styleClass="required" />
+                            <p:inputText id="uname" value="#{registrationController.newUser.username}" required="true" requiredMessage="Username is required!" />
+
+                            <p:outputLabel for="name" value="Name:" styleClass="required" />
+                            <p:inputText id="name" value="#{registrationController.newUser.name}" required="true" requiredMessage="Name is required!" />
+
+                            <p:outputLabel for="email" value="E-mail:" styleClass="required" />
+                            <p:inputText id="email" value="#{registrationController.newUser.EMail}" required="true" requiredMessage="E-mail address is required!"
+                                         validatorMessage="Please add a valid e-mail address!">
+                                <f:validateRegex
+                                    pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[ A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+
+                            <p:outputLabel for="pw" value="Password:" styleClass="required" />
+                            <p:password id="pw" value="#{registrationController.newUser.password}" required="true" requiredMessage="Password is required!"
+                                        match="passwordAgain" validatorMessage="The passwords did not match!" />
+                            <p:outputLabel for="pw" value="Confirm password:" styleClass="required" />
+                            <p:password id="passwordAgain" />
+							
+							<h:outputText styleClass="req_fields_label" value="All fields marked with an asterisk are required."/>
+
+							<p:selectBooleanCheckbox
+								id="termsAndConidtionsCheckbox"
+								styleClass="terms_checkbox"
+								requiredMessage="You have to accept the terms and conditions!">
+								<f:validator validatorId="requiredCheckboxValidator"/>
+							</p:selectBooleanCheckbox>
+						
+							<p:outputLabel styleClass="terms">
+								<a id="terms_trigger" href="#termsDialog">I agree to Privacy and Terms!</a>
+							</p:outputLabel>
+							<br/>
+                            <p:commandButton id="register_button"	styleClass="form_button"
+                                             value="Register" actionListener="#{registrationController.register()}"
+                                             ajax="true"
+                                             update=":messages, :reg_form"
+                                             />
+                        </h:form>
+			</div>
+		</p:dialog>
+
+
+	<p:dialog resizable="false" draggable="false"
+		styleClass="terms_modal" id="termsDialog" closeOnEscape="true"
+		modal="true">
+		<!-- reg form -->
+		<p:tabView>
+			<p:tab title="Terms &amp; Conditions">
+				<div class="login_form_container">
+					<p:outputLabel>
+
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla ut tellus et scelerisque. Nam eu mauris eget eros auctor aliquet quis ut nisl. Phasellus turpis mi, placerat et est sed, dictum iaculis nulla. Nam accumsan, nulla ac imperdiet accumsan, magna est tristique nisi, non facilisis magna dolor quis dolor. Nulla sed tortor turpis. Aenean faucibus ante non est tincidunt placerat. Nullam tellus urna, ullamcorper porttitor eleifend ac, aliquet quis odio. Donec urna libero, dignissim et facilisis quis, ultrices id sapien. Mauris eget ipsum sed orci aliquet vehicula. Mauris auctor maximus fermentum. Mauris vel convallis tellus. Vivamus ullamcorper imperdiet mauris, vitae efficitur arcu hendrerit vitae. Sed cursus sapien lorem, a rutrum neque convallis sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+						
+						Nunc dolor diam, condimentum at fermentum sit amet, tempor sed libero. Nunc tempor tincidunt erat sit amet blandit. Phasellus a dolor sed libero tincidunt elementum ac in diam. Etiam sapien enim, mollis at dignissim vel, posuere sed neque. Pellentesque velit risus, egestas at feugiat sit amet, placerat at orci. Curabitur justo tortor, sollicitudin vel velit vel, consectetur efficitur mauris. Ut gravida luctus congue. Sed elementum porttitor nibh ut imperdiet.
+						
+						Morbi congue lacus vel magna condimentum, in suscipit est posuere. Sed blandit euismod felis ac pellentesque. In aliquet eget urna ac faucibus. Sed sollicitudin vitae nibh vel dapibus. Cras porttitor tortor libero, tristique faucibus nisl vestibulum eu. Nulla justo dolor, ultrices eu libero eu, maximus sodales tortor. Pellentesque mattis malesuada vestibulum. Nunc imperdiet ligula ut mi sollicitudin, ut cursus leo ullamcorper. Nunc vestibulum pellentesque sem, sed volutpat felis pretium aliquet.
+						
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada. 			
+					
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada.
+					</p:outputLabel>
+				</div>
+			</p:tab>
+	     	<p:tab title="Privacy Policy">
+				<div class="login_form_container">
+					<p:outputLabel>
+						Nunc dolor diam, condimentum at fermentum sit amet, tempor sed libero. Nunc tempor tincidunt erat sit amet blandit. Phasellus a dolor sed libero tincidunt elementum ac in diam. Etiam sapien enim, mollis at dignissim vel, posuere sed neque. Pellentesque velit risus, egestas at feugiat sit amet, placerat at orci. Curabitur justo tortor, sollicitudin vel velit vel, consectetur efficitur mauris. Ut gravida luctus congue. Sed elementum porttitor nibh ut imperdiet.
+	
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada. 
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla ut tellus et scelerisque. Nam eu mauris eget eros auctor aliquet quis ut nisl. Phasellus turpis mi, placerat et est sed, dictum iaculis nulla. Nam accumsan, nulla ac imperdiet accumsan, magna est tristique nisi, non facilisis magna dolor quis dolor. Nulla sed tortor turpis. Aenean faucibus ante non est tincidunt placerat. Nullam tellus urna, ullamcorper porttitor eleifend ac, aliquet quis odio. Donec urna libero, dignissim et facilisis quis, ultrices id sapien. Mauris eget ipsum sed orci aliquet vehicula. Mauris auctor maximus fermentum. Mauris vel convallis tellus. Vivamus ullamcorper imperdiet mauris, vitae efficitur arcu hendrerit vitae. Sed cursus sapien lorem, a rutrum neque convallis sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.						
+						Morbi congue lacus vel magna condimentum, in suscipit est posuere. Sed blandit euismod felis ac pellentesque. In aliquet eget urna ac faucibus. Sed sollicitudin vitae nibh vel dapibus. Cras porttitor tortor libero, tristique faucibus nisl vestibulum eu. Nulla justo dolor, ultrices eu libero eu, maximus sodales tortor. Pellentesque mattis malesuada vestibulum. Nunc imperdiet ligula ut mi sollicitudin, ut cursus leo ullamcorper. Nunc vestibulum pellentesque sem, sed volutpat felis pretium aliquet.
+						
+						Morbi congue lacus vel magna condimentum, in suscipit est posuere. Sed blandit euismod felis ac pellentesque. In aliquet eget urna ac faucibus. Sed sollicitudin vitae nibh vel dapibus. Cras porttitor tortor libero, tristique faucibus nisl vestibulum eu. Nulla justo dolor, ultrices eu libero eu, maximus sodales tortor. Pellentesque mattis malesuada vestibulum. Nunc imperdiet ligula ut mi sollicitudin, ut cursus leo ullamcorper. Nunc vestibulum pellentesque sem, sed volutpat felis pretium aliquet.
+						
+						
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla ut tellus et scelerisque. Nam eu mauris eget eros auctor aliquet quis ut nisl. Phasellus turpis mi, placerat et est sed, dictum iaculis nulla. Nam accumsan, nulla ac imperdiet accumsan, magna est tristique nisi, non facilisis magna dolor quis dolor. Nulla sed tortor turpis. Aenean faucibus ante non est tincidunt placerat. Nullam tellus urna, ullamcorper porttitor eleifend ac, aliquet quis odio. Donec urna libero, dignissim et facilisis quis, ultrices id sapien. Mauris eget ipsum sed orci aliquet vehicula. Mauris auctor maximus fermentum. Mauris vel convallis tellus. Vivamus ullamcorper imperdiet mauris, vitae efficitur arcu hendrerit vitae. Sed cursus sapien lorem, a rutrum neque convallis sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+						
+						Nunc dolor diam, condimentum at fermentum sit amet, tempor sed libero. Nunc tempor tincidunt erat sit amet blandit. Phasellus a dolor sed libero tincidunt elementum ac in diam. Etiam sapien enim, mollis at dignissim vel, posuere sed neque. Pellentesque velit risus, egestas at feugiat sit amet, placerat at orci. Curabitur justo tortor, sollicitudin vel velit vel, consectetur efficitur mauris. Ut gravida luctus congue. Sed elementum porttitor nibh ut imperdiet.
+						
+						
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada. 					
+					
+					</p:outputLabel>
+				</div>
+			</p:tab>		
+		</p:tabView>
+	</p:dialog>
+
+
+	<ui:insert name="fullBody">
+        </ui:insert>
+
+        <ui:insert name="footer">
+            <div class="footer">
+                <div class="container" id="footer_container">
+                    <ul class="social_media">
+                        <li><a href="https://www.facebook.com/"><i
+                                    class="fa fa-facebook-square fa-lg soc_media_element"></i></a></li>
+                        <li><a href="https://www.twitter.com/"><i
+                                    class="fa fa-twitter-square fa-lg soc_media_element"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i
+                                    class="fa fa-instagram fa-lg soc_media_element"></i></a></li>
+                    </ul>
+                    <p class="text-muted" id="footer_text">
+                        YOU CHOOSE, WE DELIVER &nbsp; <i class="fa fa-desktop fa-lg"></i>
+                        &nbsp; MADE IN DEBRECEN, 2016
+                    </p>
+                    <ul id="footer_text_mobile">
+                        <li><p>YOU CHOOSE, WE DELIVER</p></li>
+                        <li><p>
+                                <i class="fa fa-desktop fa-lg"></i>
+                            </p></li>
+                        <li><p>MADE IN DEBRECEN, 2016</p></li>
+                    </ul>
+                </div>
+                <div id="all_rights">
+                    <p>
+                        <i class="fa fa-copyright fa-lg"></i> &nbsp; Debreceni Egyetem SZRT.
+                        All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </ui:insert>
+    </h:body>
+</html>

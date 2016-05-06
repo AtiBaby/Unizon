@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default_user.xhtml">
+	template="/WEB-INF/templates/default_admin.xhtml">
 
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/def.css" />
@@ -13,10 +13,13 @@
 	</ui:define>
 
 	<ui:define name="custom_js">
-		<h:outputScript target="head" library="js" name="index_responsive_slider.js" />
-		<h:outputScript target="head" library="js" name="imagesloaded.pkgd.min.js" />
+		<h:outputScript target="head" library="js"
+			name="index_responsive_slider.js" />
+		<h:outputScript target="head" library="js"
+			name="imagesloaded.pkgd.min.js" />
 		<h:outputScript target="head" library="js" name="jquery-imagefill.js" />
-		<h:outputScript target="head" library="js" name="jquery.fancybox.pack.js" />
+		<h:outputScript target="head" library="js"
+			name="jquery.fancybox.pack.js" />
 		<h:outputScript target="head" library="js" name="products.js" />
 	</ui:define>
 
@@ -27,7 +30,8 @@
 				<h2>Search</h2>
 				<div class="search_holder">
 					<h:form id="searchform" method="post" action="">
-						<h:inputText placeholder="Search..." type="text" value="#{SearchController.productName}" />
+						<h:inputText placeholder="Search..." type="text"
+							value="#{SearchController.productName}" />
 						<h:commandButton type="submit" styleclass="" value=""
 							actionListener="#{SearchController.search()}" ajax="false" />
 					</h:form>
@@ -37,14 +41,18 @@
 				<div class="left_box">
 					<h:form>
 						<ul class="category_list">
-							<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> <h:commandLink
+							<li class="cat_picker"><i class="fa fa-dot-circle-o"
+								aria-hidden="true"></i> <h:commandLink
 									action="#{SearchController.catSelectSearch}">
-									<f:setPropertyActionListener target="#{SearchController.category}" value="all" />All
+									<f:setPropertyActionListener
+										target="#{SearchController.category}" value="all" />All
 									categories</h:commandLink></li>
 							<ui:repeat var="cat" value="#{SearchController.categoryNames}">
-								<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> <h:commandLink
+								<li class="cat_picker"><i class="fa fa-dot-circle-o"
+									aria-hidden="true"></i> <h:commandLink
 										action="#{SearchController.catSelectSearch}">
-										<f:setPropertyActionListener target="#{SearchController.category}" value="#{cat}" />#{cat}
+										<f:setPropertyActionListener
+											target="#{SearchController.category}" value="#{cat}" />#{cat}
 								</h:commandLink></li>
 							</ui:repeat>
 						</ul>
@@ -54,8 +62,10 @@
 				<div class="sort_holder">
 					<h:form id="sort_select">
 						<p:outputLabel value="Sort by: " class="tabl_label" />
-						<p:selectOneMenu value="#{SearchController.selectedSort}" onchange="submit()"
-							valueChangeListener="#{SearchController.sortChangeListener}" id="sort_change">
+						<p:selectOneMenu value="#{SearchController.selectedSort}"
+							onchange="submit()"
+							valueChangeListener="#{SearchController.sortChangeListener}"
+							id="sort_change">
 							<f:selectItems value="#{SearchController.sortingOptions}" />
 						</p:selectOneMenu>
 					</h:form>
@@ -67,40 +77,46 @@
 							value="Price: #{SearchController.minPrice} USD - #{SearchController.maxPrice} USD"
 							class="tabl_label" />
 
-						<p:slider minValue="#{SearchController.minPrice}" maxValue="#{SearchController.maxPrice}"
-							for="txtMin,txtMax" display="displayPriceRange" range="true"
+						<p:slider minValue="#{SearchController.minPrice}"
+							maxValue="#{SearchController.maxPrice}" for="txtMin,txtMax"
+							display="displayPriceRange" range="true"
 							displayTemplate="Price {min} USD - {max} USD">
-							<p:ajax event="slideEnd" listener="#{SearchController.onSlideEndPrice}" process="priceFilter"
-								update="products" />
+							<p:ajax event="slideEnd"
+								listener="#{SearchController.onSlideEndPrice}"
+								process="priceFilter" update="products" />
 						</p:slider>
-						<h:inputHidden id="txtMin" value="#{SearchController.minPriceIn}" />
-						<h:inputHidden id="txtMax" value="#{SearchController.maxPriceIn}" />
+						<h:inputHidden id="txtMin" value="#{SearchController.minPrice}" />
+						<h:inputHidden id="txtMax" value="#{SearchController.maxPrice}" />
 					</h:form>
 				</div>
 				<br />
 				<div class="sort_holder">
 					<h:form id="tagFilter">
-							<p:selectManyCheckbox id="grid2" value="#{SearchController.tags2}" layout="responsive"
-								columns="1">
-								<f:selectItems value="#{SearchController.tags}" var="tag" itemLabel="#{tag.name}"
-									itemValue="#{tag.name}" />
-								<p:ajax listener="#{SearchController.tagFilterListener}" update="products" />
-							</p:selectManyCheckbox>
+						<p:selectManyCheckbox id="grid2" value="#{SearchController.tags2}"
+							layout="responsive" columns="1">
+							<f:selectItems value="#{SearchController.tags}" var="tag"
+								itemLabel="#{tag.name}" itemValue="#{tag.name}" />
+							<p:ajax listener="#{SearchController.tagFilterListener}"
+								update="products" />
+						</p:selectManyCheckbox>
 					</h:form>
 				</div>
 			</div>
 			<div class="right_bar clear-after">
 				<div class="slide_holder_productpage">
 					<ul class="rslides rslides1">
-						<li><a target="_self" href="#"><h:graphicImage name="images/product_slider_1.jpg" /></a>
+						<li><a target="_self" href="#"><h:graphicImage
+									name="images/product_slider_1.jpg" /></a>
 							<div class="slider_text">Lorem ipsum dolor sit amet.</div></li>
-						<li><a target="_self" href="#"><h:graphicImage name="images/product_slider_2.jpg" /></a>
+						<li><a target="_self" href="#"><h:graphicImage
+									name="images/product_slider_2.jpg" /></a>
 							<div class="slider_text right">Nullam nec odio odio.</div></li>
 					</ul>
 				</div>
 				<div class="product_box_container">
 
-					<p:dataGrid var="product" value="#{SearchController.filteredProducts}" columns="3"
+					<p:dataGrid var="product"
+						value="#{SearchController.filteredProducts}" columns="3"
 						layout="grid" rows="12" paginator="true" id="products"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="6,12,15">
@@ -138,7 +154,8 @@
 											update=":addProductDialogForm" value="Add to Cart"  icon="fa fa-plus fa-lg"
 											onclick="addProductToCartRemoteCommand([{name:'productId', value:#{product.productId}}]);" />
 
-										<h:outputLink value="productdetails.jsf" class="button view" action="#">
+										<h:outputLink value="productdetails_admin.jsf" class="button view"
+											action="#">
 											<f:param name="id" value="#{product.productId}" />
 											<i class="fa fa-eye fa-lg" aria-hidden="true"></i>
 											View
@@ -153,16 +170,19 @@
 			</div>
 		</div>
 
-		<p:dialog header="Add product" resizable="false" draggable="false" styleClass="address_modal"
-			id="addProductDialog" closeOnEscape="true" modal="true" widgetVar="addProductDialogVar">
+		<p:dialog header="Add product" resizable="false" draggable="false"
+			styleClass="address_modal" id="addProductDialog" closeOnEscape="true"
+			modal="true" widgetVar="addProductDialogVar">
 			<div class="login_form_container">
 				<h:form id="addProductDialogForm" class="login_form">
 					<p:outputLabel value="Amount:" for="minMax" styleClass="required" />
-					<p:spinner id="minMax" value="#{cartController.selectedProductAmount}" min="1"
+					<p:spinner id="minMax"
+						value="#{cartController.selectedProductAmount}" min="1"
 						max="#{cartController.selectedProduct.amount}" style="padding-right:10px;" />
 					<p:commandButton class="button cart" value="Add to Cart"
 						oncomplete="PF('addProductDialogVar').hide()"
-						actionListener="#{cartController.addProductToCart}" update=":messages">
+						actionListener="#{cartController.addProductToCart}"
+						update=":messages">
 						<!-- 						<i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> -->
 					</p:commandButton>
 				</h:form>
