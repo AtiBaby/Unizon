@@ -181,7 +181,7 @@ public class SearchController implements Serializable {
 				setProducts(productFacade.findAll(cat));
 			}
 		}
-		if (products.get(0) != null) {
+		if (!products.isEmpty() && products.get(0) != null) {
 			minPrice = products.get(0).getPrice();
 			maxPrice = products.get(0).getPrice();
 			minPriceIn = minPrice;
