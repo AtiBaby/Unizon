@@ -42,30 +42,11 @@
                 <div class="container" id="header_container">
                     <div id="logo">
                         <div class="logo_holder">
-                            <h:panelGroup rendered="#{loginController.loggedIn and loginController.administrator}">
-                            	<a href="#{request.contextPath}/admin.jsf"><img src="./resources/images/other/logo.png" /></a>
-                            </h:panelGroup>
-                            
-                            <h:panelGroup rendered="#{loginController.loggedIn and not loginController.administrator}">
                             	<a href="./"><img src="./resources/images/other/logo.png" /></a>
-                            </h:panelGroup>
-                            
-                            <h:panelGroup rendered="#{not loginController.loggedIn}">
-                            	<a href="./"><img src="./resources/images/other/logo.png" /></a>
-                            </h:panelGroup>
                         </div>
                     </div>
-                    <ul class="navigation">
-                        <h:panelGroup rendered="#{loginController.loggedIn and loginController.administrator}">
-                            <li><a href="#{request.contextPath}/admin.jsf">Manage</a></li>
-	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
-                            <h:form id="logout2">
-                                <li><a>#{loginController.user.username}</a></li>
-                                <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
-                            </h:form>
-                        </h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{loginController.loggedIn and not loginController.administrator}">
+                    <ul class="navigation"> 
+                        <h:panelGroup rendered="#{loginController.loggedIn}">
                         	<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
 	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
 	                        <li><a href="#{request.contextPath}/contact.jsf">Contact</a></li>
@@ -76,7 +57,6 @@
                                 <li><h:commandLink actionListener="#{loginController.logout()}">Log out</h:commandLink></li>
                             </h:form>
                         </h:panelGroup>
-                        
                         <h:panelGroup rendered="#{not loginController.loggedIn}">
                         	<li><a href="#{request.contextPath}/index.jsf">Home</a></li>
 	                        <li><a href="#{request.contextPath}/products.jsf">Products</a></li>
@@ -85,8 +65,7 @@
 	                        <li><a href="#{request.contextPath}/cart.jsf"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
                             <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
                             <li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
-                        </h:panelGroup>
-                        
+                        </h:panelGroup>        
                     </ul>
                     <div id="mobile_menu_button">&nbsp;</div>
                     <a href="#{request.contextPath}/cart.jsf"><i id="mobile_cart_image" class="fa fa-shopping-cart fa-3x"></i></a>
@@ -160,24 +139,26 @@
                     <div class="reg_form_container" >
                         <h:form id="reg_form" class="reg_form" action="#">
 
-                            <p:outputLabel value="Username:" styleClass="required" />
-                            <p:inputText value="#{registrationController.newUser.username}" required="true" requiredMessage="Username is required!" />
+                            <p:outputLabel for="uname" value="Username:" styleClass="required" />
+                            <p:inputText id="uname" value="#{registrationController.newUser.username}" required="true" requiredMessage="Username is required!" />
 
-                            <p:outputLabel value="Name:" styleClass="required" />
-                            <p:inputText value="#{registrationController.newUser.name}" required="true" requiredMessage="Name is required!" />
+                            <p:outputLabel for="name" value="Name:" styleClass="required" />
+                            <p:inputText id="name" value="#{registrationController.newUser.name}" required="true" requiredMessage="Name is required!" />
 
-                            <p:outputLabel value="E-mail:" styleClass="required" />
-                            <p:inputText value="#{registrationController.newUser.EMail}" required="true" requiredMessage="E-mail address is required!"
+                            <p:outputLabel for="email" value="E-mail:" styleClass="required" />
+                            <p:inputText id="email" value="#{registrationController.newUser.EMail}" required="true" requiredMessage="E-mail address is required!"
                                          validatorMessage="Please add a valid e-mail address!">
                                 <f:validateRegex
                                     pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[ A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$" />
                             </p:inputText>
 
-                            <p:outputLabel value="Password:" styleClass="required" />
-                            <p:password value="#{registrationController.newUser.password}" required="true" requiredMessage="Password is required!"
+                            <p:outputLabel for="pw" value="Password:" styleClass="required" />
+                            <p:password id="pw" value="#{registrationController.newUser.password}" required="true" requiredMessage="Password is required!"
                                         match="passwordAgain" validatorMessage="The passwords did not match!" />
-                            <p:outputLabel value="Confirm password:" styleClass="required" />
+                            <p:outputLabel for="pw" value="Confirm password:" styleClass="required" />
                             <p:password id="passwordAgain" />
+							
+							<h:outputText styleClass="req_fields_label" value="All fields marked with an asterisk are required."/>
 
 							<p:selectBooleanCheckbox
 								id="termsAndConidtionsCheckbox"
@@ -185,7 +166,9 @@
 								requiredMessage="You have to accept the terms and conditions!">
 								<f:validator validatorId="requiredCheckboxValidator"/>
 							</p:selectBooleanCheckbox>
-
+							
+							
+							
                             <p:commandButton id="register"	styleClass="form_button"
                                              value="Register" actionListener="#{registrationController.register()}"
                                              ajax="true"

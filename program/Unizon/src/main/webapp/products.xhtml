@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
+	template="/WEB-INF/templates/default_user.xhtml">
 
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/def.css" />
@@ -151,7 +151,7 @@
 											oncomplete="PF('addProductDialogVar').show()" />
 
 										<p:commandButton class="button cart"
-											update=":addProductDialogForm" value="Add to Cart"
+											update=":addProductDialogForm" value="Add to Cart"  icon="fa fa-plus fa-lg"
 											onclick="addProductToCartRemoteCommand([{name:'productId', value:#{product.productId}}]);" />
 
 										<h:outputLink value="productdetails.jsf" class="button view"

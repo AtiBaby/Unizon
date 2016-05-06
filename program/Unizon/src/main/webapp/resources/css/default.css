@@ -373,7 +373,7 @@ top: 120px !important;
 	background: #3A495F;
 	color: #fff;
 	border: none;
-	margin: 5px auto 0 auto;
+	margin: 10px auto 0 auto;
 	text-align: center;
 	font-weight: bold;
 	margin: 20px auto 5px auto;
@@ -388,6 +388,21 @@ top: 120px !important;
 .reg_form label{
 	display: block;
 	margin: 0px;
+}
+
+.ui-chkbox-label{
+	margin-top: 0 !important;
+	margin-left: 10px !important;
+	line-height: 16px !important;
+	font-size: 13px;
+	font-weight: bold !important;
+}
+
+.req_fields_label{
+	font-weight: 400px !important;
+	margin: 10px 0 !important;
+	display: block;
+	font-size: 13px;
 }
 
 /*SIGN UP END*/

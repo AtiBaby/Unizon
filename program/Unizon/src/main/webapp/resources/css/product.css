@@ -79,7 +79,7 @@
 	box-sizing: border-box;
 	border:1px solid #ccc;
 	min-height:375px;
-	margin:0 1.111% 20px;
+	margin: 20px 0;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
 	border-radius:5px;
@@ -160,6 +160,15 @@
 	padding:5px 0;
 	margin: 5px 5px 5px 10px;
 	width:93% !important;
+}
+
+.ui-slider{
+	
+	margin: 10px 18px 5px 15px;
+}
+
+.ui-selectmanycheckbox{
+	margin: 10px 5px 5px 10px !important;
 }
 
 .ui-selectonemenu-item, .ui-selectonemenu-list-item {
@@ -290,6 +299,7 @@
 	color:#fff;
 	text-decoration: none;
 	outline: none;
+	
 }
 
 .product_box .view{
@@ -300,6 +310,11 @@
 	outline: none;
 }
 
+.ui-icon.fa {
+     text-indent:0px;
+     background-image:none;
+	line-height: 14px !important;
+}
 #products{
 	margin-bottom: 20px !important;
 	-webkit-margin-bottom: 20px !important;
