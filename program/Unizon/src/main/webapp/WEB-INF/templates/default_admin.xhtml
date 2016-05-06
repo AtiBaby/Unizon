@@ -36,7 +36,7 @@
         <ui:insert name="custom_js"></ui:insert>
     </h:head>
 
-    <h:body>
+    <h:body onload="#{loginController.adminValidation()}">
         <ui:insert name="nav">
             <div id="top_main_nav" class="navbar navbar-default navbar-fixed-top">
                 <div class="container" id="header_container">
