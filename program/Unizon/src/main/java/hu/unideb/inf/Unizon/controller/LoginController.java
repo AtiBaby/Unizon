@@ -132,17 +132,6 @@ public class LoginController implements Serializable {
         return isAdministrator;
     }
 
-    public void updateUser() {
-        log.info("Updating user in loginController.");
-        if (user == null) {
-            log.info("User not logged in.");
-        } else {
-            user = userFacade.findByUsername(user.getUsername());
-            log.info("User has been successfully updated in loginController.");
-            log.info("User {} status: {}", user, user.getUserStatus().getStatusName());
-        }
-    }
-
     public User getUser() {
         return user;
     }
