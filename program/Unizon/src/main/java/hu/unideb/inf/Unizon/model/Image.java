@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,7 +22,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "IMAGE")
-@NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i")
+@NamedQueries({
+	@NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i"),
+	@NamedQuery(name = "Image.findByImageUrl", query = "SELECT i FROM Image i WHERE i.imageUrl = :imageUrl")
+})
 public class Image implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -21,22 +21,12 @@ public class CatToProd implements Serializable {
 	//bi-directional many-to-one association to Category
 	@ManyToOne
 	@JoinColumn(name="CATEGORY_ID", nullable=false, insertable=false, updatable=false)
-	private Category category1;
-
-	//bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name="CATEGORY_ID", nullable=false, insertable=false, updatable=false)
-	private Category category2;
+	private Category category;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_ID", nullable=false, insertable=false, updatable=false)
-	private Product product1;
-
-	//bi-directional many-to-one association to Product
-	@ManyToOne
-	@JoinColumn(name="PRODUCT_ID", nullable=false, insertable=false, updatable=false)
-	private Product product2;
+	private Product product;
 
 	public CatToProd() {
 	}
@@ -49,36 +39,20 @@ public class CatToProd implements Serializable {
 		this.id = id;
 	}
 
-	public Category getCategory1() {
-		return this.category1;
+	public Category getCategory() {
+		return this.category;
 	}
 
-	public void setCategory1(Category category1) {
-		this.category1 = category1;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public Category getCategory2() {
-		return this.category2;
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setCategory2(Category category2) {
-		this.category2 = category2;
-	}
-
-	public Product getProduct1() {
-		return this.product1;
-	}
-
-	public void setProduct1(Product product1) {
-		this.product1 = product1;
-	}
-
-	public Product getProduct2() {
-		return this.product2;
-	}
-
-	public void setProduct2(Product product2) {
-		this.product2 = product2;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
     @Override

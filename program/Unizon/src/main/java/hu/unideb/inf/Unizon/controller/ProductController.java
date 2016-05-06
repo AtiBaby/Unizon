@@ -2,7 +2,10 @@ package hu.unideb.inf.Unizon.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;
@@ -13,13 +16,17 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.primefaces.event.FlowEvent;
 import org.slf4j.Logger;
 
+import hu.unideb.inf.Unizon.facade.CategoryFacade;
 import hu.unideb.inf.Unizon.facade.ImageFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
+import hu.unideb.inf.Unizon.facade.TagFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.Image;
 import hu.unideb.inf.Unizon.model.Product;
+import hu.unideb.inf.Unizon.model.Tag;
 import hu.unideb.inf.Unizon.model.User;
 
 @ManagedBean
@@ -44,6 +51,12 @@ public class ProductController implements Serializable {
 	private ImageFacade imageFacade;
 
 	@EJB
+	private CategoryFacade categoryFacade;
+
+	@EJB
+	private TagFacade tagFacade;
+
+	@EJB
 	private UserFacade userFacade;
 
 	@Inject
@@ -53,6 +66,8 @@ public class ProductController implements Serializable {
 	private Image storedImage;
 	private Product newProduct;
 	private Product originalProduct;
+	private List<String> selectedCategoryIds;
+	private List<String> selectedTags;
 	private User user;
 
 	public void init() {
@@ -80,6 +95,8 @@ public class ProductController implements Serializable {
 		user = loginController.getUser();
 		this.image = new Image();
 		this.storedImage = new Image();
+		this.selectedCategoryIds = new ArrayList<>();
+		this.selectedTags = new ArrayList<>();
 	}
 
 	public void showAllProducts() {
@@ -90,15 +107,48 @@ public class ProductController implements Serializable {
 		init();
 	}
 
+	public String addProductOnFlowProcess(FlowEvent event) {
+		return event.getNewStep();
+		// switch (event.getOldStep()) {
+		// case "details":
+		// return "images";
+		//
+		// default:
+		// return event.getNewStep();
+		// }
+	}
+
+	public List<String> completeTags(String query) {
+		List<String> completedTags = tagFacade.findByNameStartingWith(query).stream().map(tag -> tag.getName())
+				.collect(Collectors.toList());
+		completedTags.add(query);
+		return completedTags;
+	}
+
 	public void upload() {
 		log.info("Uploading a product!");
-		imageFacade.create(image);
-		for (Image i : imageFacade.findAll()) {
-			if (i.getImageUrl().equals(image.getImageUrl())) {
-				storedImage = i;
-			}
+
+		Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
+		if (queriedImage == null) {
+			imageFacade.create(image);
+		} else {
+			image = queriedImage;
 		}
-		newProduct.setImage(storedImage);
+		newProduct.setImage(image);
+
+		newProduct.setCategories(selectedCategoryIds.stream().mapToInt(Integer::valueOf)
+				.mapToObj(categoryId -> categoryFacade.find(categoryId)).collect(Collectors.toSet()));
+
+		newProduct.setTags(selectedTags.stream().map(tagString -> {
+			Tag tag = tagFacade.findByName(tagString);
+			if (tag == null) {
+				tag = new Tag();
+				tag.setName(tagString);
+				tagFacade.create(tag);
+			}
+			return tag;
+		}).collect(Collectors.toSet()));
+
 		productFacade.create(newProduct);
 		log.info("Product uploaded, name: {}.", newProduct.getTitle());
 
@@ -206,5 +256,21 @@ public class ProductController implements Serializable {
 
 	public Image getStoredImage() {
 		return storedImage;
+	}
+
+	public List<String> getSelectedCategoryIds() {
+		return selectedCategoryIds;
+	}
+
+	public void setSelectedCategoryIds(List<String> selectedCategoryIds) {
+		this.selectedCategoryIds = selectedCategoryIds;
+	}
+
+	public List<String> getSelectedTags() {
+		return selectedTags;
+	}
+
+	public void setSelectedTags(List<String> selectedTags) {
+		this.selectedTags = selectedTags;
 	}
 }

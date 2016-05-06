@@ -18,34 +18,86 @@
 			modal="true" widgetVar="addProductDialogVar">
 			<div class="product_form_container">
 				<h:form id="addProductDialogForm" styleClass="product_form">
-					<p:outputLabel value="Title:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.title}"
-						required="true" requiredMessage="Title is required!" tabindex="1" />
-
-					<p:outputLabel value="Price:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.price}"
-						required="true" requiredMessage="Price is required!" tabindex="2" />
-
-					<p:outputLabel value="Amount:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.amount}"
-						required="true" requiredMessage="Amount is required!" tabindex="3" />
-
-					<p:outputLabel value="Description:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.description}"
-						required="true" requiredMessage="Description is required!"
-						tabindex="4" />
-
-					<p:outputLabel value="URL:" styleClass="required" />
-					<p:inputText value="#{productController.image.imageUrl}"
-						required="true" requiredMessage="URL is required!"
-						styleClass="required" tabindex="5" />
-
-					<p:commandButton value="Add" styleClass="custom_button"
-						actionListener="#{productController.upload()}" ajax="true"
-						update=":messages, :addProductDialogForm" tabindex="6" />
-					<p:commandButton value="Cancel" styleClass="custom_button"
-						actionListener="#{productController.showAllProducts()}"
-						ajax="true" immediate="true" tabindex="7" />
+					<p:wizard flowListener="#{productController.addProductOnFlowProcess}">
+						<p:tab id="details" title="Details">
+							<p:panel header="Product details">
+								<p:panelGrid>
+									<p:outputLabel value="Title:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.title}"
+										required="true" requiredMessage="Title is required!" tabindex="1" />
+						
+									<p:outputLabel value="Price:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.price}"
+										required="true" requiredMessage="Price is required!" tabindex="2" />
+						
+									<p:outputLabel value="Amount:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.amount}"
+										required="true" requiredMessage="Amount is required!" tabindex="3" />
+						
+									<p:outputLabel value="Description:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.description}"
+										required="true" requiredMessage="Description is required!" tabindex="4" />
+								</p:panelGrid>
+							</p:panel>
+						</p:tab>
+						<p:tab id="images" title="Image">
+							<p:panel header="Product images">
+								<p:panelGrid>
+									<p:outputLabel value="URL:" styleClass="required" />
+									<p:inputText value="#{productController.image.imageUrl}"
+										required="true"
+										requiredMessage="URL is required!"
+										styleClass="required" />
+								</p:panelGrid>
+							</p:panel>
+						</p:tab>
+						<p:tab id="catsTags" title="Categories and Tags">
+							<p:panel header="Categories and Tags">
+								<p:panelGrid>
+									<p:selectCheckboxMenu label="Categories"
+										required="true"
+										value="#{productController.selectedCategoryIds}"
+										filter="true"
+										filterMatchMode="startsWith">
+										<f:selectItems value="#{categories}"
+											var="category"
+											itemLabel="#{category.name}"
+											itemValue="#{category.categoryId}" />
+									</p:selectCheckboxMenu>
+									
+							        <p:autoComplete label="Tags"
+							        	multiple="true"
+							        	value="#{productController.selectedTags}"
+							        	completeMethod="#{productController.completeTags}"
+				                        var="theme"
+				                        itemLabel="#{tag.name}"
+				                        itemValue="#{tag.name}"
+				                        forceSelection="false"/>
+								</p:panelGrid>
+							</p:panel>
+						</p:tab>
+						<p:tab id="confirm" title="Confirmation">
+							<p:panel header="Confirmation">
+								<p:panelGrid>
+									<p:outputLabel value="Title:" />
+									<h:outputText value="#{productController.newProduct.title}" />
+						
+									<p:outputLabel value="Price:" />
+									<h:outputText value="#{productController.newProduct.price}" />
+						
+									<p:outputLabel value="Amount:"/>
+									<h:outputText value="#{productController.newProduct.amount}" />
+						
+									<p:outputLabel value="Description:" styleClass="required" />
+									<h:outputText value="#{productController.newProduct.description}" />
+									
+									<p:commandButton value="Submit" styleClass="custom_button"
+										actionListener="#{productController.upload()}" ajax="true"
+										update=":messages, :addProductDialogForm" />
+								</p:panelGrid>
+							</p:panel>
+						</p:tab>
+					</p:wizard>
 				</h:form>
 			</div>
 		</p:dialog>
@@ -71,8 +123,7 @@
 
 					<p:outputLabel value="Description:" styleClass="required" />
 					<p:inputText value="#{productController.newProduct.description}"
-						required="true" requiredMessage="Description is required!"
-						tabindex="4" />
+						required="true" requiredMessage="Description is required!" tabindex="4" />
 
 					<p:commandButton value="Edit" styleClass="custom_button"
 						actionListener="#{productController.editProduct()}" ajax="true"
