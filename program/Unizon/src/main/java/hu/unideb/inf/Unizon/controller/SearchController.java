@@ -58,6 +58,8 @@ public class SearchController implements Serializable {
 
 	private Integer minPrice;
 	private Integer maxPrice;
+	private Integer minPriceIn;
+	private Integer maxPriceIn;
 
 	@PostConstruct
 	public void init() {
@@ -83,6 +85,8 @@ public class SearchController implements Serializable {
 		if (products.get(0) != null) {
 			minPrice = products.get(0).getPrice();
 			maxPrice = products.get(products.size() - 1).getPrice();
+			minPriceIn = minPrice;
+			maxPriceIn = maxPrice;
 		}
 		filteredProducts = products;
 	}
@@ -124,7 +128,7 @@ public class SearchController implements Serializable {
 		filteredProducts = new ArrayList<>();
 		for (Product prod : products) {
 			int o = 0;
-			if (prod.getPrice() >= minPrice && prod.getPrice() <= maxPrice) {
+			if (prod.getPrice() >= minPriceIn && prod.getPrice() <= maxPriceIn) {
 				if (prod.getTags().isEmpty()) {
 					filteredProducts.add(prod);
 					o = 1;
@@ -132,7 +136,7 @@ public class SearchController implements Serializable {
 			}
 			for (String tag : tags2) {
 				for (Tag pTag : prod.getTags()) {
-					if (prod.getPrice() >= minPrice && prod.getPrice() <= maxPrice) {
+					if (prod.getPrice() >= minPriceIn && prod.getPrice() <= maxPriceIn) {
 						if (pTag.getName().equals(tag)) {
 							filteredProducts.add(prod);
 							o = 1;
@@ -180,6 +184,8 @@ public class SearchController implements Serializable {
 		if (products.get(0) != null) {
 			minPrice = products.get(0).getPrice();
 			maxPrice = products.get(0).getPrice();
+			minPriceIn = minPrice;
+			maxPriceIn = maxPrice;
 		} else {
 			minPrice = 0;
 			maxPrice = 0;
@@ -187,8 +193,10 @@ public class SearchController implements Serializable {
 		for (int i = 0; i < products.size(); ++i) {
 			if (minPrice > products.get(i).getPrice()) {
 				minPrice = products.get(i).getPrice();
+				minPriceIn = minPrice;
 			} else if (maxPrice < products.get(i).getPrice()) {
 				maxPrice = products.get(i).getPrice();
+				maxPriceIn = maxPrice;
 			}
 		}
 		tags = new ArrayList<>();
@@ -343,6 +351,22 @@ public class SearchController implements Serializable {
 
 	public void setTags2(List<String> tags2) {
 		this.tags2 = tags2;
+	}
+
+	public Integer getMinPriceIn() {
+		return minPriceIn;
+	}
+
+	public void setMinPriceIn(Integer minPriceIn) {
+		this.minPriceIn = minPriceIn;
+	}
+
+	public Integer getMaxPriceIn() {
+		return maxPriceIn;
+	}
+
+	public void setMaxPriceIn(Integer maxPriceIn) {
+		this.maxPriceIn = maxPriceIn;
 	}
 
 }
