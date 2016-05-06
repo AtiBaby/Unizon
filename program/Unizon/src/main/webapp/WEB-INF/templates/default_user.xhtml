@@ -32,6 +32,7 @@
         <h:outputScript target="head" library="js" name="login.js"/>	
         <h:outputScript target="head" library="js" name="signup.js"/>
         <h:outputScript target="head" library="js" name="site.js"/>
+        <h:outputScript target="head" library="js" name="terms.js"/>
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <ui:insert name="custom_js"></ui:insert>
     </h:head>
@@ -64,7 +65,7 @@
 	                        <li><a href="#{request.contextPath}/about.jsf">About us</a></li>
 	                        <li><a href="#{request.contextPath}/cart.jsf"><i class="fa fa-shopping-cart fa-2x"></i></a></li>
                             <li><a id="menu_log" class="modal_trigger" rel="leanModal" href="#modal_log">Login</a></li>
-                            <li><a id="menu_reg" class="modal_trigger" rel="leanModal" href="#modal_reg">Sign up</a></li>
+                            <li><a id="menu_reg" href="#regDialog">Sign up</a></li>
                         </h:panelGroup>        
                     </ul>
                     <div id="mobile_menu_button">&nbsp;</div>
@@ -94,7 +95,6 @@
             </div>
         </ui:insert>
 
-        <ui:insert name="login">
             <div id="modal_log" class="popupContainer" style="display: none;">
                 <div class="popupHeader">
                     <span class="header_title">Login</span> <span id="close_modal_log" class="modal_close"><i
@@ -125,20 +125,13 @@
                     </div>
                 </div>
             </div>
-        </ui:insert>
-
-        <ui:insert name="register">
-            <div id="modal_reg" class="popupContainer" style="display: none;">
-                <div class="popupHeader">
-                    <span class="header_title">Register</span> 
-                    <span id="close_modal_reg" class="modal_close"><i class="fa fa-times"></i></span>
-                </div>
-
-                <div class="popupBody">
-                    <!-- Register Form -->
-                    <div class="reg_form_container" >
-                        <h:form id="reg_form" class="reg_form" action="#">
-
+        
+        <p:dialog header="Registration" resizable="false" draggable="false"
+			styleClass="reg_modal" id="regDialog" closeOnEscape="true"
+			modal="true" widgetVar="regd">
+			<!-- reg form -->
+			<div class="login_form_container">
+				  <h:form id="reg_form" class="login_form" action="#">
                             <p:outputLabel for="uname" value="Username:" styleClass="required" />
                             <p:inputText id="uname" value="#{registrationController.newUser.username}" required="true" requiredMessage="Username is required!" />
 
@@ -162,25 +155,80 @@
 
 							<p:selectBooleanCheckbox
 								id="termsAndConidtionsCheckbox"
-								itemLabel="I accept the Terms and Conditions!"
+								styleClass="terms_checkbox"
 								requiredMessage="You have to accept the terms and conditions!">
 								<f:validator validatorId="requiredCheckboxValidator"/>
 							</p:selectBooleanCheckbox>
-							
-							
-							
-                            <p:commandButton id="register"	styleClass="form_button"
+						
+							<p:outputLabel styleClass="terms">
+								<a id="terms_trigger" href="#termsDialog">I agree to Privacy and Terms!</a>
+							</p:outputLabel>
+							<br/>
+                            <p:commandButton id="register_button"	styleClass="form_button"
                                              value="Register" actionListener="#{registrationController.register()}"
                                              ajax="true"
                                              update=":messages, :reg_form"
                                              />
                         </h:form>
-                    </div>
-                </div>
-            </div>
-        </ui:insert>
+			</div>
+		</p:dialog>
 
-        <ui:insert name="fullBody">
+
+	<p:dialog resizable="false" draggable="false"
+		styleClass="terms_modal" id="termsDialog" closeOnEscape="true"
+		modal="true">
+		<!-- reg form -->
+		<p:tabView>
+			<p:tab title="Terms &amp; Conditions">
+				<div class="login_form_container">
+					<p:outputLabel>
+
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla ut tellus et scelerisque. Nam eu mauris eget eros auctor aliquet quis ut nisl. Phasellus turpis mi, placerat et est sed, dictum iaculis nulla. Nam accumsan, nulla ac imperdiet accumsan, magna est tristique nisi, non facilisis magna dolor quis dolor. Nulla sed tortor turpis. Aenean faucibus ante non est tincidunt placerat. Nullam tellus urna, ullamcorper porttitor eleifend ac, aliquet quis odio. Donec urna libero, dignissim et facilisis quis, ultrices id sapien. Mauris eget ipsum sed orci aliquet vehicula. Mauris auctor maximus fermentum. Mauris vel convallis tellus. Vivamus ullamcorper imperdiet mauris, vitae efficitur arcu hendrerit vitae. Sed cursus sapien lorem, a rutrum neque convallis sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+						
+						Nunc dolor diam, condimentum at fermentum sit amet, tempor sed libero. Nunc tempor tincidunt erat sit amet blandit. Phasellus a dolor sed libero tincidunt elementum ac in diam. Etiam sapien enim, mollis at dignissim vel, posuere sed neque. Pellentesque velit risus, egestas at feugiat sit amet, placerat at orci. Curabitur justo tortor, sollicitudin vel velit vel, consectetur efficitur mauris. Ut gravida luctus congue. Sed elementum porttitor nibh ut imperdiet.
+						
+						Morbi congue lacus vel magna condimentum, in suscipit est posuere. Sed blandit euismod felis ac pellentesque. In aliquet eget urna ac faucibus. Sed sollicitudin vitae nibh vel dapibus. Cras porttitor tortor libero, tristique faucibus nisl vestibulum eu. Nulla justo dolor, ultrices eu libero eu, maximus sodales tortor. Pellentesque mattis malesuada vestibulum. Nunc imperdiet ligula ut mi sollicitudin, ut cursus leo ullamcorper. Nunc vestibulum pellentesque sem, sed volutpat felis pretium aliquet.
+						
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada. 			
+					
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada.
+					</p:outputLabel>
+				</div>
+			</p:tab>
+	     	<p:tab title="Privacy Policy">
+				<div class="login_form_container">
+					<p:outputLabel>
+						Nunc dolor diam, condimentum at fermentum sit amet, tempor sed libero. Nunc tempor tincidunt erat sit amet blandit. Phasellus a dolor sed libero tincidunt elementum ac in diam. Etiam sapien enim, mollis at dignissim vel, posuere sed neque. Pellentesque velit risus, egestas at feugiat sit amet, placerat at orci. Curabitur justo tortor, sollicitudin vel velit vel, consectetur efficitur mauris. Ut gravida luctus congue. Sed elementum porttitor nibh ut imperdiet.
+	
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada. 
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla ut tellus et scelerisque. Nam eu mauris eget eros auctor aliquet quis ut nisl. Phasellus turpis mi, placerat et est sed, dictum iaculis nulla. Nam accumsan, nulla ac imperdiet accumsan, magna est tristique nisi, non facilisis magna dolor quis dolor. Nulla sed tortor turpis. Aenean faucibus ante non est tincidunt placerat. Nullam tellus urna, ullamcorper porttitor eleifend ac, aliquet quis odio. Donec urna libero, dignissim et facilisis quis, ultrices id sapien. Mauris eget ipsum sed orci aliquet vehicula. Mauris auctor maximus fermentum. Mauris vel convallis tellus. Vivamus ullamcorper imperdiet mauris, vitae efficitur arcu hendrerit vitae. Sed cursus sapien lorem, a rutrum neque convallis sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.						
+						Morbi congue lacus vel magna condimentum, in suscipit est posuere. Sed blandit euismod felis ac pellentesque. In aliquet eget urna ac faucibus. Sed sollicitudin vitae nibh vel dapibus. Cras porttitor tortor libero, tristique faucibus nisl vestibulum eu. Nulla justo dolor, ultrices eu libero eu, maximus sodales tortor. Pellentesque mattis malesuada vestibulum. Nunc imperdiet ligula ut mi sollicitudin, ut cursus leo ullamcorper. Nunc vestibulum pellentesque sem, sed volutpat felis pretium aliquet.
+						
+						Morbi congue lacus vel magna condimentum, in suscipit est posuere. Sed blandit euismod felis ac pellentesque. In aliquet eget urna ac faucibus. Sed sollicitudin vitae nibh vel dapibus. Cras porttitor tortor libero, tristique faucibus nisl vestibulum eu. Nulla justo dolor, ultrices eu libero eu, maximus sodales tortor. Pellentesque mattis malesuada vestibulum. Nunc imperdiet ligula ut mi sollicitudin, ut cursus leo ullamcorper. Nunc vestibulum pellentesque sem, sed volutpat felis pretium aliquet.
+						
+						
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla ut tellus et scelerisque. Nam eu mauris eget eros auctor aliquet quis ut nisl. Phasellus turpis mi, placerat et est sed, dictum iaculis nulla. Nam accumsan, nulla ac imperdiet accumsan, magna est tristique nisi, non facilisis magna dolor quis dolor. Nulla sed tortor turpis. Aenean faucibus ante non est tincidunt placerat. Nullam tellus urna, ullamcorper porttitor eleifend ac, aliquet quis odio. Donec urna libero, dignissim et facilisis quis, ultrices id sapien. Mauris eget ipsum sed orci aliquet vehicula. Mauris auctor maximus fermentum. Mauris vel convallis tellus. Vivamus ullamcorper imperdiet mauris, vitae efficitur arcu hendrerit vitae. Sed cursus sapien lorem, a rutrum neque convallis sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+						
+						Nunc dolor diam, condimentum at fermentum sit amet, tempor sed libero. Nunc tempor tincidunt erat sit amet blandit. Phasellus a dolor sed libero tincidunt elementum ac in diam. Etiam sapien enim, mollis at dignissim vel, posuere sed neque. Pellentesque velit risus, egestas at feugiat sit amet, placerat at orci. Curabitur justo tortor, sollicitudin vel velit vel, consectetur efficitur mauris. Ut gravida luctus congue. Sed elementum porttitor nibh ut imperdiet.
+						
+						
+						Quisque in nisi dapibus, porttitor orci quis, sollicitudin ante. In pellentesque dignissim ex eget egestas. Sed rutrum est efficitur odio pharetra, in pharetra velit lobortis. Aliquam quis sem eget diam consequat facilisis a mollis mi. Pellentesque hendrerit turpis sit amet libero placerat dictum. Maecenas rhoncus orci ut commodo tincidunt. Aenean gravida risus et varius ultrices.
+						
+						Suspendisse tortor quam, viverra id quam aliquam, congue tincidunt tortor. Donec a condimentum lorem. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Ut vitae porta sapien. Etiam porttitor neque libero, ac sagittis augue cursus non. Aenean ullamcorper diam sit amet ultricies facilisis. Curabitur ac orci venenatis, interdum nisi pretium, scelerisque diam. Nullam in suscipit dui, et pellentesque lacus. Nunc vitae sagittis mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin accumsan tempus mi, ac volutpat ligula. Phasellus elementum mattis justo a malesuada. 					
+					
+					</p:outputLabel>
+				</div>
+			</p:tab>		
+		</p:tabView>
+	</p:dialog>
+
+
+	<ui:insert name="fullBody">
         </ui:insert>
 
         <ui:insert name="footer">

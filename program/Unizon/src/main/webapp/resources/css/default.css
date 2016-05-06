@@ -230,6 +230,17 @@ body {
 	background: #FFF;
 }
 
+.terms_container{
+	box-sizing: border-box;
+	border-radius: 3px;
+	position: absolute;
+	width: 50%;
+	height: auto;
+	left: 30%;
+	top: 10%;
+	background: #FFF;
+}
+
 .popupHeader {
 	font-size: 16px;
 	text-align: center;
@@ -254,6 +265,7 @@ body {
 	box-sizing: border-box;
 	border-radius: 3px;
 }
+
 
 .popupBody {
 	padding: 10px 20px;
@@ -302,8 +314,8 @@ body {
 
 .login_form .form_button{
 	font-family: Raleway !important;
-	display: inline-block;
-	margin: 5px 5px 5px 0 !important;
+	display: block;
+	margin: 5px auto !important;
 	width: 85px;
 	height: 40px;
 	border-radius: 7px;
@@ -367,16 +379,16 @@ top: 120px !important;
 }
 
 .reg_form input[type=button] {
+	display: block !important;
 	width: 85px;
 	border-left: 1px solid #d9d9d9;
 	border-radius: 7px;
 	background: #3A495F;
 	color: #fff;
 	border: none;
-	margin: 10px auto 0 auto;
-	text-align: center;
+	text-align: center !important;
 	font-weight: bold;
-	margin: 20px auto 5px auto;
+	margin: 5px auto !important;
 }
 
 .reg_form_container label {
@@ -390,13 +402,31 @@ top: 120px !important;
 	margin: 0px;
 }
 
-.ui-chkbox-label{
-	margin-top: 0 !important;
-	margin-left: 10px !important;
-	line-height: 16px !important;
+.terms_checkbox{
+	display: block;
+	position: relative;
+	float: left;
+}
+
+.terms{
+	display: block;
+	position: relative;
+	float: left;
+	margin: 0 0 15px 10px !important;
 	font-size: 13px;
 	font-weight: bold !important;
 }
+
+#terms_trigger{
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: 16px !important;
+	font-site: 13px !important;
+	font-weight:normal !important;
+	
+}
+
+
 
 .req_fields_label{
 	font-weight: 400px !important;
@@ -404,6 +434,29 @@ top: 120px !important;
 	display: block;
 	font-size: 13px;
 }
+
+.reg_modal{
+	display: block;
+	position: relative;
+	z-index : 11000 !important;
+	width:20% !important;
+	top:115px !important;
+	left: 40%;
+	
+}
+
+.terms_modal{
+	display: block;
+	position: relative;
+	z-index : 11100 !important;
+	width:40% !important;
+	top:115px !important;
+	left: 30%;
+	height: 700px !important;
+	overflow: auto !important;
+	text-align: justify;
+}
+
 
 /*SIGN UP END*/
 /************************************************************************************************************************/
@@ -474,12 +527,40 @@ top: 120px !important;
 /*************************************************************************************************************/
 /*RESPONSIVE*/
 
+
+@media all and (max-width:1400px) {
+
+	#regDialog{
+		width:26% !important;
+		top:115px !important;
+		left:37% !important;
+		scrollable: true !important;
+		height: 480px !important;
+		overflow: auto;
+	}
+	
+	#termsDialog{
+		width:40% !important;
+		top:115px !important;
+		left:30% !important;
+		scrollable: true !important;
+		height: 600px !important;
+		overflow: auto;
+	}
+}
+
 @media all and (max-width:1200px) {
 	/*HEADER*/	
 	.navigation li a {
 		font-size: 19px;
 	}
 	/*HEADER END*/
+	
+		#regDialog{
+		width:30% !important;
+	}
+	
+	
 }
 
 @media all and (max-width:992px) {
