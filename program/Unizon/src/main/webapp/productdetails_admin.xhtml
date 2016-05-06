@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default_admin.xhtml">
+
+    <ui:define name="custom_css">
+        <h:outputStylesheet name="css/def.css" />
+        <h:outputStylesheet name="css/product.css" />
+        <h:outputStylesheet name="css/productdetails.css" />
+        <h:outputStylesheet name="css/product_slider.css" />
+    </ui:define>
+
+    <ui:define name="custom_js">
+        <h:outputScript target="head" library="js"
+                        name="index_responsive_slider.js" />
+        <h:outputScript target="head" library="js"
+                        name="imagesloaded.pkgd.min.js" />
+        <h:outputScript target="head" library="js" name="jquery-imagefill.js" />
+        <h:outputScript target="head" library="js"
+                        name="jquery.fancybox.pack.js" />
+        <h:outputScript target="head" library="js" name="products.js" />
+    </ui:define>
+    <f:metadata>
+        <f:viewParam name="id" value="#{productDetailController.productId}" />
+        <f:viewAction action="#{productDetailController.init()}" />
+    </f:metadata>
+
+    <ui:define name="fullBody">
+        <div class="wrapper product clear-after">
+            <div class="left_bar">
+                <h2>Search</h2>
+                <div class="search_holder">
+
+                    <h:form id="searchform" method="post" action="">
+                        <h:inputText placeholder="Search..." type="text"
+                                     value="#{SearchController.productName}" />
+
+                        <h:commandButton type="submit" styleclass="" value=""
+                                         actionListener="#{SearchController.catSelectBehindProductDetails()}"
+                                         ajax="false" />
+
+                    </h:form>
+
+                </div>
+
+                <h2>categories</h2>
+                <div class="left_box">
+
+                    <h:form>
+                        <ul class="category_list">
+
+                            <li class="cat_picker"><i class="fa fa-dot-circle-o"
+                                                      aria-hidden="true"></i> <h:commandLink
+                                                      action="#{SearchController.catSelectBehindProductDetails()}">
+                                    <f:setPropertyActionListener
+                                        target="#{SearchController.category}" value="all" />All
+                                    categories</h:commandLink></li>
+
+                            <ui:repeat var="cat" value="#{SearchController.categoryNames}">
+                                <li class="cat_picker"><i class="fa fa-dot-circle-o"
+                                                          aria-hidden="true"></i> <h:commandLink
+                                                          action="#{SearchController.catSelectBehindProductDetails}">
+                                        <f:setPropertyActionListener
+                                            target="#{SearchController.category}" value="#{cat}" />#{cat}
+                                    </h:commandLink></li>
+                            </ui:repeat>
+                        </ul>
+                    </h:form>
+
+                </div>
+                <h2>Sort</h2>
+                <div class="sort_holder">
+                    <h:form id="sort_select">
+                        <p:outputLabel value="Sort by: " class="tabl_label" />
+                        <p:selectOneMenu value="#{SearchController.selectedSort}"
+                                         onchange="submit()"
+                                         valueChangeListener="#{SearchController.sortChangeListener}"
+                                         id="sort_change">
+                            <f:selectItems value="#{SearchController.sortingOptions}" />
+                        </p:selectOneMenu>
+                    </h:form>
+                </div>
+
+            </div>
+            <div class="right_bar clear-after">
+                <h1 align="center" id="product_title">
+                    <h:outputText
+                        value="#{productDetailController.actualProduct.title}" />
+                </h1>
+                <div class="product_box_container col-sm-6">
+                    <div class="smallImage">
+                        <div class="product_box_imageholder">
+                            <div class="product_box_imageholder_cell">
+                                <h:graphicImage name="#{productDetailController.actualImageUrl}" style="height:270px; margin-bottom:1cm;" />
+                                <h3 style="margin-top: 0">Images</h3>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="col-sm-6">
+                    <div id="product_amount">
+                        <h:outputText  value="Amount: #{productDetailController.actualProduct.amount}" />					
+                    </div>
+                    <div id="product_price">
+                        <h:outputText  value="Price: #{productDetailController.actualProduct.price} USD" />
+                    </div>					
+                    <div class="buttons clear-after" id="add_to_cart_button">
+                        <h3>
+                            <h:form>
+                                <p:remoteCommand name="addProductToCartRemoteCommand"
+                                                 actionListener="#{cartController.addProductToCartListen()}"
+                                                 oncomplete="PF('addProductDialogVar').show()" />
+
+                                <p:commandButton class="button cart"
+                                                 update=":addProductDialogForm" value="Add to Cart"
+                                                 onclick="addProductToCartRemoteCommand([{name: 'productId', value:#{productDetailController.actualProduct.productId}}]);" />
+                            </h:form>
+                        </h3>
+                    </div>
+                </div>
+                <div class="row" id="productImages">
+                    <p:lightBox styleClass="imagebox" id="lighbox1">
+                        <ui:repeat value="#{productDetailController.actualProduct.images.toArray()}" var="image">	 
+                            <h:outputLink value="/Unizon/javax.faces.resource/#{image.imageUrl}.jsf">
+                                <h:graphicImage name="#{image.imageUrl}" id="nature2" style="height: 77px; width: 100px" />
+                            </h:outputLink>
+                        </ui:repeat>
+                    </p:lightBox>
+                </div>
+                <h4>
+                    <h:outputText value="&lt;br/&gt;" escape="false" />
+                    <h:outputText value="&lt;br/&gt;" escape="false" />
+                    <h:outputText
+                        value="Description: #{productDetailController.actualProduct.description}" />
+                    <h:outputText value="&lt;br/&gt;" escape="false" />
+                </h4>
+            </div>
+        </div>
+
+        <p:dialog header="Add product" resizable="false" draggable="false"
+                  styleClass="address_modal" id="addProductDialog" closeOnEscape="true"
+                  modal="true" widgetVar="addProductDialogVar">
+            <div class="login_form_container">
+                <h:form id="addProductDialogForm" class="login_form">
+                    <p:outputLabel value="Amount:" for="minMax" styleClass="required" />
+                    <p:spinner id="minMax"
+                               value="#{cartController.selectedProductAmount}" min="1"
+                               max="#{cartController.selectedProduct.amount}" style="padding-right:10px;"/>
+                    <p:commandButton class="button cart" value="Add to Cart"
+                                     oncomplete="PF('addProductDialogVar').hide()"
+                                     actionListener="#{cartController.addProductToCart}"
+                                     update=":messages">
+                        <!-- 						<i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> -->
+                    </p:commandButton>
+                </h:form>
+            </div>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>
