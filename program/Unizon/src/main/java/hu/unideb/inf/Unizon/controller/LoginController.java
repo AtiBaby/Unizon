@@ -24,127 +24,146 @@ import hu.unideb.inf.Unizon.util.Password;
 @SessionScoped
 public class LoginController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Inject
-	private Logger log;
+    @Inject
+    private Logger log;
 
-	@Inject
-	private FacesContext facesContext;
+    @Inject
+    private FacesContext facesContext;
 
-	@EJB
-	private UserFacade userFacade;
+    @EJB
+    private UserFacade userFacade;
 
-	@EJB
-	private AdministratorFacade administratorFacade;
+    @EJB
+    private AdministratorFacade administratorFacade;
 
-	private User user;
-	private String username;
-	private String password;
+    private User user;
+    private String username;
+    private String password;
 
-	@PostConstruct
-	public void init() {
-		this.user = null;
-		this.username = null;
-		this.password = null;
-	}
+    @PostConstruct
+    public void init() {
+        this.user = null;
+        this.username = null;
+        this.password = null;
+    }
 
-	public void showUserProfile() {
-		redirect(isLoggedIn() ? "/user.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
-	}
+    public void showUserProfile() {
+        redirect(isLoggedIn() ? "/user.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
+    }
 
-	public void login() {
-		log.info("Authenticating user: {}.", username);
+    public void login() {
+        log.info("Authenticating user: {}.", username);
 
-		User user = userFacade.findByUsername(username);
-		if (user != null) {
-			try {
-				if (Password.check(password, user.getPassword())) {
-					this.user = user;
-					log.info("{} successfully authenticated.", user);
+        User user = userFacade.findByUsername(username);
+        if (user != null) {
+            try {
+                if (Password.check(password, user.getPassword())) {
+                    this.user = user;
+                    log.info("{} successfully authenticated.", user);
 
-					redirect(isAdministrator() ? "/admin.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
-					return;
-				}
-			} catch (Exception e) {
-				log.error(e.getMessage());
-				addErrorMessage("Unknown error happened!");
-			}
-		}
+                    redirect(isAdministrator() ? "/admin.jsf?faces-redirect=true" : "/index.jsf?faces-redirect=true");
+                    return;
+                }
+            } catch (Exception e) {
+                log.error(e.getMessage());
+                addErrorMessage("Unknown error happened!");
+            }
+        }
 
-		log.info("{} failed to authenticate.", user);
-		addErrorMessage("Wrong username or password!");
-		init();
-	}
+        log.info("{} failed to authenticate.", user);
+        addErrorMessage("Wrong username or password!");
+        init();
+    }
 
-	public void logout() {
-		facesContext.getExternalContext().invalidateSession();
-		log.info("{} logged out.", user);
-		redirect("/index.jsf?faces-redirect=true");
-		init();
-	}
+    public void logout() {
+        facesContext.getExternalContext().invalidateSession();
+        log.info("{} logged out.", user);
+        redirect("/index.jsf?faces-redirect=true");
+        init();
+    }
 
-	private void addErrorMessage(String detail) {
-		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
-	}
+    public void adminValidation() {
+        if (!isLoggedIn() || !isAdministrator()) {
+            invalidate();
+        }
+    }
 
-	private void addMessage(Severity severity, String summary, String detail) {
-		FacesMessage msg = new FacesMessage(severity, summary, detail);
-		facesContext.addMessage(null, msg);
-	}
+    public void userValidation() {
+        if (isLoggedIn() && isAdministrator()) {
+            invalidate();
+        }
+    }
 
-	private void redirect(String url) {
-		log.info("Redirecting {} to {}.", user, url);
-		try {
-			ExternalContext ec = facesContext.getExternalContext();
-			ec.redirect(ec.getRequestContextPath() + url);
-		} catch (IOException e) {
-			log.error(e.getMessage());
-		}
-	}
+    public void invalidate() {
+        facesContext.getExternalContext().invalidateSession();
+        log.info("{} tried to cause CSRF.", user);
+        redirect("/index.jsf?faces-redirect=true");
+        init();
+    }
 
-	public boolean isLoggedIn() {
-		return this.user != null;
-	}
+    private void addErrorMessage(String detail) {
+        addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+    }
 
-	public boolean isAdministrator() {
-		boolean isAdministrator = administratorFacade.isAdministrator(user.getUserId());
-		log.trace("Checking whether {} is administrator: {}", user, isAdministrator);
-		return isAdministrator;
-	}
+    private void addMessage(Severity severity, String summary, String detail) {
+        FacesMessage msg = new FacesMessage(severity, summary, detail);
+        facesContext.addMessage(null, msg);
+    }
 
-	public void updateUser() {
-		log.info("Updating user in loginController.");
-		if (user == null) {
-			log.info("User not logged in.");
-		} else {
-			user = userFacade.findByUsername(user.getUsername());
-			log.info("User has been successfully updated in loginController.");
-			log.info("User {} status: {}", user, user.getUserStatus().getStatusName());
-		}
-	}
+    private void redirect(String url) {
+        log.info("Redirecting {} to {}.", user, url);
+        try {
+            ExternalContext ec = facesContext.getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + url);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public boolean isLoggedIn() {
+        return this.user != null;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public boolean isAdministrator() {
+        boolean isAdministrator = administratorFacade.isAdministrator(user.getUserId());
+        log.trace("Checking whether {} is administrator: {}", user, isAdministrator);
+        return isAdministrator;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void updateUser() {
+        log.info("Updating user in loginController.");
+        if (user == null) {
+            log.info("User not logged in.");
+        } else {
+            user = userFacade.findByUsername(user.getUsername());
+            log.info("User has been successfully updated in loginController.");
+            log.info("User {} status: {}", user, user.getUserStatus().getStatusName());
+        }
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
