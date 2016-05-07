@@ -28,10 +28,10 @@
 				<h2>Search</h2>
 				<div class="search_holder">
 					<h:form id="searchform" method="post" action="">
-						<h:inputText placeholder="Search..." type="text" value="#{SearchController.productName}" />
+						<h:inputText placeholder="Search..." type="text" value="#{searchController.productName}" />
 
 						<h:commandButton type="submit" styleclass="" value=""
-							actionListener="#{SearchController.catSelectBehindProductDetails()}" ajax="false" />
+							actionListener="#{searchController.catSelectBehindProductDetails()}" ajax="false" />
 					</h:form>
 				</div>
 
@@ -40,14 +40,14 @@
 					<h:form>
 						<ul class="category_list">
 							<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> <h:commandLink
-									action="#{SearchController.catSelectBehindProductDetails()}">
-									<f:setPropertyActionListener target="#{SearchController.category}" value="all" />All
+									action="#{searchController.catSelectBehindProductDetails()}">
+									<f:setPropertyActionListener target="#{searchController.category}" value="all" />All
                                     categories</h:commandLink></li>
 
-							<ui:repeat var="cat" value="#{SearchController.categoryNames}">
+							<ui:repeat var="cat" value="#{searchController.categoryNames}">
 								<li class="cat_picker"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> <h:commandLink
-										action="#{SearchController.catSelectBehindProductDetails}">
-										<f:setPropertyActionListener target="#{SearchController.category}" value="#{cat}" />#{cat}
+										action="#{searchController.catSelectBehindProductDetails}">
+										<f:setPropertyActionListener target="#{searchController.category}" value="#{cat}" />#{cat}
                                     </h:commandLink></li>
 							</ui:repeat>
 						</ul>
@@ -58,9 +58,9 @@
 				<div class="sort_holder">
 					<h:form id="sort_select">
 						<p:outputLabel value="Sort by: " class="tabl_label" />
-						<p:selectOneMenu disabled="true" value="#{SearchController.selectedSort}" onchange="submit()"
-							valueChangeListener="#{SearchController.sortChangeListener}" id="sort_change">
-							<f:selectItems value="#{SearchController.sortingOptions}" />
+						<p:selectOneMenu disabled="true" value="#{searchController.selectedSort}" onchange="submit()"
+							valueChangeListener="#{searchController.sortChangeListener}" id="sort_change">
+							<f:selectItems value="#{searchController.sortingOptions}" />
 						</p:selectOneMenu>
 					</h:form>
 				</div>
@@ -69,12 +69,12 @@
 				<div class="sort_holder">
 					<h:form id="priceFilter">
 						<p:outputLabel id="displayPriceRange"
-							value="Price: #{SearchController.minPrice} USD - #{SearchController.maxPrice} USD" class="tabl_label" />
-						<p:slider minValue="#{SearchController.minPrice}" maxValue="#{SearchController.maxPrice}" for="txtMin,txtMax"
+							value="Price: #{searchController.minPrice} USD - #{searchController.maxPrice} USD" class="tabl_label" />
+						<p:slider minValue="#{searchController.minPrice}" maxValue="#{searchController.maxPrice}" for="txtMin,txtMax"
 							display="displayPriceRange" range="true" displayTemplate="Price {min} USD - {max} USD" disabled="true">
 						</p:slider>
-						<h:inputHidden id="txtMin" value="#{SearchController.minPriceIn}" />
-						<h:inputHidden id="txtMax" value="#{SearchController.maxPriceIn}" />
+						<h:inputHidden id="txtMin" value="#{searchController.minPriceIn}" />
+						<h:inputHidden id="txtMax" value="#{searchController.maxPriceIn}" />
 					</h:form>
 				</div>
 
@@ -82,8 +82,8 @@
 
 				<div class="sort_holder">
 					<h:form id="tagFilter">
-						<p:selectManyCheckbox disabled="true" id="grid2" value="#{SearchController.tags2}" layout="responsive" columns="1">
-							<f:selectItems value="#{SearchController.tags}" var="tag" itemLabel="#{tag.name}" itemValue="#{tag.name}" />
+						<p:selectManyCheckbox disabled="true" id="grid2" value="#{searchController.tags2}" layout="responsive" columns="1">
+							<f:selectItems value="#{searchController.tags}" var="tag" itemLabel="#{tag.name}" itemValue="#{tag.name}" />
 						</p:selectManyCheckbox>
 					</h:form>
 				</div>

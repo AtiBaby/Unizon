@@ -24,9 +24,9 @@
             <div class="search_holder">
                 <h:form method="post" action="#{request.contextPath}/products.jsf">
                     <h:inputText placeholder="Let's find your dreams..." type="text"
-                                 value="#{SearchController.productName}" />
+                                 value="#{searchController.productName}" />
                     <h:commandButton value=""
-                                     actionListener="#{SearchController.search()}"
+                                     actionListener="#{searchController.search()}"
                                      action="/products?faces-redirect=true" ajax="false" />
                 </h:form>
             </div>

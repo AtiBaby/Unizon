@@ -26,8 +26,7 @@ import hu.unideb.inf.Unizon.model.Category;
 import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.Tag;
 
-@Stateless
-@ManagedBean(name = "SearchController")
+@ManagedBean
 @SessionScoped
 public class SearchController implements Serializable {
 
