@@ -122,6 +122,16 @@ public class SearchController implements Serializable {
 		tagFilterListener();
 	}
 
+	public void modifyProduct(Product p) {
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i).getProductId() == p.getProductId()) {
+				products.set(i, p);
+				break;
+			}
+		}
+		filteredProducts = products;
+	}
+
 	public void tagFilterListener() {
 		filteredProducts = new ArrayList<>();
 		for (Product prod : products) {

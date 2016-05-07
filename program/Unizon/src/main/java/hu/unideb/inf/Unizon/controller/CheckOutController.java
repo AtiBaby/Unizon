@@ -43,6 +43,9 @@ public class CheckOutController implements Serializable {
 	@ManagedProperty("#{cartItemController}")
 	private CartItemController cartItemController;
 
+	@ManagedProperty("#{searchController}")
+	private SearchController searchController;
+
 	private Integer shippingAddressId;
 	private Integer billingAddressId;
 
@@ -61,6 +64,7 @@ public class CheckOutController implements Serializable {
 			// TODO Check newAmount first (individually)
 			product.setAmount(newAmount);
 			productFacade.edit(product);
+			searchController.modifyProduct(product);
 		}
 
 		log.info("Products' amount successfully updated.");
@@ -116,5 +120,13 @@ public class CheckOutController implements Serializable {
 
 	public void setBillingAddressId(Integer billingAddressId) {
 		this.billingAddressId = billingAddressId;
+	}
+
+	public SearchController getSearchController() {
+		return searchController;
+	}
+
+	public void setSearchController(SearchController searchController) {
+		this.searchController = searchController;
 	}
 }
