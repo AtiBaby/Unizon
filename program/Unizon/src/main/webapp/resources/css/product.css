@@ -189,6 +189,7 @@
 	background:#fff;
 	width:100%;
 	min-height:350px;
+	height: 400px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -264,6 +265,9 @@
 .product_box .prod_box_cat{
 	text-align:left;
 	padding:0 15px;
+	height: 70px;
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 
 .product_box .buttons{
