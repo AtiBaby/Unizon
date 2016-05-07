@@ -39,6 +39,11 @@
 					<h:outputText class="prod_celltext" value="#{cart.value}" />
 				</p:column>
 
+				<p:column class="prod_price" headerText="Total price">
+					<h:outputText class="prod_celltext"
+						value="#{cart.value * cart.key.price}" />
+				</p:column>
+
 				<p:column class="prod_edit">
 					<div class="address_cell">
 						<h:form>
@@ -81,6 +86,11 @@
 				</p:column>
 
 			</p:dataTable>
+
+			<p:commandButton value="Check out"
+				rendered="#{not cartController.isCartEmpty()}"
+				style="margin:5px; float: right;"
+				actionListener="#{cartController.checkOut()}" update=":messages" />
 		</div>
 
 		<p:dialog header="Edit amount" resizable="false" draggable="false"
@@ -98,7 +108,28 @@
 						oncomplete="PF('editProductInCartDialogVar').hide()"
 						actionListener="#{cartController.editProductInCart}"
 						update=":messages">
-						<!-- 						<i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> -->
+					</p:commandButton>
+				</h:form>
+			</div>
+		</p:dialog>
+
+		<p:dialog header="Check out" resizable="false" draggable="false"
+			styleClass="address_modal" id="checkOutFromCartDialog"
+			closeOnEscape="true" modal="true"
+			widgetVar="checkOutFromCartDialogVar">
+			<div class="login_form_container">
+				<h:form id="checkOutFromCartDialogForm" class="login_form">
+
+					<p:selectOneMenu id="finalAddress"
+						value="#{checkOutController.address}" effect="fold">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{loginController.user.addresses}" />
+					</p:selectOneMenu>
+
+					<p:commandButton class="button cart" value="Order"
+						oncomplete="PF('checkOutFromCartDialogVar').hide()"
+						actionListener="#{checkOutController.finalizeShopping()}"
+						update=":messages">
 					</p:commandButton>
 				</h:form>
 			</div>

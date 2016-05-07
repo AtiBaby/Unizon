@@ -70,23 +70,19 @@ public class CartItemController implements Serializable {
 	}
 
 	public void editProductInCart(Product product, int amount) {
-
 		if (products.containsKey(product)) {
 			products.put(product, amount);
 			redirect("/cart.jsf?faces-redirect=true");
 		}
 	}
-	public void deleteProductFromCart(Product product) {
 
+	public void deleteProductFromCart(Product product) {
 		if (products.containsKey(product)) {
 			products.remove(product);
-			
 		}
 	}
 
-	
 	private void redirect(String url) {
-
 		try {
 			ExternalContext ec = facesContext.getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + url);

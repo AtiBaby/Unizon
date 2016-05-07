@@ -27,9 +27,9 @@
 					</p:inputText>
 
 					<p:outputLabel for="country" value="Country:" styleClass="required" />
-					<p:inputText id="country" value="#{addressController.newAddress.country}"
-						maxlength="100" required="true"
-						requiredMessage="Country is required!"
+					<p:inputText id="country"
+						value="#{addressController.newAddress.country}" maxlength="100"
+						required="true" requiredMessage="Country is required!"
 						validator="alphabeticInputValidator" tabindex="2">
 						<f:attribute name="componentname" value="country" />
 					</p:inputText>
@@ -43,17 +43,18 @@
 					</p:inputText>
 
 					<p:outputLabel for="street" value="Street:" styleClass="required" />
-					<p:inputText id="street" value="#{addressController.newAddress.street}"
-						maxlength="100" required="true"
-						requiredMessage="Street is required!" tabindex="4">
+					<p:inputText id="street"
+						value="#{addressController.newAddress.street}" maxlength="100"
+						required="true" requiredMessage="Street is required!" tabindex="4">
 						<f:attribute name="componentname" value="streetname" />
 					</p:inputText>
 
-					<p:outputLabel for="street_num" value="Street number:" styleClass="required" />
-					<p:inputText id="street_num" value="#{addressController.newAddress.strNumber}"
-						required="true" requiredMessage="Street number is required!"
-						styleClass="required" tabindex="5"
-						converterMessage="Please enter digits only.">
+					<p:outputLabel for="street_num" value="Street number:"
+						styleClass="required" />
+					<p:inputText id="street_num"
+						value="#{addressController.newAddress.strNumber}" required="true"
+						requiredMessage="Street number is required!" styleClass="required"
+						tabindex="5" converterMessage="Please enter digits only.">
 						<f:attribute name="componentname" value="streetnumber" />
 					</p:inputText>
 
@@ -68,9 +69,10 @@
 						tabindex="7" converterMessage="Please enter digits only.">
 						<f:attribute name="componentname" value="door" />
 					</p:inputText>
-					
-					<h:outputText styleClass="req_fields_label" value="All fields marked with an asterisk are required."/>
-					
+
+					<h:outputText styleClass="req_fields_label"
+						value="All fields marked with an asterisk are required." />
+
 					<p:commandButton value="Add" styleClass="custom_button"
 						actionListener="#{addressController.addAddress()}" ajax="true"
 						update=":messages, :addAddressDialogForm" tabindex="8" />
@@ -87,17 +89,19 @@
 			<!-- Edit address form -->
 			<div class="login_form_container">
 				<h:form id="editAddressDialogForm" class="login_form">
-					<p:outputLabel for="zipcode" value="ZIP code:" styleClass="required" />
-					<p:inputText id="zipcode" value="#{addressController.newAddress.zip}"
-						maxlength="10" required="true"
-						requiredMessage="ZIP code is required!" tabindex="1">
+					<p:outputLabel for="zipcode" value="ZIP code:"
+						styleClass="required" />
+					<p:inputText id="zipcode"
+						value="#{addressController.newAddress.zip}" maxlength="10"
+						required="true" requiredMessage="ZIP code is required!"
+						tabindex="1">
 						<f:attribute name="componentname" value="zipcode" />
 					</p:inputText>
 
 					<p:outputLabel for="count" value="Country:" styleClass="required" />
-					<p:inputText id="count" value="#{addressController.newAddress.country}"
-						maxlength="100" required="true"
-						requiredMessage="Country is required!"
+					<p:inputText id="count"
+						value="#{addressController.newAddress.country}" maxlength="100"
+						required="true" requiredMessage="Country is required!"
 						validator="alphabeticInputValidator" tabindex="2">
 						<f:attribute name="componentname" value="country" />
 					</p:inputText>
@@ -111,17 +115,18 @@
 					</p:inputText>
 
 					<p:outputLabel for="str" value="Street:" styleClass="required" />
-					<p:inputText id="str" value="#{addressController.newAddress.street}"
-						maxlength="100" required="true"
-						requiredMessage="Street is required!" tabindex="4">
+					<p:inputText id="str"
+						value="#{addressController.newAddress.street}" maxlength="100"
+						required="true" requiredMessage="Street is required!" tabindex="4">
 						<f:attribute name="componentname" value="streetname" />
 					</p:inputText>
 
-					<p:outputLabel for="num" value="Street number:" styleClass="required" />
-					<p:inputText id="num" value="#{addressController.newAddress.strNumber}"
-						required="true" requiredMessage="Street number is required!"
-						styleClass="required" tabindex="5"
-						converterMessage="Please enter digits only.">
+					<p:outputLabel for="num" value="Street number:"
+						styleClass="required" />
+					<p:inputText id="num"
+						value="#{addressController.newAddress.strNumber}" required="true"
+						requiredMessage="Street number is required!" styleClass="required"
+						tabindex="5" converterMessage="Please enter digits only.">
 						<f:attribute name="componentname" value="streetnumber" />
 					</p:inputText>
 
@@ -136,8 +141,9 @@
 						tabindex="7" converterMessage="Please enter digits only.">
 						<f:attribute name="componentname" value="door" />
 					</p:inputText>
-					
-					<h:outputText styleClass="req_fields_label" value="All fields marked with an asterisk are required."/>
+
+					<h:outputText styleClass="req_fields_label"
+						value="All fields marked with an asterisk are required." />
 
 					<p:commandButton value="Edit" styleClass="custom_button"
 						actionListener="#{addressController.editAddress()}" ajax="true"
@@ -307,8 +313,7 @@
 											<p>#{loginController.user.userStatus.statusName}</p>
 											<p:commandButton
 												actionListener="#{userController.sendActivationLink()}"
-												ajax="true"
-												update=":messages"
+												ajax="true" update=":messages"
 												rendered="#{loginController.user.userStatus.statusName eq 'inactive'}"
 												value="Resend activation link" />
 										</h:form>
@@ -365,18 +370,21 @@
 											<h:form transient="true" id="removeAddressForm">
 												<p:remoteCommand name="removeAddressRemoteCommand"
 													actionListener="#{addressController.removeAddress}"
-													process="@this"
-													oncomplete="location.reload();" />
+													process="@this" oncomplete="location.reload();" />
 
 												<p:commandLink id="remove"
 													onclick="removeAddressRemoteCommand([{name:'addressId', value:#{address.addressId}}]);">
 													<f:ajax render="@form" />
 													<i class="fa fa-remove"></i>
-													<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+													<p:confirm header="Confirmation" message="Are you sure?"
+														icon="ui-icon-alert" />
 												</p:commandLink>
-												<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-													<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-													<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+												<p:confirmDialog global="true" showEffect="fade"
+													hideEffect="fade">
+													<p:commandButton value="Yes" type="button"
+														styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+													<p:commandButton value="No" type="button"
+														styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 												</p:confirmDialog>
 											</h:form>
 										</div>
@@ -432,18 +440,21 @@
 											<h:form transient="true" id="removeAddressForm">
 												<p:remoteCommand name="removePhoneNumberRemoteCommand"
 													actionListener="#{phoneNumberController.removePhoneNumberFromUser}"
-													process="@this"
-													oncomplete="location.reload();" />
+													process="@this" oncomplete="location.reload();" />
 
 												<p:commandLink id="remove"
 													onclick="removePhoneNumberRemoteCommand([{name:'phoneNumberId', value:#{pn.phoneNumberId}}]);">
 													<f:ajax render="@form" />
 													<i class="fa fa-remove"></i>
-													<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+													<p:confirm header="Confirmation" message="Are you sure?"
+														icon="ui-icon-alert" />
 												</p:commandLink>
-												<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-													<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-													<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+												<p:confirmDialog global="true" showEffect="fade"
+													hideEffect="fade">
+													<p:commandButton value="Yes" type="button"
+														styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+													<p:commandButton value="No" type="button"
+														styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 												</p:confirmDialog>
 											</h:form>
 										</div>
@@ -476,7 +487,8 @@
 										value="#{ord.phoneNumber.phoneNumber}" />
 								</p:column>
 								<p:column class="po_total_price" headerText="Total price">
-									<h:outputText class="po_celltext" value="#{ord.prodToOrders.stream().map(prod -> prod.product.price).sum()}">
+									<h:outputText class="po_celltext"
+										value="#{ord.prodToOrders.stream().map(prod -> prod.product.price).sum()}">
 										<f:convertNumber currencyCode="USD" type="currency" />
 									</h:outputText>
 								</p:column>

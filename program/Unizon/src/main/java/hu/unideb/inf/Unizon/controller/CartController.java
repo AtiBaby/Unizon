@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -11,14 +13,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.primefaces.context.RequestContext;
+import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.facade.ProductFacade;
 import hu.unideb.inf.Unizon.model.Product;
 
-/**
- * @author Czuczi
- * @author Zsoca
- */
 @ManagedBean
 @ViewScoped
 public class CartController {
@@ -26,11 +25,20 @@ public class CartController {
 	@Inject
 	private FacesContext facesContext;
 
+	@Inject
+	private Logger log;
+
 	@EJB
 	private ProductFacade productFacade;
 
+	@ManagedProperty("#{loginController}")
+	private LoginController loginController;
+
 	@ManagedProperty("#{cartItemController}")
 	private CartItemController cartItemController;
+
+	@ManagedProperty("#{checkOutController}")
+	private CheckOutController checkOutController;
 
 	private Product selectedProduct;
 	private int selectedProductAmount;
@@ -63,7 +71,7 @@ public class CartController {
 			selectedProductAmount = Integer.parseInt(params.get("productAmount"));
 		}
 	}
-	
+
 	public void removeProductFromCart() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
 		if (params.containsKey("productId")) {
@@ -72,8 +80,44 @@ public class CartController {
 			cartItemController.deleteProductFromCart(selectedProduct);
 		}
 	}
-	public void editProductInCart(){
+
+	public void editProductInCart() {
 		cartItemController.editProductInCart(selectedProduct, selectedProductAmount);
+	}
+
+	public boolean isCartEmpty() {
+		return cartItemController.getProducts().isEmpty();
+	}
+
+	public void checkOut() {
+		if (!loginController.isLoggedIn()) {
+			addInfoMessage("Please, log in first!");
+			return;
+		}
+
+		RequestContext context = RequestContext.getCurrentInstance();
+		context.execute("PF('checkOutFromCartDialogVar').show();");
+	}
+
+	private void addInfoMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_INFO, "INFO", detail);
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
+	}
+
+	public LoginController getLoginController() {
+		return loginController;
+	}
+
+	public void setLoginController(LoginController loginController) {
+		this.loginController = loginController;
 	}
 
 	public CartItemController getCartItemController() {
@@ -82,6 +126,14 @@ public class CartController {
 
 	public void setCartItemController(CartItemController cartItemController) {
 		this.cartItemController = cartItemController;
+	}
+
+	public CheckOutController getCheckOutController() {
+		return checkOutController;
+	}
+
+	public void setCheckOutController(CheckOutController checkOutController) {
+		this.checkOutController = checkOutController;
 	}
 
 	public Product getSelectedProduct() {
