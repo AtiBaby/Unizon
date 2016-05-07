@@ -66,13 +66,14 @@
 									</p:selectCheckboxMenu>
 									
 							        <p:autoComplete label="Tags"
+							        	id="tags"
 							        	multiple="true"
 							        	value="#{productController.selectedTags}"
 							        	completeMethod="#{productController.completeTags}"
-				                        var="theme"
-				                        itemLabel="#{tag.name}"
-				                        itemValue="#{tag.name}"
-				                        forceSelection="false"/>
+				                        var="tag"
+				                        itemLabel="#{tag}"
+				                        itemValue="#{tag}"
+				                        forceSelection="true"/>
 								</p:panelGrid>
 							</p:panel>
 						</p:tab>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;
@@ -119,14 +120,13 @@ public class ProductController implements Serializable {
 	}
 
 	public List<String> completeTags(String query) {
-		List<String> completedTags = tagFacade.findByNameStartingWith(query).stream().map(tag -> tag.getName())
-				.collect(Collectors.toList());
-		completedTags.add(query);
-		return completedTags;
+		Stream<String> tags = tagFacade.findByNameStartingWith(query).stream().map(tag -> tag.getName());
+
+		return Stream.concat(Stream.of(query), tags).sorted().distinct().collect(Collectors.toList());
 	}
 
 	public void upload() {
-		log.info("Uploading a product!");
+		log.info("Uploading product: {}, category ids: {}, tags: {}.", newProduct, selectedCategoryIds, selectedTags);
 
 		Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
 		if (queriedImage == null) {
@@ -150,7 +150,7 @@ public class ProductController implements Serializable {
 		}).collect(Collectors.toSet()));
 
 		productFacade.create(newProduct);
-		log.info("Product uploaded, name: {}.", newProduct.getTitle());
+		log.info("Product {} has been uploaded.", newProduct);
 
 		productEventSrc.fire(newProduct);
 

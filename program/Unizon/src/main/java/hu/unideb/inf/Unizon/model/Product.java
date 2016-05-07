@@ -82,10 +82,17 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	private Set<ProdToOrder> prodToOrders;
 
-	// bi-directional many-to-many association to Tag
-	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
+//	// bi-directional many-to-many association to Tag
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "PROD_TO_TAG", joinColumns = {
+                @JoinColumn(name = "PRODUCT_ID", nullable = false)
+            }, inverseJoinColumns = {
+                @JoinColumn(name = "TAG_ID", nullable = false)
+            }
+    )
 	private Set<Tag> tags;
-
+	
 	public Product() {
 	}
 
@@ -234,6 +241,13 @@ public class Product implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Product [productId=%s, title=%s, description=%s, amount=%s, price=%s, deleted=%s, image=%s]",
+				productId, title, description, amount, price, deleted, image);
 	}
 
 }

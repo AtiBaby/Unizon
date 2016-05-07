@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.inf.Unizon.facade;
 
 import java.util.Collections;
@@ -46,7 +41,7 @@ public class TagFacade extends AbstractFacade<Tag> {
 		List<Tag> resultList;
 
 		try {
-			resultList = em.createNamedQuery("Tag.findByName", Tag.class).setParameter(":name", name).getResultList();
+			resultList = em.createNamedQuery("Tag.findByName", Tag.class).setParameter("name", name).getResultList();
 		} catch (Exception e) {
 			resultList = Collections.emptyList();
 		}

@@ -124,4 +124,9 @@ public class Image implements Serializable {
         return true;
     }
 
+	@Override
+	public String toString() {
+		return String.format("Image [imageId=%s, imageUrl=%s]", imageId, imageUrl);
+	}
+
 }

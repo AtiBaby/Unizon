@@ -29,14 +29,7 @@ public class Tag implements Serializable {
     private String name;
 
     //bi-directional many-to-many association to Product
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "PROD_TO_TAG", joinColumns = {
-                @JoinColumn(name = "TAG_ID", nullable = false)
-            }, inverseJoinColumns = {
-                @JoinColumn(name = "PRODUCT_ID", nullable = false)
-            }
-    )
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     private Set<Product> products;
 
     public Tag() {
@@ -94,5 +87,10 @@ public class Tag implements Serializable {
         }
         return true;
     }
+
+	@Override
+	public String toString() {
+		return String.format("Tag [tagId=%s, name=%s]", tagId, name);
+	}
 
 }
