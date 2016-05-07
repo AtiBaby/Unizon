@@ -120,7 +120,7 @@ public class ProductController implements Serializable {
 	}
 
 	public List<String> completeTags(String query) {
-		Stream<String> tags = tagFacade.findByNameStartingWith(query).stream().map(tag -> tag.getName());
+		Stream<String> tags = tagFacade.findByNameStartingWith(query).stream().map(Tag::getName);
 
 		return Stream.concat(Stream.of(query), tags).sorted().distinct().collect(Collectors.toList());
 	}
