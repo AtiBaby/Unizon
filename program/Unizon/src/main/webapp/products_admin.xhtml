@@ -154,8 +154,7 @@
 											update=":addProductDialogForm" value="Add to Cart"  icon="fa fa-plus fa-lg"
 											onclick="addProductToCartRemoteCommand([{name:'productId', value:#{product.productId}}]);" />
 
-										<h:outputLink value="productdetails_admin.jsf" class="button view"
-											action="#">
+										<h:outputLink value="productdetails_admin.jsf" class="button view">
 											<f:param name="id" value="#{product.productId}" />
 											<i class="fa fa-eye fa-lg" aria-hidden="true"></i>
 											View
