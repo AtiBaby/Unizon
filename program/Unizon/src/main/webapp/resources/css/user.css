@@ -6,7 +6,6 @@ body {
 	background-color: #FFF !important;
 	font-family: Raleway !important;
 	font-weight: 400px !important;
-	padding-bottom: 140px;
 }
 
 .ui-growl {
@@ -19,7 +18,7 @@ top: 120px !important;
 	display: block;
 	padding: 0;
 	background-color: #FFF ;
-	height: 600px !important;
+	min-height: 710px !important;
 }
 
 .ui-tabs-selected a{
@@ -107,6 +106,13 @@ top: 120px !important;
 	font-weight: 400px;
 	margin: 0;
 	padding: 5px 0;
+}
+
+.req_fields_label{
+	font-weight: 400px !important;
+	margin: 10px 0 !important;
+	display: block;
+	font-size: 13px;
 }
 
 .address_cell p{

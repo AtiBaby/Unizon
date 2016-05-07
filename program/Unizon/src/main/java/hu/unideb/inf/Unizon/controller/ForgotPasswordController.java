@@ -27,7 +27,7 @@ public class ForgotPasswordController implements Serializable {
 
 	@Inject
 	private Logger log;
-
+	
 	@EJB
 	private UserFacade userFacade;
 
@@ -42,7 +42,7 @@ public class ForgotPasswordController implements Serializable {
 	private String text;
 	private String name;
 	private User user;
-
+	
 	private static final String ABC = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	private static SecureRandom rnd = new SecureRandom();
 
@@ -60,7 +60,6 @@ public class ForgotPasswordController implements Serializable {
 	}
 
 	public void sendEmail() {
-
 		user = userFacade.findByUsername(username);
 		if (user == null) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "It is not a username.");

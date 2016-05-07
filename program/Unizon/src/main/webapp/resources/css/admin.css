@@ -13,6 +13,10 @@ body {
 	text-align: right !important;
 }
 
+#new_product_trigger{
+	cursor: pointer !important;
+}
+
 .add_new_prod {
 	display: inline;
 	margin: 0;
