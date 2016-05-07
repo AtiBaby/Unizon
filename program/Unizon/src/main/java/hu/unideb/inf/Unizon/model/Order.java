@@ -19,50 +19,49 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
  * The persistent class for the UNI_ORDER database table.
  * 
  */
 @Entity
-@Table(name="UNI_ORDER")
-@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
+@Table(name = "UNI_ORDER")
+@NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ORDER_ID", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ORDER_ID", unique = true, nullable = false)
 	private int orderId;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="ORDER_DATE", nullable=false)
+	@Column(name = "ORDER_DATE", nullable = false)
 	private Date orderDate;
 
-	//bi-directional many-to-one association to ProdToOrder
-	@OneToMany(mappedBy="order", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to ProdToOrder
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
 	private Set<ProdToOrder> prodToOrders;
 
-	//bi-directional many-to-one association to Address
+	// bi-directional many-to-one association to Address
 	@ManyToOne
-	@JoinColumn(name="SHIPPING_ADDRESS_ID", nullable=false)
+	@JoinColumn(name = "SHIPPING_ADDRESS_ID", nullable = false)
 	private Address address1;
 
-	//bi-directional many-to-one association to Address
+	// bi-directional many-to-one association to Address
 	@ManyToOne
-	@JoinColumn(name="BILLING_ADDRESS_ID", nullable=false)
+	@JoinColumn(name = "BILLING_ADDRESS_ID", nullable = false)
 	private Address address2;
 
-	//bi-directional many-to-one association to PhoneNumber
+	// bi-directional many-to-one association to PhoneNumber
 	@ManyToOne
-	@JoinColumn(name="PHONE_NUMBER_ID", nullable=false)
+	@JoinColumn(name = "PHONE_NUMBER_ID", nullable = false)
 	private PhoneNumber phoneNumber;
 
-	//bi-directional many-to-one association to User
+	// bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="USER_ID", nullable=false)
+	@JoinColumn(name = "USER_ID", nullable = false)
 	private User user;
-	
+
 	public Order() {
 	}
 
@@ -127,7 +126,7 @@ public class Order implements Serializable {
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+
 	public User getUser() {
 		return this.user;
 	}
@@ -136,33 +135,33 @@ public class Order implements Serializable {
 		this.user = user;
 	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + this.orderId;
-        hash = 17 * hash + Objects.hashCode(this.orderDate);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 17 * hash + this.orderId;
+		hash = 17 * hash + Objects.hashCode(this.orderDate);
+		return hash;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Order other = (Order) obj;
-        if (this.orderId != other.orderId) {
-            return false;
-        }
-        if (!Objects.equals(this.orderDate, other.orderDate)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Order other = (Order) obj;
+		if (this.orderId != other.orderId) {
+			return false;
+		}
+		if (!Objects.equals(this.orderDate, other.orderDate)) {
+			return false;
+		}
+		return true;
+	}
 
 }

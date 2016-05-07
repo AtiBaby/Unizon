@@ -132,17 +132,35 @@
 			<div class="login_form_container">
 				<h:form id="checkOutFromCartDialogForm" class="login_form">
 
-					<p:selectOneMenu id="finalAddress"
-						value="#{checkOutController.address}" effect="fold">
-						<f:selectItem itemLabel="Select One" itemValue="" />
-						<f:selectItems value="#{loginController.user.addresses}" />
-					</p:selectOneMenu>
+					<p:panelGrid>
+						<p:outputLabel value="Shipping address:" styleClass="required" />
+						<p:selectOneMenu id="shippingAddressIdMenu" styleClass="required"
+							value="#{checkOutController.shippingAddressId}" effect="fold">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItems value="#{loginController.user.addresses}"
+								var="address" itemLabel="#{address}"
+								itemValue="#{address.addressId}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
 
-					<p:commandButton class="button cart" value="Order"
-						oncomplete="PF('checkOutFromCartDialogVar').hide()"
-						actionListener="#{checkOutController.finalizeShopping()}"
-						update=":messages">
-					</p:commandButton>
+					<p:panelGrid>
+						<p:outputLabel value="Billing address:" styleClass="required" />
+						<p:selectOneMenu id="billingAddressIdMenu" styleClass="required"
+							value="#{checkOutController.billingAddressId}" effect="fold">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItems value="#{loginController.user.addresses}"
+								var="address" itemLabel="#{address}"
+								itemValue="#{address.addressId}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:commandButton class="button cart" value="Order"
+							oncomplete="PF('checkOutFromCartDialogVar').hide()"
+							actionListener="#{checkOutController.finalizeShopping()}"
+							update=":messages">
+						</p:commandButton>
+					</p:panelGrid>
 				</h:form>
 			</div>
 		</p:dialog>

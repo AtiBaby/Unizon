@@ -25,8 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PRODUCT")
-@NamedQueries({
-		@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+@NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
 		@NamedQuery(name = "Product.findAllTags", query = "SELECT DISTINCT t FROM Product p INNER JOIN p.tags AS t"),
 		@NamedQuery(name = "Product.findAllNotDeleted", query = "SELECT p FROM Product p WHERE p.deleted=false"),
 		@NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
@@ -82,17 +81,13 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	private Set<ProdToOrder> prodToOrders;
 
-//	// bi-directional many-to-many association to Tag
+	// bi-directional many-to-many association to Tag
 	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "PROD_TO_TAG", joinColumns = {
-                @JoinColumn(name = "PRODUCT_ID", nullable = false)
-            }, inverseJoinColumns = {
-                @JoinColumn(name = "TAG_ID", nullable = false)
-            }
-    )
+	@JoinTable(name = "PROD_TO_TAG", joinColumns = {
+			@JoinColumn(name = "PRODUCT_ID", nullable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "TAG_ID", nullable = false) })
 	private Set<Tag> tags;
-	
+
 	public Product() {
 	}
 
@@ -249,5 +244,4 @@ public class Product implements Serializable {
 				"Product [productId=%s, title=%s, description=%s, amount=%s, price=%s, deleted=%s, image=%s]",
 				productId, title, description, amount, price, deleted, image);
 	}
-
 }
