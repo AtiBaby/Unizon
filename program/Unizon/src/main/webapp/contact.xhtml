@@ -48,10 +48,8 @@
                             <div class="contact_form_row inputfield">
                                 <p:inputTextarea class="message" value="#{contactController.text}" autoResize="false" placeholder="Message"/>
                             </div>
-                            <div class="contact_form_row">
-                                <center>
-                                    <p:commandButton class="submit_button" type="submit" update=":contact_form, :messages" actionListener="#{contactController.sendEmail}" value="Send" />
-                                </center>
+                            <div class="contact_form_row" id="contact_form_button_row">
+                                   <p:commandButton class="submit_button" type="submit" update=":contact_form, :messages" actionListener="#{contactController.sendEmail}" value="Send" />
                             </div>
                         </h:form>
                     </div>

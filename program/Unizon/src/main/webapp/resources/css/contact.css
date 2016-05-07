@@ -207,6 +207,12 @@ textarea:required:invalid {
 	font-weight: bold;
 }
 
+#contact_form_button_row {
+	display: flex;
+	justify-content: center;
+	align-items:center;	
+}
+
 /*Google Maps*/
 #map {
 	width: 100%;
