@@ -56,19 +56,19 @@
 								<p:panelGrid>
 									<p:selectCheckboxMenu label="Categories"
 										required="true"
-										value="#{productController.selectedCategoryIds}"
+										value="#{productController.categories}"
 										filter="true"
 										filterMatchMode="startsWith">
 										<f:selectItems value="#{categories}"
 											var="category"
 											itemLabel="#{category.name}"
-											itemValue="#{category.categoryId}" />
+											itemValue="#{category.name}" />
 									</p:selectCheckboxMenu>
 									
 							        <p:autoComplete label="Tags"
 							        	id="tags"
 							        	multiple="true"
-							        	value="#{productController.selectedTags}"
+							        	value="#{productController.tags}"
 							        	completeMethod="#{productController.completeTags}"
 				                        var="tag"
 				                        itemLabel="#{tag}"
@@ -79,7 +79,7 @@
 						</p:tab>
 						<p:tab id="confirm" title="Confirmation">
 							<p:panel header="Confirmation">
-								<p:panelGrid>
+								<p:panelGrid columns="2">
 									<p:outputLabel value="Title:" />
 									<h:outputText value="#{productController.newProduct.title}" />
 						
@@ -89,9 +89,28 @@
 									<p:outputLabel value="Amount:"/>
 									<h:outputText value="#{productController.newProduct.amount}" />
 						
-									<p:outputLabel value="Description:" styleClass="required" />
+									<p:outputLabel value="Description:" />
 									<h:outputText value="#{productController.newProduct.description}" />
 									
+									<p:outputLabel value="Categories:" />
+									<p:panelGrid>
+										<ui:repeat var="category" value="#{productController.categories}">
+											<p>
+												<h:outputText value="#{category}" />
+											</p>
+										</ui:repeat>
+									</p:panelGrid>
+									
+									<p:outputLabel value="Tags:" />
+									<p:panelGrid>
+										<ui:repeat var="tag" value="#{productController.tags}">
+											<p>
+												<h:outputText value="#{tag}" />
+											</p>
+										</ui:repeat>
+									</p:panelGrid>
+									
+									<p:panelGrid />
 									<p:commandButton value="Submit" styleClass="custom_button"
 										actionListener="#{productController.upload()}" ajax="true"
 										update=":messages, :addProductDialogForm" />

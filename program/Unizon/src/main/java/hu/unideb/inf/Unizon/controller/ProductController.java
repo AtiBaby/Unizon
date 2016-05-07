@@ -67,8 +67,8 @@ public class ProductController implements Serializable {
 	private Image storedImage;
 	private Product newProduct;
 	private Product originalProduct;
-	private List<String> selectedCategoryIds;
-	private List<String> selectedTags;
+	private List<String> categories;
+	private List<String> tags;
 	private User user;
 
 	public void init() {
@@ -96,8 +96,8 @@ public class ProductController implements Serializable {
 		user = loginController.getUser();
 		this.image = new Image();
 		this.storedImage = new Image();
-		this.selectedCategoryIds = new ArrayList<>();
-		this.selectedTags = new ArrayList<>();
+		this.categories = new ArrayList<>();
+		this.tags = new ArrayList<>();
 	}
 
 	public void showAllProducts() {
@@ -111,8 +111,19 @@ public class ProductController implements Serializable {
 	public String addProductOnFlowProcess(FlowEvent event) {
 		return event.getNewStep();
 		// switch (event.getOldStep()) {
-		// case "details":
-		// return "images";
+		// case "catsTags":
+		//
+		//
+		// newProduct.setTags(selectedTags.stream().map(tagString -> {
+		// Tag tag = tagFacade.findByName(tagString);
+		// if (tag == null) {
+		// tag = new Tag();
+		// tag.setName(tagString);
+		// tagFacade.create(tag);
+		// }
+		// return tag;
+		// }).collect(Collectors.toSet()));
+		// return "confirm";
 		//
 		// default:
 		// return event.getNewStep();
@@ -126,7 +137,7 @@ public class ProductController implements Serializable {
 	}
 
 	public void upload() {
-		log.info("Uploading product: {}, category ids: {}, tags: {}.", newProduct, selectedCategoryIds, selectedTags);
+		log.info("Uploading product: {}, categories: {}, tags: {}.", newProduct, categories, tags);
 
 		Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
 		if (queriedImage == null) {
@@ -136,10 +147,9 @@ public class ProductController implements Serializable {
 		}
 		newProduct.setImage(image);
 
-		newProduct.setCategories(selectedCategoryIds.stream().mapToInt(Integer::valueOf)
-				.mapToObj(categoryId -> categoryFacade.find(categoryId)).collect(Collectors.toSet()));
+		newProduct.setCategories(categories.stream().map(categoryFacade::findByName).collect(Collectors.toSet()));
 
-		newProduct.setTags(selectedTags.stream().map(tagString -> {
+		newProduct.setTags(tags.stream().map(tagString -> {
 			Tag tag = tagFacade.findByName(tagString);
 			if (tag == null) {
 				tag = new Tag();
@@ -194,22 +204,6 @@ public class ProductController implements Serializable {
 		}
 	}
 
-	public Logger getLog() {
-		return log;
-	}
-
-	public void setLog(Logger log) {
-		this.log = log;
-	}
-
-	public FacesContext getFacesContext() {
-		return facesContext;
-	}
-
-	public void setFacesContext(FacesContext facesContext) {
-		this.facesContext = facesContext;
-	}
-
 	public LoginController getLoginController() {
 		return loginController;
 	}
@@ -258,19 +252,20 @@ public class ProductController implements Serializable {
 		return storedImage;
 	}
 
-	public List<String> getSelectedCategoryIds() {
-		return selectedCategoryIds;
+	public List<String> getCategories() {
+		return categories;
 	}
 
-	public void setSelectedCategoryIds(List<String> selectedCategoryIds) {
-		this.selectedCategoryIds = selectedCategoryIds;
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
 	}
 
-	public List<String> getSelectedTags() {
-		return selectedTags;
+	public List<String> getTags() {
+		return tags;
 	}
 
-	public void setSelectedTags(List<String> selectedTags) {
-		this.selectedTags = selectedTags;
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
+
 }
