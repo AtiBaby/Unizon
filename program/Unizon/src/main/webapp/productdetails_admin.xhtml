@@ -36,10 +36,10 @@
 
                     <h:form id="searchform" method="post" action="">
                         <h:inputText placeholder="Search..." type="text"
-                                     value="#{SearchController.productName}" />
+                                     value="#{searchController.productName}" />
 
                         <h:commandButton type="submit" styleclass="" value=""
-                                         actionListener="#{SearchController.catSelectBehindProductDetails()}"
+                                         actionListener="#{searchController.catSelectBehindProductDetails()}"
                                          ajax="false" />
 
                     </h:form>
@@ -54,17 +54,17 @@
 
                             <li class="cat_picker"><i class="fa fa-dot-circle-o"
                                                       aria-hidden="true"></i> <h:commandLink
-                                                      action="#{SearchController.catSelectBehindProductDetails()}">
+                                                      action="#{searchController.catSelectBehindProductDetails()}">
                                     <f:setPropertyActionListener
-                                        target="#{SearchController.category}" value="all" />All
+                                        target="#{searchController.category}" value="all" />All
                                     categories</h:commandLink></li>
 
-                            <ui:repeat var="cat" value="#{SearchController.categoryNames}">
+                            <ui:repeat var="cat" value="#{searchController.categoryNames}">
                                 <li class="cat_picker"><i class="fa fa-dot-circle-o"
                                                           aria-hidden="true"></i> <h:commandLink
-                                                          action="#{SearchController.catSelectBehindProductDetails}">
+                                                          action="#{searchController.catSelectBehindProductDetails}">
                                         <f:setPropertyActionListener
-                                            target="#{SearchController.category}" value="#{cat}" />#{cat}
+                                            target="#{searchController.category}" value="#{cat}" />#{cat}
                                     </h:commandLink></li>
                             </ui:repeat>
                         </ul>
@@ -75,15 +75,36 @@
                 <div class="sort_holder">
                     <h:form id="sort_select">
                         <p:outputLabel value="Sort by: " class="tabl_label" />
-                        <p:selectOneMenu value="#{SearchController.selectedSort}"
+                        <p:selectOneMenu disabled="true"  value="#{searchController.selectedSort}"
                                          onchange="submit()"
-                                         valueChangeListener="#{SearchController.sortChangeListener}"
+                                         valueChangeListener="#{searchController.sortChangeListener}"
                                          id="sort_change">
-                            <f:selectItems value="#{SearchController.sortingOptions}" />
+                            <f:selectItems value="#{searchController.sortingOptions}" />
                         </p:selectOneMenu>
                     </h:form>
                 </div>
+<h2>Filters</h2>
+				<div class="sort_holder">
+					<h:form id="priceFilter">
+						<p:outputLabel id="displayPriceRange"
+							value="Price: #{searchController.minPrice} USD - #{searchController.maxPrice} USD" class="tabl_label" />
+						<p:slider minValue="#{searchController.minPrice}" maxValue="#{searchController.maxPrice}" for="txtMin,txtMax"
+							display="displayPriceRange" range="true" displayTemplate="Price {min} USD - {max} USD" disabled="true">
+						</p:slider>
+						<h:inputHidden id="txtMin" value="#{searchController.minPriceIn}" />
+						<h:inputHidden id="txtMax" value="#{searchController.maxPriceIn}" />
+					</h:form>
+				</div>
 
+				<br />
+
+				<div class="sort_holder">
+					<h:form id="tagFilter">
+						<p:selectManyCheckbox disabled="true" id="grid2" value="#{searchController.tags2}" layout="responsive" columns="1">
+							<f:selectItems value="#{searchController.tags}" var="tag" itemLabel="#{tag.name}" itemValue="#{tag.name}" />
+						</p:selectManyCheckbox>
+					</h:form>
+				</div>
             </div>
             <div class="right_bar clear-after">
                 <h1 align="center" id="product_title">
