@@ -185,6 +185,7 @@ body {
 	#addProductDialog{
 		width:40% !important;
 		left: 30% !important;
+		max-height: 500px !important;
 	}
 	
 	.product_form_container input{
