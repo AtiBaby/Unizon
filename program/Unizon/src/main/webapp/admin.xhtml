@@ -57,6 +57,7 @@
 						<p:tab id="catsTags" title="Categories and Tags">
 							<p:panel header="Categories and Tags">
 								<p:panelGrid>
+									<p:outputLabel value="Categories:" styleClass="required" />
 									<p:selectCheckboxMenu label="Categories"
 										required="true"
 										value="#{productController.categories}"
@@ -67,7 +68,8 @@
 											itemLabel="#{category.name}"
 											itemValue="#{category.name}" />
 									</p:selectCheckboxMenu>
-									
+								
+									<p:outputLabel value="Tags:" styleClass="required" />
 							        <p:autoComplete label="Tags"
 							        	id="tags"
 							        	multiple="true"
@@ -77,7 +79,7 @@
 				                        itemLabel="#{tag}"
 				                        itemValue="#{tag}"
 				                        forceSelection="true"/>
-								</p:panelGrid>
+		                        </p:panelGrid>
 							</p:panel>
 						</p:tab>
 						<p:tab id="confirm" title="Confirmation">
