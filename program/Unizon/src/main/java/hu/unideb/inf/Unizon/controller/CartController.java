@@ -85,10 +85,6 @@ public class CartController {
 		cartItemController.editProductInCart(selectedProduct, selectedProductAmount);
 	}
 
-	public boolean isCartEmpty() {
-		return cartItemController.getProducts().isEmpty();
-	}
-
 	public void checkOut() {
 		if (!loginController.isLoggedIn()) {
 			addInfoMessage("Please, log in first!");

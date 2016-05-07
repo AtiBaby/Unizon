@@ -22,9 +22,9 @@
 				<f:facet name="header">Products in your cart</f:facet>
 				<p:column class="prod_imgcol">
 					<p:graphicImage class="prod_img"
-							name="#{cart.key.image.getImageUrl()}" />
+						name="#{cart.key.image.getImageUrl()}" />
 				</p:column>
-				
+
 				<p:column class="prod_title" headerText="Product name">
 					<h:outputText class="prod_celltext" value="#{cart.key.title}" />
 				</p:column>
@@ -82,28 +82,26 @@
 							</p:confirmDialog>
 						</h:form>
 					</div>
-
 				</p:column>
-
 			</p:dataTable>
+		</div>
 
-			<p:commandButton value="Check out"
-				rendered="#{not cartController.isCartEmpty()}"
-				style="margin:5px; float: right;"
-				actionListener="#{cartController.checkOut()}" update=":messages" />
-		</div>
-<!-- 		<h:outputText class="po_celltext" value="#{ord.prodToOrders.stream().map(prod -> prod.product.price).sum()}"> -->
-<!-- 				<f:convertNumber currencyCode="USD" type="currency" /> -->
-<!-- 		</h:outputText> -->
 		<div class="finish_shopping container">
-			<p:outputLabel rendered="#{not empty cartItemController.products}" value="Total price: "/>
-			<h:outputText id="total_price" value="#{cartItemController.totalPrice}"><f:convertNumber currencyCode="USD" type="currency" /></h:outputText>
+			<p:panelGrid rendered="#{not empty cartItemController.products}">
+				<p:outputLabel value="Total price: " />
+				<h:outputText id="total_price"
+					value="#{cartItemController.totalPrice}">
+					<f:convertNumber currencyCode="USD" type="currency" />
+				</h:outputText>
+			</p:panelGrid>
 		</div>
-		
+
 		<div class="order_btn_container container">
 			<h:form id="finishOrder" class="login_form">
-					<p:commandButton rendered="#{not empty cartItemController.products}" id="order_btn" value="Order" styleClass="form_button">
-					</p:commandButton>
+				<p:commandButton rendered="#{not empty cartItemController.products}"
+					id="order_btn" value="Order" styleClass="form_button"
+					actionListener="#{cartController.checkOut()}" update=":messages">
+				</p:commandButton>
 			</h:form>
 		</div>
 
