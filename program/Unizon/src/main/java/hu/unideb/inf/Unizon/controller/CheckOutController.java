@@ -68,7 +68,7 @@ public class CheckOutController implements Serializable {
 		// TODO Update DB: insert new orders
 		// Two tables are involved: UNI_ORDER and PROD_TO_ORDER
 
-		log.info("Order successfully saved.");
+		log.info("Order successfully saved (in both tables).");
 
 		// TODO Send an email about the shopping
 
