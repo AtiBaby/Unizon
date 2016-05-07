@@ -131,7 +131,10 @@
                         <h:outputText  value="Amount: #{productDetailController.actualProduct.amount}" />					
                     </div>
                     <div id="product_price">
-                        <h:outputText  value="Price: #{productDetailController.actualProduct.price} USD" />
+                   		<h:outputText  value="Price: "/>
+                        <h:outputText  value="#{productDetailController.actualProduct.price}">
+                        	<f:convertNumber currencyCode="USD" type="currency" />
+                        </h:outputText>
                     </div>					
                     <div class="buttons clear-after" id="add_to_cart_button">
                         <h3>

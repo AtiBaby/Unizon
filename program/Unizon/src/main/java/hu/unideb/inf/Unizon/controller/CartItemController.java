@@ -103,4 +103,8 @@ public class CartItemController implements Serializable {
 		FacesMessage msg = new FacesMessage(severity, summary, detail);
 		facesContext.addMessage(null, msg);
 	}
+	
+	public int getTotalPrice() {
+		  return products.entrySet().stream().mapToInt(entry -> entry.getKey().getPrice() * entry.getValue()).sum();
+	}
 }
