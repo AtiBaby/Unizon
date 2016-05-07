@@ -26,8 +26,7 @@ import hu.unideb.inf.Unizon.model.Category;
 import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.Tag;
 
-@Stateless
-@ManagedBean(name = "SearchController")
+@ManagedBean
 @SessionScoped
 public class SearchController implements Serializable {
 
@@ -121,6 +120,16 @@ public class SearchController implements Serializable {
 
 	public void onSlideEndPrice(SlideEndEvent event) {
 		tagFilterListener();
+	}
+
+	public void modifyProduct(Product p) {
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i).getProductId() == p.getProductId()) {
+				products.set(i, p);
+				break;
+			}
+		}
+		filteredProducts = products;
 	}
 
 	public void tagFilterListener() {

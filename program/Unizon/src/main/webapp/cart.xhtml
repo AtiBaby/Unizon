@@ -155,11 +155,22 @@
 					</p:panelGrid>
 
 					<p:panelGrid>
+						<p:outputLabel value="Phone number:" styleClass="required" />
+						<p:selectOneMenu id="phoneNumberIdMenu" styleClass="required"
+							value="#{checkOutController.phoneNumberId}" effect="fold">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItems value="#{loginController.user.phoneNumbers}"
+								var="phonenumber" itemLabel="#{phonenumber}"
+								itemValue="#{phonenumber.phoneNumberId}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+
+					<p:panelGrid>
 						<p:commandButton class="button cart" value="Order"
 							oncomplete="PF('checkOutFromCartDialogVar').hide()"
-							actionListener="#{checkOutController.finalizeShopping()}"
-							update=":messages">
+							actionListener="#" update=":messages">
 						</p:commandButton>
+						<!-- 						{checkOutController.finalizeShopping()} -->
 					</p:panelGrid>
 				</h:form>
 			</div>
