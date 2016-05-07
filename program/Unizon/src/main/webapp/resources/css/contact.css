@@ -144,18 +144,23 @@ body {
 }
 
 .contact_form_row  textarea {
-	line-height: 3em;
+	line-height: 2em;
 	display: block;
 	box-sizing: border-box;
 	background: #eee;
 	color: #3A495F;
 	width: 90%;
-	margin: 0 auto 15px auto;
+	margin: 0 auto 10px auto;
 	border-radius: 7px;
 	padding: 0 10px;
 	resize: none;
 	border: 1px solid #ccc;
 	font-weight: bold;
+}
+
+.ui-button{
+	margin-bottom: 10px;
+	margin-top: 0;
 }
 
 

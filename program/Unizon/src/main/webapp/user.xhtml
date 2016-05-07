@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
+	template="/WEB-INF/templates/default_user.xhtml">
 
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/user.css" />
@@ -19,38 +19,38 @@
 			<!-- Add address form -->
 			<div class="login_form_container">
 				<h:form id="addAddressDialogForm" class="login_form">
-					<p:outputLabel value="ZIP code:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.zip}"
+					<p:outputLabel for="zip" value="ZIP code:" styleClass="required" />
+					<p:inputText id="zip" value="#{addressController.newAddress.zip}"
 						maxlength="10" required="true"
 						requiredMessage="ZIP code is required!" tabindex="1">
 						<f:attribute name="componentname" value="zipcode" />
 					</p:inputText>
 
-					<p:outputLabel value="Country:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.country}"
+					<p:outputLabel for="country" value="Country:" styleClass="required" />
+					<p:inputText id="country" value="#{addressController.newAddress.country}"
 						maxlength="100" required="true"
 						requiredMessage="Country is required!"
 						validator="alphabeticInputValidator" tabindex="2">
 						<f:attribute name="componentname" value="country" />
 					</p:inputText>
 
-					<p:outputLabel value="City:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.city}"
+					<p:outputLabel for="city" value="City:" styleClass="required" />
+					<p:inputText id="city" value="#{addressController.newAddress.city}"
 						maxlength="100" required="true"
 						requiredMessage="City is required!"
 						validator="alphabeticInputValidator" tabindex="3">
 						<f:attribute name="componentname" value="city" />
 					</p:inputText>
 
-					<p:outputLabel value="Street:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.street}"
+					<p:outputLabel for="street" value="Street:" styleClass="required" />
+					<p:inputText id="street" value="#{addressController.newAddress.street}"
 						maxlength="100" required="true"
 						requiredMessage="Street is required!" tabindex="4">
 						<f:attribute name="componentname" value="streetname" />
 					</p:inputText>
 
-					<p:outputLabel value="Street number:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.strNumber}"
+					<p:outputLabel for="street_num" value="Street number:" styleClass="required" />
+					<p:inputText id="street_num" value="#{addressController.newAddress.strNumber}"
 						required="true" requiredMessage="Street number is required!"
 						styleClass="required" tabindex="5"
 						converterMessage="Please enter digits only.">
@@ -68,7 +68,9 @@
 						tabindex="7" converterMessage="Please enter digits only.">
 						<f:attribute name="componentname" value="door" />
 					</p:inputText>
-
+					
+					<h:outputText styleClass="req_fields_label" value="All fields marked with an asterisk are required."/>
+					
 					<p:commandButton value="Add" styleClass="custom_button"
 						actionListener="#{addressController.addAddress()}" ajax="true"
 						update=":messages, :addAddressDialogForm" tabindex="8" />
@@ -85,38 +87,38 @@
 			<!-- Edit address form -->
 			<div class="login_form_container">
 				<h:form id="editAddressDialogForm" class="login_form">
-					<p:outputLabel value="ZIP code:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.zip}"
+					<p:outputLabel for="zipcode" value="ZIP code:" styleClass="required" />
+					<p:inputText id="zipcode" value="#{addressController.newAddress.zip}"
 						maxlength="10" required="true"
 						requiredMessage="ZIP code is required!" tabindex="1">
 						<f:attribute name="componentname" value="zipcode" />
 					</p:inputText>
 
-					<p:outputLabel value="Country:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.country}"
+					<p:outputLabel for="count" value="Country:" styleClass="required" />
+					<p:inputText id="count" value="#{addressController.newAddress.country}"
 						maxlength="100" required="true"
 						requiredMessage="Country is required!"
 						validator="alphabeticInputValidator" tabindex="2">
 						<f:attribute name="componentname" value="country" />
 					</p:inputText>
 
-					<p:outputLabel value="City:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.city}"
+					<p:outputLabel for="cit" value="City:" styleClass="required" />
+					<p:inputText id="cit" value="#{addressController.newAddress.city}"
 						maxlength="100" required="true"
 						requiredMessage="City is required!"
 						validator="alphabeticInputValidator" tabindex="3">
 						<f:attribute name="componentname" value="city" />
 					</p:inputText>
 
-					<p:outputLabel value="Street:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.street}"
+					<p:outputLabel for="str" value="Street:" styleClass="required" />
+					<p:inputText id="str" value="#{addressController.newAddress.street}"
 						maxlength="100" required="true"
 						requiredMessage="Street is required!" tabindex="4">
 						<f:attribute name="componentname" value="streetname" />
 					</p:inputText>
 
-					<p:outputLabel value="Street number:" styleClass="required" />
-					<p:inputText value="#{addressController.newAddress.strNumber}"
+					<p:outputLabel for="num" value="Street number:" styleClass="required" />
+					<p:inputText id="num" value="#{addressController.newAddress.strNumber}"
 						required="true" requiredMessage="Street number is required!"
 						styleClass="required" tabindex="5"
 						converterMessage="Please enter digits only.">
@@ -134,6 +136,8 @@
 						tabindex="7" converterMessage="Please enter digits only.">
 						<f:attribute name="componentname" value="door" />
 					</p:inputText>
+					
+					<h:outputText styleClass="req_fields_label" value="All fields marked with an asterisk are required."/>
 
 					<p:commandButton value="Edit" styleClass="custom_button"
 						actionListener="#{addressController.editAddress()}" ajax="true"

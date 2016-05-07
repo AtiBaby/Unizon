@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
+	template="/WEB-INF/templates/default_admin.xhtml">
 
 	<ui:define name="custom_css">
 		<h:outputStylesheet name="css/admin.css" />
@@ -35,10 +35,8 @@
 						required="true" requiredMessage="Description is required!"
 						tabindex="4" />
 
-					<p:outputLabel value="URL:" styleClass="required" />
-					<p:inputText value="#{productController.image.imageUrl}"
-						required="true" requiredMessage="URL is required!"
-						styleClass="required" tabindex="5" />
+					<p:outputLabel value="Upload picture:" styleClass="required" />
+					<p:fileUpload fileUploadListener="#{productController.handleFileUpload}"/>
 
 					<p:commandButton value="Add" styleClass="custom_button"
 						actionListener="#{productController.upload()}" ajax="true"
