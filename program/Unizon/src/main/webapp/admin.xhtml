@@ -79,7 +79,7 @@
 						</p:tab>
 						<p:tab id="confirm" title="Confirmation">
 							<p:panel header="Confirmation">
-								<p:panelGrid columns="2">
+								<p:panelGrid styleClass="conf_grid" columns="2">
 									<p:outputLabel value="Title:" />
 									<h:outputText value="#{productController.newProduct.title}" />
 						
@@ -89,9 +89,6 @@
 									<p:outputLabel value="Amount:"/>
 									<h:outputText value="#{productController.newProduct.amount}" />
 						
-									<p:outputLabel value="Description:" />
-									<h:outputText value="#{productController.newProduct.description}" />
-									
 									<p:outputLabel value="Categories:" />
 									<p:panelGrid>
 										<ui:repeat var="category" value="#{productController.categories}">
@@ -110,11 +107,15 @@
 										</ui:repeat>
 									</p:panelGrid>
 									
-									<p:panelGrid />
-									<p:commandButton value="Submit" styleClass="custom_button"
+									<p:outputLabel value="Description:" />
+									<h:outputText value="#{productController.newProduct.description}" />
+									
+								</p:panelGrid>
+								
+								<p:panelGrid />
+									<p:commandButton value="Submit" styleClass="submit_button"
 										actionListener="#{productController.upload()}" ajax="true"
 										update=":messages, :addProductDialogForm" />
-								</p:panelGrid>
 							</p:panel>
 						</p:tab>
 					</p:wizard>

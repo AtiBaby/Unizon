@@ -57,6 +57,56 @@ body {
 	font-weight: 350px;
 }
 
+.submit_button{
+	font-family: Raleway !important;
+	display: inline-block;
+	margin: 15px 5px 5px 0 !important;
+	width: 85px;
+	height: 40px;
+	border-radius: 7px;
+	text-align: center !important;
+	font-size: 14px;
+	font-weight: 350px;
+}
+
+.conf_grid{
+	text-align: justify !important;
+	
+}
+
+.ui-dialog-content{
+	overflow: hidden !important;
+}
+
+#addProductDialog{
+	width:34% !important;
+	top:115px !important;
+	left: 33% !important;
+	max-height: 600px !important;
+	overflow: auto !important;
+}
+
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger{
+	padding: 0 !important;
+}
+
+.ui-autocomplete-multiple-container{
+	display: block !important;
+	width: 100% !important;
+}
+
+.ui-selectcheckboxmenu{
+	margin-top: 10px !important
+}
+
+.ui-autocomplete{
+	display: block !important;
+	width: 60% !important;
+	line-height: 1em !important;
+	margin-top: 15px !important;
+	margin-bottom: 5px !important;
+}
+
 /* PRODUCT TABLE */
 
 .ui-datatable.borderless thead th,
@@ -133,11 +183,8 @@ body {
 @media all and (max-width:1400px) {
 
 	#addProductDialog{
-		width:30% !important;
-		top:115px !important;
-		scrollable: true !important;
-		height: 355px !important;
-		overflow: auto;
+		width:40% !important;
+		left: 30% !important;
 	}
 	
 	.product_form_container input{
@@ -148,11 +195,8 @@ body {
 @media all and (max-width:1200px) {
 
 	#addProductDialog{
-		width:30% !important;
-		top:115px !important;
-		scrollable: true !important;
-		height: 355px !important;
-		overflow: auto;
+		width:50% !important;
+		left: 25% !important;
 	}
 		
 	.product_form_container input{
