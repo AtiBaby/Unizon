@@ -18,32 +18,110 @@
 			modal="true" widgetVar="addProductDialogVar">
 			<div class="product_form_container">
 				<h:form id="addProductDialogForm" styleClass="product_form">
-					<p:outputLabel value="Title:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.title}"
-						required="true" requiredMessage="Title is required!" tabindex="1" />
-
-					<p:outputLabel value="Price:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.price}"
-						required="true" requiredMessage="Price is required!" tabindex="2" />
-
-					<p:outputLabel value="Amount:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.amount}"
-						required="true" requiredMessage="Amount is required!" tabindex="3" />
-
-					<p:outputLabel value="Description:" styleClass="required" />
-					<p:inputText value="#{productController.newProduct.description}"
-						required="true" requiredMessage="Description is required!"
-						tabindex="4" />
-
-					<p:outputLabel value="Upload picture:" styleClass="required" />
-					<p:fileUpload fileUploadListener="#{productController.handleFileUpload}"/>
-
-					<p:commandButton value="Add" styleClass="custom_button"
-						actionListener="#{productController.upload()}" ajax="true"
-						update=":messages, :addProductDialogForm" tabindex="6" />
-					<p:commandButton value="Cancel" styleClass="custom_button"
-						actionListener="#{productController.showAllProducts()}"
-						ajax="true" immediate="true" tabindex="7" />
+					<p:wizard flowListener="#{productController.addProductOnFlowProcess}">
+						<p:tab id="details" title="Details">
+							<p:panel header="Product details">
+								<p:panelGrid>
+									<p:outputLabel value="Title:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.title}"
+										required="true" requiredMessage="Title is required!" tabindex="1" />
+						
+									<p:outputLabel value="Price:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.price}"
+										required="true" requiredMessage="Price is required!" tabindex="2" />
+						
+									<p:outputLabel value="Amount:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.amount}"
+										required="true" requiredMessage="Amount is required!" tabindex="3" />
+						
+									<p:outputLabel value="Description:" styleClass="required" />
+									<p:inputText value="#{productController.newProduct.description}"
+										required="true" requiredMessage="Description is required!" tabindex="4" />
+								</p:panelGrid>
+							</p:panel>
+						</p:tab>
+						<p:tab id="images" title="Image">
+							<p:panel header="Product images">
+								<p:panelGrid>
+									<p:outputLabel value="URL:" styleClass="required" />
+									<p:inputText value="#{productController.image.imageUrl}"
+										required="true"
+										requiredMessage="URL is required!"
+										styleClass="required" />
+									
+									<p:outputLabel value="Upload picture:" styleClass="required" />
+									<p:fileUpload fileUploadListener="#{productController.handleFileUpload}"/>
+								</p:panelGrid>
+							</p:panel>
+						</p:tab>
+						<p:tab id="catsTags" title="Categories and Tags">
+							<p:panel header="Categories and Tags">
+								<p:panelGrid>
+									<p:selectCheckboxMenu label="Categories"
+										required="true"
+										value="#{productController.categories}"
+										filter="true"
+										filterMatchMode="startsWith">
+										<f:selectItems value="#{categories}"
+											var="category"
+											itemLabel="#{category.name}"
+											itemValue="#{category.name}" />
+									</p:selectCheckboxMenu>
+									
+							        <p:autoComplete label="Tags"
+							        	id="tags"
+							        	multiple="true"
+							        	value="#{productController.tags}"
+							        	completeMethod="#{productController.completeTags}"
+				                        var="tag"
+				                        itemLabel="#{tag}"
+				                        itemValue="#{tag}"
+				                        forceSelection="true"/>
+								</p:panelGrid>
+							</p:panel>
+						</p:tab>
+						<p:tab id="confirm" title="Confirmation">
+							<p:panel header="Confirmation">
+								<p:panelGrid styleClass="conf_grid" columns="2">
+									<p:outputLabel value="Title:" />
+									<h:outputText value="#{productController.newProduct.title}" />
+						
+									<p:outputLabel value="Price:" />
+									<h:outputText value="#{productController.newProduct.price}" />
+						
+									<p:outputLabel value="Amount:"/>
+									<h:outputText value="#{productController.newProduct.amount}" />
+						
+									<p:outputLabel value="Categories:" />
+									<p:panelGrid>
+										<ui:repeat var="category" value="#{productController.categories}">
+											<p>
+												<h:outputText value="#{category}" />
+											</p>
+										</ui:repeat>
+									</p:panelGrid>
+									
+									<p:outputLabel value="Tags:" />
+									<p:panelGrid>
+										<ui:repeat var="tag" value="#{productController.tags}">
+											<p>
+												<h:outputText value="#{tag}" />
+											</p>
+										</ui:repeat>
+									</p:panelGrid>
+									
+									<p:outputLabel value="Description:" />
+									<h:outputText value="#{productController.newProduct.description}" />
+									
+								</p:panelGrid>
+								
+								<p:panelGrid />
+									<p:commandButton value="Submit" styleClass="submit_button"
+										actionListener="#{productController.upload()}" ajax="true"
+										update=":messages, :addProductDialogForm" />
+							</p:panel>
+						</p:tab>
+					</p:wizard>
 				</h:form>
 			</div>
 		</p:dialog>
@@ -69,8 +147,7 @@
 
 					<p:outputLabel value="Description:" styleClass="required" />
 					<p:inputText value="#{productController.newProduct.description}"
-						required="true" requiredMessage="Description is required!"
-						tabindex="4" />
+						required="true" requiredMessage="Description is required!" tabindex="4" />
 
 					<p:commandButton value="Edit" styleClass="custom_button"
 						actionListener="#{productController.editProduct()}" ajax="true"
@@ -107,12 +184,14 @@
 							<h:outputText class="prod_celltext" value="#{product.title}" />
 						</p:column>
 						<p:column class="prod_price" headerText="Price">
-							<h:outputText class="prod_celltext" value="#{product.price}" />
+							<h:outputText class="prod_celltext" value="#{product.price}" >
+								<f:convertNumber currencyCode="USD" type="currency" />
+							</h:outputText>
 						</p:column>
 						<p:column class="prod_amount" headerText="Amount">
 							<h:outputText class="prod_celltext" value="#{product.amount}" />
 						</p:column>
-						<p:column class="prod_description" headerText="Description">
+						<p:column styleClass="prod_description" headerText="Description">
 							<h:outputText class="prod_celltext"
 								value="#{product.description}" />
 						</p:column>

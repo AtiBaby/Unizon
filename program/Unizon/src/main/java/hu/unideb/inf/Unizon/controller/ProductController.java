@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.ejb.EJB;
@@ -17,17 +20,22 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+
 import org.apache.commons.io.FileUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
-import java.net.URL;
+
+import hu.unideb.inf.Unizon.facade.CategoryFacade;
 import hu.unideb.inf.Unizon.facade.ImageFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
+import hu.unideb.inf.Unizon.facade.TagFacade;
 import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.Image;
 import hu.unideb.inf.Unizon.model.Product;
+import hu.unideb.inf.Unizon.model.Tag;
 import hu.unideb.inf.Unizon.model.User;
 
 @ManagedBean
@@ -52,6 +60,12 @@ public class ProductController implements Serializable {
 	private ImageFacade imageFacade;
 
 	@EJB
+	private CategoryFacade categoryFacade;
+
+	@EJB
+	private TagFacade tagFacade;
+
+	@EJB
 	private UserFacade userFacade;
 
 	@Inject
@@ -63,10 +77,11 @@ public class ProductController implements Serializable {
 	private Image storedImage;
 	private Product newProduct;
 	private Product originalProduct;
+	private List<String> categories;
+	private List<String> tags;
 	private User user;
 	private String url;
-	
-	
+
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
 		System.out.println("productId: " + params.get("productId"));
@@ -92,7 +107,9 @@ public class ProductController implements Serializable {
 		user = loginController.getUser();
 		this.image = new Image();
 		this.storedImage = new Image();
-		url=null;
+		this.url = null;
+		this.categories = new ArrayList<>();
+		this.tags = new ArrayList<>();
 	}
 
 	public void showAllProducts() {
@@ -103,17 +120,59 @@ public class ProductController implements Serializable {
 		init();
 	}
 
+	public String addProductOnFlowProcess(FlowEvent event) {
+		return event.getNewStep();
+		// switch (event.getOldStep()) {
+		// case "catsTags":
+		//
+		//
+		// newProduct.setTags(selectedTags.stream().map(tagString -> {
+		// Tag tag = tagFacade.findByName(tagString);
+		// if (tag == null) {
+		// tag = new Tag();
+		// tag.setName(tagString);
+		// tagFacade.create(tag);
+		// }
+		// return tag;
+		// }).collect(Collectors.toSet()));
+		// return "confirm";
+		//
+		// default:
+		// return event.getNewStep();
+		// }
+	}
+
+	public List<String> completeTags(String query) {
+		Stream<String> tags = tagFacade.findByNameStartingWith(query).stream().map(Tag::getName);
+
+		return Stream.concat(Stream.of(query), tags).sorted().distinct().collect(Collectors.toList());
+	}
+
 	public void upload() {
-		log.info("Uploading a product!");
-		imageFacade.create(image);
-		for (Image i : imageFacade.findAll()) {
-			if (i.getImageUrl().equals(image.getImageUrl())) {
-				storedImage = i;
-			}
+		log.info("Uploading product: {}, categories: {}, tags: {}.", newProduct, categories, tags);
+
+		Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
+		if (queriedImage == null) {
+			imageFacade.create(image);
+		} else {
+			image = queriedImage;
 		}
-		newProduct.setImage(storedImage);
+		newProduct.setImage(image);
+
+		newProduct.setCategories(categories.stream().map(categoryFacade::findByName).collect(Collectors.toSet()));
+
+		newProduct.setTags(tags.stream().map(tagString -> {
+			Tag tag = tagFacade.findByName(tagString);
+			if (tag == null) {
+				tag = new Tag();
+				tag.setName(tagString);
+				tagFacade.create(tag);
+			}
+			return tag;
+		}).collect(Collectors.toSet()));
+
 		productFacade.create(newProduct);
-		log.info("Product uploaded, name: {}.", newProduct.getTitle());
+		log.info("Product {} has been uploaded.", newProduct);
 
 		productEventSrc.fire(newProduct);
 
@@ -148,53 +207,53 @@ public class ProductController implements Serializable {
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-        UploadedFile kep = (UploadedFile) event.getFile();
+		UploadedFile kep = (UploadedFile) event.getFile();
 
-        InputStream inputStr = null;
+		InputStream inputStr = null;
 
-        if (kep.getSize() == 0) {
-            return;
-        }
+		if (kep.getSize() == 0) {
+			return;
+		}
 
-        try {
-            inputStr = kep.getInputstream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-       
-        kepLink = (System.getProperty("user.home") + "/uniPicture/" + kep.getFileName()).replaceAll("\\\\", "/");
-        System.out.println(kepLink);
-        url= ("images/Consumer electronics/" + kep.getFileName()).replaceAll("\\\\", "/");
-        File destFile = new File(kepLink);
-        
-        String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
-        String type = mimetype.split("/")[0];
-        if (!type.equals("image")) {
-            badFileFormat = true;
-            RequestContext.getCurrentInstance().execute("PF('uzenetDialogWidget').hide()");
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING", "A kép formátuma nem megfelelő!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return;
-        }
-        
-        try {
-            FileUtils.copyInputStreamToFile(inputStr, destFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (inputStr != null) {
-                inputStr.close();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
-        image.setImageUrl(url);
-        imageFacade.create(image);
-    }
-	
+		try {
+			inputStr = kep.getInputstream();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		kepLink = (System.getProperty("user.home") + "/uniPicture/" + kep.getFileName()).replaceAll("\\\\", "/");
+		System.out.println(kepLink);
+		url = ("images/Consumer electronics/" + kep.getFileName()).replaceAll("\\\\", "/");
+		File destFile = new File(kepLink);
+
+		String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
+		String type = mimetype.split("/")[0];
+		if (!type.equals("image")) {
+			badFileFormat = true;
+			RequestContext.getCurrentInstance().execute("PF('uzenetDialogWidget').hide()");
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
+					"A kép formátuma nem megfelelő!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return;
+		}
+
+		try {
+			FileUtils.copyInputStreamToFile(inputStr, destFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (inputStr != null) {
+				inputStr.close();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
+		image.setImageUrl(url);
+		imageFacade.create(image);
+	}
+
 	private void redirect(String url) {
 		log.info("Redirecting {} to {}.", user, url);
 		try {
@@ -203,22 +262,6 @@ public class ProductController implements Serializable {
 		} catch (IOException e) {
 			log.error(e.getMessage());
 		}
-	}
-
-	public Logger getLog() {
-		return log;
-	}
-
-	public void setLog(Logger log) {
-		this.log = log;
-	}
-
-	public FacesContext getFacesContext() {
-		return facesContext;
-	}
-
-	public void setFacesContext(FacesContext facesContext) {
-		this.facesContext = facesContext;
 	}
 
 	public LoginController getLoginController() {
@@ -268,12 +311,29 @@ public class ProductController implements Serializable {
 	public Image getStoredImage() {
 		return storedImage;
 	}
-	
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
 	public String getUrl() {
 		return url;
 	}
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
 }

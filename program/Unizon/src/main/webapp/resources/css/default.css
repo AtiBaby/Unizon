@@ -436,8 +436,7 @@ top: 120px !important;
 }
 
 .reg_modal{
-	display: block;
-	position: relative;
+	display: none;
 	z-index : 11000 !important;
 	width:20% !important;
 	top:115px !important;
@@ -446,8 +445,7 @@ top: 120px !important;
 }
 
 .terms_modal{
-	display: block;
-	position: relative;
+	display: none;
 	z-index : 11100 !important;
 	width:40% !important;
 	top:115px !important;
@@ -544,7 +542,7 @@ top: 120px !important;
 		top:115px !important;
 		left:30% !important;
 		scrollable: true !important;
-		height: 600px !important;
+		height: 480px !important;
 		overflow: auto;
 	}
 }
