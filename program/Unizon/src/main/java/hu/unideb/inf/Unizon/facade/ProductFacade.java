@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.inf.Unizon.facade;
 
 import java.util.List;
@@ -15,10 +10,6 @@ import hu.unideb.inf.Unizon.model.Category;
 import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.Tag;
 
-/**
- *
- * @author Czuczi
- */
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {
 
@@ -34,46 +25,43 @@ public class ProductFacade extends AbstractFacade<Product> {
 		super(Product.class);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Product> findAllNotDeleted() {
-		return em.createNamedQuery("Product.findAllNotDeleted").getResultList();
+		return em.createNamedQuery("Product.findAllNotDeleted", Product.class).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Product> findByNameStartingWith(String term, Integer num) {
-		return em.createNamedQuery("Product.findAllContain").setParameter("term", term + "%").setMaxResults(num)
-				.getResultList();
+		return em.createNamedQuery("Product.findAllContain", Product.class).setParameter("term", term + "%")
+				.setMaxResults(num).getResultList();
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Product> findByNameStartingWith(String term, Category cat, Integer num) {
-		return em.createNamedQuery("Product.findAllByCatIdContain").setParameter("term", term + "%")
+		return em.createNamedQuery("Product.findAllByCatIdContain", Product.class).setParameter("term", term + "%")
 				.setParameter("catId", cat.getCategoryId()).setMaxResults(num).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Product> findByNameContaining(String productName, Category cat) {
-		return em.createNamedQuery("Product.findAllByCatIdContain").setParameter("term", "%" + productName + "%")
-				.setParameter("catId", cat.getCategoryId()).getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Product> findByNameContaining(String productName) {
-		return em.createNamedQuery("Product.findAllContain").setParameter("term", "%" + productName + "%")
+		return em.createNamedQuery("Product.findAllByCatIdContain", Product.class)
+				.setParameter("term", "%" + productName + "%").setParameter("catId", cat.getCategoryId())
 				.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
+	public List<Product> findByNameContaining(String productName) {
+		return em.createNamedQuery("Product.findAllContain", Product.class)
+				.setParameter("term", "%" + productName + "%").getResultList();
+	}
+
 	public List<Product> findAll(Category cat) {
-		return em.createNamedQuery("Product.findAllByCat").setParameter("catId", cat.getCategoryId()).getResultList();
+		return em.createNamedQuery("Product.findAllByCat", Product.class).setParameter("catId", cat.getCategoryId())
+				.getResultList();
 	}
 
 	public Product findById(int productId) {
-		return (Product) em.createNamedQuery("Product.findById").setParameter("productId", productId).getSingleResult();
+		return em.createNamedQuery("Product.findById", Product.class).setParameter("productId", productId)
+				.getSingleResult();
 	}
 
 	public List<Tag> findAllTags() {
-		return em.createNamedQuery("Product.findAllTags").getResultList();
+		return em.createNamedQuery("Product.findAllTags", Tag.class).getResultList();
 	}
 }
