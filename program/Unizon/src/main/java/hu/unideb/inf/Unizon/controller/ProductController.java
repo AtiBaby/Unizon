@@ -1,10 +1,13 @@
 package hu.unideb.inf.Unizon.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,6 +17,7 @@ import javax.activation.MimetypesFileTypeMap;
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -22,9 +26,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.apache.commons.io.FileUtils;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 
@@ -71,14 +76,15 @@ public class ProductController implements Serializable {
 	@Inject
 	private Event<Product> productEventSrc;
 
-	private boolean badFileFormat = false;
-	private String kepLink;
 	private Image image;
 	private Image storedImage;
 	private Product newProduct;
 	private Product originalProduct;
 	private List<String> categories;
 	private List<String> tags;
+	private List<String> images;
+	private Map<Image, StreamedContent> uploadedImages;
+	private String defaultImage;
 	private User user;
 	private String url;
 
@@ -110,6 +116,7 @@ public class ProductController implements Serializable {
 		this.url = null;
 		this.categories = new ArrayList<>();
 		this.tags = new ArrayList<>();
+		this.uploadedImages = new HashMap<>();
 	}
 
 	public void showAllProducts() {
@@ -122,24 +129,6 @@ public class ProductController implements Serializable {
 
 	public String addProductOnFlowProcess(FlowEvent event) {
 		return event.getNewStep();
-		// switch (event.getOldStep()) {
-		// case "catsTags":
-		//
-		//
-		// newProduct.setTags(selectedTags.stream().map(tagString -> {
-		// Tag tag = tagFacade.findByName(tagString);
-		// if (tag == null) {
-		// tag = new Tag();
-		// tag.setName(tagString);
-		// tagFacade.create(tag);
-		// }
-		// return tag;
-		// }).collect(Collectors.toSet()));
-		// return "confirm";
-		//
-		// default:
-		// return event.getNewStep();
-		// }
 	}
 
 	public List<String> completeTags(String query) {
@@ -209,49 +198,42 @@ public class ProductController implements Serializable {
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile kep = (UploadedFile) event.getFile();
 
-		InputStream inputStr = null;
-
 		if (kep.getSize() == 0) {
 			return;
 		}
 
-		try {
-			inputStr = kep.getInputstream();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		try (InputStream inputStr = kep.getInputstream()) {
+			String tmp = "/Desktop/unizonPictures/" + new Date(System.currentTimeMillis()).getTime() + "/"
+					+ kep.getFileName();
+			String kepLink = (System.getProperty("user.home") + tmp).replaceAll("\\\\", "/");
+			File destFile = new File(kepLink);
 
-		kepLink = (System.getProperty("user.home") + "/uniPicture/" + kep.getFileName()).replaceAll("\\\\", "/");
-		System.out.println(kepLink);
-		url = ("images/Consumer electronics/" + kep.getFileName()).replaceAll("\\\\", "/");
-		File destFile = new File(kepLink);
-
-		String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
-		String type = mimetype.split("/")[0];
-		if (!type.equals("image")) {
-			badFileFormat = true;
-			RequestContext.getCurrentInstance().execute("PF('uzenetDialogWidget').hide()");
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
-					"A kép formátuma nem megfelelő!");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			return;
-		}
-
-		try {
-			FileUtils.copyInputStreamToFile(inputStr, destFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			if (inputStr != null) {
-				inputStr.close();
+			String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
+			String type = mimetype.split("/")[0];
+			if (!type.equals("image")) {
+				addErrorMessage("The format of the picture is invalid!");
+				return;
 			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
 
-		image.setImageUrl(url);
-		imageFacade.create(image);
+			FileUtils.copyInputStreamToFile(inputStr, destFile);
+
+			Image image = new Image();
+			image.setImageUrl(tmp);
+			imageFacade.create(image);
+
+			uploadedImages.put(image, new DefaultStreamedContent(new FileInputStream(destFile), "image/png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
 	}
 
 	private void redirect(String url) {
@@ -334,6 +316,34 @@ public class ProductController implements Serializable {
 
 	public void setTags(List<String> tags) {
 		this.tags = tags;
+	}
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
+	}
+
+	public String getDefaultImage() {
+		return defaultImage;
+	}
+
+	public void setDefaultImage(String defaultImage) {
+		this.defaultImage = defaultImage;
+	}
+
+	public Map<Image, StreamedContent> getUploadedImages() {
+		return uploadedImages;
+	}
+
+	public void setUploadedImages(Map<Image, StreamedContent> uploadedImages) {
+		this.uploadedImages = uploadedImages;
+	}
+
+	public int getEntrySetSize() {
+		return this.uploadedImages.entrySet().size();
 	}
 
 }
