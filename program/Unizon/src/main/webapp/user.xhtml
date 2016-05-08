@@ -488,7 +488,7 @@
 								</p:column>
 								<p:column class="po_total_price" headerText="Total price">
 									<h:outputText class="po_celltext"
-										value="#{ord.prodToOrders.stream().map(prod -> prod.product.price).sum()}">
+										value="#{ord.prodToOrders.stream().map(prod -> prod.product.price * prod.amount).sum()}">
 										<f:convertNumber currencyCode="USD" type="currency" />
 									</h:outputText>
 								</p:column>
