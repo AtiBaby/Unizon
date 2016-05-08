@@ -32,7 +32,7 @@ public class ImageStreamer {
 			// So, browser is requesting the image. Return a real StreamedContent with the image bytes.
 			String imageId = context.getExternalContext().getRequestParameterMap().get("imageId");
 			Image image = imageFacade.find(Integer.valueOf(imageId));
-			return new DefaultStreamedContent(new FileInputStream((System.getProperty("user.home") + image.getImageUrl()).replaceAll("\\\\", "/")));
+			return new DefaultStreamedContent(new FileInputStream(image.getImageUrl()));
 		}
 	}
 

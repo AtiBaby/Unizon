@@ -54,7 +54,7 @@
 								<h:form id="productImageSelectForm">
 									<p:dataGrid id="productImageDataGrid"
 										var="image"
-										value="#{productController.uploadedImages.entrySet()}"
+										value="#{productController.uploadedImages}"
 										columns="3"
 										rows="3"
 										paginator="true"
@@ -62,10 +62,13 @@
        									rowsPerPageTemplate="3,6,12">
        									<p:panel style="text-align:center">
        										<h:panelGrid columns="1" style="width:100%">
-       											#{image.key.imageId}
-       											<p:graphicImage value="#{imageStreamer.image}" width="25px" height="25px">
-       												<f:param name="imageId" value="#{image.key.imageId}" />
+       											<p:graphicImage value="#{imageStreamer.image}" width="100px" height="100px">
+       												<f:param name="imageId" value="#{image.image.imageId}" />
        											</p:graphicImage>
+       											<p:selectBooleanCheckbox value="#{image.selected}">
+       												<f:param name="imageId" value="#{image.image.imageId}" />
+       												<p:ajax listener="#{productController.selectImage()}" />
+    											</p:selectBooleanCheckbox>
        										</h:panelGrid>
        									</p:panel>
 									</p:dataGrid>
@@ -90,6 +93,7 @@
 									<p:outputLabel value="Tags:" styleClass="required" />
 							        <p:autoComplete label="Tags"
 							        	id="tags"
+							        	required="true"
 							        	multiple="true"
 							        	value="#{productController.tags}"
 							        	completeMethod="#{productController.completeTags}"

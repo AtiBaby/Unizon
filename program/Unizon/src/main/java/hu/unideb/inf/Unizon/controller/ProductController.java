@@ -1,13 +1,11 @@
 package hu.unideb.inf.Unizon.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,8 +26,6 @@ import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 
@@ -42,6 +38,7 @@ import hu.unideb.inf.Unizon.model.Image;
 import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.Tag;
 import hu.unideb.inf.Unizon.model.User;
+import hu.unideb.inf.Unizon.util.ImageWrapper;
 
 @ManagedBean
 @ViewScoped
@@ -82,11 +79,9 @@ public class ProductController implements Serializable {
 	private Product originalProduct;
 	private List<String> categories;
 	private List<String> tags;
-	private List<String> images;
-	private Map<Image, StreamedContent> uploadedImages;
-	private String defaultImage;
+	private List<ImageWrapper> selectedImages;
+	private List<ImageWrapper> uploadedImages;
 	private User user;
-	private String url;
 
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
@@ -110,13 +105,11 @@ public class ProductController implements Serializable {
 			newProduct.setDeleted(originalProduct.getDeleted());
 		}
 
-		user = loginController.getUser();
-		this.image = new Image();
-		this.storedImage = new Image();
-		this.url = null;
+		this.user = loginController.getUser();
 		this.categories = new ArrayList<>();
 		this.tags = new ArrayList<>();
-		this.uploadedImages = new HashMap<>();
+		this.uploadedImages = new ArrayList<>();
+		this.selectedImages = new ArrayList<>();
 	}
 
 	public void showAllProducts() {
@@ -140,13 +133,16 @@ public class ProductController implements Serializable {
 	public void upload() {
 		log.info("Uploading product: {}, categories: {}, tags: {}.", newProduct, categories, tags);
 
-		Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
-		if (queriedImage == null) {
-			imageFacade.create(image);
-		} else {
-			image = queriedImage;
-		}
-		newProduct.setImage(image);
+		// Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
+		// if (queriedImage == null) {
+		// imageFacade.create(image);
+		// } else {
+		// image = queriedImage;
+		// }
+		// newProduct.setImage(image);
+
+		newProduct.setImages(selectedImages.stream().map(ImageWrapper::getImage).collect(Collectors.toSet()));
+		newProduct.setImage(new ArrayList<>(newProduct.getImages()).get(0)); // TODO radio buttonnal kellene az ui-n
 
 		newProduct.setCategories(categories.stream().map(categoryFacade::findByName).collect(Collectors.toSet()));
 
@@ -196,17 +192,17 @@ public class ProductController implements Serializable {
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-		UploadedFile kep = (UploadedFile) event.getFile();
+		UploadedFile uploadedFile = (UploadedFile) event.getFile();
 
-		if (kep.getSize() == 0) {
+		if (uploadedFile.getSize() == 0) {
 			return;
 		}
 
-		try (InputStream inputStr = kep.getInputstream()) {
-			String tmp = "/Desktop/unizonPictures/" + new Date(System.currentTimeMillis()).getTime() + "/"
-					+ kep.getFileName();
-			String kepLink = (System.getProperty("user.home") + tmp).replaceAll("\\\\", "/");
-			File destFile = new File(kepLink);
+		try (InputStream inputStr = uploadedFile.getInputstream()) {
+			String imageUrl = (System.getProperty("user.home") + "/Desktop/unizonPictures/"
+					+ new Date(System.currentTimeMillis()).getTime() + "/" + uploadedFile.getFileName())
+							.replaceAll("\\\\", "/");
+			File destFile = new File(imageUrl);
 
 			String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
 			String type = mimetype.split("/")[0];
@@ -218,13 +214,27 @@ public class ProductController implements Serializable {
 			FileUtils.copyInputStreamToFile(inputStr, destFile);
 
 			Image image = new Image();
-			image.setImageUrl(tmp);
+			image.setImageUrl(imageUrl);
 			imageFacade.create(image);
 
-			uploadedImages.put(image, new DefaultStreamedContent(new FileInputStream(destFile), "image/png"));
+			uploadedImages.add(new ImageWrapper(image, false));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void selectImage() {
+		String imageId = facesContext.getExternalContext().getRequestParameterMap().get("imageId");
+		Image image = imageFacade.find(Integer.valueOf(imageId));
+
+		System.out.println("Before doing anything: " + selectedImages.size());
+		ImageWrapper imageWrapper = new ImageWrapper(image, true);
+		if (selectedImages.contains(imageWrapper)) {
+			selectedImages.remove(imageWrapper);
+		} else {
+			selectedImages.add(imageWrapper);
+		}
+		System.out.println("After doing anything: " + selectedImages.size());
 	}
 
 	private void addErrorMessage(String detail) {
@@ -294,14 +304,6 @@ public class ProductController implements Serializable {
 		return storedImage;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
 	public List<String> getCategories() {
 		return categories;
 	}
@@ -318,32 +320,20 @@ public class ProductController implements Serializable {
 		this.tags = tags;
 	}
 
-	public List<String> getImages() {
-		return images;
+	public List<ImageWrapper> getSelectedImages() {
+		return selectedImages;
 	}
 
-	public void setImages(List<String> images) {
-		this.images = images;
+	public void setSelectedImages(List<ImageWrapper> images) {
+		this.selectedImages = images;
 	}
 
-	public String getDefaultImage() {
-		return defaultImage;
-	}
-
-	public void setDefaultImage(String defaultImage) {
-		this.defaultImage = defaultImage;
-	}
-
-	public Map<Image, StreamedContent> getUploadedImages() {
+	public List<ImageWrapper> getUploadedImages() {
 		return uploadedImages;
 	}
 
-	public void setUploadedImages(Map<Image, StreamedContent> uploadedImages) {
+	public void setUploadedImages(List<ImageWrapper> uploadedImages) {
 		this.uploadedImages = uploadedImages;
-	}
-
-	public int getEntrySetSize() {
-		return this.uploadedImages.entrySet().size();
 	}
 
 }
