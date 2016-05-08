@@ -129,19 +129,6 @@
                     </div>
                     <div id="product_price">
                         <h:outputText  value="Price: #{productDetailController.actualProduct.price} USD" />
-                    </div>					
-                    <div class="buttons clear-after" id="add_to_cart_button">
-                        <h3>
-                            <h:form>
-                                <p:remoteCommand name="addProductToCartRemoteCommand"
-                                                 actionListener="#{cartController.addProductToCartListen()}"
-                                                 oncomplete="PF('addProductDialogVar').show()" />
-
-                                <p:commandButton class="button cart"
-                                                 update=":addProductDialogForm" value="Add to Cart"
-                                                 onclick="addProductToCartRemoteCommand([{name: 'productId', value:#{productDetailController.actualProduct.productId}}]);" />
-                            </h:form>
-                        </h3>
                     </div>
                 </div>
                 <div class="row" id="productImages">
