@@ -70,7 +70,7 @@ public class CartItemController implements Serializable {
 	}
 
 	public void editProductInCart(Product product, int amount) {
-		if (products.containsKey(product)) {
+		if (products.containsKey(product) && amount != product.getAmount()) {
 			products.put(product, amount);
 			redirect("/cart.jsf?faces-redirect=true");
 		}
@@ -91,11 +91,11 @@ public class CartItemController implements Serializable {
 		}
 	}
 
-	private void addInfoMessage(String detail) {
+	public void addInfoMessage(String detail) {
 		addMessage(FacesMessage.SEVERITY_INFO, "INFO", detail);
 	}
 
-	private void addErrorMessage(String detail) {
+	public void addErrorMessage(String detail) {
 		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
 	}
 

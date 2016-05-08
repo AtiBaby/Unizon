@@ -91,15 +91,20 @@ public class CartController {
 			return;
 		}
 
+		if (loginController.getUser().getUserStatus().getStatusName().equals("inactive")) {
+			addInfoMessage("Please, activate your profile first!");
+			return;
+		}
+
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('checkOutFromCartDialogVar').show();");
 	}
 
-	private void addInfoMessage(String detail) {
+	public void addInfoMessage(String detail) {
 		addMessage(FacesMessage.SEVERITY_INFO, "INFO", detail);
 	}
 
-	private void addErrorMessage(String detail) {
+	public void addErrorMessage(String detail) {
 		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
 	}
 
