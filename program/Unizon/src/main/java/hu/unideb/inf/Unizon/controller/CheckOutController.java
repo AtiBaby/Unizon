@@ -69,13 +69,13 @@ public class CheckOutController implements Serializable {
 	public void finalizeShopping() {
 		log.info("Finalizing shopping-session...");
 
-		// Updating DB: modify amounts in stock
 		// TODO Check ALL newAmounts together and apply only if all conditions
 		// fit
-		// Some multithreading lock operations should be applied before
-		// modifying the DB (if the chosen technologies don't provide)
 
-		// Not ready solution - in progress
+		/*
+		 * Some multithreading lock operations should be applied before
+		 * modifying the DB (if the chosen technologies don't provide)
+		 */
 
 		Order newOrder = new Order();
 		newOrder.setUser(loginController.getUser());
@@ -84,16 +84,14 @@ public class CheckOutController implements Serializable {
 		newOrder.setPhoneNumber(phoneNumberFacade.find(phoneNumberId));
 		newOrder.setOrderDate(new Date());
 
-		orderFacade.create(newOrder); // New row added to DB
-
-		// TODO Fix ID collision
-		log.info("{}", newOrder.toString());
+		orderFacade.create(newOrder);
+		log.info("Order {} added to UNI_ORDER.", newOrder.toString());
 
 		for (Map.Entry<Product, Integer> entry : cartItemController.getProducts().entrySet()) {
 			Product product = entry.getKey();
 
 			int newAmount = product.getAmount() - entry.getValue();
-			// TODO Check newAmount first (individually)
+
 			if (newAmount >= 0) {
 				ProdToOrderPK newProdToOrderPk = new ProdToOrderPK();
 				newProdToOrderPk.setOrderId(newOrder.getOrderId());
@@ -109,28 +107,20 @@ public class CheckOutController implements Serializable {
 				product.setAmount(newAmount);
 				productFacade.edit(product);
 				searchController.modifyProduct(product);
-
 			} else {
 				addErrorMessage(product.getTitle() + "is out of stock");
 			}
 		}
 
-		log.info("Products' amount successfully updated.");
-
-		// TODO Update DB: insert new orders
-		// Two tables are involved: UNI_ORDER and PROD_TO_ORDER
-
-		log.info("Order successfully saved (in both tables).");
+		log.info("Products' amounts and products page successfully updated.");
 
 		// TODO Send an email about the shopping
 
-		log.info("Email about shopping has been sent.");
-
-		// TODO Empty cart
+		log.info("Email about shopping hasn't been sent so far.");
 
 		cartItemController.getProducts().clear();
-
 		log.info("Cart has been emptied.");
+		log.info("Finalizing shopping-session... Done.");
 
 		redirect("/cart.jsf?faces-redirect=true");
 	}
