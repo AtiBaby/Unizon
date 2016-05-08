@@ -135,8 +135,9 @@
 					<p:panelGrid>
 						<p:outputLabel value="Shipping address:" styleClass="required" />
 						<p:selectOneMenu id="shippingAddressIdMenu" styleClass="required"
-							value="#{checkOutController.shippingAddressId}" effect="fold">
-							<f:selectItem itemLabel="Select One" itemValue="" />
+							value="#{checkOutController.shippingAddressId}" effect="fold"
+							required="true" requiredMessage="Shipping address is required!">
+
 							<f:selectItems value="#{loginController.user.addresses}"
 								var="address" itemLabel="#{address}"
 								itemValue="#{address.addressId}" />
@@ -146,8 +147,9 @@
 					<p:panelGrid>
 						<p:outputLabel value="Billing address:" styleClass="required" />
 						<p:selectOneMenu id="billingAddressIdMenu" styleClass="required"
-							value="#{checkOutController.billingAddressId}" effect="fold">
-							<f:selectItem itemLabel="Select One" itemValue="" />
+							value="#{checkOutController.billingAddressId}" effect="fold"
+							required="true" requiredMessage="Billing address is required!">
+
 							<f:selectItems value="#{loginController.user.addresses}"
 								var="address" itemLabel="#{address}"
 								itemValue="#{address.addressId}" />
@@ -157,8 +159,9 @@
 					<p:panelGrid>
 						<p:outputLabel value="Phone number:" styleClass="required" />
 						<p:selectOneMenu id="phoneNumberIdMenu" styleClass="required"
-							value="#{checkOutController.phoneNumberId}" effect="fold">
-							<f:selectItem itemLabel="Select One" itemValue="" />
+							value="#{checkOutController.phoneNumberId}" effect="fold"
+							required="true" requiredMessage="Phone number is required!">
+
 							<f:selectItems value="#{loginController.user.phoneNumbers}"
 								var="phonenumber" itemLabel="#{phonenumber}"
 								itemValue="#{phonenumber.phoneNumberId}" />
@@ -168,9 +171,9 @@
 					<p:panelGrid>
 						<p:commandButton class="button cart" value="Order"
 							oncomplete="PF('checkOutFromCartDialogVar').hide()"
-							actionListener="#{checkOutController.finalizeShopping()}" update=":messages">
+							actionListener="#{checkOutController.finalizeShopping()}"
+							update=":messages">
 						</p:commandButton>
-						<!-- 						{checkOutController.finalizeShopping()} -->
 					</p:panelGrid>
 				</h:form>
 			</div>
