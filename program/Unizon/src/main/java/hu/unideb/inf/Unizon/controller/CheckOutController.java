@@ -24,6 +24,7 @@ import hu.unideb.inf.Unizon.facade.ProdToOrderFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
 import hu.unideb.inf.Unizon.model.Order;
 import hu.unideb.inf.Unizon.model.ProdToOrder;
+import hu.unideb.inf.Unizon.model.ProdToOrderPK;
 import hu.unideb.inf.Unizon.model.Product;
 
 @ManagedBean
@@ -91,20 +92,27 @@ public class CheckOutController implements Serializable {
 		for (Map.Entry<Product, Integer> entry : cartItemController.getProducts().entrySet()) {
 			Product product = entry.getKey();
 
-			// ProdToOrderPK ???
-			ProdToOrder newProdToOrder = new ProdToOrder();
-			newProdToOrder.setAmount(entry.getValue());
-			newProdToOrder.setOrder(newOrder);
-			newProdToOrder.setProduct(product);
-
-			prodToOrderFacade.create(newProdToOrder); // New rows added to DB
-			// ProdToOrderPK ???
-
 			int newAmount = product.getAmount() - entry.getValue();
 			// TODO Check newAmount first (individually)
-			product.setAmount(newAmount);
-			productFacade.edit(product);
-			searchController.modifyProduct(product);
+			if (newAmount >= 0) {
+				ProdToOrderPK newProdToOrderPk = new ProdToOrderPK();
+				newProdToOrderPk.setOrderId(newOrder.getOrderId());
+				newProdToOrderPk.setProductId(product.getProductId());
+				ProdToOrder newProdToOrder = new ProdToOrder();
+				newProdToOrder.setId(newProdToOrderPk);
+				newProdToOrder.setAmount(entry.getValue());
+				newProdToOrder.setOrder(newOrder);
+				newProdToOrder.setProduct(product);
+
+				prodToOrderFacade.create(newProdToOrder);
+
+				product.setAmount(newAmount);
+				productFacade.edit(product);
+				searchController.modifyProduct(product);
+
+			} else {
+				addErrorMessage(product.getTitle() + "is out of stock");
+			}
 		}
 
 		log.info("Products' amount successfully updated.");
