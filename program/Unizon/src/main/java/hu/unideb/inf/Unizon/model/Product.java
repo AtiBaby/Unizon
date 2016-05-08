@@ -27,11 +27,11 @@ import javax.persistence.Table;
 @Table(name = "PRODUCT")
 @NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
 		@NamedQuery(name = "Product.findAllTags", query = "SELECT DISTINCT t FROM Product p INNER JOIN p.tags AS t"),
-		@NamedQuery(name = "Product.findAllNotDeleted", query = "SELECT p FROM Product p WHERE p.deleted=false"),
+		@NamedQuery(name = "Product.findAllNotDeleted", query = "SELECT p FROM Product p WHERE p.deleted=false AND p.amount>0"),
 		@NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
-		@NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE p.deleted=false AND cats.categoryId = :catId"),
-		@NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.deleted=false AND p.title LIKE :term"),
-		@NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE  p.deleted=false AND cats.categoryId = :catId AND p.title LIKE :term")
+		@NamedQuery(name = "Product.findAllByCat", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE p.deleted=false AND cats.categoryId = :catId AND p.amount>0"),
+		@NamedQuery(name = "Product.findAllContain", query = "SELECT p FROM Product p WHERE p.deleted=false AND p.title LIKE :term AND p.amount>0"),
+		@NamedQuery(name = "Product.findAllByCatIdContain", query = "SELECT p FROM Product p INNER JOIN p.categories cats WHERE  p.deleted=false AND cats.categoryId = :catId AND p.title LIKE :term AND p.amount>0")
 
 })
 public class Product implements Serializable {
