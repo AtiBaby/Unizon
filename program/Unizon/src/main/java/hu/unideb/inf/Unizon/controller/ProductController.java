@@ -73,8 +73,6 @@ public class ProductController implements Serializable {
 	@Inject
 	private Event<Product> productEventSrc;
 
-	private Image image;
-	private Image storedImage;
 	private Product newProduct;
 	private Product originalProduct;
 	private List<String> categories;
@@ -132,14 +130,6 @@ public class ProductController implements Serializable {
 
 	public void upload() {
 		log.info("Uploading product: {}, categories: {}, tags: {}.", newProduct, categories, tags);
-
-		// Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
-		// if (queriedImage == null) {
-		// imageFacade.create(image);
-		// } else {
-		// image = queriedImage;
-		// }
-		// newProduct.setImage(image);
 
 		newProduct.setImages(selectedImages.stream().map(ImageWrapper::getImage).collect(Collectors.toSet()));
 		newProduct.setImage(new ArrayList<>(newProduct.getImages()).get(0)); // TODO radio buttonnal kellene az ui-n
@@ -286,22 +276,6 @@ public class ProductController implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	public void setStoredImage(Image storedImage) {
-		this.storedImage = storedImage;
-	}
-
-	public Image getStoredImage() {
-		return storedImage;
 	}
 
 	public List<String> getCategories() {
