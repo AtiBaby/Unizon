@@ -137,8 +137,9 @@
 									<h:outputText value="In stock amount: #{product.amount}" />
 								</div>
 								<div class="prod_box_cat">
+									Categories: 
 									<ui:repeat value="#{product.categories.toArray()}" var="cat">
-										<h:outputText value="Categories: #{cat.name}" />
+										<p class="tile_categories"><h:outputText value="#{cat.name}" /></p>
 									</ui:repeat>
 								</div>
 								<div class="buttons clear-after">

@@ -324,6 +324,10 @@
 	-webkit-margin-bottom: 20px !important;
 }
 
+.tile_categories {
+	margin: 0;
+}
+
 @media all and (max-width:1200px) {
 
 .slide_holder_productpage{
