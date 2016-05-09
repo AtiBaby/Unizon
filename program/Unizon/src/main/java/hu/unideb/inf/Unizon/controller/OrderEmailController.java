@@ -55,17 +55,6 @@ public class OrderEmailController implements Serializable {
 		cfg.setDefaultEncoding(StandardCharsets.UTF_8.toString());
 	}
 	
-	static class AmountProduct{
-		Product products;
-		int amount;
-		
-		public AmountProduct(Product product,int amount) {
-			this.products = product;
-			this.amount = amount;
-		}
-		
-	}
-	
 	public void sendEmail(Order order) throws ActivationEmailException {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				Writer out = new OutputStreamWriter(baos, StandardCharsets.UTF_8)) {

@@ -116,6 +116,7 @@ public class CheckOutController implements Serializable {
 				productFacade.edit(product);
 				searchController.modifyProduct(product);
 			} else {
+				// TODO Make this shit be displayed.
 				addErrorMessage(product.getTitle() + "is out of stock");
 			}
 		}

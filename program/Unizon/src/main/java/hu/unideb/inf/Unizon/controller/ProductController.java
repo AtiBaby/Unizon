@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import javax.activation.MimetypesFileTypeMap;
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -22,7 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.apache.commons.io.FileUtils;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.UploadedFile;
@@ -37,6 +38,8 @@ import hu.unideb.inf.Unizon.model.Image;
 import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.Tag;
 import hu.unideb.inf.Unizon.model.User;
+import hu.unideb.inf.Unizon.util.ImageWrapper;
+import hu.unideb.inf.Unizon.util.PropertyHelper;
 
 @ManagedBean
 @ViewScoped
@@ -71,16 +74,13 @@ public class ProductController implements Serializable {
 	@Inject
 	private Event<Product> productEventSrc;
 
-	private boolean badFileFormat = false;
-	private String kepLink;
-	private Image image;
-	private Image storedImage;
 	private Product newProduct;
 	private Product originalProduct;
 	private List<String> categories;
 	private List<String> tags;
+	private List<ImageWrapper> selectedImages;
+	private List<ImageWrapper> uploadedImages;
 	private User user;
-	private String url;
 
 	public void init() {
 		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
@@ -104,12 +104,11 @@ public class ProductController implements Serializable {
 			newProduct.setDeleted(originalProduct.getDeleted());
 		}
 
-		user = loginController.getUser();
-		this.image = new Image();
-		this.storedImage = new Image();
-		this.url = null;
+		this.user = loginController.getUser();
 		this.categories = new ArrayList<>();
 		this.tags = new ArrayList<>();
+		this.uploadedImages = new ArrayList<>();
+		this.selectedImages = new ArrayList<>();
 	}
 
 	public void showAllProducts() {
@@ -122,24 +121,6 @@ public class ProductController implements Serializable {
 
 	public String addProductOnFlowProcess(FlowEvent event) {
 		return event.getNewStep();
-		// switch (event.getOldStep()) {
-		// case "catsTags":
-		//
-		//
-		// newProduct.setTags(selectedTags.stream().map(tagString -> {
-		// Tag tag = tagFacade.findByName(tagString);
-		// if (tag == null) {
-		// tag = new Tag();
-		// tag.setName(tagString);
-		// tagFacade.create(tag);
-		// }
-		// return tag;
-		// }).collect(Collectors.toSet()));
-		// return "confirm";
-		//
-		// default:
-		// return event.getNewStep();
-		// }
 	}
 
 	public List<String> completeTags(String query) {
@@ -151,13 +132,8 @@ public class ProductController implements Serializable {
 	public void upload() {
 		log.info("Uploading product: {}, categories: {}, tags: {}.", newProduct, categories, tags);
 
-		Image queriedImage = imageFacade.findByImageUrl(image.getImageUrl());
-		if (queriedImage == null) {
-			imageFacade.create(image);
-		} else {
-			image = queriedImage;
-		}
-		newProduct.setImage(image);
+		newProduct.setImages(selectedImages.stream().map(ImageWrapper::getImage).collect(Collectors.toSet()));
+		newProduct.setImage(new ArrayList<>(newProduct.getImages()).get(0)); // TODO radio buttonnal kellene az ui-n
 
 		newProduct.setCategories(categories.stream().map(categoryFacade::findByName).collect(Collectors.toSet()));
 
@@ -207,51 +183,60 @@ public class ProductController implements Serializable {
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-		UploadedFile kep = (UploadedFile) event.getFile();
+		UploadedFile uploadedFile = (UploadedFile) event.getFile();
 
-		InputStream inputStr = null;
-
-		if (kep.getSize() == 0) {
+		if (uploadedFile.getSize() == 0) {
 			return;
 		}
 
-		try {
-			inputStr = kep.getInputstream();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		try (InputStream inputStr = uploadedFile.getInputstream()) {
+			System.out.println("unizon.images.location: " + PropertyHelper.IMAGES_LOCATION);
 
-		kepLink = (System.getProperty("user.home") + "/uniPicture/" + kep.getFileName()).replaceAll("\\\\", "/");
-		System.out.println(kepLink);
-		url = ("images/Consumer electronics/" + kep.getFileName()).replaceAll("\\\\", "/");
-		File destFile = new File(kepLink);
+			String imageUrl = new Date(System.currentTimeMillis()).getTime() + "/" + uploadedFile.getFileName();
+			System.out.println("Image URL: " + imageUrl);
+			String destFileUrl = (PropertyHelper.IMAGES_LOCATION + imageUrl).replaceAll("\\\\", "/");
+			File destFile = new File(destFileUrl);
 
-		String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
-		String type = mimetype.split("/")[0];
-		if (!type.equals("image")) {
-			badFileFormat = true;
-			RequestContext.getCurrentInstance().execute("PF('uzenetDialogWidget').hide()");
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING",
-					"A kép formátuma nem megfelelő!");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			return;
-		}
-
-		try {
-			FileUtils.copyInputStreamToFile(inputStr, destFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			if (inputStr != null) {
-				inputStr.close();
+			String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
+			String type = mimetype.split("/")[0];
+			if (!type.equals("image")) {
+				addErrorMessage("The format of the picture is invalid!");
+				return;
 			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
 
-		image.setImageUrl(url);
-		imageFacade.create(image);
+			FileUtils.copyInputStreamToFile(inputStr, destFile);
+
+			Image image = new Image();
+			image.setImageUrl(imageUrl);
+			imageFacade.create(image);
+
+			uploadedImages.add(new ImageWrapper(image, false));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void selectImage() {
+		String imageId = facesContext.getExternalContext().getRequestParameterMap().get("imageId");
+		Image image = imageFacade.find(Integer.valueOf(imageId));
+
+		System.out.println("Before doing anything: " + selectedImages.size());
+		ImageWrapper imageWrapper = new ImageWrapper(image, true);
+		if (selectedImages.contains(imageWrapper)) {
+			selectedImages.remove(imageWrapper);
+		} else {
+			selectedImages.add(imageWrapper);
+		}
+		System.out.println("After doing anything: " + selectedImages.size());
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
 	}
 
 	private void redirect(String url) {
@@ -296,30 +281,6 @@ public class ProductController implements Serializable {
 		this.user = user;
 	}
 
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	public void setStoredImage(Image storedImage) {
-		this.storedImage = storedImage;
-	}
-
-	public Image getStoredImage() {
-		return storedImage;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
 	public List<String> getCategories() {
 		return categories;
 	}
@@ -334,6 +295,22 @@ public class ProductController implements Serializable {
 
 	public void setTags(List<String> tags) {
 		this.tags = tags;
+	}
+
+	public List<ImageWrapper> getSelectedImages() {
+		return selectedImages;
+	}
+
+	public void setSelectedImages(List<ImageWrapper> images) {
+		this.selectedImages = images;
+	}
+
+	public List<ImageWrapper> getUploadedImages() {
+		return uploadedImages;
+	}
+
+	public void setUploadedImages(List<ImageWrapper> uploadedImages) {
+		this.uploadedImages = uploadedImages;
 	}
 
 }

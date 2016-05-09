@@ -97,8 +97,9 @@
 					<div class="smallImage">
 						<div class="product_box_imageholder">
 							<div class="product_box_imageholder_cell">
-								<h:graphicImage name="#{productDetailController.actualProduct.image.imageUrl}"
-									style="height:270px; margin-bottom:1cm;" />
+								<p:graphicImage value="#{imageStreamer.image}" style="height:270px; margin-bottom:1cm;">
+									<f:param name="imageId" value="#{productDetailController.actualProduct.image.imageId}" />
+								</p:graphicImage>
 								<h3 style="margin-top: 0">Images</h3>
 							</div>
 						</div>
@@ -127,13 +128,20 @@
 					</div>
 				</div>
 				<div class="row" id="productImages">
-					<p:lightBox styleClass="imagebox" id="lighbox1">
+					<p:galleria var="image" value="#{productDetailController.actualProduct.images}">
+						<p:graphicImage value="#{imageStreamer.image}" id="nature2" style=" width: 100%; max-height: 100%; object-fit: cover">
+							<f:param name="imageId" value="#{image.imageId}" />
+						</p:graphicImage>
+					</p:galleria>
+					<!-- <p:lightBox styleClass="imagebox" id="lighbox1">
 						<ui:repeat value="#{productDetailController.actualProduct.images.toArray()}" var="image">
-							<h:outputLink value="/Unizon/javax.faces.resource/#{image.imageUrl}.jsf">
-								<h:graphicImage name="#{image.imageUrl}" id="nature2" style="height: 77px; width: 100px" />
+							<h:outputLink value="#{image.imageUrl}">
+								<p:graphicImage value="#{imageStreamer.image}" id="nature2" style="height: 77px; width: 100px">
+									<f:param name="imageId" value="#{image.imageId}" />
+								</p:graphicImage>
 							</h:outputLink>
 						</ui:repeat>
-					</p:lightBox>
+					</p:lightBox> -->
 				</div>
 				<h4>
 					<h:outputText value="&lt;br/&gt;" escape="false" />

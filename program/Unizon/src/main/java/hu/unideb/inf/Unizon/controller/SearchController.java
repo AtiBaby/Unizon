@@ -125,7 +125,11 @@ public class SearchController implements Serializable {
 	public void modifyProduct(Product p) {
 		for (int i = 0; i < products.size(); i++) {
 			if (products.get(i).getProductId() == p.getProductId()) {
-				products.set(i, p);
+				if (p.getAmount() > 0) {
+					products.set(i, p);
+				} else {
+					products.remove(i);
+				}
 				break;
 			}
 		}

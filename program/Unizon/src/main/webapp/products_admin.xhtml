@@ -122,7 +122,9 @@
 							<div class="product_box">
 								<div class="product_box_imageholder">
 									<div class="product_box_imageholder_cell">
-										<h:graphicImage name="#{product.image.imageUrl}" />
+										<p:graphicImage value="#{imageStreamer.image}">
+											<f:param name="imageId" value="#{product.image.imageId}" />
+										</p:graphicImage>
 									</div>
 								</div>
 								<div class="name">
@@ -145,14 +147,6 @@
 								<div class="buttons clear-after">
 
 									<h:form>
-										<p:remoteCommand name="addProductToCartRemoteCommand"
-											actionListener="#{cartController.addProductToCartListen()}"
-											oncomplete="PF('addProductDialogVar').show()" />
-
-										<p:commandButton class="button cart"
-											update=":addProductDialogForm" value="Add to Cart"  icon="fa fa-plus fa-lg"
-											onclick="addProductToCartRemoteCommand([{name:'productId', value:#{product.productId}}]);" />
-
 										<h:outputLink value="productdetails_admin.jsf" class="button view">
 											<f:param name="id" value="#{product.productId}" />
 											<i class="fa fa-eye fa-lg" aria-hidden="true"></i>

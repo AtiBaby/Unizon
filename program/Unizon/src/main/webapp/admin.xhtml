@@ -40,18 +40,39 @@
 								</p:panelGrid>
 							</p:panel>
 						</p:tab>
-						<p:tab id="images" title="Image">
-							<p:panel header="Product images">
-								<p:panelGrid>
-									<p:outputLabel value="URL:" styleClass="required" />
-									<p:inputText value="#{productController.image.imageUrl}"
-										required="true"
-										requiredMessage="URL is required!"
-										styleClass="required" />
-									
+						<p:tab id="uploadImages" title="Upload Image">
+							<p:panel header="Upload Images">
+								<h:form id="productImageUploadForm">
 									<p:outputLabel value="Upload picture:" styleClass="required" />
-									<p:fileUpload fileUploadListener="#{productController.handleFileUpload}"/>
-								</p:panelGrid>
+									<p:fileUpload fileUploadListener="#{productController.handleFileUpload}"
+										update=":addProductDialogForm:productImageSelectForm:productImageDataGrid"/>
+								</h:form>
+							</p:panel>
+						</p:tab>
+						<p:tab id="selectImages" title="Select Images">
+							<p:panel header="Select Images">
+								<h:form id="productImageSelectForm">
+									<p:dataGrid id="productImageDataGrid"
+										var="image"
+										value="#{productController.uploadedImages}"
+										columns="3"
+										rows="3"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+       									rowsPerPageTemplate="3,6,12">
+       									<p:panel style="text-align:center">
+       										<h:panelGrid columns="1" style="width:100%">
+       											<p:graphicImage value="#{imageStreamer.image}" width="100px" height="100px">
+       												<f:param name="imageId" value="#{image.image.imageId}" />
+       											</p:graphicImage>
+       											<p:selectBooleanCheckbox value="#{image.selected}">
+       												<f:param name="imageId" value="#{image.image.imageId}" />
+       												<p:ajax listener="#{productController.selectImage()}" />
+    											</p:selectBooleanCheckbox>
+       										</h:panelGrid>
+       									</p:panel>
+									</p:dataGrid>
+								</h:form>
 							</p:panel>
 						</p:tab>
 						<p:tab id="catsTags" title="Categories and Tags">
@@ -72,6 +93,7 @@
 									<p:outputLabel value="Tags:" styleClass="required" />
 							        <p:autoComplete label="Tags"
 							        	id="tags"
+							        	required="true"
 							        	multiple="true"
 							        	value="#{productController.tags}"
 							        	completeMethod="#{productController.completeTags}"
