@@ -141,31 +141,23 @@
 		</div>
 	</div>
 
-	<ui:insert name="forgotPassword">
-		<div id="modal_fP" class="popupContainer" style="display: none;">
-			<div class="popupHeader">
-				<span class="header_title">New password</span> <span
-					id="close_modal_fP" class="modal_close"><i
-					class="fa fa-times"></i></span>
-			</div>
+	<p:dialog header="Forgot Password" resizable="false" draggable="false" closable="true"
+		styleClass="fp_modal" id="modal_fP" closeOnEscape="true" modal="true" widgetVar="fp">
+		<!-- fp form -->
+		<div class="login_form_container">
+			<h:form id="fP_form" class="login_form"
+				action="#{request.contextPath}/contact.jsf">
+				<p:outputLabel value="Username:" styleClass="required" />
+				<p:inputText id="username" required="true"
+					requiredMessage="Please type your username!"
+					value="#{forgotPasswordController.username}" />
 
-			<div class="popupBody">
-
-				<div class="login_form_container">
-					<h:form id="fP_form" class="login_form"
-						action="#{request.contextPath}/contact.jsf">
-						<p:outputLabel value="Username:" styleClass="required" />
-						<p:inputText id="username" required="true"
-							requiredMessage="Please type your username!"
-							value="#{forgotPasswordController.username}" />
-
-						<p:commandButton styleClass="form_button" value="Send e-mail"
-							actionListener="#{forgotPasswordController.sendEmail()}" />
-					</h:form>
-				</div>
-			</div>
+				<p:commandButton id="btn_send_mail" styleClass="btn_send_email"
+					value="Send e-mail" onclick="PF('fp').hide();"
+					actionListener="#{forgotPasswordController.sendEmail()}" />
+			</h:form>
 		</div>
-	</ui:insert>
+	</p:dialog>
 
 	<p:dialog header="Registration" resizable="false" draggable="false"
 		styleClass="reg_modal" id="regDialog" closeOnEscape="true"

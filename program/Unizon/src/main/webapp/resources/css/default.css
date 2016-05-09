@@ -324,6 +324,18 @@ body {
 	font-weight: 350px;
 }
 
+.login_form .btn_send_email{
+	font-family: Raleway !important;
+	display: block;
+	margin: 5px auto !important;
+	width: 120px;
+	height: 40px;
+	border-radius: 7px;
+	text-align: center !important;
+	font-size: 14px;
+	font-weight: 350px;
+}
+
 .login_name:focus:required:invalid {
 	border-color: #CC0000;
 	border-style: solid;
@@ -444,6 +456,13 @@ top: 120px !important;
 	
 }
 
+.fp_modal{
+	z-index : 11000 !important;
+	width:20% !important;
+	top:115px !important;
+	left: 40%;
+}
+
 .terms_modal{
 	display: none;
 	z-index : 11100 !important;
@@ -557,6 +576,11 @@ top: 120px !important;
 		#regDialog{
 		width:30% !important;
 	}
+	
+	.fp_modal{
+	width:30% !important;
+	left: 35%;
+}
 	
 	
 }

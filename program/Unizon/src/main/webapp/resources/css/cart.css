@@ -47,7 +47,7 @@ body {
 	font-face: bold !important;	
 }
 
-.prod_amount {
+.prod_amount, .prod_tot_price {
 	width: 10%;	
 	color: #2e6da4 !important;
 	font-size: 16px !important;
@@ -69,6 +69,14 @@ body {
 	color: #2e6da4 !important;
 	font-size: 16px !important;
 	font-face: bold !important;	
+}
+
+.prod_edit a{
+	cursor: pointer !important;
+}
+
+.remove_prod a{
+	cursor: pointer !important;
 }
 
 .prod_remove {
@@ -107,32 +115,81 @@ body {
 	z-index: 1003;
 }
 
+.edit_cart_modal{
+	z-index : 11000 !important;
+	width:18% !important;
+	top:115px !important;
+	left: 41%;
+}
+
+.checkout_modal{
+	z-index : 11000 !important;
+	width:20% !important;
+	top:115px !important;
+	left: 40%;
+}
+
+.btn_order{
+	display: block !important;
+	margin: 10px auto 5px auto !important;
+}
+
+.checkout_modal ui-inputfield{
+	display: block !important;
+	margin: 15px 5px !important;
+}
+
+.btn_cart{
+	margin-left: 15px !important;
+}
+
+.remove_prod{
+	z-index : 11000 !important;
+	width:10% !important;
+	top:115px !important;
+	left: 45%;
+}
+
+.ui-selectonemenu-trigger{
+	padding: 0 !important;
+}
+
 @media all and (max-width:1400px) {
 
-	#addAddressDialog{
-		width:30% !important;
-		top:115px !important;
-		scrollable: true !important;
-		height: 355px !important;
-		overflow: auto;
+	.edit_cart_modal {
+		width: 28% !important;
+		left: 36%;
+	}
+	.remove_prod {
+		width: 16% !important;
+		left: 42%;
 	}
 	
 	.product_form_container input{
 		margin: 5px 0 !important; 
 	}
+	
+	.checkout_modal{
+		width:26% !important;
+		left: 37%;
+}
 }
 
 @media all and (max-width:1200px) {
-
-	#addAddressDialog{
-		width:30% !important;
-		top:115px !important;
-		scrollable: true !important;
-		height: 355px !important;
-		overflow: auto;
-	}
 		
 	.product_form_container input{
 		margin: 5px 0 !important; 
 	}
+	.edit_cart_modal {
+		width: 36% !important;
+		left: 32%;
+	}
+	.remove_prod {
+		width: 20% !important;
+		left: 40%;
+	}
+	.checkout_modal{
+		width:34% !important;
+		left: 33%;
 }
+	}

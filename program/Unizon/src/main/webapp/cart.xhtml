@@ -30,7 +30,7 @@
 				</p:column>
 
 				<p:column class="prod_price" headerText="Price">
-					<h:outputText class="prod_celltext" value="$#{cart.key.price}">
+					<h:outputText class="prod_celltext" value="#{cart.key.price}">
 						<f:convertNumber currencyCode="USD" type="currency" />
 					</h:outputText>
 				</p:column>
@@ -39,9 +39,11 @@
 					<h:outputText class="prod_celltext" value="#{cart.value}" />
 				</p:column>
 
-				<p:column class="prod_price" headerText="Total price">
+				<p:column class="prod_tot_price" headerText="Total price">
 					<h:outputText class="prod_celltext"
-						value="#{cart.value * cart.key.price}" />
+						value="#{cart.value * cart.key.price}" >
+						<f:convertNumber currencyCode="USD" type="currency" />
+						</h:outputText>
 				</p:column>
 
 				<p:column class="prod_edit">
@@ -73,7 +75,7 @@
 								<p:confirm header="Delete product" message="Are you sure?"
 									icon="ui-icon-alert" />
 							</p:commandLink>
-							<p:confirmDialog global="true" showEffect="fade"
+							<p:confirmDialog styleClass="remove_prod" global="true" showEffect="fade"
 								hideEffect="fade">
 								<p:commandButton value="Yes" type="button"
 									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
@@ -88,7 +90,7 @@
 
 		<div class="finish_shopping container">
 			<p:panelGrid rendered="#{not empty cartItemController.products}">
-				<p:outputLabel value="Total price: " />
+				<p:outputLabel value="Final price: " />
 				<h:outputText id="total_price"
 					value="#{cartItemController.totalPrice}">
 					<f:convertNumber currencyCode="USD" type="currency" />
@@ -106,7 +108,7 @@
 		</div>
 
 		<p:dialog header="Edit amount" resizable="false" draggable="false"
-			styleClass="address_modal" id="editProductInCartDialog"
+			styleClass="edit_cart_modal" id="editProductInCartDialog"
 			closeOnEscape="true" modal="true"
 			widgetVar="editProductInCartDialogVar">
 			<div class="login_form_container">
@@ -116,7 +118,7 @@
 						value="#{cartController.selectedProductAmount}" min="1"
 						max="#{cartController.selectedProduct.amount}"
 						style="padding-right:10px;" />
-					<p:commandButton class="button cart" value="Apply"
+					<p:commandButton class="button cart" styleClass="btn_cart" value="Apply"
 						oncomplete="PF('editProductInCartDialogVar').hide()"
 						actionListener="#{cartController.editProductInCart}"
 						update=":messages">
@@ -126,7 +128,7 @@
 		</p:dialog>
 
 		<p:dialog header="Check out" resizable="false" draggable="false"
-			styleClass="address_modal" id="checkOutFromCartDialog"
+			styleClass="checkout_modal" id="checkOutFromCartDialog"
 			closeOnEscape="true" modal="true"
 			widgetVar="checkOutFromCartDialogVar">
 			<div class="login_form_container">
@@ -169,7 +171,7 @@
 					</p:panelGrid>
 
 					<p:panelGrid>
-						<p:commandButton class="button cart" value="Order"
+						<p:commandButton class="button cart" styleClass="btn_order" value="Order"
 							oncomplete="PF('checkOutFromCartDialogVar').hide()"
 							actionListener="#{checkOutController.finalizeShopping()}"
 							update=":messages">

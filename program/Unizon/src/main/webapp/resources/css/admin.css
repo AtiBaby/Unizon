@@ -79,9 +79,9 @@ body {
 }
 
 #addProductDialog{
-	width:34% !important;
+	width:40% !important;
 	top:115px !important;
-	left: 33% !important;
+	left: 30% !important;
 	max-height: 600px !important;
 	overflow: auto !important;
 }
@@ -183,8 +183,8 @@ body {
 @media all and (max-width:1400px) {
 
 	#addProductDialog{
-		width:40% !important;
-		left: 30% !important;
+		width:54% !important;
+		left: 23% !important;
 		max-height: 500px !important;
 	}
 	
@@ -196,8 +196,8 @@ body {
 @media all and (max-width:1200px) {
 
 	#addProductDialog{
-		width:50% !important;
-		left: 25% !important;
+		width:70% !important;
+		left: 15% !important;
 	}
 		
 	.product_form_container input{
