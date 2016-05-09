@@ -118,15 +118,20 @@
 					<div class="buttons clear-after" id="add_to_cart_button"></div>
 				</div>
 				<div class="row" id="productImages">
-					<p:lightBox styleClass="imagebox" id="lighbox1">
+					<p:galleria var="image" value="#{productDetailController.actualProduct.images}">
+						<p:graphicImage value="#{imageStreamer.image}" id="nature2" style=" width: 100%; max-height: 100%; object-fit: cover">
+							<f:param name="imageId" value="#{image.imageId}" />
+						</p:graphicImage>
+					</p:galleria>
+					<!-- <p:lightBox styleClass="imagebox" id="lighbox1">
 						<ui:repeat value="#{productDetailController.actualProduct.images.toArray()}" var="image">
 							<h:outputLink value="#{image.imageUrl}">
-								<p:graphicImage value="#{imageStreamer.image}" id="nature2" style="height: 77px; width: 100px">
+								<p:graphicImage value="#{imageStreamer.image}" id="nature2" style="width: 100px">
 									<f:param name="imageId" value="#{image.imageId}" />
 								</p:graphicImage>
 							</h:outputLink>
 						</ui:repeat>
-					</p:lightBox>
+					</p:lightBox> -->
 				</div>
 				<h4>
 					<h:outputText value="&lt;br/&gt;" escape="false" />
