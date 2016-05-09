@@ -499,8 +499,9 @@
 											<h:outputText class="empty_cell" value=" " />
 										</p:column>
 										<p:column class="po_prod_imgcol">
-											<p:graphicImage class="po_prod_img"
-												name="#{prod.product.image.getImageUrl()}" />
+											<p:graphicImage value="#{imageStreamer.image}" styleClass="po_prod_img">
+												<f:param name="imageId" value="#{prod.product.image.imageUrl}" />
+											</p:graphicImage>
 										</p:column>
 										<p:column class="po_prod_name" headerText="Product name">
 											<h:outputText class="po_celltext"
