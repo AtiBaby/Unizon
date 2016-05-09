@@ -71,6 +71,13 @@ public class ForgotPasswordController implements Serializable {
 				Writer out = new OutputStreamWriter(baos, StandardCharsets.UTF_8)) {
 			Template template = cfg.getTemplate("forgotPasswordTemplate.ftl");
 			User user = userFacade.findByUsername(username);
+			
+			if (user == null) {
+				addErrorMessage("Invalid username!");
+				RequestContext.getCurrentInstance().update("messages");
+				return;
+			}
+			
 			String newPassword = randomString(8);
 			try {
 				user.setPassword(Password.getSaltedHash(newPassword));
@@ -94,8 +101,6 @@ public class ForgotPasswordController implements Serializable {
 			RequestContext.getCurrentInstance().update("messages");
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			addErrorMessage("Invalid username!");
-			RequestContext.getCurrentInstance().update("messages");
 		}
 	}
 
