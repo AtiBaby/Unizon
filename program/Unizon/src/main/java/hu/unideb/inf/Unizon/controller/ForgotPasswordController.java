@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -39,24 +40,27 @@ public class ForgotPasswordController implements Serializable {
 	private static final String NAME = "UNIZON WEBSHOP";
 
 	private Configuration cfg;
-	
+
 	private static final String ABC = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	private static SecureRandom rnd = new SecureRandom();
 
 	@Inject
 	private Logger log;
-	
+
+	@Inject
+	private FacesContext facesContext;
+
 	@EJB
 	private UserFacade userFacade;
 
 	@EJB
 	EmailSessionBean emailSessionBean;
-	
+
 	private String username;
 
 	@PostConstruct
 	public void init() {
-		username=null;
+		username = null;
 		cfg = new Configuration(Configuration.VERSION_2_3_24);
 		cfg.setClassForTemplateLoading(ForgotPasswordController.class, "/templates/");
 		cfg.setDefaultEncoding(StandardCharsets.UTF_8.toString());
@@ -74,7 +78,7 @@ public class ForgotPasswordController implements Serializable {
 				log.error(ex.getMessage());
 			}
 			user = userFacade.edit(user);
-			
+
 			Map<String, Object> data = new HashMap<>();
 			data.put("user", user);
 			data.put("newPassword", newPassword);
@@ -84,14 +88,28 @@ public class ForgotPasswordController implements Serializable {
 			out.flush();
 
 			emailSessionBean.sendEmail(EmailSessionBean.E_MAIL, user.getEMail(), SUBJECT, baos.toString(), NAME);
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "E-mail has been sent!");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			RequestContext.getCurrentInstance().update("messages");
 			log.info("E-mail sent to {} , because he/she forgot the password.", username);
+
+			addInfoMessage("E-mail has been sent!");
+			RequestContext.getCurrentInstance().update("messages");
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ActivationEmailException("Failed to send the activation e-mail to user: " + username + ".");
+			addErrorMessage("Invalid username!");
+			RequestContext.getCurrentInstance().update("messages");
 		}
+	}
+
+	private void addInfoMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_INFO, "INFO", detail);
+	}
+
+	private void addErrorMessage(String detail) {
+		addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", detail);
+	}
+
+	private void addMessage(Severity severity, String summary, String detail) {
+		FacesMessage msg = new FacesMessage(severity, summary, detail);
+		facesContext.addMessage(null, msg);
 	}
 
 	public static String randomString(int len) {
@@ -100,11 +118,11 @@ public class ForgotPasswordController implements Serializable {
 			sb.append(ABC.charAt(rnd.nextInt(ABC.length())));
 		return sb.toString();
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}

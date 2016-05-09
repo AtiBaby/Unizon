@@ -196,8 +196,8 @@ body {
 @media all and (max-width:1200px) {
 
 	#addProductDialog{
-		width:70% !important;
-		left: 15% !important;
+		width:74% !important;
+		left: 13% !important;
 	}
 		
 	.product_form_container input{
