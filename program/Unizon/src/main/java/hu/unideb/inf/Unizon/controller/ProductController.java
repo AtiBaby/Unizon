@@ -39,6 +39,7 @@ import hu.unideb.inf.Unizon.model.Product;
 import hu.unideb.inf.Unizon.model.Tag;
 import hu.unideb.inf.Unizon.model.User;
 import hu.unideb.inf.Unizon.util.ImageWrapper;
+import hu.unideb.inf.Unizon.util.PropertyHelper;
 
 @ManagedBean
 @ViewScoped
@@ -189,10 +190,12 @@ public class ProductController implements Serializable {
 		}
 
 		try (InputStream inputStr = uploadedFile.getInputstream()) {
-			String imageUrl = (System.getProperty("user.home") + "/Desktop/unizonPictures/"
-					+ new Date(System.currentTimeMillis()).getTime() + "/" + uploadedFile.getFileName())
-							.replaceAll("\\\\", "/");
-			File destFile = new File(imageUrl);
+			System.out.println("unizon.images.location: " + PropertyHelper.IMAGES_LOCATION);
+
+			String imageUrl = new Date(System.currentTimeMillis()).getTime() + "/" + uploadedFile.getFileName();
+			System.out.println("Image URL: " + imageUrl);
+			String destFileUrl = (PropertyHelper.IMAGES_LOCATION + imageUrl).replaceAll("\\\\", "/");
+			File destFile = new File(destFileUrl);
 
 			String mimetype = new MimetypesFileTypeMap().getContentType(destFile);
 			String type = mimetype.split("/")[0];

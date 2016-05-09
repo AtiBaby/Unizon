@@ -14,6 +14,7 @@ import org.primefaces.model.StreamedContent;
 
 import hu.unideb.inf.Unizon.facade.ImageFacade;
 import hu.unideb.inf.Unizon.model.Image;
+import hu.unideb.inf.Unizon.util.PropertyHelper;
 
 @ManagedBean
 @ApplicationScoped
@@ -32,7 +33,8 @@ public class ImageStreamer {
 			// So, browser is requesting the image. Return a real StreamedContent with the image bytes.
 			String imageId = context.getExternalContext().getRequestParameterMap().get("imageId");
 			Image image = imageFacade.find(Integer.valueOf(imageId));
-			return new DefaultStreamedContent(new FileInputStream(image.getImageUrl()));
+			return new DefaultStreamedContent(
+					new FileInputStream(PropertyHelper.IMAGES_LOCATION + image.getImageUrl()));
 		}
 	}
 
