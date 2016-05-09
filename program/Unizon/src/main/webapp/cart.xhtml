@@ -40,10 +40,9 @@
 				</p:column>
 
 				<p:column class="prod_tot_price" headerText="Total price">
-					<h:outputText class="prod_celltext"
-						value="#{cart.value * cart.key.price}" >
+					<h:outputText class="prod_celltext" value="#{cart.value * cart.key.price}">
 						<f:convertNumber currencyCode="USD" type="currency" />
-						</h:outputText>
+					</h:outputText>
 				</p:column>
 
 				<p:column class="prod_edit">
@@ -173,7 +172,7 @@
 					<p:panelGrid>
 						<p:commandButton class="button cart" styleClass="btn_order" value="Order"
 							oncomplete="PF('checkOutFromCartDialogVar').hide()"
-							actionListener="#{checkOutController.finalizeShopping()}"
+							action="#{checkOutController.finalizeShopping()}"
 							update=":messages">
 						</p:commandButton>
 					</p:panelGrid>

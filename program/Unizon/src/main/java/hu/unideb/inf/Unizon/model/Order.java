@@ -2,6 +2,7 @@ package hu.unideb.inf.Unizon.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -90,6 +91,8 @@ public class Order implements Serializable {
 	}
 
 	public ProdToOrder addProdToOrder(ProdToOrder prodToOrder) {
+		if (prodToOrders == null)
+			prodToOrders = new HashSet<>();
 		getProdToOrders().add(prodToOrder);
 		prodToOrder.setOrder(this);
 

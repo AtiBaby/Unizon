@@ -95,4 +95,9 @@ public class ProdToOrder implements Serializable {
         return true;
     }
 
+	@Override
+	public String toString() {
+		return "ProdToOrder [id=" + id + ", amount=" + amount + ", product=" + product + ", order=" + order + "]";
+	}
+
 }

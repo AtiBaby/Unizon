@@ -54,4 +54,9 @@ public class ProdToOrderPK implements Serializable {
 		
 		return hash;
 	}
+	@Override
+	public String toString() {
+		return "ProdToOrderPK [orderId=" + orderId + ", productId=" + productId + "]";
+	}
+	
 }
