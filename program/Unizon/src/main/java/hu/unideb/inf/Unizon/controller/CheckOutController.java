@@ -23,6 +23,7 @@ import hu.unideb.inf.Unizon.facade.OrderFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
 import hu.unideb.inf.Unizon.facade.ProdToOrderFacade;
 import hu.unideb.inf.Unizon.facade.ProductFacade;
+import hu.unideb.inf.Unizon.facade.UserFacade;
 import hu.unideb.inf.Unizon.model.Order;
 import hu.unideb.inf.Unizon.model.ProdToOrder;
 import hu.unideb.inf.Unizon.model.ProdToOrderPK;
@@ -44,6 +45,9 @@ public class CheckOutController implements Serializable {
 
 	@EJB
 	private ProductFacade productFacade;
+	
+	@EJB
+	private UserFacade userFacade;
 
 	@EJB
 	private OrderFacade orderFacade;
@@ -115,6 +119,8 @@ public class CheckOutController implements Serializable {
 				product.setAmount(newAmount);
 				productFacade.edit(product);
 				searchController.modifyProduct(product);
+				
+				loginController.setUser(userFacade.findByUsername(loginController.getUser().getUsername()));
 			} else {
 				// TODO Make this shit be displayed.
 				addErrorMessage(product.getTitle() + "is out of stock");

@@ -8,7 +8,7 @@ with the following billing address:
 ${billingAddress}.
 
 Your order was registrated at the following time:
-${orderDate}.
+${orderDate} with a total price of $${totalPrice}.00.
 
 Regards,
 ${from}

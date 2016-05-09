@@ -5,10 +5,7 @@ import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +21,6 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import hu.unideb.inf.Unizon.email.EmailSessionBean;
 import hu.unideb.inf.Unizon.exceptions.ActivationEmailException;
-import hu.unideb.inf.Unizon.facade.OrderFacade;
 import hu.unideb.inf.Unizon.model.Order;
 import hu.unideb.inf.Unizon.model.ProdToOrder;
 import hu.unideb.inf.Unizon.model.Product;
@@ -54,21 +50,29 @@ public class OrderEmailController implements Serializable {
 		cfg.setClassForTemplateLoading(OrderEmailController.class, "/templates/");
 		cfg.setDefaultEncoding(StandardCharsets.UTF_8.toString());
 	}
-	
+
 	public void sendEmail(Order order) throws ActivationEmailException {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				Writer out = new OutputStreamWriter(baos, StandardCharsets.UTF_8)) {
 			Template template = cfg.getTemplate("orderTemplate.ftl");
 			User user = order.getUser();
 			Map<String, Object> data = new HashMap<>();
-			
-			Set<ProdToOrder> list = order.getProdToOrders();
+
+			Set<ProdToOrder> prodToOrders = order.getProdToOrders();
 			String text = "";
-			for(ProdToOrder p: list){
-				text += "\nTitle: " + p.getProduct().getTitle() + "\nPrice: " + p.getProduct().getPrice() + "\nAmount: " + p.getAmount() + "\n";
+			int totalPrice = 0;
+
+			for (ProdToOrder prodToOrder : prodToOrders) {
+				Product product = prodToOrder.getProduct();
+				int amount = prodToOrder.getAmount();
+
+				text += "\nTitle: " + product.getTitle() + "\nPrice: $" + product.getPrice() + "\nAmount: " + amount
+						+ "\n";
+				totalPrice += product.getPrice() * amount;
 			}
-			
+
 			data.put("user", user);
+			data.put("totalPrice", totalPrice);
 			data.put("orderproducts", text);
 			data.put("shippingAddress", order.getAddress1());
 			data.put("billingAddress", order.getAddress2());
@@ -77,7 +81,7 @@ public class OrderEmailController implements Serializable {
 
 			template.process(data, out);
 			out.flush();
-			
+
 			emailSessionBean.sendEmail(EmailSessionBean.E_MAIL, user.getEMail(), SUBJECT, baos.toString(), NAME);
 		} catch (Exception e) {
 			log.error(e.getMessage());
