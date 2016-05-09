@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import hu.unideb.inf.Unizon.exceptions.ActivationEmailException;
 import hu.unideb.inf.Unizon.facade.AddressFacade;
 import hu.unideb.inf.Unizon.facade.OrderFacade;
 import hu.unideb.inf.Unizon.facade.PhoneNumberFacade;
@@ -32,6 +33,9 @@ import hu.unideb.inf.Unizon.model.Product;
 public class CheckOutController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@ManagedProperty("#{orderEmailController}")
+	private OrderEmailController orderEmailController;
+	
 	@Inject
 	private FacesContext facesContext;
 
@@ -101,8 +105,12 @@ public class CheckOutController implements Serializable {
 				newProdToOrder.setAmount(entry.getValue());
 				newProdToOrder.setOrder(newOrder);
 				newProdToOrder.setProduct(product);
-
+				System.out.println("ProdToOrder: " + newProdToOrder);
+				System.out.println("Order: " + newOrder);
+				newOrder.addProdToOrder(newProdToOrder);
 				prodToOrderFacade.create(newProdToOrder);
+				
+				
 
 				product.setAmount(newAmount);
 				productFacade.edit(product);
@@ -114,10 +122,14 @@ public class CheckOutController implements Serializable {
 
 		log.info("Products' amounts and products page successfully updated.");
 
-		// TODO Send an email about the shopping
-
-		log.info("Email about shopping hasn't been sent so far.");
-
+		try {
+			orderEmailController.sendEmail(newOrder);
+		} catch (ActivationEmailException e) {
+			log.error(e.getMessage());
+		}
+		
+		log.info("Email about shopping has been sent.");
+		
 		cartItemController.getProducts().clear();
 		log.info("Cart has been emptied.");
 		log.info("Finalizing shopping-session... Done.");
@@ -155,6 +167,14 @@ public class CheckOutController implements Serializable {
 		this.loginController = loginController;
 	}
 
+	public OrderEmailController getOrderEmailController() {
+		return orderEmailController;
+	}
+	
+	public void setOrderEmailController(OrderEmailController orderEmailController) {
+		this.orderEmailController = orderEmailController;
+	}
+	
 	public CartItemController getCartItemController() {
 		return cartItemController;
 	}
