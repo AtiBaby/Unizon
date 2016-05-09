@@ -15,6 +15,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 
 import hu.unideb.inf.Unizon.exceptions.ActivationEmailException;
@@ -36,7 +37,7 @@ public class CheckOutController implements Serializable {
 
 	@ManagedProperty("#{orderEmailController}")
 	private OrderEmailController orderEmailController;
-	
+
 	@Inject
 	private FacesContext facesContext;
 
@@ -45,7 +46,7 @@ public class CheckOutController implements Serializable {
 
 	@EJB
 	private ProductFacade productFacade;
-	
+
 	@EJB
 	private UserFacade userFacade;
 
@@ -81,8 +82,8 @@ public class CheckOutController implements Serializable {
 		// fit
 
 		/*
-		 * Some multithreading lock operations should be applied before
-		 * modifying the DB (if the chosen technologies don't provide)
+		 * Some multithreading lock operations should be applied before modifying the DB (if the chosen technologies
+		 * don't provide)
 		 */
 
 		Order newOrder = new Order();
@@ -113,19 +114,28 @@ public class CheckOutController implements Serializable {
 				System.out.println("Order: " + newOrder);
 				newOrder.addProdToOrder(newProdToOrder);
 				prodToOrderFacade.create(newProdToOrder);
-				
-				
 
 				product.setAmount(newAmount);
 				productFacade.edit(product);
 				searchController.modifyProduct(product);
-				
-				loginController.setUser(userFacade.findByUsername(loginController.getUser().getUsername()));
+
 			} else {
-				// TODO Make this shit be displayed.
 				addErrorMessage(product.getTitle() + "is out of stock");
+				
+				ExternalContext ec = facesContext.getExternalContext();
+				ec.getFlash().setKeepMessages(true);
+				RequestContext.getCurrentInstance().update("messages");
+				
+				return;
 			}
 		}
+
+		loginController.setUser(userFacade.findByUsername(loginController.getUser().getUsername()));
+		addInfoMessage("You have successfully ordered the selected products.");
+
+		ExternalContext ec = facesContext.getExternalContext();
+		ec.getFlash().setKeepMessages(true);
+		RequestContext.getCurrentInstance().update("messages");
 
 		log.info("Products' amounts and products page successfully updated.");
 
@@ -134,9 +144,9 @@ public class CheckOutController implements Serializable {
 		} catch (ActivationEmailException e) {
 			log.error(e.getMessage());
 		}
-		
+
 		log.info("Email about shopping has been sent.");
-		
+
 		cartItemController.getProducts().clear();
 		log.info("Cart has been emptied.");
 		log.info("Finalizing shopping-session... Done.");
@@ -177,11 +187,11 @@ public class CheckOutController implements Serializable {
 	public OrderEmailController getOrderEmailController() {
 		return orderEmailController;
 	}
-	
+
 	public void setOrderEmailController(OrderEmailController orderEmailController) {
 		this.orderEmailController = orderEmailController;
 	}
-	
+
 	public CartItemController getCartItemController() {
 		return cartItemController;
 	}
